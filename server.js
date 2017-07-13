@@ -4,7 +4,11 @@ var app = express();
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/public/views/index.html');
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/public/views/login.html');
 });
 
 let server;
