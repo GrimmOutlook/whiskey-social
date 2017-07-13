@@ -17,7 +17,7 @@ describe('GET endpoint', function() {
     return closeServer();
   });
 
-    it('should return a 200 status & HTML', function() {
+    it('should return a 200 status & HTML - homepage', function() {
 
       let res;
       return chai.request(app)
@@ -30,6 +30,20 @@ describe('GET endpoint', function() {
           console.log(`Your status is ${res.status}.`);
           // return status();
         });
-
     });
+
+    it('should return a 200 status & HTML - login', function() {
+
+      let res;
+      return chai.request(app)
+        .get('/login')
+        .then(function(_res) {
+          res = _res;
+          console.log(res.status);
+          res.should.have.status(200);
+          res.should.be.html;
+          console.log(`Your status is ${res.status}.`);
+        });
+    });
+
 });
