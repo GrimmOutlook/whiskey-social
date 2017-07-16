@@ -1,43 +1,65 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
 
-app.use(express.static('public'));
+const app = express();
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/views/index.html');
-});
+const badgeRouter = require('./routes/badgeRouter');
 
-app.get('/login', (req, res) => {
-  res.sendFile(__dirname + '/public/views/login.html');
-});
+// app.use(express.static('public'));
+
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/public/views/index.html');
+// });
+
+// app.get('/login', (req, res) => {
+//   res.sendFile(__dirname + '/public/views/login.html');
+// });
+
+const {DATABASE_URL, PORT} = require('./config');
+
+app.use(morgan('common'));
+app.use(jsonParser);
+app.use('/badges', badgeRouter);
+
+mongoose.Promise = global.Promise;
 
 let server;
 
-function runServer() {
-  const port = process.env.PORT || 8080;
+function runServer(databaseUrl=DATABASE_URL, port=PORT) {
+
   return new Promise((resolve, reject) => {
-    server = app.listen(port, () => {
-      console.log(`Your app is listening on port ${port}`);
-      resolve(server);
-    }).on('error', err => {
-      reject(err)
+    mongoose.connect(databaseUrl, err => {
+      if (err) {
+        return reject(err);
+      }
+      server = app.listen(port, () => {
+        console.log(`Your app is listening on port ${port}`);
+        resolve();
+      })
+      .on('error', err => {
+        mongoose.disconnect();
+        reject(err);
+      });
     });
   });
 }
 
 function closeServer() {
-  return new Promise((resolve, reject) => {
-    console.log('Closing server');
-    server.close(err => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve();
-    });
+  return mongoose.disconnect().then(() => {
+     return new Promise((resolve, reject) => {
+       console.log('Closing server');
+       server.close(err => {
+           if (err) {
+               return reject(err);
+           }
+           resolve();
+       });
+     });
   });
 }
-
 
 if (require.main === module) {
   runServer().catch(err => console.error(err));

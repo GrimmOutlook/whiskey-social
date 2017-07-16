@@ -1,0 +1,30 @@
+{
+  "name": {
+    "firstName": "Dave",
+    "lastName": "Grimm"
+  },
+  "userName": "grimmoutlook",
+  "dob": "August 26, 1973",
+  "email": "grimmoutlook87@gmail.com",
+  "postCount": 20,
+  "uniquePostCount": 3,
+  "friendCount": 5,
+  "favoriteCount": 1,
+  "badgeCount": 2,
+  "badges": ["First Whiskey", "St. Patrick's Day"]
+}
+{
+  "name": {
+    "firstName": "Friendly",
+    "lastName": "McFriend"
+  },
+  "userName": "whiskeydrinker",
+  "dob": "January 1, 1975",
+  "email": "friendly@gmail.com",
+  "postCount": 10,
+  "uniquePostCount": 2,
+  "friendCount": 14,
+  "favoriteCount": 2,
+  "badgeCount": 1,
+  "badges": ["First Whiskey"]
+}
