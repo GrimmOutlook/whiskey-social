@@ -10,15 +10,15 @@ const {Badge} = require('../models/badges');
 
 router.get('/', (req, res) => {
   console.log("Does this GET request work?");
-  console.log(Badge.paths);
   Badge.find()
   .exec()
-    .then(badges => {
-      res.json({
-        badges: badges.map(
-          (badge) => badge)
-      });
-    })
+    // .then(badges => {
+    //   res.json({
+    //     badges: badges.map(
+    //       (badge) => badge)
+    //   });
+    // })
+    .then(res.render('badges', {stuff: 'Here is stuff'}))
     .catch(
       err => {
         console.error(err);

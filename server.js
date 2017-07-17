@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const path   = require('path');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
@@ -25,6 +26,10 @@ app.use(jsonParser);
 app.use('/badges', badgeRouter);
 
 mongoose.Promise = global.Promise;
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, '/public/views'));
+
 
 let server;
 
