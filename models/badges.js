@@ -10,4 +10,5 @@ const Badge = mongoose.model('Badge', badgeSchema);
 
 module.exports = {Badge};
 
+// module.exports = mongoose.model('Badge', badgeSchema);
 

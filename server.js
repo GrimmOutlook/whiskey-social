@@ -28,7 +28,7 @@ app.use('/badges', badgeRouter);
 mongoose.Promise = global.Promise;
 
 app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, '/public/views'));
+app.set('views', path.join(__dirname, './public/views'));
 
 
 let server;

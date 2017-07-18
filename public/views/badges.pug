@@ -5,4 +5,6 @@ html(lang="en")
   body
     h1 Badges:
     div= stuff
-    div= badges
+      ul
+        each badge in badges
+          li= badge.name + badge.description + badge.badgePhoto
