@@ -5,9 +5,14 @@ const userSchema = mongoose.Schema({
     firstName: String,
     lastName: String
   },
+  password: {
+    type: String,
+    required: true
+  },
   userName: {type: String, required: true},
   dob: {type: String, required: true},
   email: {type: String, required: true},
+  //----------------------model - userActivity.js refers back to user id -------------
   postCount: Number,
   uniquePostCount: Number,
   friendCount: Number,

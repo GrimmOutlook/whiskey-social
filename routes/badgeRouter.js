@@ -41,16 +41,4 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
-  Badge
-    .findById(req.params.id)
-    .exec()
-    .then(badge => res.json(badge))
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'No particular whiskey for you!'});
-    });
-});
-
 module.exports = router;

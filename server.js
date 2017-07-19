@@ -8,6 +8,7 @@ const jsonParser = bodyParser.json();
 const app = express();
 
 const badgeRouter = require('./routes/badgeRouter');
+const whiskeyprofileRouter = require('./routes/whiskey-profileRouter');
 
 // app.use(express.static('public'));
 
@@ -24,6 +25,7 @@ const {DATABASE_URL, PORT} = require('./config');
 app.use(morgan('common'));
 app.use(jsonParser);
 app.use('/badges', badgeRouter);
+app.use('/whiskey-profile', whiskeyprofileRouter);
 
 mongoose.Promise = global.Promise;
 
