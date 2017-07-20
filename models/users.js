@@ -2,28 +2,21 @@ const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
   name: {
-    firstName: String,
-    lastName: String
+    {firstName: String, required: true, trim: true},
+    {lastName: String, required: true, trim: true}
   },
   password: {
     type: String,
     required: true
   },
-  userName: {type: String, required: true},
+  userName: {type: String, required: true, trim: true},
   dob: {type: String, required: true},
-  email: {type: String, required: true},
-  //----------------------model - userActivity.js refers back to user id -------------
-  postCount: Number,
-  uniquePostCount: Number,
-  friendCount: Number,
-  favoriteCount: Number,
-  badgeCount: Number,
-  badges: [String]
+  email: {type: String, required: true, trim: true}
 });
 
 
 userSchema.virtual('fullName').get(function() {
-  return `${this.name.firstName} ${this.name.lastName}`; //trim()
+  return `${this.name.firstName} ${this.name.lastName}`;
 });
 
 userSchema.methods.formattedUser = function() {
@@ -33,13 +26,7 @@ userSchema.methods.formattedUser = function() {
     name: this.fullName,
     userName: this.userName,
     dob: this.dob,
-    email: this.email,
-    postCount: this.postCount,
-    uniquePostCount: this.uniquePostCount,
-    friendCount: this.friendCount,
-    favoriteCount: this.favoriteCount,
-    badgeCount: this.badgeCount,
-    badges: this.badges
+    email: this.email
   };
 }
 
