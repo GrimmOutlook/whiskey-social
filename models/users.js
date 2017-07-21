@@ -10,7 +10,11 @@ const userSchema = mongoose.Schema({
     required: true
   },
   userName: {type: String, required: true, trim: true},
-  dob: {type: String, required: true},
+  dob: {
+    {month: type: Number, required: true},
+    {day: type: Number, required: true},
+    {year: type: Number, required: true}
+  },
   email: {type: String, required: true, trim: true}
 });
 
