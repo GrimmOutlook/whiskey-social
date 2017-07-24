@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
   // firstName: {type: String, required: true, trim: true},
   // lastName: {type: String, required: true, trim: true},
   password: {type: String, required: true},
-  userName: {type: String, required: true, trim: true}    //,
+  username: {type: String, required: true, trim: true}    //,
   // email: {type: String, required: true, trim: true},
   // avatar: Buffer,  //TODO nice to have  -  twitter or FBook photo
 
@@ -50,8 +50,8 @@ userSchema.methods.formattedUser = function() {
   return {
     id: this._id,
     // name: this.fullName,
-    userName: this.userName,
-    email: this.email
+    username: this.username  //,
+    // email: this.email
   };
 }
 
