@@ -1,4 +1,5 @@
 const {BasicStrategy} = require('passport-http');
+const mongoose = require('mongoose');
 const express = require('express');
 const jsonParser = require('body-parser').json();
 const passport = require('passport');
@@ -8,7 +9,6 @@ const {User} = require('../models/users');
 const router = express.Router();
 
 router.use(jsonParser);
-
 
 const strategy = new BasicStrategy(
   (username, password, cb) => {
@@ -35,9 +35,9 @@ router.get('/', (req, res) => {
   return User
     .find()
     .exec()
-    .then(users => res.json(users.map(user => user.apiRepr())))
+    .then(users => res.json(users.map(user => user.formattedUser())))
     .catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
 });
 
-module.exports = {router};
+module.exports = router;
 

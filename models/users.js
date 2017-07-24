@@ -49,7 +49,7 @@ userSchema.methods.formattedUser = function() {
   console.log(this);
   return {
     id: this._id,
-    name: this.fullName,
+    // name: this.fullName,
     userName: this.userName,
     email: this.email
   };
