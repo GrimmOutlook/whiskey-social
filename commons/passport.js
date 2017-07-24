@@ -1,6 +1,6 @@
-var LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 
-var User = require('../models/users');
+const User = require('../models/users');
 
 // expose fxn to the app:
 module.exports = function(passport) {
@@ -20,35 +20,36 @@ module.exports = function(passport) {
 
   // LocalStrategy named 'local-signup'--------------------------------------------------
 
-  passport.use('local-signup', new LocalStrategy({
-      // by default, local strategy uses username and password
-      usernameField : 'userName' || 'email',
-      passwordField : 'password',
-      passReqToCallback : true // pass back the entire request to the callback
-    },
+  passport.use('local-signup', new LocalStrategy(
+  //     // by default, local strategy uses username and password
+  //     { usernameField : 'userName' || 'email',
+  //     passwordField : 'password',
+  //     passReqToCallback : true // pass back the entire request to the callback
+  //   },
     function(req, email, password, done) {
       // find user + email = same as form email
       User.findOne({ 'local.email' :  email }, function(err, user) {
-        if (err)
+        if (err) {
           return done(err);
-          // check if user with that email currently exists
-          if (user) {
-            return done(null, false, req.flash('signupMessage', 'That email is already taken'));
-          }
-          else {
-            var newUser = new User();
-            // set the user's local credentials
-            newUser.local.email    = email;
-            newUser.local.password = newUser.generateHash(password); // use the generateHash fxn in user model
+        }
+        // check if user with that email currently exists
+        if (user) {
+          return done(null, false, req.flash('signupMessage', 'That email is already taken'));
+        }
+        else {
+          let newUser = new User();
+          // set the user's local credentials
+          newUser.local.email    = email;
+          newUser.local.password = newUser.generateHash(password); // use the hashPassword fxn in user model
 
-            newUser.save(function(err) {
-              if (err)
-                  throw err;
-              return done(null, newUser);
-            });
-          }
+          newUser.save(function(err) {
+            if (err)
+                throw err;
+            return done(null, newUser);
+          });
+        }
 
-        });
+      });
 
     }));
 };

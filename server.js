@@ -9,7 +9,8 @@ const app = express();
 
 const badgeRouter = require('./routes/badgeRouter');
 const whiskeyprofileRouter = require('./routes/whiskey-profileRouter');
-const userRouter = require('./routes/userRouter');
+// const userRouter = require('./routes/userRouter');
+const passportRouter = require('./routes/passportRouter');
 
 // app.use(express.static('public'));
 
@@ -27,8 +28,9 @@ app.use(morgan('common'));
 app.use(jsonParser);
 app.use('/badges', badgeRouter);
 app.use('/whiskey-profile', whiskeyprofileRouter);
-app.use('/signup', userRouter);
-app.use('/login', userRouter);
+// app.use('/user', userRouter);
+app.use('/auth', passportRouter);
+
 
 mongoose.Promise = global.Promise;
 
