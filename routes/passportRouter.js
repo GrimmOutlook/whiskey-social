@@ -10,31 +10,31 @@ const router = express.Router();
 
 router.use(jsonParser);
 
-// const basicStrategy = new BasicStrategy((username, password, callback) => {
-//   let user;
-//   User
-//     .findOne({username: username})
-//     .exec()
-//     .then(_user => {
-//       user = _user;
-//       if (!user) {
-//         return callback(null, false);
-//       }
-//       return user.validatePassword(password);
-//     })
-//     .then(isValid => {
-//       if (!isValid) {
-//         return callback(null, false);
-//       }
-//       else {
-//         return callback(null, user);
-//       }
-//     })
-//     .catch(err => callback(err));
-// });
+const basicStrategy = new BasicStrategy((username, password, callback) => {
+  let user;
+  User
+    .findOne({username: username})
+    .exec()
+    .then(_user => {
+      user = _user;
+      if (!user) {
+        return callback(null, false);
+      }
+      return user.validatePassword(password);
+    })
+    .then(isValid => {
+      if (!isValid) {
+        return callback(null, false);
+      }
+      else {
+        return callback(null, user);
+      }
+    })
+    .catch(err => callback(err));
+});
 
-// passport.use(basicStrategy);
-// router.use(passport.initialize());
+passport.use(basicStrategy);
+router.use(passport.initialize());
 
           //  OR THIS:
 
@@ -56,7 +56,6 @@ router.use(jsonParser);
 //       })
 //       .catch(err => cb(err))
 // });
-
 // passport.use(strategy);
 
 //GET a list of all users
@@ -68,7 +67,7 @@ router.get('/', (req, res) => {
     .catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
 });
 
-//POST one user with unique username
+//POST one user with unique username for signup
 router.post('/', (req, res) => {
   //req.body = {username: "<user>", password: "<pw>"};
   //var username = "<user>";   var password = "<pw>";
@@ -103,9 +102,23 @@ router.post('/', (req, res) => {
       return res.status(201).json(user.formattedUser());
     })
     .catch(err => {
+      if (err.name === 'AuthenticationError') {
+        return res.status(422).json({message: err.message});
+      }
       res.status(500).json({message: 'Internal server error'})
     });
 });
+
+router.get('/me',
+  passport.authenticate('basic', {session: false}),
+  (req, res) => res.json({user: req.user.formattedUser()})
+);
+
+// app.post('/me', passport.authenticate('basic', {
+//     successRedirect : '/settings',
+//     failureRedirect : '/',
+//     failureFlash : true
+//   }));
 
 module.exports = router;
 
