@@ -50,7 +50,8 @@ userSchema.methods.formattedUser = function() {
   return {
     id: this._id,
     // name: this.fullName,
-    username: this.username  //,
+    username: this.username,
+    message: "This went into the DB"
     // email: this.email
   };
 }
