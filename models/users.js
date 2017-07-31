@@ -23,18 +23,18 @@ const userSchema = mongoose.Schema({
   // post: [{
   //   title: String,
   //   image_url: String,
-  //   postDate: {date: Date.now()},
+  //   postDate: {type: Date, default: Date.now},
   //   rating: Number,
   //   likesCount: Number,
   //   favorite: Boolean,
   //   comment: [{
   //     author: Schema.Types.ObjectId,
   //     text: [String],
-  //     commentDate: {date: Date.now()},
+  //     commentDate: {type: Date, default: Date.now},
   //     replies: [{
   //       author: Schema.Types.ObjectId,
   //       text: [String],
-  //       replyDate: {date: Date.now()}
+  //       replyDate: {type: Date, default: Date.now}
   //     }]
   //   }]
   // }]

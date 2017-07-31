@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path   = require('path');
@@ -14,14 +15,6 @@ const passportRouter = require('./routes/passportRouter');
 
 // app.use(express.static('public'));
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/public/views/index.html');
-// });
-
-// app.get('/login', (req, res) => {
-//   res.sendFile(__dirname + '/public/views/login.html');
-// });
-
 const {DATABASE_URL, PORT} = require('./config');
 
 app.use(morgan('common'));
@@ -29,8 +22,13 @@ app.use(jsonParser);
 app.use('/badges', badgeRouter);
 app.use('/whiskey-profile', whiskeyprofileRouter);
 // app.use('/user', userRouter);
-app.use('/auth', passportRouter);
-
+app.use('/signup', passportRouter);
+//Use sessions for tracking logins:
+// app.use(session, {
+//   secret: 'whiskey in the jar', //
+//   resave: true,                 //
+//   saveUninitialized: false      //
+// });
 
 mongoose.Promise = global.Promise;
 

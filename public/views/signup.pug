@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    title Signup Screen
+  body
+
+    form(action='/signup', method='post')
+    div.form-group
+      label(for='username') Username:
+      input(type='text', name='username')
+    div.form-group
+      label(for='password') Password:
+      input(type='password', name='password')
+    div
+      button(type='submit') Sign up!

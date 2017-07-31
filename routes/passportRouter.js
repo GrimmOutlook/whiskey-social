@@ -13,7 +13,7 @@ router.use(jsonParser);
 //----------------------  Create basicStrategy middleware  ------------------------------
 
 //basicStrategy middleware is created using BasicStrategy module(?) from passport.js
-//Is this BasicStrategy for a signup?  Or login?
+//Is this BasicStrategy for a signup?  Or login?  or both?
 const basicStrategy = new BasicStrategy((username, password, callback) => {
   let user;  //declare random variable named user
   User  //instance of the module from user.js
@@ -52,7 +52,7 @@ router.use(passport.initialize());  //router instance can use passport middlewar
             .catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
         });
 
-//---------------------------  POST on signup screen  -----------------------------------
+//-------------------  Definitely the Signup screen  -----------------------------------
 
 //POST one user with unique username for signup screen
 router.post('/', (req, res) => {
@@ -84,7 +84,8 @@ router.post('/', (req, res) => {
         })
     })
     .then(user => {
-      return res.status(201).json(user.formattedUser());
+      res.render('settings', user.formattedUser());
+      // return res.status(201).json(user.formattedUser());
     })
     .catch(err => {
       if (err.name === 'AuthenticationError') {
@@ -96,17 +97,18 @@ router.post('/', (req, res) => {
 
 
 //Is this the login??
-router.get('/me',
-  passport.authenticate('basic', {session: false}),  //why does 'basic' work?  what is session?
-  (req, res) => res.json({user: req.user.formattedUser()})  //is this the callback fxn that goes into basicStrategy???
-);
+// router.get('/me',
+//   passport.authenticate('basic', {session: false}),  //why does 'basic' work?  what is session?
+//   (req, res) => res.json({user: req.user.formattedUser()})  //is this the callback fxn that goes into basicStrategy???
+// );
 
-// How does user get to next page after their username/password is authenticated?
-// app.post('/me', passport.authenticate('basic', {
-//     successRedirect : '/settings',
-//     failureRedirect : '/',
-//     failureFlash : true
-//   }));
+//------------------------------ Definitely Login POST  -----------------------------
+router.post('/me', passport.authenticate('basic', {
+    successRedirect : '/settings',
+    failureRedirect : '/',
+    failureFlash : true,
+    session: true
+  }));
 
 module.exports = router;
 
