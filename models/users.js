@@ -27,6 +27,7 @@ const userSchema = mongoose.Schema({
   //   rating: Number,
   //   likesCount: Number,
   //   favorite: Boolean,
+  //   unique: Boolean,  ????????????
   //   comment: [{
   //     author: Schema.Types.ObjectId,
   //     text: [String],

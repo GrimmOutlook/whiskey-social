@@ -12,6 +12,7 @@ const badgeRouter = require('./routes/badgeRouter');
 const whiskeyprofileRouter = require('./routes/whiskey-profileRouter');
 // const userRouter = require('./routes/userRouter');
 const passportRouter = require('./routes/passportRouter');
+const userRouter = require('./routes/userRouter');
 
 // app.use(express.static('public'));
 
@@ -19,10 +20,11 @@ const {DATABASE_URL, PORT} = require('./config');
 
 app.use(morgan('common'));
 app.use(jsonParser);
+app.use('/', userRouter);
 app.use('/badges', badgeRouter);
 app.use('/whiskey-profile', whiskeyprofileRouter);
 // app.use('/user', userRouter);
-app.use('/signup', passportRouter);
+app.use('/signup', passportRouter);  //use / as route, then /signup & /login in router?
 //Use sessions for tracking logins:
 // app.use(session, {
 //   secret: 'whiskey in the jar', //
