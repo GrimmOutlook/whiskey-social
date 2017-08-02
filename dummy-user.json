@@ -28,3 +28,44 @@
   "badgeCount": 1,
   "badges": ["First Whiskey"]
 }
+
+
+
+// {
+//   "firstName": "Wanda",
+//   "lastName": "Whiskeydrinker",
+//   "password": "nothashed",
+//   "username": "magicwanda",
+//   "email": "wandaw@gmail.com",
+
+
+//   "myFriends": ["samiam", "drunkguy", "drinkingbuddy22"],
+
+//   "postCount": 1,
+//   "uniquePostCount": 1,
+//   "friendCount": 3,
+//   "favoriteCount": 1,
+//   "badgeCount": 1,
+//   "badges": ["First Whiskey"],
+
+//   "post": [{
+//     "title": "Jack Daniel's Old No. 7",
+//     "image_url": "https://img.thewhiskyexchange.com/270/brbon_jac117.jpg",
+//     "postDate": "2016-05-18T16:00:00Z",
+//     "rating": 4,
+//     "likesCount": 2,
+//     "favorite": true,
+//     "unique": true,
+//     "comment": [{
+//       "author": "magicwanda",
+//       "text": "First post!  My favorite whiskey!",
+//       "commentDate": "2016-06-28T16:00:00Z",
+//       "replies": [{
+//         "author": "samiam",
+//         "text": "I would not drink this whiskey in a bar.  I would not drink this whiskey in a car",
+//         "replyDate": "2016-08-26T16:00:00Z"
+//       }]
+//     }]
+//   }]
+
+// }

@@ -15,7 +15,7 @@ router.use(jsonParser);
 // passport.use(LocalStrategy);
 // router.use(passport.initialize());
 
-
+//--------------------------- Profile Page -------------------------------------------
 router.get('/user/:id', function(req, res){
   console.log('This is the Profile page');
   User
@@ -23,6 +23,22 @@ router.get('/user/:id', function(req, res){
     .exec()
     .then(user => {
       res.render('profile', user.formattedUser());
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s happening here, what it is ain\'t exactly clear.'});
+    });
+})
+
+//--------------------------- Newsfeed Page -------------------------------------------
+router.get('/user/:id/newsfeed', function(req, res){
+  console.log('This is the Newsfeed page');
+  User
+    .findById(req.params.id)
+    .exec()
+    .then(user => {
+      res.render('newsfeed', user.formattedUser());
     })
     .catch(
       err => {
