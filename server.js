@@ -10,7 +10,6 @@ const app = express();
 
 const badgeRouter = require('./routes/badgeRouter');
 const whiskeyprofileRouter = require('./routes/whiskey-profileRouter');
-// const userRouter = require('./routes/userRouter');
 const passportRouter = require('./routes/passportRouter');
 const userRouter = require('./routes/userRouter');
 

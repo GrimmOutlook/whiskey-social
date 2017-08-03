@@ -39,11 +39,12 @@ router.get('/user/:id/newsfeed', function(req, res){
     .exec()
     .then(user => {
       res.render('newsfeed', user.formattedUser());
+      console.log('Here is the user.id: ' + user.id);
     })
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Something\'s happening here, what it is ain\'t exactly clear.'});
+        res.status(500).json({message: 'Something\'s wrong with the newsfeed page.'});
     });
 })
 
