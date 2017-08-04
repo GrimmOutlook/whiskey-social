@@ -1,0 +1,14 @@
+doctype html
+html(lang="en")
+  head
+    title Delete Account Screen
+  body
+    div= username
+    div= name
+    div Are you sure you want to delete your account?
+
+    a(href="/user/" + id)
+      button.redirect-to-newsfeed(type='submit') No
+
+    a(href="/index.html")
+      button.redirect-to-newsfeed(type='submit') Yes

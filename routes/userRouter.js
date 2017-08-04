@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 const {User} = require('../models/users');
+const {Whiskey} = require('../models/whiskeys');
 
 router.use(jsonParser);
 
@@ -27,7 +28,7 @@ router.get('/user/:id', function(req, res){
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Something\'s happening here, what it is ain\'t exactly clear.'});
+        res.status(500).json({message: 'Something\'s wrong with the profile page.'});
     });
 })
 
@@ -48,6 +49,97 @@ router.get('/user/:id/newsfeed', function(req, res){
     });
 })
 
+//--------------------------- Favorites Page -------------------------------------------
+router.get('/user/:id/my-favorites', function(req, res){
+  console.log('This is the favorites page');
+  Whiskey
+    .find()
+    .exec()
+    .then(whiskeys => {
+      res.render('my-favorites', {
+        whiskeys: whiskeys.map(
+          (whiskey) => whiskey)
+      });
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the Favorites page.'});
+    });
+})
+
+//--------------------------- My-posts Page -------------------------------------------
+router.get('/user/:id/history', function(req, res){
+  console.log('This is the my-posts/history page');
+  Whiskey
+    .find()
+    .exec()
+    .then(whiskeys => {
+      res.render('my-posts', {
+        whiskeys: whiskeys.map(
+          (whiskey) => whiskey)
+      });
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the My-posts/history page.'});
+    });
+})
+
+//---------------------------- My-unique-posts Page ------------------------------------
+router.get('/user/:id/whiskeys', function(req, res){
+  console.log('This is the my-posts-unique page');
+  Whiskey
+    .find()
+    .exec()
+    .then(whiskeys => {
+      res.render('my-posts-unique', {
+        whiskeys: whiskeys.map(
+          (whiskey) => whiskey)
+      });
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the My-unique-posts page.'});
+    });
+})
+
+//---------------------------- My Friends Page -----------------------------------------
+router.get('/user/:id/friends', function(req, res){
+  console.log('This is the my friends page');
+  User
+    .find()
+    .exec()
+    .then(users => {
+      res.render('friend-list', {
+        users: users.map(
+          (user) => user.profileUser())
+      });
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the my friends page.'});
+    });
+})
+
+//------------------------------ Account Delete Page ------------------------------------
+router.get('/user/:id/delete-account', function(req, res){
+  console.log('This is the Account Delete page');
+  User
+    .findById(req.params.id)
+    .exec()
+    .then(user => {
+      res.render('delete-account', user.formattedUser());
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the Account Delete page.'});
+    });
+})
 
 
 

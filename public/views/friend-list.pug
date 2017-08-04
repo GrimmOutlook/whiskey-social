@@ -1,0 +1,10 @@
+doctype html
+html(lang="en")
+  head
+    title My Friends Screen
+  body
+    h1 My Friends:
+    div.friends-list-container
+      ul
+        each user in users
+          li= user.username + user.id + user.name
