@@ -141,6 +141,25 @@ router.get('/user/:id/delete-account', function(req, res){
     });
 })
 
+//------------------------------ Friend Search Page ------------------------------------
+router.get('/friend/search', function(req, res){
+  console.log('This is the Search for Friend page');
+  User
+    .find()
+    .exec()
+    .then(users => {
+      res.render('friend-search', {
+        users: users.map(
+          (user) => user.profileUser())
+      });
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the my friends page.'});
+    });
+})
+
 
 
 

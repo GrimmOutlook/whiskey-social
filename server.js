@@ -21,7 +21,7 @@ app.use(morgan('common'));
 app.use(jsonParser);
 app.use('/', userRouter);
 app.use('/badges', badgeRouter);
-app.use('/whiskey-profile', whiskeyRouter);
+app.use('/whiskey', whiskeyRouter);
 // app.use('/user', userRouter);
 app.use('/signup', passportRouter);  //use / as route, then /signup & /login in router?
 //Use sessions for tracking logins:
