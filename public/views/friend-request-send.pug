@@ -1,0 +1,14 @@
+doctype html
+html(lang="en")
+  head
+    title Friend Request Send Screen
+  body
+    h3 Friend Request Send page
+
+    h2 You have sent a Friend Request to:
+
+    div= username
+    div= name
+
+    a(href="/user/" + id + "/friends")
+      button.redirect-to-whiskey-post(type='submit') OK

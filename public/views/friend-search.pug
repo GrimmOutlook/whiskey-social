@@ -11,4 +11,7 @@ html(lang="en")
     div.possible-friends-list-container
       ul
         each user in users
-          li= user.username + user.id + user.name
+          a(href="/potential-friend/" + id)
+            li= user.username + user.id + user.name
+
+    h2 Use <a> tags to click on potential friend to redirect to Potential Friend Basic Profile page
