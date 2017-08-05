@@ -1,8 +1,12 @@
 doctype html
 html(lang="en")
   head
-    title My Friends Screen
+    title Friend List Screen
   body
+    h3 Search for a New Friend field
+    a(href="/friend/search")
+      button.redirect-to-friend-search(type='submit') Search
+
     h1 My Friends:
     div.friends-list-container
       ul

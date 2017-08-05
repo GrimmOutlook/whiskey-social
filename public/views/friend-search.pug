@@ -1,0 +1,14 @@
+doctype html
+html(lang="en")
+  head
+    title Search for Friend Screen
+  body
+    h3 Search for a New Friend field (stays on this page)
+    a(href="/friend/search")
+      button.redirect-to-friend-search(type='submit') Search
+
+    h1 Possible Matches:
+    div.possible-friends-list-container
+      ul
+        each user in users
+          li= user.username + user.id + user.name
