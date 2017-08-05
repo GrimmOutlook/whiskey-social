@@ -45,7 +45,7 @@ router.get('/search', (req, res) => {
 });
 
 // Post Screen for a single whiskey  -----------------------------------------------------
-router.get('/post', (req, res) => {
+router.get('/post/:id', (req, res) => {
   console.log(req.params.id);
   Whiskey
     .findById(req.params.id)
@@ -53,7 +53,22 @@ router.get('/post', (req, res) => {
     .then(single_whiskey => {
       res.render('whiskey-post', single_whiskey)
       })
-    // .then(single_whiskey => {res.json(single_whiskey)})
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something went terribly wrong!'});
+    });
+});
+
+// Post Confirmation Screen for a user whiskey post --------------------------------------
+router.get('/post/:id/confirm', (req, res) => {
+  console.log(req.params.id);
+  Whiskey
+    .findById(req.params.id)
+    .exec()
+    .then(single_whiskey => {
+      res.render('post-hoc', single_whiskey)
+      })
     .catch(
       err => {
         console.error(err);

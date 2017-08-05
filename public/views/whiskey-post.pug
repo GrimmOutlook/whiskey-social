@@ -4,3 +4,18 @@ html(lang="en")
     title Whiskey Post Screen
   body
     h1 Whiskey Post Screen
+
+    div= title
+    div= description
+
+    form(action="")
+      textarea(rows=10, cols=100)
+        Comment on this whiskey:
+
+    h2 Rating:  1  2  3  4  5
+
+    a(href="/whiskey/post/" + id + "/confirm")
+      button.redirect-to-post-confirm(type='submit') POST
+
+    a(href="/whiskey/profile/" + id)
+      button.redirect-to-whiskey-profile(type='submit') Cancel
