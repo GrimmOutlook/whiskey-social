@@ -41,16 +41,6 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
 passport.use(basicStrategy);  //passport instance can use basicStrategy middleware
 router.use(passport.initialize());  //router instance can use passport middleware with the initialize method
 
-//---------------------------------------------------------------------------------------
-
-        //GET a list of all users - only use this search for friends screen
-        router.get('/', (req, res) => {
-          return User
-            .find()
-            .exec()
-            .then(users => res.json(users.map(user => user.formattedUser())))
-            .catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
-        });
 
 //-------------------  Definitely the Signup screen  -----------------------------------
 

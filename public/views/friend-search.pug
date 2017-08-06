@@ -4,14 +4,16 @@ html(lang="en")
     title Search for Friend Screen
   body
     h3 Search for a New Friend field (stays on this page)
-    a(href="/friend/search")
+    a(href="/user/friend/search")
       button.redirect-to-friend-search(type='submit') Search
 
     h1 Possible Matches:
     div.possible-friends-list-container
       ul
         each user in users
-          a(href="/potential-friend/" + id)
+          a(href="user/potential-friend/" + id)
             li= user.username + user.id + user.name
 
-    h2 Use <a> tags to click on potential friend to redirect to Potential Friend Basic Profile page
+    a(href="user/potential-friend/" + id)
+      p take me to /user/potential-friend/id
+

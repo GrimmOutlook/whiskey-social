@@ -8,8 +8,8 @@ html(lang="en")
     div= name
 
 
-    a(href="/friend/request/send")
-      button.redirect-back-to-whiskey-search(type='submit') Send Friend Request
+    a(href="/user/friend/request/send" + id)
+      button.redirect-to-friend-request-send(type='submit') Send Friend Request
 
-    a(href="/friend/search")
-      button.redirect-to-whiskey-post(type='submit') Back
+    a(href="/user/friend/search")
+      button.redirect-back-to-friend-search(type='submit') Back

@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    title Single Post Screen
+  body
+    h1 Single Post Screen
+
+    div= title
+    div= image_url
+
+    h2 Rating:
+      div= rating
+
+    h2 Likes:
+      div= likeCount
+
+    //- Button to delete user's own post - hidden for friends to see
+    a(href="/whiskey/post/" + id + "/confirm")
+      button.delete-post(type='submit') Delete
+
+    //- Button to like a friend's post - hidden for own post
+    a(href="/whiskey/profile/" + id)
+      button.like-post(type='submit') Like
+
+    form(action="" placeholder="Comment on this Whiskey:")
+      textarea(rows=10, cols=100)

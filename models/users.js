@@ -21,6 +21,7 @@ const userSchema = mongoose.Schema({
   // badges: [String],
 
   // post: [{
+  //   postID: Number,
   //   title: String,
   //   image_url: String,
   //   postDate: {type: Date, default: Date.now},

@@ -67,7 +67,7 @@ router.get('/post/:id/confirm', (req, res) => {
     .findById(req.params.id)
     .exec()
     .then(single_whiskey => {
-      res.render('post-hoc', single_whiskey)
+      res.render('post-confirm', single_whiskey)
       })
     .catch(
       err => {
@@ -75,5 +75,21 @@ router.get('/post/:id/confirm', (req, res) => {
         res.status(500).json({message: 'Something went terribly wrong!'});
     });
 });
+
+// Single-Post Screen for a single whiskey post w/rating, likes, comments, etc. --------
+// router.get('/post/:postID', (req, res) => {
+//   console.log(req.params.id);
+//   Whiskey
+//     .findById(req.params.id)
+//     .exec()
+//     .then(single_whiskey => {
+//       res.render('single-post', single_whiskey)
+//       })
+//     .catch(
+//       err => {
+//         console.error(err);
+//         res.status(500).json({message: 'Something went terribly wrong!'});
+//     });
+// });
 
 module.exports = router;

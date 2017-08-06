@@ -32,16 +32,16 @@ describe('GET endpoint', function() {
         });
     });
 
-    it('should return a 200 status & HTML - signup', function() {
+    it('should return a 200 status & HTML - user', function() {
 
       let res;
       return chai.request(app)
-        .get('/signup')
+        .get('/user')
         .then(function(_res) {
           res = _res;
           console.log(res.status);
           res.should.have.status(200);
-          res.should.be.html;
+          // res.should.be.html;
           console.log(`Your status is ${res.status}.`);
         });
     });

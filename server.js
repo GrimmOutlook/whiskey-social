@@ -13,13 +13,14 @@ const whiskeyRouter = require('./routes/whiskeyRouter');
 const passportRouter = require('./routes/passportRouter');
 const userRouter = require('./routes/userRouter');
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use('/', express.static(path.join(__dirname, 'public/views')))
 
 const {DATABASE_URL, PORT} = require('./config');
 
 app.use(morgan('common'));
 app.use(jsonParser);
-app.use('/', userRouter);
+app.use('/user', userRouter);
 app.use('/badges', badgeRouter);
 app.use('/whiskey', whiskeyRouter);
 // app.use('/user', userRouter);

@@ -16,8 +16,17 @@ router.use(jsonParser);
 // passport.use(LocalStrategy);
 // router.use(passport.initialize());
 
+//GET a list of all users - only use this search for friends screen
+router.get('/', (req, res) => {
+          return User
+            .find()
+            .exec()
+            .then(users => res.json(users.map(user => user.formattedUser())))
+            .catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
+        });
+
 //--------------------------- Profile Page -------------------------------------------
-router.get('/user/:id', function(req, res){
+router.get('/:id', function(req, res){
   console.log('This is the Profile page');
   User
     .findById(req.params.id)
@@ -33,7 +42,7 @@ router.get('/user/:id', function(req, res){
 })
 
 //--------------------------- Newsfeed Page -------------------------------------------
-router.get('/user/:id/newsfeed', function(req, res){
+router.get('/:id/newsfeed', function(req, res){
   console.log('This is the Newsfeed page');
   User
     .findById(req.params.id)
@@ -50,7 +59,7 @@ router.get('/user/:id/newsfeed', function(req, res){
 })
 
 //--------------------------- Favorites Page -------------------------------------------
-router.get('/user/:id/my-favorites', function(req, res){
+router.get('/:id/my-favorites', function(req, res){
   console.log('This is the favorites page');
   Whiskey
     .find()
@@ -69,7 +78,7 @@ router.get('/user/:id/my-favorites', function(req, res){
 })
 
 //--------------------------- My-posts Page -------------------------------------------
-router.get('/user/:id/history', function(req, res){
+router.get('/:id/history', function(req, res){
   console.log('This is the my-posts/history page');
   Whiskey
     .find()
@@ -88,7 +97,7 @@ router.get('/user/:id/history', function(req, res){
 })
 
 //---------------------------- My-unique-posts Page ------------------------------------
-router.get('/user/:id/whiskeys', function(req, res){
+router.get('/:id/whiskeys', function(req, res){
   console.log('This is the my-posts-unique page');
   Whiskey
     .find()
@@ -107,7 +116,7 @@ router.get('/user/:id/whiskeys', function(req, res){
 })
 
 //---------------------------- My Friends Page -----------------------------------------
-router.get('/user/:id/friends', function(req, res){
+router.get('/:id/friends', function(req, res){
   console.log('This is the my friends page');
   User
     .find()
@@ -126,7 +135,7 @@ router.get('/user/:id/friends', function(req, res){
 })
 
 //------------------------------ Account Delete Page ------------------------------------
-router.get('/user/:id/delete-account', function(req, res){
+router.get('/:id/delete-account', function(req, res){
   console.log('This is the Account Delete page');
   User
     .findById(req.params.id)
