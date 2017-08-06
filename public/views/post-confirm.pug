@@ -1,6 +1,22 @@
 doctype html
 html(lang="en")
   head
-    title Post Hoc Screen
+    title Post Confirmation Screen
   body
-    h1 Post Hoc Screen
+    h1 Post Confirmation Screen
+
+    h2 Cheers!  Your post was successful!
+
+    h3 Would you like to add this whiskey to your Favorites?
+
+      a(href="/user/" + id + "/my-favorites")
+      button.redirect-to-favorites(type='submit') Yes!
+
+    //- Hidden if no badges earned for this particular post:
+    h3 You earned the following badges:
+
+      div= badges.name, badges.photo
+      div= badges.name, badges.photo
+
+    a(href="/user/" + id + "/newsfeed")
+      button.redirect-to-newsfeed(type='submit') Close

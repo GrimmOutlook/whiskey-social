@@ -7,39 +7,39 @@ const userSchema = mongoose.Schema({
   firstName: {type: String, required: true, trim: true},
   lastName: {type: String, required: true, trim: true},
   password: {type: String, required: true},
-  username: {type: String, required: true, trim: true}    //,
-  // email: {type: String, required: true, trim: true},
+  username: {type: String, required: true, trim: true},
+  email: {type: String, required: true, trim: true},
   // avatar: Buffer,  //TODO nice to have  -  twitter or FBook photo
 
-  // myFriends: [Schema.Types.ObjectId],
+  myFriends: [String],  //TODO Is this what should be here?: Schema.Types.ObjectId
 
-  // postCount: Number,
-  // uniquePostCount: Number,
-  // friendCount: Number,
-  // favoriteCount: Number,
-  // badgeCount: Number,
-  // badges: [String],
+  postCount: Number,  //Or just use post.length in model or router?
+  uniquePostCount: Number,
+  friendCount: Number,  //Or just use myFriends.length in model or router?
+  favoriteCount: Number,
+  badgeCount: Number,  //Or just use badges.length in model or router?
+  badges: [String],
 
-  // post: [{
-  //   postID: Number,
-  //   title: String,
-  //   image_url: String,
-  //   postDate: {type: Date, default: Date.now},
-  //   rating: Number,
-  //   likesCount: Number,
-  //   favorite: Boolean,
-  //   unique: Boolean,  ????????????
-  //   comment: [{
-  //     author: Schema.Types.ObjectId,
-  //     text: [String],
-  //     commentDate: {type: Date, default: Date.now},
-  //     replies: [{
-  //       author: Schema.Types.ObjectId,
-  //       text: [String],
-  //       replyDate: {type: Date, default: Date.now}
-  //     }]
-  //   }]
-  // }]
+  post: [{
+    postID: Number,
+    title: String,
+    image_url: String,
+    postDate: {type: Date, default: Date.now},
+    rating: Number,
+    likesCount: Number,
+    favorite: Boolean,
+    // unique: Boolean,  ????????????
+    comment: [{
+      author: String,  //Or use Schema.Types.ObjectId?
+      text: [String],
+      commentDate: {type: Date, default: Date.now},
+      replies: [{
+        author: String,  //Or use Schema.Types.ObjectId?
+        text: [String],
+        replyDate: {type: Date, default: Date.now}
+      }]
+    }]
+  }]
 
 });
 
@@ -61,8 +61,8 @@ userSchema.methods.formattedUser = function() {
     id: this._id,
     name: this.fullName,
     username: this.username,
-    message: "This went into the DB"
-    // email: this.email
+    email: this.email
+    // message: "This went into the DB"
   };
 }
 

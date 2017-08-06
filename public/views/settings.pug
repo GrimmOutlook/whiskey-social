@@ -3,5 +3,15 @@ html(lang="en")
   head
     title Settings Screen
   body
+    div= email
     div= username
+    div= name
     div= password
+
+    h3 Save Changes Button
+
+    a(href="/user/" + id + "/newsfeed")
+      button.redirect-to-newsfeed(type='submit') Newsfeed
+
+    a(href="/user/" + id + "/delete-account")
+      button.redirect-to-delete-account(type='submit') Delete Account

@@ -1,71 +1,254 @@
 {
-  "name": {
-    "firstName": "Dave",
-    "lastName": "Grimm"
-  },
-  "userName": "grimmoutlook",
-  "dob": "August 26, 1973",
-  "email": "grimmoutlook87@gmail.com",
-  "postCount": 20,
+  "firstName": "Wanda",
+  "lastName": "Whiskeywoman",
+  "password": "password-wanda",
+  "username": "magicwanda",
+  "email": "wanda@gmail.com",
+  "myFriends": ["samiam", "drinkingbuddy22", "drunkguy"],
+  "postCount": 3,
   "uniquePostCount": 3,
-  "friendCount": 5,
-  "favoriteCount": 1,
-  "badgeCount": 2,
-  "badges": ["First Whiskey", "St. Patrick's Day"]
-}
-{
-  "name": {
-    "firstName": "Friendly",
-    "lastName": "McFriend"
-  },
-  "userName": "whiskeydrinker",
-  "dob": "January 1, 1975",
-  "email": "friendly@gmail.com",
-  "postCount": 10,
-  "uniquePostCount": 2,
-  "friendCount": 14,
+  "friendCount": 3,
   "favoriteCount": 2,
   "badgeCount": 1,
-  "badges": ["First Whiskey"]
+  "badges": ["First Whiskey"],
+  "posts": [
+    {
+      "postID": 1,
+      "title": "Jack Daniel's Old No. 7",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_jac117.jpg",
+      "postDate": "2016-05-18T16:00:00Z",
+      "rating": 4,
+      "likesCount": 0,
+      "favorite": true,
+      "comment": [{
+        "author": "magicwanda",
+        "text": "First post!  My favorite whiskey!",
+        "commentDate": "2016-06-28T16:00:00Z",
+        "replies": [{
+          "author": "samiam",
+          "text": "I would not drink this whiskey in a bar.  I would not drink this whiskey in a car",
+          "replyDate": "2016-08-26T16:00:00Z"
+        }]
+      }]
+    },
+    {
+      "postID": 2,
+      "title": "Early Times Old Reserve Bourbon",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_ear6.jpg",
+      "postDate": "2016-03-18T16:00:00Z",
+      "rating": 1,
+      "likesCount": 2,
+      "favorite": false,
+      "comment": [{
+        "author": "magicwanda",
+        "text": "Does it pair well with green eggs and ham?",
+        "commentDate": "2016-07-28T16:00:00Z",
+        "replies": [{
+          "author": "samiam",
+          "text": "Yes. Yes it does.",
+          "replyDate": "2016-09-26T16:00:00Z"
+        }]
+      }]
+    },
+    {
+      "postID": 3,
+      "title": "Hudson Baby Bourbon",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_hud1.jpg",
+      "postDate": "2016-05-18T16:00:00Z",
+      "rating": 4,
+      "likesCount": 1,
+      "favorite": true,
+      "comment": [{
+        "author": "drinkingbuddy22",
+        "text": "Not really a fan.",
+        "commentDate": "2016-06-28T16:00:00Z",
+        "replies": [{
+          "author": "drunkguy",
+          "text": "Drank a bottle yesterday.  Fair at best.",
+          "replyDate": "2016-08-26T16:00:00Z"
+        }]
+      }]
+    }
+  ]
 }
-
-
-
-// {
-//   "firstName": "Wanda",
-//   "lastName": "Whiskeydrinker",
-//   "password": "nothashed",
-//   "username": "magicwanda",
-//   "email": "wandaw@gmail.com",
-
-
-//   "myFriends": ["samiam", "drunkguy", "drinkingbuddy22"],
-
-//   "postCount": 1,
-//   "uniquePostCount": 1,
-//   "friendCount": 3,
-//   "favoriteCount": 1,
-//   "badgeCount": 1,
-//   "badges": ["First Whiskey"],
-
-//   "post": [{
-//     "title": "Jack Daniel's Old No. 7",
-//     "image_url": "https://img.thewhiskyexchange.com/270/brbon_jac117.jpg",
-//     "postDate": "2016-05-18T16:00:00Z",
-//     "rating": 4,
-//     "likesCount": 2,
-//     "favorite": true,
-//     "unique": true,
-//     "comment": [{
-//       "author": "magicwanda",
-//       "text": "First post!  My favorite whiskey!",
-//       "commentDate": "2016-06-28T16:00:00Z",
-//       "replies": [{
-//         "author": "samiam",
-//         "text": "I would not drink this whiskey in a bar.  I would not drink this whiskey in a car",
-//         "replyDate": "2016-08-26T16:00:00Z"
-//       }]
-//     }]
-//   }]
-
-// }
+{
+  "firstName": "Sam",
+  "lastName": "Am",
+  "password": "password-sam",
+  "username": "samiam",
+  "email": "sam@gmail.com",
+  "myFriends": ["magicwanda"],
+  "postCount": 2,
+  "uniquePostCount": 2,
+  "friendCount": 1,
+  "favoriteCount": 0,
+  "badgeCount": 1,
+  "badges": ["First Whiskey"],
+  "posts": [
+    {
+      "postID": 1,
+      "title": "Jack Daniel's Old No. 7",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_jac117.jpg",
+      "postDate": "2016-01-18T16:00:00Z",
+      "rating": 2,
+      "likesCount": 1,
+      "favorite": false,
+      "comment": [{
+        "author": "magicwanda",
+        "text": "Hello Sam!",
+        "commentDate": "2016-06-15T16:00:00Z",
+        "replies": [{
+          "author": "samiam",
+          "text": "What have you been up to Wanda?",
+          "replyDate": "2016-08-14T16:00:00Z"
+        }]
+      }]
+    },
+    {
+      "postID": 2,
+      "title": "Early Times Old Reserve Bourbon",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_ear6.jpg",
+      "postDate": "2016-04-18T16:00:00Z",
+      "rating": 1,
+      "likesCount": 0,
+      "favorite": false,
+      "comment": [{
+        "author": "magicwanda",
+        "text": "Does it pair well with green eggs and ham?",
+        "commentDate": "2016-04-28T16:00:00Z",
+        "replies": [{
+          "author": "samiam",
+          "text": "No, not at all.",
+          "replyDate": "2016-09-21T16:00:00Z"
+        }]
+      }]
+    }
+  ]
+}
+{
+  "firstName": "Walter",
+  "lastName": "Whiskeyman",
+  "password": "password-walter",
+  "username": "drinkingbuddy22",
+  "email": "walter@gmail.com",
+  "myFriends": ["magicwanda", "drunkguy"],
+  "postCount": 2,
+  "uniquePostCount": 2,
+  "friendCount": 2,
+  "favoriteCount": 1,
+  "badgeCount": 1,
+  "badges": ["First Whiskey"],
+  "posts": [
+    {
+      "postID": 1,
+      "title": "Jack Daniel's Old No. 7",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_jac117.jpg",
+      "postDate": "2016-01-08T16:00:00Z",
+      "rating": 5,
+      "likesCount": 2,
+      "favorite": true,
+      "comment": [{
+        "author": "magicwanda",
+        "text": "I comment on everything!",
+        "commentDate": "2016-06-15T16:00:00Z",
+        "replies": [{
+          "author": "drinkingbuddy22",
+          "text": "Why?",
+          "replyDate": "2016-08-14T16:00:00Z"
+        }]
+      }]
+    },
+    {
+      "postID": 2,
+      "title": "Early Times Old Reserve Bourbon",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_ear6.jpg",
+      "postDate": "2016-04-18T16:00:00Z",
+      "rating": 1,
+      "likesCount": 0,
+      "favorite": false,
+      "comment": [{
+        "author": "magicwanda",
+        "text": "I really do comment on everything.",
+        "commentDate": "2016-04-28T16:00:00Z",
+        "replies": [{
+          "author": "drunkguy",
+          "text": "Why?",
+          "replyDate": "2016-09-21T16:00:00Z"
+        }]
+      }]
+    }
+  ]
+}
+{
+  "firstName": "Don",
+  "lastName": "Drinker",
+  "password": "password-don",
+  "username": "drunkguy",
+  "email": "don@gmail.com",
+  "myFriends": ["magicwanda", "drinkingbuddy22"],
+  "postCount": 3,
+  "uniquePostCount": 2,
+  "friendCount": 2,
+  "favoriteCount": 2,
+  "badgeCount": 2,
+  "badges": ["First Whiskey", "St. Patrick's Day"],
+  "posts": [
+    {
+      "postID": 1,
+      "title": "Jack Daniel's Old No. 7",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_jac117.jpg",
+      "postDate": "2016-01-08T16:00:00Z",
+      "rating": 5,
+      "likesCount": 2,
+      "favorite": true,
+      "comment": [{
+        "author": "magicwanda",
+        "text": "What's up Don?",
+        "commentDate": "2016-06-15T16:00:00Z",
+        "replies": [{
+          "author": "drunkguy",
+          "text": "Not much.",
+          "replyDate": "2016-08-14T16:00:00Z"
+        }]
+      }]
+    },
+    {
+      "postID": 2,
+      "title": "Early Times Old Reserve Bourbon",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_ear6.jpg",
+      "postDate": "2016-03-17T16:00:00Z",
+      "rating": 5,
+      "likesCount": 0,
+      "favorite": true,
+      "comment": [{
+        "author": "magicwanda",
+        "text": "That stuff is nasty!",
+        "commentDate": "2016-03-18T16:00:00Z",
+        "replies": [{
+          "author": "drunkguy",
+          "text": "It is not!",
+          "replyDate": "2016-03-19T16:00:00Z"
+        }]
+      }]
+    },
+    {
+      "postID": 3,
+      "title": "Jack Daniel's Old No. 7",
+      "image_url": "https://img.thewhiskyexchange.com/270/brbon_jac117.jpg",
+      "postDate": "2016-07-18T16:00:00Z",
+      "rating": 5,
+      "likesCount": 1,
+      "favorite": true,
+      "comment": [{
+        "author": "drinkingbuddy22",
+        "text": "Not really a fan.",
+        "commentDate": "2016-07-28T16:00:00Z",
+        "replies": [{
+          "author": "drunkguy",
+          "text": "What?  It's awesome!",
+          "replyDate": "2016-08-01T16:00:00Z"
+        }]
+      }]
+    }
+  ]
+}

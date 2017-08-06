@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+  head
+    title Friend Request Received Screen
+  body
+    h3 Friend Request Received page
+
+    h2 You have received a Friend Request from:
+
+    div= username
+    div= name
+
+    //- Redirect to Friends List page, with new friend at top
+    a(href="/user/" + id + "/friends")
+      button.redirect-to-whiskey-post(type='submit') Accept
+
+    //- Redirect to Friends List page, with existing friends list unchanged
+    a(href="/user/" + id + "/friends")
+      button.redirect-to-whiskey-post(type='submit') Deny

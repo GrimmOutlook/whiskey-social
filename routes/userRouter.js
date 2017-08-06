@@ -32,12 +32,28 @@ router.get('/:id', function(req, res){
     .findById(req.params.id)
     .exec()
     .then(user => {
-      res.render('profile', user.formattedUser());
+      res.render('profile', user.profileUser());
     })
     .catch(
       err => {
         console.error(err);
         res.status(500).json({message: 'Something\'s wrong with the profile page.'});
+    });
+})
+
+//----------------------- User Settings Page -------------------------------------------
+router.get('/:id/settings', function(req, res){
+  console.log('This is the Settings page');
+  User
+    .findById(req.params.id)
+    .exec()
+    .then(user => {
+      res.render('settings', user.formattedUser());
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the settings page.'});
     });
 })
 
@@ -165,7 +181,7 @@ router.get('/friend/search', function(req, res){
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the my friends page.'});
+        res.status(500).json({message: 'Something\'s wrong with the search for friend page.'});
     });
 })
 
