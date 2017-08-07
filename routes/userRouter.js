@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
             .catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
         });
 
-//--------------------------- Profile Page -------------------------------------------
+//--------------------------- Profile Page ---------------------------------------------
 router.get('/:id', function(req, res){
   console.log('This is the Profile page');
   User

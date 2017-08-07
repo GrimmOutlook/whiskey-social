@@ -11,9 +11,6 @@ html(lang="en")
     div.possible-friends-list-container
       ul
         each user in users
-          a(href="user/potential-friend/" + id)
+          a(href="/user/potential-friend/" + user.id)
             li= user.username + user.id + user.name
-
-    a(href="user/potential-friend/" + id)
-      p take me to /user/potential-friend/id
 

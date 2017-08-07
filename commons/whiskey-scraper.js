@@ -17,11 +17,30 @@ request('https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true#pro
     $('.image-container img').each(function(index) {
       const imageURL = $(this).attr('data-original');
       const whiskeyName = $(this).attr('alt');
-      // console.log(whiskeyName);
-      // console.log(imageURL);
       const whiskeyObject = {name: whiskeyName, image_url: imageURL};
       const whiskeys = JSON.stringify(whiskeyObject);
-      console.log(whiskeys);
+      // console.log(whiskeys);
+    })
+
+    $('.item a').each(function(index) {
+      const redirectURL = 'https://www.thewhiskyexchange.com' + $(this).attr('href');
+      // console.log(redirectURL);
+
+        request(redirectURL, function(error, response, body) {
+          $ = cheerio.load(body);
+
+            $('div#prodDesc').each(function(index){
+              const description = $(this).text();
+              // console.log(description);
+            })
+
+            $('div#prodMeta').each(function(index){
+              const country = $('dl.meta dd:nth-child(2)').text();
+              const region = $('dl.meta dd:nth-child(4)').text();
+              console.log('Country: ' + country +', Region: ' + region);
+            })
+        })
+
     })
 });
 
