@@ -17,13 +17,13 @@ router.use(jsonParser);
 // router.use(passport.initialize());
 
 //GET a list of all users - only use this search for friends screen
-router.get('/', (req, res) => {
-          return User
-            .find()
-            .exec()
-            .then(users => res.json(users.map(user => user.formattedUser())))
-            .catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
-        });
+// router.get('/', (req, res) => {
+//           return User
+//             .find()
+//             .exec()
+//             .then(users => res.json(users.map(user => user.formattedUser())))
+//             .catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
+//         });
 
 //--------------------------- Profile Page ---------------------------------------------
 router.get('/:id', function(req, res){
@@ -135,14 +135,17 @@ router.get('/:id/whiskeys', function(req, res){
 router.get('/:id/friends', function(req, res){
   console.log('This is the my friends page');
   User
-    .find()
+    .findById(req.params.id)
     .exec()
-    .then(users => {
-      res.render('friend-list', {
-        users: users.map(
-          (user) => user.profileUser())
-      });
+    .then(user => {
+      res.render('friend-list', user.friendsOfUser());
     })
+    // .then(user => {
+    //   user.myFriends.forEach(function(friend){
+    //     //for each item in array, find the userID associated with that user
+    //     //then render the username / userID combo
+    //   })
+    // })
     .catch(
       err => {
         console.error(err);

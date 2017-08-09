@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const Schema = mongoose.Schema
 
 mongoose.Promise = global.Promise;
 
-const userSchema = mongoose.Schema({
+const userSchema = Schema({
   firstName: {type: String, required: true, trim: true},
   lastName: {type: String, required: true, trim: true},
   password: {type: String, required: true},
@@ -11,7 +12,8 @@ const userSchema = mongoose.Schema({
   email: {type: String, required: true, trim: true},
   // avatar: Buffer,  //TODO nice to have  -  twitter or FBook photo
 
-  myFriends: [String],  //TODO Is this what should be here?: Schema.Types.ObjectId
+  // myFriends: [String],
+  myFriends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 
   postCount: Number,  //Or just use post.length in model or router?
   uniquePostCount: Number,
@@ -30,11 +32,11 @@ const userSchema = mongoose.Schema({
     favorite: Boolean,
     // unique: Boolean,  ????????????
     comment: [{
-      author: String,  //Or use Schema.Types.ObjectId?
+      author: { type: Schema.Types.ObjectId, ref: 'User' },  //Or use String?
       text: [String],
       commentDate: {type: Date, default: Date.now},
       replies: [{
-        author: String,  //Or use Schema.Types.ObjectId?
+        author: { type: Schema.Types.ObjectId, ref: 'User' },  //Or use String?
         text: [String],
         replyDate: {type: Date, default: Date.now}
       }]
@@ -55,8 +57,10 @@ userSchema.virtual('fullName').get(function() {
   return `${this.firstName} ${this.lastName}`;
 });
 
+//use a virtual(s) to replace Counts??
+
 userSchema.methods.formattedUser = function() {
-  console.log('formattedUser: ' + this);
+  // console.log('formattedUser: ' + this);
   return {
     id: this._id,
     name: this.fullName,
@@ -67,7 +71,7 @@ userSchema.methods.formattedUser = function() {
 }
 
 userSchema.methods.profileUser = function() {
-  console.log('profileUser: ' + this);
+  // console.log('profileUser: ' + this);
   return {
     id: this._id,
     name: this.fullName,
@@ -75,10 +79,30 @@ userSchema.methods.profileUser = function() {
     postCount: this.postCount,
     uniquePostCount: this.uniquePostCount,
     friendCount: this.friendCount,
+    myFriends: this.myFriends,
     favoriteCount: this.favoriteCount,
     badgeCount: this.badgeCount,
     badges: this.badges  // an array of strings
     // avatar: this.avatar
+  };
+}
+
+userSchema.virtual('friendToString').get(function() {
+  let objToString = [];
+  console.log((this.myFriends).length); //why isn't this.myFriends an array?!
+  this.myFriends.forEach(function(element) {
+    objToString.push(element.toString());
+    console.log('objToString so far: ' + objToString);
+  });
+  console.log('objToString output: ' + objToString);
+  return objToString;
+});
+
+userSchema.methods.friendsOfUser = function() {
+  // console.log('friendToString output: ' + this.friendToString);
+  return {
+    id: this._id,
+    friends: this.friendToString
   };
 }
 

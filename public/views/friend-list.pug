@@ -7,10 +7,11 @@ html(lang="en")
     a(href="/user/friend/search")
       button.redirect-to-friend-search(type='submit') Search
 
+
     h1 My Friends:
     div.friends-list-container
       ul
-        each user in users
-          li= user.username + user.id + user.name
-
-    h2 Use "a" tags to click on friend to redirect to Friend's Profile page
+        each friend in friends
+          a(href="/user/" + friend.id)
+            li= friend
+            //- li= user.username + user.name
