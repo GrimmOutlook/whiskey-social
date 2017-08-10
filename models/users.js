@@ -28,7 +28,7 @@ const userSchema = Schema({
     image_url: String,
     postDate: {type: Date, default: Date.now},
     rating: Number,
-    likesCount: Number,
+    likesCount: {type: Number, default: 0},
     favorite: Boolean,
     // unique: Boolean,  ????????????
     comment: [{
@@ -87,22 +87,23 @@ userSchema.methods.profileUser = function() {
   };
 }
 
-userSchema.virtual('friendToString').get(function() {
-  let objToString = [];
-  console.log((this.myFriends).length); //why isn't this.myFriends an array?!
-  this.myFriends.forEach(function(element) {
-    objToString.push(element.toString());
-    console.log('objToString so far: ' + objToString);
-  });
-  console.log('objToString output: ' + objToString);
-  return objToString;
-});
+// userSchema.virtual('friendToString').get(function() {
+//   let objToString = [];
+//   console.log((this.myFriends).length); //why isn't this.myFriends an array?!
+//   this.myFriends.forEach(function(element) {
+//     objToString.push(element.toString());
+//     console.log('objToString so far: ' + objToString);
+//   });
+//   console.log('objToString output: ' + objToString);
+//   return objToString;
+// });
 
 userSchema.methods.friendsOfUser = function() {
   // console.log('friendToString output: ' + this.friendToString);
   return {
     id: this._id,
-    friends: this.friendToString
+    name: this.fullName,
+    username: this.username
   };
 }
 

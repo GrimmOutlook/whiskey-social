@@ -11,7 +11,8 @@ html(lang="en")
     h1 My Friends:
     div.friends-list-container
       ul
-        each friend in friends
-          a(href="/user/" + friend.id)
+        each friend in friendsArray
+          li= friend
+          //- a(href="/user/" + friend.id)
             li= friend
             //- li= user.username + user.name
