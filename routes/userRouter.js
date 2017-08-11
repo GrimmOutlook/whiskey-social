@@ -202,59 +202,6 @@ router.get('/:id/delete-account', function(req, res){
     });
 })
 
-//------------------------------ Friend Search Page ------------------------------------
-router.get('/friend/search', function(req, res){
-  console.log('This is the Search for Friend page');
-  User
-    .find()
-    .exec()
-    .then(users => {
-      res.render('friend-search', {
-        users: users.map(
-          (user) => user.profileUser())
-      });
-    })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the search for friend page.'});
-    });
-})
-
-//----------------- Potential Friend Basic Profile Page --------------------------------
-router.get('/potential-friend/:id', function(req, res){
-  console.log('This is the Profile page');
-  User
-    .findById(req.params.id)
-    .exec()
-    .then(user => {
-      res.render('friend-potential-profile', user.formattedUser());
-    })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the Potential Friend profile page.'});
-    });
-})
-
-//----------------- Potential Friend Basic Profile Page --------------------------------
-router.get('/friend/request/send/:id', function(req, res){
-  console.log('This is the Friend Request Send page');
-  User
-    .findById(req.params.id)
-    .exec()
-    .then(user => {
-      res.render('friend-request-send', user.formattedUser());
-    })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the Friend Request Send page.'});
-    });
-})
-
-
-
 module.exports = router;
 
 
