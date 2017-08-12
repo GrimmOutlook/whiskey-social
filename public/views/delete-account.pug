@@ -8,7 +8,15 @@ html(lang="en")
     div Are you sure you want to delete your account?
 
     a(href="/user/" + id)
-      button.redirect-to-newsfeed(type='submit') No
+      button.redirect-to-profile(type='submit') No
 
-    a(href="/index.html")
-      button.redirect-to-newsfeed(type='submit') Yes
+    a(href="/user/" + id + "/delete-account")
+      button.redirect-to-homepage(type='submit', formmethod="POST") Yes
+
+
+    form(action="/user/" + id + "/delete-account", method="POST")
+      label(for="eliminate") Yes, delete my account
+      input(type="submit")
+
+
+

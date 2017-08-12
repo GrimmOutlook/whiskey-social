@@ -131,61 +131,6 @@ router.get('/:id/whiskeys', function(req, res){
     });
 })
 
-//---------------------------- My Friends Page -----------------------------------------
-router.get('/:id/friends', function(req, res){
-  console.log('This is the my friends page');
-  User                                        //Look in user model
-  .findById(req.params.id)                    //GET User by id
-  .exec()
-  .then(function(user){                       //Pass User into fxn.
-    const friendsArray = [];
-     console.log("myFriends array: " + user.myFriends);
-      user.myFriends.forEach(function(id){  //for every user id in myFriends array
-        User                                  //Look in user model again
-        .findById(id)                         //find id of original user's friend
-        .exec()
-        .then(user => {                     //Pass that user's info into fxn.
-          friendsArray.push(user);  //Push entire user object into the array
-          console.log("There should be stuff in this array!: " + friendsArray);
-          return friendsArray;  //returns an array of user objects
-        });
-      })
-      // console.log("friendsArray results1: " + friendsArray);
-      // return friendsArray;                    //fxn. returns the friendsArray
-      // res.render('friend-list', friendsArray);
-    })
-     .then(function(friendsArray){   //where tf did the friendsArray go to?!
-        console.log("friendsArray after another .then: " + friendsArray);
-      })
-  // .then(results => {
-  //   console.log("friendsArray results2: " + results);
-  //     res.render('friend-list', results.map(
-  //         (result) => result.friendsOfUser)
-  //     );
-  //   })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the my friends page.'});
-    });
-})
-
-
-  // function findFriends(req, res, user) {
-  //   const friendsArray = [];
-  //     user.myFriends.forEach(function(id){
-  //       //for each item in array, find the userID associated with that user
-  //       //then render the username / userID combo
-  //       User
-  //       .findById(id)
-  //       .exec()
-  //       .then(user => {
-  //         friendsArray.push(user.friendsOfUser);
-  //       })
-  //     })
-  //     res.render('friend-list', friendsArray);
-  // }
-
 //------------------------------ Account Delete Page ------------------------------------
 router.get('/:id/delete-account', function(req, res){
   console.log('This is the Account Delete page');
@@ -193,7 +138,23 @@ router.get('/:id/delete-account', function(req, res){
     .findById(req.params.id)
     .exec()
     .then(user => {
+      console.log(user);
       res.render('delete-account', user.formattedUser());
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the Account Delete page.'});
+    });
+})
+
+router.delete('/:id/delete-account', function(req, res){
+  User.findByIdAndRemove(req.params.id)
+    .exec()
+    .then(() => {
+      console.log('Why won\'t this shit delete?');
+      res.sendFile('/index.html');
+      console.log('User has been removed from the database.');
     })
     .catch(
       err => {
