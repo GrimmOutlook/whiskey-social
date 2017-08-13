@@ -148,7 +148,7 @@ router.get('/:id/delete-account', function(req, res){
     });
 })
 
-router.delete('/:id/delete-account', function(req, res){
+router.post('/:id/delete-account', function(req, res){
   User.findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {

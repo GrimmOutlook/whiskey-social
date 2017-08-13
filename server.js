@@ -8,7 +8,6 @@ const jsonParser = bodyParser.json();
 
 const app = express();
 
-const badgeRouter = require('./routes/badgeRouter');
 const whiskeyRouter = require('./routes/whiskeyRouter');
 const passportRouter = require('./routes/passportRouter');
 const userRouter = require('./routes/userRouter');
@@ -21,7 +20,6 @@ const {DATABASE_URL, PORT} = require('./config');
 app.use(morgan('common'));
 app.use(jsonParser);
 app.use('/user', userRouter);
-app.use('/badges', badgeRouter);
 app.use('/whiskey', whiskeyRouter);
 // app.use('/user', userRouter);
 app.use('/signup', passportRouter);  //use / as route, then /signup & /login in router?

@@ -12,15 +12,9 @@ const userSchema = Schema({
   email: {type: String, required: true, trim: true},
   // avatar: Buffer,  //TODO nice to have  -  twitter or FBook photo
 
-  // myFriends: [String],
-  myFriends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-
   postCount: Number,  //Or just use post.length in model or router?
   uniquePostCount: Number,
-  friendCount: Number,  //Or just use myFriends.length in model or router?
   favoriteCount: Number,
-  badgeCount: Number,  //Or just use badges.length in model or router?
-  badges: [String],
 
   post: [{
     postID: Number,
@@ -28,18 +22,12 @@ const userSchema = Schema({
     image_url: String,
     postDate: {type: Date, default: Date.now},
     rating: Number,
-    likesCount: {type: Number, default: 0},
     favorite: Boolean,
     // unique: Boolean,  ????????????
     comment: [{
       author: { type: Schema.Types.ObjectId, ref: 'User' },  //Or use String?
       text: [String],
       commentDate: {type: Date, default: Date.now},
-      replies: [{
-        author: { type: Schema.Types.ObjectId, ref: 'User' },  //Or use String?
-        text: [String],
-        replyDate: {type: Date, default: Date.now}
-      }]
     }]
   }]
 
@@ -78,35 +66,10 @@ userSchema.methods.profileUser = function() {
     username: this.username,
     postCount: this.postCount,
     uniquePostCount: this.uniquePostCount,
-    friendCount: this.friendCount,
-    myFriends: this.myFriends,
     favoriteCount: this.favoriteCount,
-    badgeCount: this.badgeCount,
-    badges: this.badges  // an array of strings
     // avatar: this.avatar
   };
 }
-
-// userSchema.virtual('friendToString').get(function() {
-//   let objToString = [];
-//   console.log((this.myFriends).length); //why isn't this.myFriends an array?!
-//   this.myFriends.forEach(function(element) {
-//     objToString.push(element.toString());
-//     console.log('objToString so far: ' + objToString);
-//   });
-//   console.log('objToString output: ' + objToString);
-//   return objToString;
-// });
-
-userSchema.methods.friendsOfUser = function() {
-  // console.log('friendToString output: ' + this.friendToString);
-  return {
-    id: this._id,
-    name: this.fullName,
-    username: this.username
-  };
-}
-
 
 const User = mongoose.model('User', userSchema);
 
