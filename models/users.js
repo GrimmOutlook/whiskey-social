@@ -16,16 +16,14 @@ const userSchema = Schema({
   uniquePostCount: Number,
   favoriteCount: Number,
 
-  post: [{
-    postID: Number,
-    title: String,
+  posts: [{
+    title: String,  // from whiskey schema
     image_url: String,
     postDate: {type: Date, default: Date.now},
     rating: Number,
     favorite: Boolean,
     // unique: Boolean,  ????????????
     comment: [{
-      author: { type: Schema.Types.ObjectId, ref: 'User' },  //Or use String?
       text: [String],
       commentDate: {type: Date, default: Date.now},
     }]
@@ -54,7 +52,6 @@ userSchema.methods.formattedUser = function() {
     name: this.fullName,
     username: this.username,
     email: this.email
-    // message: "This went into the DB"
   };
 }
 

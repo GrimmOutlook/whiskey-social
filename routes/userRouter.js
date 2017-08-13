@@ -43,7 +43,22 @@ router.get('/:id', function(req, res){
 
 //----------------------- User Settings Page -------------------------------------------
 router.get('/:id/settings', function(req, res){
-  console.log('This is the Settings page');
+  console.log('This is the Settings page - GET');
+  User
+    .findById(req.params.id)
+    .exec()
+    .then(user => {
+      res.render('settings', user.formattedUser());
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the settings page.'});
+    });
+})
+          //------ POST/PUT changes to user settings fields ---------------//
+router.post('/:id/settings', function(req, res){
+  console.log('This is the Settings page - POST');
   User
     .findById(req.params.id)
     .exec()
@@ -57,22 +72,28 @@ router.get('/:id/settings', function(req, res){
     });
 })
 
-//--------------------------- Newsfeed Page -------------------------------------------
-router.get('/:id/newsfeed', function(req, res){
-  console.log('This is the Newsfeed page');
+//--------------------- My-posts (history) Page -----------------------------------------
+router.get('/:id/post-history', function(req, res){
+  console.log('This is the my-posts/history page');
   User
     .findById(req.params.id)
     .exec()
     .then(user => {
-      res.render('newsfeed', user.formattedUser());
-      console.log('Here is the user.id: ' + user.id);
+      //take the user and map each user.post
+      res.render('post-history', user);
+      // console.log(user);
+      console.log(user.posts);
+      // user.posts.map(post => {
+      //   console.log(post);
+      // })
     })
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the newsfeed page.'});
+        res.status(500).json({message: 'Something\'s wrong with the My-posts/history page.'});
     });
 })
+
 
 //--------------------------- Favorites Page -------------------------------------------
 router.get('/:id/my-favorites', function(req, res){
@@ -90,25 +111,6 @@ router.get('/:id/my-favorites', function(req, res){
       err => {
         console.error(err);
         res.status(500).json({message: 'Something\'s wrong with the Favorites page.'});
-    });
-})
-
-//--------------------------- My-posts Page -------------------------------------------
-router.get('/:id/history', function(req, res){
-  console.log('This is the my-posts/history page');
-  Whiskey
-    .find()
-    .exec()
-    .then(whiskeys => {
-      res.render('my-posts', {
-        whiskeys: whiskeys.map(
-          (whiskey) => whiskey)
-      });
-    })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the My-posts/history page.'});
     });
 })
 

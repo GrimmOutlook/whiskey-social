@@ -1,0 +1,12 @@
+doctype html
+html(lang="en")
+  head
+    title Post History Screen
+  body
+    h1 Post History:
+    div.history-container
+      ul
+        each post in posts
+          - var photoURL = post.image_url
+          li= post.title + ' ' + 'Rating: ' + post.rating + ' ' + 'Favorite?: ' + post.favorite
+            a(href=photoURL): img(src=photoURL)

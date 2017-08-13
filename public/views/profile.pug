@@ -7,7 +7,7 @@ html(lang="en")
     div= name
     div This is your Profile page!!
 
-    a(href="/user/" + id + "/history")
+    a(href="/user/" + id + "/post-history")
       h1= postCount
       h3 My Posts
 
@@ -19,13 +19,5 @@ html(lang="en")
       h1= favoriteCount
       h3 My Favorites
 
-    a(href="/user/" + id + "/friends")
-      h1= friendCount
-      h3 My Friends
-
-    a(href="/badges")
-      h1= badgeCount
-      h3 My Badges
-
-    a(href="/user/" + id + "/newsfeed")
-      button.redirect-to-newsfeed(type='submit') Newsfeed
+    a(href="/user/" + id + "/settings")
+      button.redirect-to-settings(type='submit') User Settings
