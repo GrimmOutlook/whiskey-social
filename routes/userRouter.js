@@ -63,6 +63,7 @@ router.post('/:id/settings', function(req, res){
     .findById(req.params.id)
     .exec()
     .then(user => {
+
       res.render('settings', user.formattedUser());
     })
     .catch(
@@ -72,25 +73,49 @@ router.post('/:id/settings', function(req, res){
     });
 })
 
-//--------------------- My-posts (history) Page -----------------------------------------
+//--------------------- POST History Page -----------------------------------------
 router.get('/:id/post-history', function(req, res){
-  console.log('This is the my-posts/history page');
+  console.log('This is the post-history page');
   User
     .findById(req.params.id)
     .exec()
     .then(user => {
-      //take the user and map each user.post
+      //just get the whole user and use pug to render what is needed for display
       res.render('post-history', user);
-      // console.log(user);
-      console.log(user.posts);
-      // user.posts.map(post => {
-      //   console.log(post);
-      // })
     })
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the My-posts/history page.'});
+        res.status(500).json({message: 'Something\'s wrong with the post-history page.'});
+    });
+})
+
+//--------------------- Single Post Page -----------------------------------------
+router.get('/:id/single-post/:postID', function(req, res){
+  console.log('This is the single-post page');
+  User
+    .findById(req.params.id)
+    .exec()
+    .then(user => {
+      // console.log(req.params.postID);  //this works
+      //console.log("Post Length:"+user.posts.length);
+      //TODO Rewrite with find instead of filter:
+      for (var i = 0; i < user.posts.length; i++){
+        var item = user.posts[i];
+        console.log(item);
+        if (item.postID == req.params.postID){
+          console.log("Post Found!");
+          console.log("This is the title: "+ item.title);
+          res.render('single-post', item);
+          break;
+        }
+      }
+
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with the single-post page.'});
     });
 })
 

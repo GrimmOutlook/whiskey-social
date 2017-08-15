@@ -5,7 +5,7 @@ const fs = require('fs');
 const app = express();
 const port = 8000;
 
-const URL = ['https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=2#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=3#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=4#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=5#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=6#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=7#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=8#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=9#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=10#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=11#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=12#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=13#productlist-filter'];
+const URL = ['https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=2#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=3#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=4#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=5#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=6#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=7#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=8#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=9#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=10#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=11#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=12#productlist-filter', 'https://www.thewhiskyexchange.com/c/33/american-whiskey?filter=true&pg=13#productlist-filter', 'https://www.thewhiskyexchange.com/c/34/canadian-whisky', 'https://www.thewhiskyexchange.com/c/34/canadian-whisky?pg=2#productlist-filter'];
 
 URL.forEach(function(URL){
 
@@ -58,6 +58,7 @@ URL.forEach(function(URL){
         })   // a each
       })  // .item each
     });   // 1st request URL
+  console.log('Done scraping!');
 });  // URL forEach
 
 app.listen(port);

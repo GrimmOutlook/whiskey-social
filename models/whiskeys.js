@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 
 const whiskeySchema = mongoose.Schema({
-  title: {type: String, required: true},
-  image_url: {type: String, required: true},
+  whiskeyName: {type: String, required: true},
+  country: String,
+  region: String,
+  smallImageURL: {type: String, required: true},
+  largeImageURL:  {type: String, required: true},
   description: {type: String, required: true}
 });
 

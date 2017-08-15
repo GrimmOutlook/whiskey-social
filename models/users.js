@@ -17,6 +17,7 @@ const userSchema = Schema({
   favoriteCount: Number,
 
   posts: [{
+    postID: Number,
     title: String,  // from whiskey schema
     image_url: String,
     postDate: {type: Date, default: Date.now},
