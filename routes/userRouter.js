@@ -100,18 +100,25 @@ router.get('/:id/single-post/:postID', function(req, res){
       // console.log(req.params.postID);  //this works
       //console.log("Post Length:"+user.posts.length);
       //TODO Rewrite with find instead of filter:
-      for (var i = 0; i < user.posts.length; i++){
-        var item = user.posts[i];
-        console.log(item);
+      user.posts.find(function(item){
+        console.log('This is the postID: ' + item.postID);
         if (item.postID == req.params.postID){
-          console.log("Post Found!");
-          console.log("This is the title: "+ item.title);
           res.render('single-post', item);
-          break;
         }
-      }
-
+      })
     })
+    //   for (var i = 0; i < user.posts.length; i++){
+    //     var item = user.posts[i];
+    //     console.log(item);
+    //     if (item.postID == req.params.postID){
+    //       console.log("Post Found!");
+    //       console.log("This is the title: "+ item.title);
+    //       res.render('single-post', item);
+    //       break;
+    //     }
+    //   }
+
+    // })
     .catch(
       err => {
         console.error(err);
