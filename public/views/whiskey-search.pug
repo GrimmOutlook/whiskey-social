@@ -4,3 +4,19 @@ html(lang="en")
     title Whiskey Search Screen
   body
     h1 Whiskey Search Screen
+
+    //- each whiskey in whiskeys
+    h2= whiskeyName
+    h2= country
+    div= description
+
+    //- TODO - Look at Treehouse form  -  Probably not a POST
+    form(action="POST")
+      textarea(rows=1, cols=100)
+        | Search for a whiskey
+      button.delete-post(type='submit') Search
+
+    //- each whiskey in whiskeys
+    //-   li= whiskeyName + smallImageURL
+
+

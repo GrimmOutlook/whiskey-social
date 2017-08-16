@@ -73,7 +73,7 @@ router.post('/:id/settings', function(req, res){
     });
 })
 
-//--------------------- POST History Page -----------------------------------------
+//--------------------- Post-History Page -----------------------------------------
 router.get('/:id/post-history', function(req, res){
   console.log('This is the post-history page');
   User
@@ -90,7 +90,7 @@ router.get('/:id/post-history', function(req, res){
     });
 })
 
-//--------------------- Single Post Page -----------------------------------------
+//---------------------------- Single Post Page -----------------------------------------
 router.get('/:id/single-post/:postID', function(req, res){
   console.log('This is the single-post page');
   User

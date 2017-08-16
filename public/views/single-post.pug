@@ -5,11 +5,16 @@ html(lang="en")
   body
     h1 Single Post Screen
 
-    div= title
-    div= image_url
+    div= whiskeyName
+    div= smallImageURL
 
     h2 Rating:
       div= rating
+
+    //- TODO - loop over comments
+    //- TODO - edit comment button - maybe
+    h2 Comments:
+      div= comment[0].text
 
     //- Button to delete user's own post - hidden for friends to see
     a(href="/whiskey/post/" + id + "/confirm")

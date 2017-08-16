@@ -13,10 +13,6 @@ html(lang="en")
       button.redirect-to-favorites(type='submit') Yes!
 
     //- Hidden if no badges earned for this particular post:
-    h3 You earned the following badges:
 
-      div= badges.name, badges.photo
-      div= badges.name, badges.photo
-
-    a(href="/user/" + id + "/newsfeed")
+    a(href="/user/" + id + "/post-history")
       button.redirect-to-newsfeed(type='submit') Close
