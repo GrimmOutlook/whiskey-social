@@ -5,12 +5,16 @@ html(lang="en")
   body
     h1 Whiskey Search Screen
 
-    //- each whiskey in whiskeys
-    h2= whiskeyName
-    h2= country
-    div= description
+    //- h2= whiskeys.length
 
-    //- TODO - Look at Treehouse form  -  Probably not a POST
+    if whiskeys
+      each w in whiskeys
+        h2= w.whiskeyName
+        h2= w.country
+        div= w.description
+    else
+
+    //- TODO - Look at Treehouse form  -  Probably not a POST - How do I make what's entered here into the query part of the URL???
     form(action="POST")
       textarea(rows=1, cols=100)
         | Search for a whiskey

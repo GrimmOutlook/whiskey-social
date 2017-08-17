@@ -28,18 +28,18 @@ router.get('/profile/:id', (req, res) => {
 
 // ----------------------------- Whiskey Search Screen ----------------------------------
 
-router.get('/search', (req, res) =>{
+router.get('/search', (req, res) => {
   var searchTerm = req.query.whiskey;
   console.log(searchTerm);
   if (searchTerm){
     Whiskey
-    .find({"whiskeyName": searchTerm})
+    .find({"whiskeyName": { $regex: searchTerm }})  // find is always an array
     .exec()
-    .then(whiskey => {
-      console.log("This is what whiskey is returning: " + whiskey);
-      console.log("Print this whiskeyName to screen!!: " + whiskey.whiskeyName);
-      console.log(typeof(whiskey));    //object
-      res.render('whiskey-search', whiskey);
+    .then(whiskeys => {
+      console.log("This is what whiskey is returning: " + whiskeys);
+      console.log("Print this whiskeyName to screen!!: " + whiskeys[0].whiskeyName);
+      console.log(typeof(whiskeys));    //object - array
+      res.render('whiskey-search', { whiskeys });  // This makes the array an object
     })
     .catch(
       err => {

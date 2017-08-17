@@ -24,12 +24,12 @@ URL.forEach(function(URL){
 
         $(this).find('a').each(function(index) {
 
-          var largeImageURL1;
-          var description1;
-          var country1;
-          var region1;
-          const whiskeyName1 = $(this).attr('title').trim();
-          const smallImageURL1 = $(this).find('.image-container img').attr('data-original');
+          var largeImageURL;
+          var description;
+          var country;
+          var region;
+          const whiskeyName = $(this).attr('title');  //.trim()
+          const smallImageURL = $(this).find('.image-container img').attr('data-original');
 
           //Get description, country, region, largeImageURL from next page -----------------
           const redirectURL = 'https://www.thewhiskyexchange.com' + $(this).attr('href');
@@ -37,29 +37,32 @@ URL.forEach(function(URL){
               $ = cheerio.load(body);
 
               $('div#productDefaultImage').each(function(index){
-                largeImageURL1 = $(this).find('img').attr('data-original');
+                largeImageURL = $(this).find('img').attr('data-original');
               })
 
               $('div#prodDesc').each(function(index){
-                description1 = $(this).text().trim();
+                description = $(this).text();   //.trim()
                 // console.log(description);
               })
 
               $('div#prodMeta').each(function(index){
-                country1 = $('dl.meta dd:nth-child(2)').text().trim();
-                region1 = $('dl.meta dd:nth-child(4)').text().trim();
+                country = $('dl.meta dd:nth-child(2)').text();   //.trim()
+                region = $('dl.meta dd:nth-child(4)').text();   //.trim()
               })
 
-              // console.log(whiskeyName1);
-              console.log('Whiskey: ' + whiskeyName1 + '  - Country: ' + country1 +', Region: ' + region1 + ', Description: ' + description1 + ', smallImageURL: ' + smallImageURL1 + ', largeImageURL: ' + largeImageURL1);
+              // console.log(whiskeyName);
+              // console.log('Whiskey: ' + whiskeyName + '  - Country: ' + country +', Region: ' + region + ', Description: ' + description + ', smallImageURL: ' + smallImageURL + ', largeImageURL: ' + largeImageURL);
 
-              // var thisWorks = {"whiskeyName": "' + whiskeyName1 + '", "country": "' + country1 + '", "region": "' + region1 + '", "description": "' + description1 + '", "smallImageURL": "' + smallImageURL1 + '", "largeImageURL": "' + largeImageURL1 +'"};
+              var thisWorks = '{"whiskeyName": "' + whiskeyName + '", "country": "' + country + '", "region": "' + region + '", "description": "' + description + '", "smallImageURL": "' + smallImageURL + '", "largeImageURL": "' + largeImageURL +'"}';
+              console.log(thisWorks);
 
               // var jsonToFile = JSON.stringify(thisWorks);
 
-              // const jsonToFile = JSON.stringify({whiskeyName: whiskeyName1, country: country1, region: region1, description: description1, smallImageURL: smallImageURL1, largeImageURL: largeImageURL1});
+              // const jsonToFile = JSON.stringify({whiskeyName: whiskeyName, country: country, region: region, description: description, smallImageURL: smallImageURL, largeImageURL: largeImageURL});
 
-              // fs.appendFileSync('whiskeys.json', jsonToFile);
+              fs.appendFileSync('whiskeys.json', thisWorks);
+
+              // fs.appendFileSync('whiskeys.json', '{"whiskeyName": "' + whiskeyName + '", "country": "' + country + '", "region": "' + region + '", "description": "' + description + '", "smallImageURL": "' + smallImageURL + '", "largeImageURL": "' + largeImageURL +'"}');
 
             })  // request redirect
         })   // a each
