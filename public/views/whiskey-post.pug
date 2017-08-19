@@ -17,9 +17,9 @@ html(lang="en")
       div.form-group
         label(for='rating') Rating:
         - var ratings = [1,2,3,4,5];
-          select
+          select(name='rating')
             each number in ratings
-              option#rating(value=number.id, name='rating')= number
+              option#rating(value=number)= number
       button(type='submit') Add Comment and Rating
 
     //- a(href="/whiskey/post/" + id + "/confirm")

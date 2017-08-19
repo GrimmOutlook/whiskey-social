@@ -82,12 +82,9 @@ router.get('/post/:id', (req, res) => {
           //POST info entered into screen into DB
 router.post('/post/:id', (req, res) => {
   //GET comment from form
-    console.log('stuff');
-    console.log('body: ' + JSON.stringify(req.body));
-    // var comment = req.body.comment;
-  //GET rating from form
-    // console.log('rating: ' + req.body.rating);
-    // var rating = req.body.rating;
+    var userInput = JSON.stringify(req.body);
+    console.log(userInput);
+
   //GET whiskey info from params.id  All info, including URLs?
   // Whiskey
   //   .findById(req.params.id)
