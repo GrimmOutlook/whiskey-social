@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
+// const bodyParser = require('body-parser');
+// const jsonParser = bodyParser.json();
+
 
 
 const {Whiskey} = require('../models/whiskeys');
@@ -61,7 +62,8 @@ router.get('/search', (req, res) => {
                   //       });
                   //     })
 
-// --------------------- Whiskey Post Screen ---------------------------------------------
+// -------------------- Whiskey Post Screen ---------------------------------------------
+         //GET the screen
 router.get('/post/:id', (req, res) => {
   console.log(req.params.id);
   Whiskey
@@ -77,7 +79,29 @@ router.get('/post/:id', (req, res) => {
     });
 });
 
-// ----------------------- Post Confirmation Screen --------------------------------------
+          //POST info entered into screen into DB
+router.post('/post/:id', (req, res) => {
+  //GET comment from form
+    console.log('stuff');
+    console.log('body: ' + JSON.stringify(req.body));
+    // var comment = req.body.comment;
+  //GET rating from form
+    // console.log('rating: ' + req.body.rating);
+    // var rating = req.body.rating;
+  //GET whiskey info from params.id  All info, including URLs?
+  // Whiskey
+  //   .findById(req.params.id)
+  //   .exec()
+
+  //How do dates get entered into DB?
+  //GET user from DB - How?
+  //GET length of user.posts array, increment by 1, set that = postID
+  //Push all info into user.posts array
+  //separate push to user.posts.comment array?
+
+})
+
+// ---------------------- Post Confirmation Screen --------------------------------------
 router.get('/post/:id/confirm', (req, res) => {
   console.log(req.params.id);
   Whiskey

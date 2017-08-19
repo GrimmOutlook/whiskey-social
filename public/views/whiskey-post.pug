@@ -10,14 +10,20 @@ html(lang="en")
     div= region
     div= description
 
-    form(action="")
-      textarea(rows=10, cols=100)
-        | Comment on this Whiskey:
+    form(method='POST' enctype='application/json' action="/whiskey/post/" + id)
+      div.form-group
+        label(for='comment') Comment:
+        textarea#comment(rows=10, cols=100, type='text', placeholder='Comment on this whiskey' name='comment')
+      div.form-group
+        label(for='rating') Rating:
+        - var ratings = [1,2,3,4,5];
+          select
+            each number in ratings
+              option#rating(value=number.id, name='rating')= number
+      button(type='submit') Add Comment and Rating
 
-    h2 Rating:  1  2  3  4  5
+    //- a(href="/whiskey/post/" + id + "/confirm")
+    //-   button.redirect-to-post-confirm(type='submit') POST
 
-    a(href="/whiskey/post/" + id + "/confirm")
-      button.redirect-to-post-confirm(type='submit') POST
-
-    a(href="/whiskey/profile/" + id)
-      button.redirect-to-whiskey-profile(type='submit') Cancel
+    //- a(href="/whiskey/profile/" + id)
+    //-   button.redirect-to-whiskey-profile(type='submit') Cancel
