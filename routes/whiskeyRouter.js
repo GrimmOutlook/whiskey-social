@@ -81,14 +81,23 @@ router.get('/post/:id', (req, res) => {
 
           //POST info entered into screen into DB
 router.post('/post/:id', (req, res) => {
-  //GET comment from form
+  //GET comment and rating from form:
     var userInput = JSON.stringify(req.body);
     console.log(userInput);
 
   //GET whiskey info from params.id  All info, including URLs?
-  // Whiskey
-  //   .findById(req.params.id)
-  //   .exec()
+  Whiskey
+    .findById(req.params.id)
+    .exec()
+    .then(single_whiskey => {
+      console.log('findById passed to fxn: ' + single_whiskey);
+      console.log('userInput: ' + userInput);
+      res.render('post-confirm', single_whiskey)
+      })
+
+    //Determine updateable fields and how to update the User's posts array of objects
+
+
 
   //How do dates get entered into DB?
   //GET user from DB - How?

@@ -5,11 +5,11 @@ const Schema = mongoose.Schema
 mongoose.Promise = global.Promise;
 
 const userSchema = Schema({
-  firstName: {type: String, required: true, trim: true},
-  lastName: {type: String, required: true, trim: true},
+  // firstName: {type: String},// required: true, trim: true},
+  // lastName: {type: String, required: true, trim: true},
   password: {type: String, required: true},
   username: {type: String, required: true, trim: true},
-  email: {type: String, required: true, trim: true},
+  // email: {type: String, required: true, trim: true},
   // avatar: Buffer,  //TODO nice to have  -  twitter or FBook photo
 
   postCount: Number,  //Or just use post.length in model or router?

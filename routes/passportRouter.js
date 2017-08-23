@@ -2,13 +2,13 @@
 const {BasicStrategy} = require('passport-http');
 const mongoose = require('mongoose');
 const express = require('express');
-const jsonParser = require('body-parser').json();
+// const jsonParser = require('body-parser').json();
 const passport = require('passport');
 const {User} = require('../models/users');
 //router is an instance of the express.Router()
 const router = express.Router();
 //router instance will use jsonParser middleware
-router.use(jsonParser);
+// router.use(jsonParser);
 
 //----------------------  Create basicStrategy middleware  ------------------------------
 
@@ -43,17 +43,24 @@ router.use(passport.initialize());  //router instance can use passport middlewar
 
 
 //-------------------  Definitely the Signup screen  -----------------------------------
+router.get('/', (req, res) => {
+  console.log("To the signup page!");
+  res.render('signup');
+});
+
 
 //POST one user with unique username for signup screen
 router.post('/', (req, res) => {
   //req.body = {username: "<user>", password: "<pw>"};
   //which is eqv to:  var username = "<user>";   var password = "<pw>";
+
   let {username, password} = req.body;
   if (!req.body) {
     console.log("Even w/o a request body, this never executes. Why?");
     return res.status(400).json({message: 'No request body'});
   }
   // check for existing user
+  console.log("req.body: " + JSON.stringify(req.body));
   return User
     .find({username})   //eqv. to .find({username: "<user>"})
     .count()
@@ -74,6 +81,7 @@ router.post('/', (req, res) => {
         })
     })
     .then(user => {
+      console.log('This is the user: ' + user);
       res.render('settings', user.formattedUser());
       // return res.status(201).json(user.formattedUser());
     })
@@ -93,12 +101,66 @@ router.post('/', (req, res) => {
 // );
 
 //------------------------------ Definitely Login POST  -----------------------------
+  //GET the Login Screen
+router.get('/login', (req, res) => {
+  console.log("To the login page!");
+  res.render('login');
+});
+
+  //POST the Login info, have passport authenticate it, redirect to settings page
 router.post('/me', passport.authenticate('basic', {
     successRedirect : '/settings',
     failureRedirect : '/',
-    failureFlash : true,
+    // failureFlash : true,
     session: true
   }));
+
+
+
+
+
+
+const isAuthenticated = function(req,res,next){
+  // console.log('fxn isAuthenticated: ' + req.user);
+   if(req.user)
+      return next();
+   else
+      return res.status(401).json({
+        error: 'User not authenticated'
+      })
+
+}
+router.get('/checkauth', isAuthenticated, function(req, res){
+  console.log('req.user: ' + req.user);
+
+    res.status(200).json({
+        status: 'Login successful!'
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
 

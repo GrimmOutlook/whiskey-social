@@ -28,6 +28,7 @@ router.use(jsonParser);
 //--------------------------- Profile Page ---------------------------------------------
 router.get('/:id', function(req, res){
   console.log('This is the Profile page');
+  console.log('req.user: ' + req.user);
   User
     .findById(req.params.id)
     .exec()

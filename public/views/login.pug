@@ -5,12 +5,11 @@ html(lang="en")
     title Login Screen
   body
 
-    form(action='/signup', method='post')
-    div.form-group
-      label(for='username') Username:
-      input(type='text', name='username')
-    div.form-group
-      label(for='password') Password:
-      input(type='password', name='password')
-    div
+    form(method='POST' action="/signup/me")
+      div.form-group
+        label(for='username') Username:
+        input(type='text', name='username')
+      div.form-group
+        label(for='password') Password:
+        input(type='text', name='password')
       button(type='submit') Log In

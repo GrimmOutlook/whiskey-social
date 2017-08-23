@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path   = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const jsonParser = bodyParser.json();
 
 const app = express();
@@ -30,6 +31,15 @@ app.use('/signup', passportRouter);  //use / as route, then /signup & /login in 
 //   resave: true,                 //
 //   saveUninitialized: false      //
 // });
+
+
+// app.use(express.cookieParser());
+// app.use(express.session({ secret: 'keyboard cat' }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+
+
 
 mongoose.Promise = global.Promise;
 
