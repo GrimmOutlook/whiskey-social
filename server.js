@@ -6,6 +6,8 @@ const path   = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const jsonParser = bodyParser.json();
+const passport = require('passport');
+const Strategy = require('passport-http').BasicStrategy;
 
 const app = express();
 
@@ -33,10 +35,12 @@ app.use('/signup', passportRouter);  //use / as route, then /signup & /login in 
 // });
 
 
-// app.use(express.cookieParser());
-// app.use(express.session({ secret: 'keyboard cat' }));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(cookieParser());
+app.use(session({ secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 

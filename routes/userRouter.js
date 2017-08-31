@@ -67,6 +67,10 @@ router.post('/:id/settings', function(req, res){
 
       res.render('settings', user.formattedUser());
     })
+    // .then
+    //  Whiskey.findById
+     // find the whiskey and push to post
+
     .catch(
       err => {
         console.error(err);

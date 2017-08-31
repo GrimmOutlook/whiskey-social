@@ -117,9 +117,6 @@ router.post('/me', passport.authenticate('basic', {
 
 
 
-
-
-
 const isAuthenticated = function(req,res,next){
   // console.log('fxn isAuthenticated: ' + req.user);
    if(req.user)
@@ -137,29 +134,6 @@ router.get('/checkauth', isAuthenticated, function(req, res){
         status: 'Login successful!'
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;

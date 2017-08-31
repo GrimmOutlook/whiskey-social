@@ -5,9 +5,10 @@ const mongoose = require('mongoose');
 // const bodyParser = require('body-parser');
 // const jsonParser = bodyParser.json();
 
-
+const universalUserId = 5;
 
 const {Whiskey} = require('../models/whiskeys');
+const {User} = require('../models/users');
 
 // --------------------------- Whiskey Profile screen --------------------------
 router.get('/profile/:id', (req, res) => {
@@ -64,10 +65,10 @@ router.get('/search', (req, res) => {
 
 // -------------------- Whiskey Post Screen ---------------------------------------------
          //GET the screen
-router.get('/post/:id', (req, res) => {
-  console.log(req.params.id);
+router.get('/:userId/post/:whiskeyId', (req, res) => {
+  console.log('userId: ' + req.params.userId);
   Whiskey
-    .findById(req.params.id)
+    .findById(req.params.whiskeyId)
     .exec()
     .then(single_whiskey => {
       res.render('whiskey-post', single_whiskey)
@@ -79,22 +80,39 @@ router.get('/post/:id', (req, res) => {
     });
 });
 
+
+//every route has hard-coded user in it!!!!!!!
           //POST info entered into screen into DB
-router.post('/post/:id', (req, res) => {
+router.post('/:userId/post/:whiskeyId', (req, res) => {
   //GET comment and rating from form:
     var userInput = JSON.stringify(req.body);
     console.log(userInput);
 
-  //GET whiskey info from params.id  All info, including URLs?
-  Whiskey
-    .findById(req.params.id)
+  //GET user id from hard-coded userId
+  User
+    .findById(req.params.userId)
     .exec()
-    .then(single_whiskey => {
-      console.log('findById passed to fxn: ' + single_whiskey);
-      console.log('userInput: ' + userInput);
-      res.render('post-confirm', single_whiskey)
-      })
-
+    .then(user => {
+      console.log('Here is user.username info.: ' + user.username);
+      return user;
+    })
+    .then(
+  //GET whiskey info from params.id  All info, including URLs?
+      Whiskey
+        .findById(req.params.whiskeyId)
+        .exec()
+        .then((single_whiskey, user) => {
+          console.log('findById passed to fxn: ' + single_whiskey);
+          console.log('Does user.posts make it down here? ' + user.posts);  //not now
+          console.log('userInput: ' + userInput);
+          res.render('post-confirm', single_whiskey)
+          })
+    )
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with POSTing a post.'});
+    });
     //Determine updateable fields and how to update the User's posts array of objects
 
 
