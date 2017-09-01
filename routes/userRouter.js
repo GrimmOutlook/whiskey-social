@@ -131,18 +131,24 @@ router.get('/:id/single-post/:postID', function(req, res){
     });
 })
 
+             //--------- PUT method for modifying comment & rating ----------------
+
+
+
+
+             //--------- DELETE method for deleting entire post -------------------
+
+
 
 //--------------------------- Favorites Page -------------------------------------------
 router.get('/:id/my-favorites', function(req, res){
   console.log('This is the favorites page');
-  Whiskey
-    .find()
+  User
+    .findById(req.params.id)
     .exec()
-    .then(whiskeys => {
-      res.render('my-favorites', {
-        whiskeys: whiskeys.map(
-          (whiskey) => whiskey)
-      });
+    .then(user => {
+      //TODO get users posts where favorite is true.  Here or in .pug file?
+      res.render('my-favorites', user);
     })
     .catch(
       err => {
@@ -154,19 +160,18 @@ router.get('/:id/my-favorites', function(req, res){
 //---------------------------- My-unique-posts Page ------------------------------------
 router.get('/:id/whiskeys', function(req, res){
   console.log('This is the my-posts-unique page');
-  Whiskey
-    .find()
+
+  User
+    .findById(req.params.id)
     .exec()
-    .then(whiskeys => {
-      res.render('my-posts-unique', {
-        whiskeys: whiskeys.map(
-          (whiskey) => whiskey)
-      });
+    .then(user => {
+      //TODO get users posts.  Then $group by unique name
+      res.render('my-posts-unique', user);
     })
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the My-unique-posts page.'});
+        res.status(500).json({message: 'Something\'s wrong with the Favorites page.'});
     });
 })
 

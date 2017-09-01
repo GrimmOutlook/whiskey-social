@@ -141,4 +141,24 @@ router.get('/post/:id/confirm', (req, res) => {
     });
 });
 
+
+              //------------------- POST/PUT add to favorites --------------------------
+//TODO - needs work!!!
+router.post(':userId/post/:id/confirm', (req, res) => {
+    let userInput = JSON.stringify(req.body);
+    console.log(userInput);
+  User
+    .findById(req.params.userId)
+    .exec()
+    .then(user => {
+      user.posts[postID].favorite === true
+      res.render('post-history', user)
+      })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something went terribly wrong!'});
+    });
+});
+
 module.exports = router;
