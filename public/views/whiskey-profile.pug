@@ -1,17 +1,15 @@
-doctype html
-html(lang="en")
-  head
-    title Whiskey Profile Screen
-  body
-    h1 Whiskey Profile Screen
+extends page-outline.pug
 
-    div= whiskeyName
-    div= description
+block content
+  h1 Whiskey Profile Screen
 
-    img(src=smallImageURL)
+  div= whiskeyName
+  div= description
 
-    a(href="/whiskey/search")
-      button.redirect-back-to-whiskey-search(type='submit') Back
+  img(src=smallImageURL)
 
-    a(href="/whiskey/post/" + id)
-      button.redirect-to-whiskey-post(type='submit') Rate this Whiskey
+  a(href="/whiskey/search")
+    button.redirect-back-to-whiskey-search(type='submit') Back
+
+  a(href="/whiskey/post/" + id)
+    button.redirect-to-whiskey-post(type='submit') Rate this Whiskey

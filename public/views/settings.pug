@@ -1,17 +1,15 @@
-doctype html
-html(lang="en")
-  head
-    title Settings Screen
-  body
-    div= email
-    div= username
-    div= name
-    div= password
+extends page-outline.pug
 
-    h3 Save Changes Button - redirect to this same page, with updated info. shown
+block content
+  div= email
+  div= username
+  div= name
+  div= password
 
-    a(href="/user/" + id + "/newsfeed")
-      button.redirect-to-newsfeed(type='submit') Newsfeed
+  h3 Save Changes Button - redirect to this same page, with updated info. shown
 
-    a(href="/user/" + id + "/delete-account")
-      button.redirect-to-delete-account(type='submit') Delete Account
+  a(href="/user/" + id + "/newsfeed")
+    button.redirect-to-newsfeed(type='submit') Newsfeed
+
+  a(href="/user/" + id + "/delete-account")
+    button.redirect-to-delete-account(type='submit') Delete Account

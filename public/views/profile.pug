@@ -1,23 +1,21 @@
-doctype html
-html(lang="en")
-  head
-    title User Profile Screen
-  body
-    div= username
-    div= name
-    div This is your Profile page!!
+extends page-outline.pug
 
-    a(href="/user/" + id + "/post-history")
-      h1= postCount
-      h3 My Posts
+block content
+  div= username
+  div= name
+  div This is your Profile page!!
 
-    a(href="/user/" + id + "/whiskeys")
-      h1= uniquePostCount
-      h3 My Unique Posts
+  a(href="/user/" + id + "/post-history")
+    h1= postCount
+    h3 My Posts
 
-    a(href="/user/" + id + "/my-favorites")
-      h1= favoriteCount
-      h3 My Favorites
+  a(href="/user/" + id + "/whiskeys")
+    h1= uniquePostCount
+    h3 My Unique Posts
 
-    a(href="/user/" + id + "/settings")
-      button.redirect-to-settings(type='submit') User Settings
+  a(href="/user/" + id + "/my-favorites")
+    h1= favoriteCount
+    h3 My Favorites
+
+  a(href="/user/" + id + "/settings")
+    button.redirect-to-settings(type='submit') User Settings

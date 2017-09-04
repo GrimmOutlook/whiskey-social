@@ -1,27 +1,25 @@
-doctype html
-html(lang="en")
-  head
-    title Whiskey Search Screen
-  body
-    h1 Whiskey Search Screen
+extends page-outline.pug
 
-    //- h2= whiskeys.length
+block content
+  h1 Whiskey Search Screen
 
-    if whiskeys
-      each w in whiskeys
-        h2= w.whiskeyName
-        h2= w.country
-        div= w.description
-        img(src=w.smallImageURL)
-    else
+  //- h2= whiskeys.length
 
-    //- TODO - Look at Treehouse form  -  Probably not a POST - How do I make what's entered here into the query part of the URL???
-    form(action="POST")
-      textarea(rows=1, cols=100)
-        | Search for a whiskey
-      button.delete-post(type='submit') Search
+  if whiskeys
+    each w in whiskeys
+      h2= w.whiskeyName
+      h2= w.country
+      div= w.description
+      img(src=w.smallImageURL)
+  else
 
-    //- each whiskey in whiskeys
-    //-   li= whiskeyName + smallImageURL
+  //- TODO - Look at Treehouse form  -  Probably not a POST - How do I make what's entered here into the query part of the URL???
+  form(action="POST")
+    textarea(rows=1, cols=100)
+      | Search for a whiskey
+    button.delete-post(type='submit') Search
+
+  //- each whiskey in whiskeys
+  //-   li= whiskeyName + smallImageURL
 
 

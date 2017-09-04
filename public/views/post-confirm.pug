@@ -1,18 +1,16 @@
-doctype html
-html(lang="en")
-  head
-    title Post Confirmation Screen
-  body
-    h1 Post Confirmation Screen
+extends page-outline.pug
 
-    h2 Cheers!  Your post was successful!
+block content
+  h1 Post Confirmation Screen
 
-    h3 Would you like to add this whiskey to your Favorites?
+  h2 Cheers!  Your post was successful!
 
-      a(href="/user/" + id + "/my-favorites")
-      button.redirect-to-favorites(type='submit') Yes!
+  h3 Would you like to add this whiskey to your Favorites?
 
-    //- Hidden if no badges earned for this particular post:
+    a(href="/user/" + id + "/my-favorites")
+    button.redirect-to-favorites(type='submit') Yes!
 
-    a(href="/user/" + id + "/post-history")
-      button.redirect-to-newsfeed(type='submit') Close
+  //- Hidden if no badges earned for this particular post:
+
+  a(href="/user/" + id + "/post-history")
+    button.redirect-to-newsfeed(type='submit') Close

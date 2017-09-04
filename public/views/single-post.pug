@@ -1,24 +1,22 @@
-doctype html
-html(lang="en")
-  head
-    title Single Post Screen
-  body
-    h1 Single Post Screen
+extends page-outline.pug
 
-    div= whiskeyName
-    div= smallImageURL
+block content
+  h1 Single Post Screen
 
-    h2 Rating:
-      div= rating
+  div= whiskeyName
+  div= smallImageURL
 
-    //- TODO - edit comment button
-    h2 Comments:
-      div= comment[0].text
+  h2 Rating:
+    div= rating
 
-    //- Button to delete user's own post - hidden for friends to see
-    a(href="/whiskey/post/" + id + "/confirm")
-      button.delete-post(type='submit') Delete
+  //- TODO - edit comment button
+  h2 Comments:
+    div= comment[0].text
 
-    form(action="POST")
-      textarea(rows=10, cols=100)
-        | Make another comment
+  //- Button to delete user's own post - hidden for friends to see
+  a(href="/whiskey/post/" + id + "/confirm")
+    button.delete-post(type='submit') Delete
+
+  form(action="POST")
+    textarea(rows=10, cols=100)
+      | Make another comment

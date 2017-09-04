@@ -1,10 +1,8 @@
-doctype html
-html(lang="en")
-  head
-    title Unique Posts Screen
-  body
-    h1 Unique Whiskeys:
-    div.unique-container
-      ul
-        each whiskey in whiskeys
-          li= whiskey.title + whiskey.description + whiskey.image_url
+extends page-outline.pug
+
+block content
+  h1 Unique Whiskeys:
+  div.unique-container
+    ul
+      each whiskey in whiskeys
+        li= whiskey.title + whiskey.description + whiskey.image_url

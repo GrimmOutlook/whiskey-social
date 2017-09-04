@@ -2,14 +2,15 @@ doctype html
 html(lang="en")
   head
     meta(charset='utf-8')
-    title Signup Screen
+    title Whiskey Social Signup
   body
-
-    form(method='POST' enctype='application/json' action='/signup')
-      div.form-group
-        label(for='username') Username:
-        input(type='text', name='username')
-      div.form-group
-        label(for='password') Password:
-        input(type='password', name='password')
-      button(type='submit') Sign up!
+    header
+      h1 Whiskey Social Signup Page Header
+        form(method='POST' enctype='application/json' action='/signup')
+          div.form-group
+            label(for='username') Username:
+            input(type='text', name='username')
+          div.form-group
+            label(for='password') Password:
+            input(type='password', name='password')
+          button(type='submit') Sign up!

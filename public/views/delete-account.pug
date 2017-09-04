@@ -1,22 +1,20 @@
-doctype html
-html(lang="en")
-  head
-    title Delete Account Screen
-  body
-    div= username
-    div= name
-    div Are you sure you want to delete your account?
+extends page-outline.pug
 
-    a(href="/user/" + id)
-      button.redirect-to-profile(type='submit') No
+block content
+  div= username
+  div= name
+  div Are you sure you want to delete your account?
 
-    a(href="/user/" + id + "/delete-account")
-      button.redirect-to-homepage(type='submit', formmethod="POST") Yes
+  a(href="/user/" + id)
+    button.redirect-to-profile(type='submit') No
+
+  a(href="/user/" + id + "/delete-account")
+    button.redirect-to-homepage(type='submit', formmethod="POST") Yes
 
 
-    form(action="/user/" + id + "/delete-account", method="POST")
-      label(for="eliminate") Yes, delete my account
-      input(type="submit")
+  form(action="/user/" + id + "/delete-account", method="POST")
+    label(for="eliminate") Yes, delete my account
+    input(type="submit")
 
 
 
