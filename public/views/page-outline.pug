@@ -3,11 +3,17 @@ html(lang="en")
   head
     meta(charset='utf-8')
     title Whiskey Social
+
+    link(href="https://fonts.googleapis.com/css?family=Amiri|Libre+Baskerville|Libre+Franklin" rel="stylesheet")
+    //- link(rel='stylesheet', href='/../css/main.css') - doesn't work. Why?
+    style
+      include ../css/normalize.css
+      include ../css/grid.css
+      include ../css/main.css
   body
-    header
-      h1 Whiskey Social Header
+
+    include includes/header.pug
 
     block content
 
-    footer
-      p Whiskey Social Footer
+    include includes/footer.pug
