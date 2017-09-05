@@ -3,14 +3,14 @@ html(lang="en")
   head
     meta(charset='utf-8')
     title Whiskey Social
-
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     link(href="https://fonts.googleapis.com/css?family=Amiri|Libre+Baskerville|Libre+Franklin" rel="stylesheet")
     //- link(rel='stylesheet', href='/../css/main.css') - doesn't work. Why?
     style
       include ../css/normalize.css
       include ../css/grid.css
       include ../css/main.css
-  body
+  body.menu.menu-open
 
     include includes/header.pug
 
