@@ -1,0 +1,62 @@
+/* ------------------- Profile Page Grid -------------------------*/
+
+  /*------------ Mobile Stack -----------*/
+#profile-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    /*grid-template-rows: 500px min-content 120px 40px 120px 40px;*/
+    grid-template-rows: auto;
+    grid-template-areas:
+      "header"
+      "username"
+      "avatar"
+      "total-post"
+      "unique-post"
+      "favorite"
+      "footer";
+  }
+
+.main-head {
+  grid-area: header;
+}
+
+.username {
+  grid-area: username;
+  justify-self: left;
+  align-self: end;
+  margin-left: 12px;
+}
+
+.avatar {
+  grid-area: avatar;
+  justify-self: right;
+  align-self: start;
+  margin-right: 12px;
+}
+
+.total-post {
+  grid-area: total-post;
+  justify-self: left;
+  align-self: center;
+  margin-left: 12px;
+  margin-top: 0;
+}
+
+.unique-post {
+  grid-area: unique-post;
+  justify-self: right;
+  align-self: center;
+  margin-right: 12px;
+}
+
+.favorite {
+  grid-area: favorite;
+  justify-self: left;
+  align-self: center;
+  margin-left: 12px;
+}
+
+footer {
+  grid-area: footer;
+  text-align: center;
+}

@@ -12,8 +12,10 @@ html(lang="en")
       include ../css/main.css
   body.menu.menu-open
 
-    include includes/header.pug
+    div#profile-container
 
-    block content
+      include includes/header.pug
 
-    include includes/footer.pug
+      block content
+
+      include includes/footer.pug

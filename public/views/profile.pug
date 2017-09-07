@@ -1,21 +1,23 @@
 extends page-outline.pug
 
 block content
-  div= username
-  div= name
-  div This is your Profile page!!
+  div.username
+    p= username
+  //- div= name
+  div.avatar
+    div.wax-seal
 
-  a(href="/user/" + id + "/post-history")
-    p= postCount
-    h3 My Posts
+  div.total-post
+    a(href="/user/" + id + "/post-history")
+      p= postCount
+      h3 My Posts
 
-  a(href="/user/" + id + "/whiskeys")
-    p= uniquePostCount
-    h3 My Unique Posts
+  div.unique-post
+    a(href="/user/" + id + "/whiskeys")
+      p= uniquePostCount
+      h3 My Unique Posts
 
-  a(href="/user/" + id + "/my-favorites")
-    p= favoriteCount
-    h3 My Favorites
-
-  a(href="/user/" + id + "/settings")
-    button.redirect-to-settings(type='submit') User Settings
+  div.favorite
+    a(href="/user/" + id + "/my-favorites")
+      p= favoriteCount
+      h3 My Favorites

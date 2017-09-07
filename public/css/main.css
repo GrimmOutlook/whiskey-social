@@ -1,6 +1,14 @@
 * {
   box-sizing: border-box;
+  margin: 0;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+   /* --------------------- Menu --------------------- */
 
 .menu {
   overflow-x: hidden;
@@ -8,12 +16,12 @@
   left: 0;
 }
 
-.menu-open {
+/*.menu-open {
   left: 201px;
-}
+}*/
 
 .menu-open #menu-side {
-  left: 0;
+  left: -201px;
 }
 
 #menu-side {
@@ -26,33 +34,57 @@
   height: 100%;
   width: 200px;
   padding: 10px;
-
 }
 
-header {
-  margin: 0 auto;
-  width: 100%;
-  height: 60px;
+.main-head {
   background-color: #DB631C;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
 }
 
-#logo {
-  margin: auto;
+#logo h1 {
+  /*margin: auto;*/
+  text-align: center;
+  color: white;
+  font-family: 'Libre Franklin', sans-serif;
 }
 
-a {
-  text-decoration: none;
+  /* ----------   Profile Page   ---------------- */
+
+.wax-seal {
+  height: 150px;
+  width: 150px;
+  background-image: url('../images/wax-seal2.jpg');
+  background-size: cover;
+  /*text-align: center;*/
 }
 
 p {
   font-family: 'Amiri', serif;
-  font-size: 100px;
+  font-size: 60px;
+  margin: 5px 5px;
+  text-align: center;
+}
+
+.username p {
+  /*font-family: 'Amiri', serif;*/
+  font-size: 40px;
+ /* margin: 5px 5px;
+  text-align: center;*/
 }
 
 h3 {
   font-family: 'Libre Franklin', sans-serif;
+  margin: 2px;
+  color: #DB631C;
+}
+
+.footer-text {
+  font-family: 'Libre Franklin', sans-serif;
+  margin: 2px;
+  color: white;
+}
+
+.main-footer {
+  background-color: #DB631C;
+  width: 100%;
 }

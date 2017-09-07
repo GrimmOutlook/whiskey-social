@@ -16,7 +16,7 @@ const passportRouter = require('./routes/passportRouter');
 const userRouter = require('./routes/userRouter');
 
 // app.use(express.static('public'));
-app.use('/', express.static(path.join(__dirname, 'public/views')));
+app.use('/', express.static(path.join(__dirname, 'public/')));
 
 const {DATABASE_URL, PORT} = require('./config');
 
