@@ -4,7 +4,8 @@ block content
   h1 Single Post Screen
 
   div= whiskeyName
-  div= smallImageURL
+  div
+    img(src=image_url)
 
   h2 Rating:
     div= rating
@@ -18,5 +19,4 @@ block content
     button.delete-post(type='submit') Delete
 
   form(action="POST")
-    textarea(rows=10, cols=100)
-      | Make another comment
+    textarea(rows=10, cols=100 placeholder='Make another comment')

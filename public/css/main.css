@@ -97,7 +97,12 @@ h3 {
 /* ----------   Post-History Page   ---------------- */
 
 .history-list {
-  padding: 0;
+  padding: 10px;
+}
+
+.history-container h2 {
+  padding-top: 15px;
+  padding-left: 5px;
 }
 
 .history-list li {
@@ -109,4 +114,29 @@ h3 {
 .history-list li .whiskeyname {
   color: #DB631C;
   font-family: 'Libre Franklin', sans-serif;
+  text-align: center;
+  padding: 5px 0;
 }
+
+.history-list li .rating {
+  color: black;
+  font-family: 'Libre Franklin', sans-serif;
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.history-list li .favorite-icon {
+  color: black;
+  font-family: 'Libre Franklin', sans-serif;
+  text-align: right;
+  padding: 5px 10px;
+}
+
+.bottle-history {
+  width: 65%;
+  height: 65%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
