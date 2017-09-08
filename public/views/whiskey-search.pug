@@ -15,8 +15,8 @@ block content
 
   //- TODO - Look at Treehouse form  -  Probably not a POST - How do I make what's entered here into the query part of the URL???
   form(action="POST")
-    textarea(rows=1, cols=100)
-      | Search for a whiskey
+    textarea(rows=1, cols=100 placeholder='Search for a whiskey')
+      //- | Search for a whiskey
     button.delete-post(type='submit') Search
 
   //- each whiskey in whiskeys

@@ -1,7 +1,7 @@
 /* ------------------- Profile Page Grid -------------------------*/
 
   /*------------ Mobile Stack -----------*/
-#profile-container {
+.profile-container {
     display: grid;
     grid-template-columns: 1fr;
     /*grid-template-rows: 500px min-content 120px 40px 120px 40px;*/
@@ -59,4 +59,24 @@
 footer {
   grid-area: footer;
   text-align: center;
+}
+
+
+/* ------------------- Post History Page Grid -------------------------*/
+
+  /*------------ Mobile Stack -----------*/
+.history-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      /*"header"*/
+      "history-list"
+      /*"footer";*/
+  }
+
+.history-list {
+  grid-area: history-list;
+  justify-self: center;
+  align-self: center;
 }

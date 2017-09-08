@@ -1,11 +1,14 @@
 extends page-outline.pug
 
 block content
-  h1 Post History:
   div.history-container
-    ul
-      //- make <a> tags for each list item and redirect to corresponding single-post page
-      each post in posts
-        - var photoURL = post.image_url
-        li= post.title + ' ' + 'Rating: ' + post.rating + ' ' + 'Favorite?: ' + post.favorite
-          a(href=photoURL): img(src=photoURL)
+    h2 Recent Activity:
+      ul.history-list
+        //- make <a> tags for each list item and redirect to corresponding single-post page
+        each post in posts
+          - var photoURL = post.image_url
+          li
+            div.whiskeyname= post.title
+            div.rating= 'Rating: ' + post.rating
+            div.favorite= 'Favorite?: ' + post.favorite
+            a(href=photoURL): img.bottle-history(src=photoURL)
