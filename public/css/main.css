@@ -140,3 +140,9 @@ h3 {
   margin-right: auto;
 }
 
+/* ----------   Single Post Page   ---------------- */
+
+.single-add-comment {
+  margin: 8px;
+  border: 1px solid gray;
+}

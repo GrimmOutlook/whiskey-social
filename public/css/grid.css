@@ -80,3 +80,68 @@ footer {
   justify-self: center;
   align-self: center;
 }
+
+/* ------------------- Single Post Page Grid -------------------------*/
+
+  /*------------ Mobile Stack -----------*/
+.single-post-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "header"
+      "single-name"
+      "single-rating"
+      "single-comment"
+      "single-add-comment"
+      "delete-post"
+      "footer";
+  }
+
+.single-name {
+  grid-area: single-name;
+  justify-self: center;
+  align-self: center;
+}
+
+.single-rating {
+  grid-area: single-rating;
+  justify-self: center;
+  align-self: center;
+}
+
+.single-photo {
+  grid-area: single-photo;
+  justify-self: center;
+  align-self: center;
+}
+
+.single-comment {
+  grid-area: single-comment;
+  justify-self: center;
+  align-self: center;
+}
+
+.single-add-comment {
+  grid-area: single-add-comment;
+  justify-self: center;
+  align-self: center;
+}
+
+.delete-post {
+  grid-area: delete-post;
+  justify-self: center;
+  align-self: center;
+}
+
+/*grid-template-areas:
+      "header header"
+      "single-name single-name"
+      "single-rating single-photo"
+      "single-comment single-comment"
+      "single-add-comment single-add-comment"
+      "delete-post delete-post"
+      "footer footer";*/
+
+
+

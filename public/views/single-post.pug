@@ -1,22 +1,24 @@
 extends page-outline.pug
 
 block content
-  h1 Single Post Screen
+  div.single-post-container
 
-  div= whiskeyName
-  div
-    img(src=image_url)
+    div.single-name
+      h1= title
 
-  h2 Rating:
-    div= rating
+    div.single-photo
+      img(src=image_url)
 
-  //- TODO - edit comment button
-  h2 Comments:
-    div= comment[0].text
+    div.single-rating
+      h2= 'Rating: ' + rating
 
-  //- Button to delete user's own post - hidden for friends to see
-  a(href="/whiskey/post/" + id + "/confirm")
-    button.delete-post(type='submit') Delete
+    //- TODO - edit comment button
+    div.single-comment
+      h2= 'Comments: ' + comment[0].text
 
-  form(action="POST")
-    textarea(rows=10, cols=100 placeholder='Make another comment')
+    form.single-add-comment(action="POST")
+      textarea(rows=10, cols=100 placeholder='Make another comment')
+
+    div.delete-post
+      a(href="/whiskey/post/" + id + "/confirm")
+        button.delete-post(type='submit') Delete
