@@ -70,9 +70,9 @@ footer {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     grid-template-areas:
-      /*"header"*/
+      "header"
       "history-list"
-      /*"footer";*/
+      "footer";
   }
 
 .history-list {
@@ -93,6 +93,7 @@ footer {
       "single-name"
       "single-rating"
       "single-comment"
+      "single-photo"
       "single-add-comment"
       "delete-post"
       "footer";

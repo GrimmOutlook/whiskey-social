@@ -16,8 +16,12 @@ block content
     div.single-comment
       h2= 'Comments: ' + comment[0].text
 
-    form.single-add-comment(action="POST")
-      textarea(rows=10, cols=100 placeholder='Make another comment')
+    div.single-add-comment
+      form(method='POST' enctype='application/json' action="/whiskey/598786f0873d1cf2aa55467c/post/59930c0314ba7b8933046102")
+        div.form-group
+          label(for='comment') Comment:
+          textarea#comment(rows=10, cols=40, type='text', placeholder='Comment on this whiskey' name='comment')
+      button(type='submit') Add Comment and Rating
 
     div.delete-post
       a(href="/whiskey/post/" + id + "/confirm")
