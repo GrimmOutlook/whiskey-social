@@ -1,7 +1,7 @@
-* {
+/** {
   box-sizing: border-box;
   margin: 0;
-}
+}*/
 
 a {
   text-decoration: none;
@@ -11,28 +11,30 @@ a {
 .main-head, .main-footer {
   background-color: #DB631C;
   width: 100%;
+  height: 50px;
 }
 
 .footer-text {
   font-family: 'Libre Franklin', sans-serif;
   margin: 2px;
   color: white;
+  line-height: 50px;
   text-align: center;
 }
 
    /* --------------------- Menu --------------------- */
 
-.menu {
+/*.menu {
   overflow-x: hidden;
   position: relative;
   left: 0;
-}
+}*/
 
 /*.menu-open {
   left: 201px;
 }*/
 
-.menu-open #menu-side {
+/*.menu-open #menu-side {
   left: -201px;
 }
 
@@ -46,25 +48,25 @@ a {
   height: 100%;
   width: 200px;
   padding: 10px;
-}
+}*/
 
-#logo h1 {
+/*#logo h1 {*/
   /*margin: auto;*/
-  text-align: center;
+  /*text-align: center;
   color: white;
   font-family: 'Libre Franklin', sans-serif;
-}
+}*/
 
   /* ----------   Profile Page   ---------------- */
 
 .wax-seal {
   height: 150px;
   width: 150px;
-  background-image: url('../images/wax-seal2.jpg');
+  background-image: url('../images/wax-seal2.png');
   background-size: cover;
-  /*text-align: center;*/
 }
 
+/* MORE SPECIFICITY! */
 p {
   font-family: 'Amiri', serif;
   font-size: 60px;
@@ -73,35 +75,81 @@ p {
 }
 
 .username p {
-  /*font-family: 'Amiri', serif;*/
+  font-family: 'Amiri', serif;
   font-size: 40px;
- /* margin: 5px 5px;
-  text-align: center;*/
+  margin: 5px 5px;
+  text-align: center;
 }
 
+/* MORE SPECIFICITY! */
 h3 {
   font-family: 'Libre Franklin', sans-serif;
   margin: 2px;
   color: #DB631C;
 }
 
-.bottle-history {
-  width: 65%;
-  height: 65%;
-}
-
 /* ----------   Post-History Page   ---------------- */
 
 .history-list {
   padding: 10px;
+  list-style-type: none;
+  background-color: #FFB832;
 }
 
 .history-container h2 {
   padding-top: 15px;
   padding-left: 5px;
+  font-family: 'Libre Franklin', sans-serif;
 }
 
-.history-list li {
+.whiskey-card {
+  background-color: #fff;
+  color: black;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+  font-family: 'Libre Franklin', sans-serif;
+  text-align: center;
+}
+
+.bottle-history {
+  max-width: 100%;
+  height: auto;
+  /*margin: auto;*/
+}
+
+.rating {
+  text-align: left;
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+.favorite {
+  text-align: right;
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+.favorite-icon {
+  height: 45px;
+  width: 45px;
+  background-image: url('/images/ribbon.svg');
+  /*background-size: cover;*/
+  text-align: right;
+  /*padding-right: 18px;*/
+}
+
+.favorite p {
+  font-size: 0.5em;
+  text-align: right;
+}
+
+
+
+
+
+
+
+/*.history-list li {
   margin: 8px;
   border: 1px solid gray;
   list-style: none;
@@ -134,7 +182,7 @@ h3 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
+}*/
 
 /* ----------   Single Post Page   ---------------- */
 

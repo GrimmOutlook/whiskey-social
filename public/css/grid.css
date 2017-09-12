@@ -1,11 +1,11 @@
 /* ------------------- Profile Page Grid -------------------------*/
 
   /*------------ Mobile Stack -----------*/
-.profile-container {
+/*.profile-container {
     display: grid;
     grid-template-columns: 1fr;
     /*grid-template-rows: 500px min-content 120px 40px 120px 40px;*/
-    grid-template-rows: auto;
+   /* grid-template-rows: auto;
     grid-template-areas:
       "header"
       "username"
@@ -14,9 +14,9 @@
       "unique-post"
       "favorite"
       "footer";
-  }
+  }*/
 
-.main-head {
+/*.main-head {
   grid-area: header;
 }
 
@@ -59,32 +59,70 @@
 footer {
   grid-area: footer;
   text-align: center;
-}
+}*/
 
 
 /* ------------------- Post History Page Grid -------------------------*/
 
   /*------------ Mobile Stack -----------*/
-.history-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-      "header"
-      "history-list"
-      "footer";
+.history-list {
+  display: grid;
+  grid-template-columns: 1fr; /*1fr 1fr;*/
+  grid-template-rows: 1fr auto;
+  grid-gap: 10px;
+  /*padding: 20px;*/
+}
+
+.main-footer {
+  grid-row-start: 12;
+  grid-row-end: 13;
+}
+
+  /* ------------ Larger Screens ---------*/
+
+@media screen and (min-width: 500px) {
+    .history-list {
+      grid-template-columns: 1fr 1fr 1fr;
+      /*grid-template-rows: 2fr 2fr;*/
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      justify-items: stretch;
+      align-items: stretch;
+    }
+
+    .whiskey-card {
+      font-size: 110%;
+    }
   }
 
-.history-list {
-  grid-area: history-list;
-  justify-self: center;
-  align-self: center;
-}
+  @media screen and (min-width: 800px) {
+    .history-list {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      /*grid-template-rows: 2fr 2fr 2fr;*/
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      justify-items: stretch;
+      align-items: stretch;
+    }
+
+    .whiskey-card {
+      font-size: 110%;
+    }
+
+    .main-footer {
+      grid-row-start: 21;
+      grid-row-end: 22;
+    }
+
+    .history-list {
+      margin: 20px 150px;
+    }
+  }
 
 /* ------------------- Single Post Page Grid -------------------------*/
 
   /*------------ Mobile Stack -----------*/
-.single-post-container {
+/*.single-post-container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -133,7 +171,7 @@ footer {
   grid-area: delete-post;
   justify-self: center;
   align-self: center;
-}
+}*/
 
 /*grid-template-areas:
       "header header"
