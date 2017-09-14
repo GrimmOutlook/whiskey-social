@@ -30,7 +30,7 @@ a {
   width: 100%;
 }
 
-ul {
+ul.menu-list {
   padding-right: 10px;
   text-align: left;
   position: relative;
@@ -48,7 +48,7 @@ ul li .logo {
   cursor: pointer;
 }
 
-ul li p {
+ul li p.header-text {
   color: white;
   position: absolute;
   top: 1px;
@@ -110,7 +110,7 @@ ul li p {
   color: white;
 }
 
-/* "Checkbox Hack" */
+/*--- "Checkbox Hack" to slide menu out ---*/
 input[type=checkbox] {
    position: absolute;
    top: -9999px;
@@ -136,6 +136,17 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
     display: none;
   }
 }
+
+  /*--- Mobile Device - Shrink header text to fit on one line ---*/
+@media only screen and (max-width: 400px) {
+  .hide {
+    display: none;
+  }
+
+  ul li p.header-text {
+    font-size: 30px;
+  }
+}
   /*--- Mid-Size Devices ---*/
 @media only screen and (min-width: 651px) and (max-width: 949px) {
   .mobile-menu {
@@ -147,11 +158,11 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
     border-bottom: 5px solid #FFB832;
   }
 
-  ul {
+  ul.menu-list {
     text-align: right;
   }
 
-  ul li p {
+  ul li p.header-text {
     position: static;
     text-align: left;
     padding-left: 12%;
@@ -203,11 +214,11 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
     width: 100%;
   }
 
-  ul {
+  ul.menu-list {
     text-align: right;
   }
 
-  ul li p {
+  ul li p.header-text {
     position: static;
     text-align: left;
     padding-left: 12%;
