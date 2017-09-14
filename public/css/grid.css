@@ -73,11 +73,6 @@ footer {
   /*padding: 20px;*/
 }
 
-.main-footer {
-  grid-row-start: 12;
-  grid-row-end: 13;
-}
-
   /* ------------ Larger Screens ---------*/
 
 @media screen and (min-width: 500px) {
@@ -101,17 +96,12 @@ footer {
       /*grid-template-rows: 2fr 2fr 2fr;*/
       grid-column-gap: 10px;
       grid-row-gap: 10px;
-      justify-items: stretch;
-      align-items: stretch;
+      /*justify-items: stretch;*/
+      /*align-items: stretch;*/
     }
 
     .whiskey-card {
       font-size: 110%;
-    }
-
-    .main-footer {
-      grid-row-start: 21;
-      grid-row-end: 22;
     }
 
     .history-list {

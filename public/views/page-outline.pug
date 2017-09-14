@@ -10,12 +10,10 @@ html(lang="en")
       include ../css/reset.css
       include ../css/grid.css
       include ../css/main.css
-  body.menu.menu-open
+  body
 
-    div.profile-container
+    include includes/header.pug
 
-      include includes/header.pug
+    block content
 
-      block content
-
-      include includes/footer.pug
+    include includes/footer.pug
