@@ -1,15 +1,34 @@
-header.main-head
-  //- a.menu-toggle(href="#") Toggle
-  //-   nav#menu-side
-  //-     ul
-  //-       li
-  //-         a(href="/user/" + id + "/profile") Profile
-  //-       li
-  //-         a(href="/user/" + id + "/settings") Settings
-  //-       li
-  //-         a(href="/user/" + id + "/post-history") Post History
-  //-       li
-  //-         a(href="/index.html") Log Out
+header
+  nav.menu
+    ul
+      li
+        input#button(type='checkbox')
+        label(for='button', onclick='')
+          img.logo(src='images/wax-seal2.png', alt='wax seal logo')
+        nav.mobile-menu
+          ul
+            li
+              a.mobile-one.mobile(href="") Profile
+            li
+              a.mobile-two.mobile(href="") History
+            li
+              a.mobile-three.mobile(href="") Settings
+            li
+              a.mobile-four.mobile(href="") Search
+            li
+              a.mobile-five.mobile(href="") Log Out
+      li
+        p Whiskey Social
+      li
+        a.link-one.hide.redirect(href="") Profile
+      li
+        a.link-two.hide.redirect(href="") History
+      li
+        a.link-three.hide.redirect(href="") Settings
+      li
+        a.link-four.hide.redirect(href="") Search
+      li
+        a.link-five.hide.redirect(href="") Log Out
 
-  div#logo
-    h1 Whiskey Social
+
+
