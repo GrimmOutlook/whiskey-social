@@ -296,17 +296,17 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   Post History Page
 ==================================== */
 
-.history-list {
+.history-list, .favorites-list, .unique-list {
   padding: 10px;
   list-style-type: none;
   background-color: #FFB832;
   /*height: 3400px;*/
 }
 
-.history-container h2 {
-  padding-top: 15px;
-  padding-left: 5px;
+.history-container h1, .favorites-container h1, .unique-container h1 {
+  padding: 15px 5px;
   font-family: 'Libre Franklin', sans-serif;
+  font-size: 30px;
 }
 
 .whiskey-card {
@@ -324,6 +324,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   max-width: 100%;
   height: auto;
   /*margin: auto;*/
+  /*align-self: end;*/
 }
 
 .rating {
