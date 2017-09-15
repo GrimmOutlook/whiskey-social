@@ -1,23 +1,25 @@
 extends page-outline.pug
 
 block content
-  div.username
-    p= username
-  //- div= name
-  div.avatar
-    div.wax-seal
 
-  div.total-post
-    a(href="/user/" + id + "/post-history")
-      p= postCount
-      h3 My Posts
+  div.profile-container
+    div.profile-username
+      p= username
+    //- div= name
+    div.profile-avatar
+      div.wax-seal
 
-  div.unique-post
-    a(href="/user/" + id + "/whiskeys")
-      p= uniquePostCount
-      h3 My Unique Posts
+    div.profile-total-post
+      a(href="/user/" + id + "/post-history")
+        p= postCount
+        h3 My Posts
 
-  div.favorite
-    a(href="/user/" + id + "/my-favorites")
-      p= favoriteCount
-      h3 My Favorites
+    div.profile-unique-post
+      a(href="/user/" + id + "/whiskeys")
+        p= uniquePostCount
+        h3 My Unique Posts
+
+    div.profile-favorite
+      a(href="/user/" + id + "/my-favorites")
+        p= favoriteCount
+        h3 My Favorites

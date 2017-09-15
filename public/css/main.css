@@ -259,34 +259,37 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   Profile Page
 ======================================== */
 
-/*.wax-seal {
+.profile-avatar .wax-seal {
   height: 150px;
   width: 150px;
   background-image: url('../images/wax-seal2.png');
   background-size: cover;
-}*/
+}
 
-/* MORE SPECIFICITY! */
-/*p {
+.profile-total-post p,
+  .profile-unique-post p,
+  .profile-favorite p {
   font-family: 'Amiri', serif;
   font-size: 60px;
   margin: 5px 5px;
   text-align: center;
-}*/
+}
 
-/*.username p {
+.profile-username p {
   font-family: 'Amiri', serif;
   font-size: 40px;
   margin: 5px 5px;
   text-align: center;
-}*/
+}
 
-/* MORE SPECIFICITY! */
-/*h3 {
+.profile-total-post h3,
+  .profile-unique-post h3,
+  .profile-favorite h3 {
   font-family: 'Libre Franklin', sans-serif;
+  font-size: 18px;
   margin: 2px;
   color: #DB631C;
-}*/
+}
 
 /* =================================
   Media Queries
@@ -351,11 +354,78 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   text-align: right;
 }
 
+/* ======================================
+  Whiskey Profile Page
+======================================== */
 
-/* ----------   Single Post Page   ---------------- */
-/*
-.single-add-comment {
-  margin: 8px;
-  border: 1px solid gray;
+.whiskey-profile-container {
+
 }
-*/
+
+.whiskey-profile-container h1 {
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.6em;
+  padding: 10px 0;
+}
+
+.whiskey-profile-description {
+  height: 140px;
+  width: 250px;
+  font-size: 1.1em;
+  color: gray;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.back-to-search {
+  height: 40px;
+  width: 60px;
+  font-size: 1.3em;
+  cursor: pointer;
+  /*align-self: end;*/
+  border: 2px solid #9d9aac;
+  border-radius: 12px;
+  background-color: #d7aa48;
+  color: #9b2b0d;
+  position: absolute;
+  top: 55%;
+  left: 8%;
+  z-index: 2;
+}
+
+.redirect-to-whiskey-post {
+  height: 80px;
+  width: 90px;
+  font-size: 1.3em;
+  cursor: pointer;
+  /*align-self: end;*/
+  border: 2px solid #9d9aac;
+  border-radius: 12px;
+  background-color: #d7aa48;
+  color: #9b2b0d;
+  position: absolute;
+  top: 55%;
+  right: 8%;
+  z-index: 2;
+}
+
+.whiskey-profile-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+
+/* ======================================
+  Single Post Page
+======================================== */
+
+.single-add-comment {
+  height: 150px;
+  width: 150px;
+  margin: 8px;
+  border: 1px solid black;
+}
+

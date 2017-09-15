@@ -2,40 +2,34 @@
   Profile Page Grid
 ======================================== */
   /*------------ Mobile Stack -----------*/
-/*.profile-container {
+.profile-container {
     display: grid;
     grid-template-columns: 1fr;
-    /*grid-template-rows: 500px min-content 120px 40px 120px 40px;*/
-   /* grid-template-rows: auto;
+    /*grid-template-rows: 500px min-content 120px 40px 120px 40px; */
+    grid-template-rows: auto;
     grid-template-areas:
-      "header"
       "username"
       "avatar"
       "total-post"
       "unique-post"
-      "favorite"
-      "footer";
-  }*/
+      "favorite";
+  }
 
-/*.main-head {
-  grid-area: header;
-}
-
-.username {
+.profile-username {
   grid-area: username;
   justify-self: left;
   align-self: end;
   margin-left: 12px;
 }
 
-.avatar {
+.profile-avatar {
   grid-area: avatar;
   justify-self: right;
   align-self: start;
   margin-right: 12px;
 }
 
-.total-post {
+.profile-total-post {
   grid-area: total-post;
   justify-self: left;
   align-self: center;
@@ -43,27 +37,24 @@
   margin-top: 0;
 }
 
-.unique-post {
+.profile-unique-post {
   grid-area: unique-post;
   justify-self: right;
   align-self: center;
   margin-right: 12px;
 }
 
-.favorite {
+.profile-favorite {
   grid-area: favorite;
   justify-self: left;
   align-self: center;
   margin-left: 12px;
 }
 
-footer {
-  grid-area: footer;
-  text-align: center;
-}*/
 
-
-/* --------------------------- Post History Page Grid ------------------------------*/
+/* =====================================================
+  Post History, My Favorites, Unique Posts Pages Grid
+======================================================== */
 
   /*------------ Mobile Stack -----------*/
 .history-list, .favorites-list, .unique-list {
@@ -110,22 +101,22 @@ footer {
     }
   }
 
-/* ------------------------------ Single Post Page Grid -----------------------------*/
+/* ======================================
+  Single Post Page Grid
+======================================== */
 
   /*------------ Mobile Stack -----------*/
-/*.single-post-container {
+.single-post-container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     grid-template-areas:
-      "header"
       "single-name"
       "single-rating"
       "single-comment"
       "single-photo"
       "single-add-comment"
-      "delete-post"
-      "footer";
+      "delete-post";
   }
 
 .single-name {
@@ -162,16 +153,7 @@ footer {
   grid-area: delete-post;
   justify-self: center;
   align-self: center;
-}*/
-
-/*grid-template-areas:
-      "header header"
-      "single-name single-name"
-      "single-rating single-photo"
-      "single-comment single-comment"
-      "single-add-comment single-add-comment"
-      "delete-post delete-post"
-      "footer footer";*/
+}
 
 
 
