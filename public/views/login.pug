@@ -3,15 +3,35 @@ html(lang="en")
   head
     meta(charset='utf-8')
     title Whiskey Social Signup
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel='stylesheet', href='/css/reset.css')
+    link(rel='stylesheet', href='/css/grid.css')
+    link(rel='stylesheet', href='/css/main.css')
   body
     header
-      h1 Whiskey Social Signup Page Header
+      nav.menu
+        ul.menu-list
+          li
+            img.logo(src='/images/wax-seal2.png', alt='wax seal logo')
+          li
+            p.header-text Whiskey Social
 
-        form(method='POST' action="/signup/me")
-          div.form-group
-            label(for='username') Username:
-            input(type='text', name='username')
-          div.form-group
-            label(for='password') Password:
-            input(type='text', name='password')
-          button(type='submit') Log In
+    form#sign-up(method='POST' action="/signup/me")
+      div
+        input#email(type='email', name='email', required='', placeholder=' ')
+        label(for='email') Email Address
+      div
+        input#password(type='password', name='password', required='', placeholder=' ', pattern='(?=.*[a-z]).{10,}')
+        label(for='password') Password
+
+      input(type='submit', value='Log In')
+
+    div.login-bottom
+      p
+        | New around here?
+        a(href='/signup')   Sign up!
+
+      div.push
+
+    footer.main-footer
+      | Whiskey Social 2017 Copyright

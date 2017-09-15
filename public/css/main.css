@@ -2,10 +2,9 @@
   Site-Wide Styles
 ======================================== */
 
-/** {
+* {
   box-sizing: border-box;
-  margin: 0;
-}*/
+}
 
 html, body {
   height: 100%;
@@ -15,6 +14,134 @@ html, body {
 a {
   text-decoration: none;
   color: black;
+}
+
+/* ======================================
+  Sign-Up Form
+======================================== */
+
+/*form always centered*/
+form#sign-up {
+  max-width: 450px;
+  margin: 30px auto 0;
+  padding: 0 10px;
+}
+
+/*position is relative so that child elements can be positioned absolutely*/
+/*background color for when field is validated with checkmark appearing*/
+form#sign-up > div {
+  position: relative;
+  background: white;
+  border-bottom: 1px solid #ccc;
+}
+
+/*just for the label placeholder text*/
+form#sign-up > div > label {
+  opacity: 0.3;
+  font-weight: bold;
+  position: absolute;
+  top: 22px;
+  left: 20px;
+}
+
+/*normal layout & styling of input fields*/
+form#sign-up > div > input[type="text"],
+form#sign-up > div > input[type="email"],
+form#sign-up > div > input[type="password"] {
+  width: 100%;
+  border: 0;
+  padding: 20px 20px 20px 50px;
+  background: #eee;
+}
+
+/* layout & styling of input fields when field is clicked on*/
+form#sign-up > div > input[type="text"]:focus,
+form#sign-up > div > input[type="email"]:focus,
+form#sign-up > div > input[type="password"]:focus {
+  outline: 0;
+  background: white;
+}
+
+/*labels containing placeholder text disappear when field is clicked on*/
+form#sign-up > div > input[type="text"]:focus + label,
+form#sign-up > div > input[type="email"]:focus + label,
+form#sign-up > div > input[type="password"]:focus + label {
+  opacity: 0;
+}
+
+/*valid entries will show checkbox.  checkbox styling.*/
+form#sign-up > div > input[type="text"]:valid,
+form#sign-up > div > input[type="email"]:valid,
+form#sign-up > div > input[type="password"]:valid {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/check.svg);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: 20px 20px;
+}
+
+/*valid entries will have label placeholder text removed*/
+form#sign-up > div > input[type="text"]:valid + label,
+form#sign-up > div > input[type="email"]:valid + label,
+form#sign-up > div > input[type="password"]:valid + label {
+  opacity: 0;
+}
+
+/*when input is not valid, not in focus, not empty, do this to the input field*/
+form#sign-up > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown),
+form#sign-up > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown),
+form#sign-up > div > input[type="password"]:invalid:not(:focus):not(:placeholder-shown) {
+  background: #FFB832;
+}
+
+/*when input is not valid, not in focus, not empty, do this to the label text*/
+form#sign-up > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown) + label,
+form#sign-up > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown) + label,
+form#sign-up > div > input[type="password"]:invalid:not(:focus):not(:placeholder-shown) + label {
+  opacity: 0;
+}
+
+/*when input is not valid, not empty, but in focus - show the requirements div*/
+form#sign-up > div > input[type="text"]:invalid:focus:not(:placeholder-shown) ~ .requirements,
+form#sign-up > div > input[type="email"]:invalid:focus:not(:placeholder-shown) ~ .requirements,
+form#sign-up > div > input[type="password"]:invalid:focus:not(:placeholder-shown) ~ .requirements {
+  max-height: 200px;
+  padding: 10px 30px 20px 50px;
+}
+
+/*requirements div is hidden unless triggered above*/
+form#sign-up > div .requirements {
+  padding: 0 30px 0 50px;
+  color: #999;
+  max-height: 0;
+  transition: 0.5s;
+  overflow: hidden;
+  color: #9B2B0D;
+  font-style: italic;
+}
+
+/*submit button*/
+form#sign-up input[type="submit"] {
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+  background: #FFB832;
+  color: white;
+  border: 0;
+  border-radius: 38px;
+  padding: 20px;
+  font-size: 1.2em;
+}
+
+.login-bottom p {
+  /*margin: 20px auto;*/
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.login-bottom p a {
+  padding-left: 8px;
+  font-size: 1.4em;
+  color: #9B2B0D;
 }
 
 /* ======================================

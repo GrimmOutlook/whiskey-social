@@ -3,14 +3,39 @@ html(lang="en")
   head
     meta(charset='utf-8')
     title Whiskey Social Signup
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel='stylesheet', href='/css/reset.css')
+    link(rel='stylesheet', href='/css/grid.css')
+    link(rel='stylesheet', href='/css/main.css')
   body
     header
-      h1 Whiskey Social Signup Page Header
-        form(method='POST' enctype='application/json' action='/signup')
-          div.form-group
-            label(for='username') Username:
-            input(type='text', name='username')
-          div.form-group
-            label(for='password') Password:
-            input(type='password', name='password')
-          button(type='submit') Sign up!
+      nav.menu
+        ul.menu-list
+          li
+            img.logo(src='/images/wax-seal2.png', alt='wax seal logo')
+          li
+            p.header-text Whiskey Social
+
+    form#sign-up(method='POST' enctype='application/json' action='/signup')
+      div
+        input#first_name(type='text', name='first_name', required='', placeholder=' ')
+        label(for='first_name') First Name
+      div
+        input#last_name(type='text', name='last_name', required='', placeholder=' ')
+        label(for='last_name') Last Name
+      div
+        input#email(type='email', name='email', required='', placeholder=' ')
+        label(for='email') Email Address
+        .requirements
+          | Must be a valid email address.
+      div
+        input#password(type='password', name='password', required='', placeholder=' ', pattern='(?=.*[a-z]).{10,}')
+        label(for='password') Password
+        .requirements
+          | Your password must be at least 10 characters with at least one letter - case insensitive.
+      input(type='submit', value='Sign Up')
+
+      div.push
+
+    footer.main-footer
+      | Whiskey Social 2017 Copyright
