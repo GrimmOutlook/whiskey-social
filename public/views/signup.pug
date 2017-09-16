@@ -12,30 +12,31 @@ html(lang="en")
       nav.menu
         ul.menu-list
           li
-            img.logo(src='/images/wax-seal2.png', alt='wax seal logo')
+            img.logo(src='/images/wax-seal-logo.png', alt='wax seal logo')
           li
             p.header-text Whiskey Social
+    div.main-content-wrapper
+      div.logo-large
+        img.logo(src='/images/wax-seal-logo.png', alt='wax seal logo')
 
-    form#sign-up(method='POST' enctype='application/json' action='/signup')
-      div
-        input#first_name(type='text', name='first_name', required='', placeholder=' ')
-        label(for='first_name') First Name
-      div
-        input#last_name(type='text', name='last_name', required='', placeholder=' ')
-        label(for='last_name') Last Name
-      div
-        input#email(type='email', name='email', required='', placeholder=' ')
-        label(for='email') Email Address
-        .requirements
-          | Must be a valid email address.
-      div
-        input#password(type='password', name='password', required='', placeholder=' ', pattern='(?=.*[a-z]).{10,}')
-        label(for='password') Password
-        .requirements
-          | Your password must be at least 10 characters with at least one letter - case insensitive.
-      input(type='submit', value='Sign Up')
-
-      div.push
+      form#sign-up(method='POST' enctype='application/json' action='/signup')
+        div
+          input#first_name(type='text', name='first_name', required='', placeholder=' ')
+          label(for='first_name') First Name
+        div
+          input#last_name(type='text', name='last_name', required='', placeholder=' ')
+          label(for='last_name') Last Name
+        div
+          input#email(type='email', name='email', required='', placeholder=' ')
+          label(for='email') Email Address
+          .requirements
+            | Must be a valid email address.
+        div
+          input#password(type='password', name='password', required='', placeholder=' ', pattern='(?=.*[a-z]).{10,}')
+          label(for='password') Password
+          .requirements
+            | Your password must be at least 10 characters with at least one letter - case insensitive.
+        input(type='submit', value='Sign Up')
 
     footer.main-footer
       | Whiskey Social 2017 Copyright

@@ -12,26 +12,28 @@ html(lang="en")
       nav.menu
         ul.menu-list
           li
-            img.logo(src='/images/wax-seal2.png', alt='wax seal logo')
+            img.logo(src='/images/wax-seal-logo.png', alt='wax seal logo')
           li
             p.header-text Whiskey Social
 
-    form#sign-up(method='POST' action="/signup/me")
-      div
-        input#email(type='email', name='email', required='', placeholder=' ')
-        label(for='email') Email Address
-      div
-        input#password(type='password', name='password', required='', placeholder=' ', pattern='(?=.*[a-z]).{10,}')
-        label(for='password') Password
+    div.main-content-wrapper
+      div.logo-large
+        img.logo(src='/images/wax-seal-logo.png', alt='wax seal logo')
 
-      input(type='submit', value='Log In')
+      form#sign-up(method='POST' action="/signup/me")
+        div
+          input#email(type='email', name='email', required='', placeholder=' ')
+          label(for='email') Email Address
+        div
+          input#password(type='password', name='password', required='', placeholder=' ', pattern='(?=.*[a-z]).{10,}')
+          label(for='password') Password
 
-    div.login-bottom
-      p
-        | New around here?
-        a(href='/signup')   Sign up!
+        input(type='submit', value='Log In')
 
-      div.push
+      div.login-bottom
+        p
+          | New around here?
+          a(href='/signup')   Sign up!
 
     footer.main-footer
       | Whiskey Social 2017 Copyright

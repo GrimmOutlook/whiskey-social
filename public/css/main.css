@@ -9,6 +9,7 @@
 html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
 }
 
 a {
@@ -20,10 +21,21 @@ a {
   Sign-Up Form
 ======================================== */
 
+.logo-large {
+  height: 220px;
+}
+
+.logo-large img {
+  display: block;
+  height: 210px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
 /*form always centered*/
 form#sign-up {
   max-width: 450px;
-  margin: 30px auto 0;
+  margin: 0 auto 0;
   padding: 0 10px;
 }
 
@@ -192,22 +204,21 @@ ul li p.header-text {
   color: #FFB832;
 }
 
-.main-container {
+/*---------- Sticky Footer Stuff --------*/
+.main-content-wrapper {
   min-height: 100%;
-  padding: 20px;
-  margin: 0 auto -60px;
+  position: relative;
 }
 
 .main-footer {
   background-color: #DB631C;
-}
-
-.main-footer, .push {
   height: 60px;
   line-height: 60px;
   color: white;
   text-align: center;
-  /*margin-top: -60px;*/
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 /*------------------------------- Slide Out Menu ---------------------------------*/
