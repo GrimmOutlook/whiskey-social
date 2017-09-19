@@ -19,7 +19,6 @@ a {
 
 .photo-container {
   text-align: center;
-  margin-bottom: 4em;
   position: relative;
 }
 
@@ -27,35 +26,34 @@ a {
   Media Queries
 ==================================== */
 
-@media (min-width: 0) and (max-width: 500px) {
-  /*.container {
-    padding: 0 1.225em 2.5em;
-  }*/
+@media only screen and (min-width: 0) and (max-width: 500px) {
 
   .mobile-image {
-    /*width: 100%;*/
     background:
       linear-gradient(#cacdd1, #e6e9ed, transparent);
     opacity: 0.55;
   }
 
+  /*.photo-container {
+
+  }*/
+
   .photo-container img {
     max-width: 100%;
-    /*position: relative;*/
   }
 
   .image-container img {
-   display: none;
+    display: none;
   }
 
-  .mobile-image {
+  .mobile-image img {
     display: block;
     max-width: 100%;
-    height: 600px;
+    height: auto;
     margin: 0 auto;
   }
 
-  div .logo {
+  div.logo {
     display: block;
     max-width: 100%;
     height: 240px;
@@ -66,26 +64,32 @@ a {
     z-index: 2;
   }
 
+  .logo img {
+    display: block;
+    max-width: 100%;
+    height: 90%;
+    margin: 0 auto;
+  }
+
   .name {
     font-family: "Times New Roman", serif;
-    font-size: 4.6em;
+    font-size: 2.6em;
     font-weight: 400;
-    margin: 0 0 1.5em;
-    /*line-height: 1;*/
+    margin: 0 auto;
     position: absolute;
+    /*display: in-line;*/
+    /*Why in the fuck won't this center the name?!*/
     text-align: center;
     top: 5%;
-    /*right: 7%;*/
     color: #ffb832;
     z-index: 2;
   }
 
   .tagline {
     font-family: "Times New Roman", serif;
-    font-size: 2.3em;
+    font-size: 1.3em;
     font-weight: 300;
     margin: 0 0 1.5em;
-    /*line-height: 1;*/
     position: absolute;
     top: 20%;
     right: 15%;
@@ -98,7 +102,6 @@ a {
     width: 20%;
     font-size: 1.3em;
     cursor: pointer;
-    /*align-self: end;*/
     border: 2px solid #9d9aac;
     border-radius: 12px;
     background-color: #d7aa48;
@@ -114,7 +117,6 @@ a {
     width: 20%;
     font-size: 1.3em;
     cursor: pointer;
-    /*align-self: end;*/
     border: 2px solid #9d9aac;
     border-radius: 12px;
     background-color: #d7aa48;
@@ -125,9 +127,79 @@ a {
     z-index: 2;
   }
 
+   /* =================================
+  Grid
+==================================== */
+
+  .wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "photo"
+      "profile-d"
+      "profile-m"
+      "history-d"
+      "history-m"
+      "whiskey-d"
+      "whiskey-m";
+    background-color: #fff;
+    color: #444;
+  }
+
+  .photo-container {
+    grid-area: photo;
+  }
+
+  .profile-description {
+    grid-area: profile-d;
+  }
+
+  .profile-mockup {
+    grid-area: profile-m;
+  }
+
+  .history-description {
+    grid-area: history-d;
+  }
+
+  .history-mockup {
+    grid-area: history-m;
+  }
+
+  .whiskey-description {
+    grid-area: whiskey-d;
+  }
+
+  .whiskey-mockup {
+    grid-area: whiskey-m;
+  }
+
+  /*Why in the fuck won't this center the description paragraphs?*/
+  .profile-description p,
+  .history-description p,
+  .whiskey-description p {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-size: 1.4em;
+  }
+
+  .profile-mockup img,
+  .history-mockup img,
+  .whiskey-mockup img {
+    display: block;
+    /*max-width: 100%;*/
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
+    border-bottom: 1px solid gray;
+  }
+
+
 }
 
-@media only screen and (min-width: 500px) and (max-width: 949px) {
+/*@media only screen and (min-width: 500px) and (max-width: 949px) {
 
   .mobile-image img {
     display: none;
@@ -136,18 +208,15 @@ a {
   .photo-container {
     width: 100%;
     float: left;
-    /*margin-left: 4%;*/
   }
 
   .image-container {
-    /*width: 100%;*/
     background:
       linear-gradient(#cacdd1, #e6e9ed, transparent);
     opacity: 0.75;
   }
 
   .image-container img {
-    /*max-width: 100%;*/
     position: relative;
     z-index: -1;
   }
@@ -157,7 +226,6 @@ a {
     font-size: 5.5em;
     font-weight: 500;
     margin: 0 0 1.5em;
-    /*line-height: 1;*/
     position: absolute;
     top: 10%;
     right: 15%;
@@ -170,22 +238,20 @@ a {
     font-size: 3.0em;
     font-weight: 300;
     margin: 0 0 1.5em;
-    /*line-height: 1;*/
     position: absolute;
     top: 27%;
     right: 15%;
     color: #DB631C;
     z-index: 2;
   }
-}
+}*/
 
-@media (min-width: 950px) {
+/*@media only screen and (min-width: 950px) {
   .name {
-    font-family: 1em/1.5 "Times New Roman", serif;
+    font-family: "Times New Roman", serif;
     font-size: 5.5em;
     font-weight: 500;
     margin: 0 0 1.5em;
-    /*line-height: 1;*/
     position: absolute;
     top: 10%;
     right: 15%;
@@ -194,11 +260,10 @@ a {
   }
 
   .tagline {
-    font-family: 1em/1.5 "Times New Roman", serif;
+    font-family: "Times New Roman", serif;
     font-size: 3.0em;
     font-weight: 300;
     margin: 0 0 1.5em;
-    /*line-height: 1;*/
     position: absolute;
     top: 27%;
     right: 15%;
@@ -211,7 +276,6 @@ a {
     width: 20%;
     font-size: 1.3em;
     cursor: pointer;
-    /*align-self: end;*/
     border: 2px solid #9d9aac;
     border-radius: 12px;
     background-color: #d7aa48;
@@ -227,7 +291,6 @@ a {
     width: 20%;
     font-size: 1.3em;
     cursor: pointer;
-    /*align-self: end;*/
     border: 2px solid #9d9aac;
     border-radius: 12px;
     background-color: #d7aa48;
@@ -239,7 +302,7 @@ a {
   }
 
   .photo-container {
-    /*width: 100%;*/
+
   }
 
   .photo-container img {
@@ -253,23 +316,19 @@ a {
   }
 
   .image-container {
-    /*width: 100%;*/
     background:
       linear-gradient(#cacdd1, #e6e9ed, transparent);
     opacity: 0.75;
   }
 
   .image-container img {
-    /*max-width: 100%;*/
     position: relative;
     z-index: -1;
   }
 
   .profile-description p {
     max-width: 100%;
-    /*height: 600px;*/
     margin: 0 auto;
-    /*padding-right: 600px;*/
     margin-top: 120px;
     margin-left: 20px;
     font-size: 1.8em;
@@ -284,9 +343,7 @@ a {
 
   .history-description p {
     max-width: 100%;
-    /*height: 600px;*/
-    margin: 0 auto
-    /*padding-left: 600px;*/
+    margin: 0 auto;
     margin-top: 40px;
     margin-right: 20px;
     font-size: 1.8em;
@@ -301,9 +358,7 @@ a {
 
   .whiskey-description p {
     max-width: 100%;
-    /*height: 600px;*/
     margin: 0 auto;
-    /*padding-left: 600px;*/
     margin-top: 40px;
     margin-right: 20px;
     font-size: 1.8em;
@@ -314,13 +369,13 @@ a {
     max-width: 100%;
     height: 600px;
     margin: 0 auto;
-  }
+  }*/
 
   /* =================================
   Grid
 ==================================== */
 
-  .wrapper {
+  /*.wrapper {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr;
@@ -362,3 +417,4 @@ a {
   }
 
 }
+*/
