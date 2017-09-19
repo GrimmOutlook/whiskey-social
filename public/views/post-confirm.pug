@@ -1,16 +1,18 @@
 extends page-outline.pug
 
 block content
-  h1 Post Confirmation Screen
 
-  h2 Cheers!  Your post was successful!
+  div.confirm-statement
+    p Cheers!  Your post was successful!
 
-  h3 Would you like to add this whiskey to your Favorites?
+  div.confirm-question
+    p Would you like to add this whiskey to your Favorites?
 
-    a(href="/user/" + id + "/my-favorites")
-    button.redirect-to-favorites(type='submit') Yes!
+  div.confirm-favorite
+    form(method='POST' enctype='application/json' action="/user/" + id + "/my-favorites")
+      input(type='submit', value='Yes')
 
-  //- Hidden if no badges earned for this particular post:
+  div.confirm-redirect
+    a(href="/user/" + id + "/post-history")
+      input(type='submit', value='Back to History')
 
-  a(href="/user/" + id + "/post-history")
-    button.redirect-to-newsfeed(type='submit') Close

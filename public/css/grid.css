@@ -109,50 +109,49 @@
 .single-post-container {
     display: grid;
     grid-template-columns: 1fr;
+    grid-gap: 1%;
     grid-template-rows: auto;
     grid-template-areas:
       "single-name"
       "single-rating"
-      "single-comment"
       "single-photo"
+      "single-comment"
       "single-add-comment"
       "delete-post";
   }
 
-.single-name {
-  grid-area: single-name;
+.single-name,
+.single-rating,
+.single-photo,
+.single-comment,
+.single-add-comment,
+.single-delete-post {
   justify-self: center;
   align-self: center;
+}
+
+.single-name {
+  grid-area: single-name;
 }
 
 .single-rating {
   grid-area: single-rating;
-  justify-self: center;
-  align-self: center;
 }
 
 .single-photo {
   grid-area: single-photo;
-  justify-self: center;
-  align-self: center;
 }
 
 .single-comment {
   grid-area: single-comment;
-  justify-self: center;
-  align-self: center;
 }
 
 .single-add-comment {
   grid-area: single-add-comment;
-  justify-self: center;
-  align-self: center;
 }
 
-.delete-post {
+.single-delete-post {
   grid-area: delete-post;
-  justify-self: center;
-  align-self: center;
 }
 
 

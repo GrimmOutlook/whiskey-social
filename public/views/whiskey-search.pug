@@ -1,9 +1,9 @@
 extends page-outline.pug
 
 block content
-  h1 Whiskey Search Screen
 
-  //- h2= whiskeys.length
+  div.search-statement
+    p Search for a whiskey:
 
   if whiskeys
     each w in whiskeys
@@ -14,10 +14,10 @@ block content
   else
 
   //- TODO - Look at Treehouse form  -  Probably not a POST - How do I make what's entered here into the query part of the URL???
-  form(action="POST")
-    textarea(rows=1, cols=100 placeholder='Search for a whiskey')
-      //- | Search for a whiskey
-    button.delete-post(type='submit') Search
+  div.search-form
+    form(action="POST" placeholder='Search for a whiskey')
+      textarea#search-input(name="search-input", placeholder='Search')
+      input(type='submit', value='Submit')
 
   //- each whiskey in whiskeys
   //-   li= whiskeyName + smallImageURL
