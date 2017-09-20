@@ -1,27 +1,35 @@
 extends page-outline.pug
 
 block content
-  h1 Whiskey Post Screen
+  div.whiskey-post-container
 
-  div= whiskeyName
-  div= country
-  div= region
-  div= description
+    div.post-whiskey-name
+      p= whiskeyName
+    div.post-country
+      h3.label Country:
+      p= country
+    div.post-region
+      h3.label Region:
+      p= region
+    div.post-description
+      p= description
 
-  form(method='POST' enctype='application/json' action="/whiskey/598786f0873d1cf2aa55467c/post/59930c0314ba7b8933046102")
-    div.form-group
-      label(for='comment') Comment:
-      textarea#comment(rows=10, cols=100, type='text', placeholder='Comment on this whiskey' name='comment')
-    div.form-group
-      label(for='rating') Rating:
-      - var ratings = [1,2,3,4,5];
-        select(name='rating')
-          each number in ratings
-            option#rating(value=number)= number
-    button(type='submit') Add Comment and Rating
+    div.post-form
+      div.post-comment
+        form(method='POST' enctype='application/json' action="/whiskey/598786f0873d1cf2aa55467c/post/59930c0314ba7b8933046102")
+          textarea#comment-box(name="post-comment", placeholder='Add a comment')
 
-  //- a(href="/whiskey/post/" + id + "/confirm")
-  //-   button.redirect-to-post-confirm(type='submit') POST
+          div.post-rating
+            label(for='rating') Rating:
+            - var ratings = [1,2,3,4,5];
+              select(name='rating')
+                each number in ratings
+                  option#rating(value=number)= number
+          p Add this whiskey to your history:
+          input(type='submit', value='Submit')
 
-  //- a(href="/whiskey/profile/" + id)
-  //-   button.redirect-to-whiskey-profile(type='submit') Cancel
+    //- a(href="/whiskey/post/" + id + "/confirm")
+    //-   button.redirect-to-post-confirm(type='submit') POST
+
+    //- a(href="/whiskey/profile/" + id)
+    //-   button.redirect-to-whiskey-profile(type='submit') Cancel

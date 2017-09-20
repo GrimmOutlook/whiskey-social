@@ -154,5 +154,46 @@
   grid-area: delete-post;
 }
 
+/* ======================================
+  Whiskey Post Page Grid
+======================================== */
 
+  /*------------ Mobile Stack -----------*/
+.whiskey-post-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1%;
+    /*grid-template-rows: auto;*/
+    grid-template-areas:
+      "name name"
+      "country region"
+      "description description"
+      "form form";
+  }
 
+.post-whiskey-name,
+.post-description,
+.post-form {
+  justify-self: center;
+  align-self: center;
+}
+
+.post-whiskey-name {
+  grid-area: name;
+}
+
+.post-country {
+  grid-area: country;
+}
+
+.post-region {
+  grid-area: region;
+}
+
+.post-description {
+  grid-area: description;
+}
+
+.post-form {
+  grid-area: form;
+}
