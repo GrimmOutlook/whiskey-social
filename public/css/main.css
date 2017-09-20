@@ -226,7 +226,7 @@ ul li p.header-text {
 .mobile-menu {
   display: grid;
   grid-template-columns: 120px;
-  grid-template-rows: 400px;
+  /*grid-template-rows: 400px;*/
   grid-gap: 10px;
 }
 
@@ -560,83 +560,83 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   Single Post Page
 ======================================== */
 
-.single-add-comment {
-  height: 150px;
-  width: 150px;
-  margin: 8px;
-  border: 1px solid black;
-}
-
 .single-name p {
-  text-align: center;
   font-size: 1.8em;
   padding: 0.5em 0 0.1em;
 }
 
+.single-photo img {
+  width: 14em;
+  height: 18.7em;
+}
+
 .single-rating p {
-  text-align: center;
   font-size: 1.25em;
   padding: 0.25em 0 0.1em;
 }
 
-.single-photo img {
-  display: block;
-  width: 12em;
-  height: 16em;
-  margin: 0 auto;
+.single-comment {
+  padding: 0.25em 1em;
 }
 
 .single-comment h2 {
   text-align: left;
-  font-size: 1.25em;
+  font-size: 1.5em;
   padding: 0.25em 0 0.1em;
 }
 
 .single-comment p {
-  text-align: left;
-  font-size: 1.1em;
+  font-size: 1.2em;
   padding: 0.5em 0 0.25em;
   border-bottom: 1px solid gray;
 }
 
+.single-add-comment {
+  margin-top: 0.75em;
+}
+
 #add-comment {
-  width: 24em;
   height: 12em;
-  border: 3px solid #cccccc;
-  padding: 5px;
-  text-align: center;
+  border: 0.2em solid #cccccc;
+  padding: 0.4em;
+  font-size: 1.2em;
+}
+
+.single-delete-post p {
+  font-size: 1.5em;
+  margin-top: 1.5em;
 }
 
 .single-add-comment input[type="submit"],
 .single-delete-post input[type="submit"] {
   display: block;
-  width: 100%;
-  margin: 1.25em auto;
-  background: #FFB832;
+  margin: 0.5em auto;
   color: white;
   border: 0;
   border-radius: 2em;
   padding: 0.75em;
   font-size: 1.5em;
   cursor: pointer;
+}
+
+.single-add-comment input[type="submit"] {
+  width: 75%;
+  background-color: #FFB832;
+}
+
+.single-delete-post input[type="submit"] {
+  background-color: #A6000A;
 }
 
 /* ======================================
   Delete Account Page
 ======================================== */
 
-.delete-answer-no input[type="submit"],
-.delete-answer-yes input[type="submit"] {
-  display: block;
-  width: 50%;
-  margin: 20px auto;
-  background: #FFB832;
-  color: white;
-  border: 0;
-  border-radius: 2em;
-  padding: 0.75em;
-  font-size: 1.5em;
-  cursor: pointer;
+.delete-username p {
+  text-align: center;
+  font-size: 2.8em;
+  font-weight: bold;
+  padding: 0.5em 0 0;
 }
 
 .delete-question p,
@@ -646,11 +646,25 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   padding: 1.5em 0 0.1em;
 }
 
-.delete-username p {
-  text-align: center;
-  font-size: 2.8em;
-  font-weight: bold;
-  padding: 0.5em 0 0;
+.delete-answer-no input[type="submit"],
+.delete-answer-yes input[type="submit"] {
+  display: block;
+  width: 50%;
+  margin: 20px auto;
+  color: white;
+  border: 0;
+  border-radius: 2em;
+  padding: 0.75em;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.delete-answer-no input[type="submit"] {
+  background-color: #FFB832;
+}
+
+.delete-answer-yes input[type="submit"] {
+  background-color: #A6000A;
 }
 
 /* ======================================

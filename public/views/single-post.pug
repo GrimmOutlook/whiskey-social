@@ -12,17 +12,16 @@ block content
     div.single-rating
       p= 'Rating: ' + rating
 
-    //- TODO - edit comment button
     div.single-comment
       h2 Comments:
       p= comment[0].text
 
     div.single-add-comment
       form(method='POST' enctype='application/json' action="/whiskey/598786f0873d1cf2aa55467c/post/59930c0314ba7b8933046102")
-        //- textarea#add-comment(name="add-comment", placeholder='Comment on this whiskey')
+        textarea#add-comment(name="add-comment", placeholder='Comment on this whiskey')
         input(type='submit', value='Submit')
 
     div.single-delete-post
-      | Delete this post?
+      p Delete this post?
       a(href="/whiskey/post/" + id + "/confirm")
         input(type='submit', value='Delete')
