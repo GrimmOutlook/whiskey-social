@@ -1,32 +1,32 @@
 extends page-outline.pug
 
 block content
-  div.main-content-wrapper
-    //- div.mobile-logo
-    //-   img.logo(src='/images/wax-seal-logo.png', alt='wax seal logo')
+  div.delete-photo-wrapper
+    div.delete-wrapper
 
-    div.delete-username
-      p= username
-    //- div= name
-    div.delete-question
-      p Are you sure you want to delete your account?
+      div.delete-username
+        p= username
+      //- div= name
+      div.delete-question
+        p Are you sure you want to delete your account?
 
-    div.delete-answer-no
-      a(href="/user/" + id)
-        input(type='submit', value='No')
-        //- button.redirect-to-profile(type='submit') No
+      div.delete-answer-no
+        a(href="/user/" + id)
+          input(type='submit', value='No')
+          //- button.redirect-to-profile(type='submit') No
 
-    div.delete-statement
-      p Yes, I'm sure.  Please delete my account:
+      div.delete-statement
+        p Yes, I'm sure.  Please delete my account:
 
-    div.delete-answer-yes
-      form(method='POST' enctype='application/json' action="/user/" + id + "/delete-account")
-        input(type='submit', value='Yes')
+      div.delete-answer-yes
+        form(method='POST' enctype='application/json' action="/user/" + id + "/delete-account")
+          //- <a> tag to redirect to homepage
+          input(type='submit', value='Yes')
 
 
-    //- form(action="/user/" + id + "/delete-account", method="POST")
-    //-   label(for="eliminate") Yes, delete my account
-    //-   input(type="submit")
+      //- form(action="/user/" + id + "/delete-account", method="POST")
+      //-   label(for="eliminate") Yes, delete my account
+      //-   input(type="submit")
 
 
 

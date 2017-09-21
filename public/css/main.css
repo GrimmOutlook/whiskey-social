@@ -1,4 +1,23 @@
 /* ======================================
+  Table of Contents
+======================================== */
+/*  - Site-Wide Styles
+    - Sign-Up & Log-In Forms
+    - Header, Menu, Mobile Menu, Footer
+      - Media Queries for Header, Menu, Mobile Menu, Footer ONLY!
+    - Delete Account Page
+    - My Favorites, My Unique Posts, Post History Pages
+    - Post Confirm Page
+    - Profile Page
+    - Single Post Page
+    - Whiskey Post Page
+    - Whiskey Profile Page
+    - Whiskey Search Page
+    - Media Queries
+*/
+
+
+/* ======================================
   Site-Wide Styles
 ======================================== */
 
@@ -18,7 +37,7 @@ a {
 }
 
 /* ======================================
-  Sign-Up Form
+  Sign-Up & Log-in Forms
 ======================================== */
 
 .logo-large {
@@ -156,10 +175,10 @@ form#sign-up input[type="submit"] {
 }
 
 /* ======================================
-  Header, Menu, Footer
+  Header, Menu, Mobile Menu, Footer
 ======================================== */
 
-  /*--- Mobile ---*/
+  /*--- Menu ---*/
 .menu {
   margin: 0;
   padding: 0;
@@ -204,10 +223,7 @@ ul li p.header-text {
 }
 
 /*---------- Sticky Footer Stuff --------*/
-.main-content-wrapper {
-  min-height: 100%;
-  position: relative;
-}
+/* Doesn't work */
 
 .main-footer {
   background-color: #DB631C;
@@ -220,7 +236,7 @@ ul li p.header-text {
   width: 100%;
 }
 
-/*------------------------------- Slide Out Menu ---------------------------------*/
+/*------------------------- Mobile Slide Out Menu ---------------------------------*/
 /*--- CSS-Grid for mobile menu only ---*/
 .mobile-menu {
   display: grid;
@@ -266,6 +282,10 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   width: 300px;
   z-index: 2;
 }
+
+/* ===========================================================
+  Media Queries for Header, Menu, Mobile Menu, Footer ONLY!
+============================================================== */
 
   /*--- Mobile Device - Hide Top Menu ---*/
 @media only screen and (max-width: 650px) {
@@ -393,60 +413,58 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 }
 
 /* ======================================
-  Profile Page
+  Delete Account Page
 ======================================== */
 
-.profile-avatar .wax-seal {
-  height: 150px;
-  width: 150px;
-  background-image: url('../images/wax-seal-logo.png');
-  background-size: cover;
-}
-
-.profile-total-post p,
-  .profile-unique-post p,
-  .profile-favorite p {
-  font-family: 'Amiri', serif;
-  font-size: 60px;
-  margin: 5px 5px;
+.delete-username p {
   text-align: center;
+  font-size: 2.8em;
+  font-weight: bold;
+  padding: 0.5em 0 0;
 }
 
-.profile-username p {
-  font-family: 'Amiri', serif;
-  font-size: 40px;
-  margin: 5px 5px;
+.delete-question p,
+.delete-statement p {
   text-align: center;
+  font-size: 1.5em;
+  padding: 1.5em 0.2em 0.1em;
 }
 
-.profile-total-post h3,
-  .profile-unique-post h3,
-  .profile-favorite h3 {
-  font-family: 'Libre Franklin', sans-serif;
-  font-size: 18px;
-  margin: 2px;
-  color: #DB631C;
+.delete-answer-no input[type="submit"],
+.delete-answer-yes input[type="submit"] {
+  display: block;
+  width: 50%;
+  margin: 1.25em auto;
+  color: white;
+  border: 0;
+  border-radius: 2em;
+  padding: 0.75em;
+  font-size: 1.5em;
+  cursor: pointer;
 }
 
-/* =================================
-  Media Queries
-==================================== */
+.delete-answer-no input[type="submit"] {
+  background-color: #FFB832;
+}
 
-/* =================================
-  Post History Page
-==================================== */
+.delete-answer-yes input[type="submit"] {
+  background-color: #A6000A;
+}
+
+/* ==================================================
+  My Favorites, My Unique Posts, Post History Pages
+==================================================== */
 
 .history-list, .favorites-list, .unique-list {
-  padding: 10px;
+  padding: 0.625em;
   list-style-type: none;
   background-color: #FFB832;
-  /*height: 3400px;*/
 }
 
 .history-container h1, .favorites-container h1, .unique-container h1 {
-  padding: 15px 5px;
+  padding: 0.75em 0.5em;
   font-family: 'Libre Franklin', sans-serif;
-  font-size: 30px;
+  font-size: 175%;
 }
 
 .whiskey-card {
@@ -454,7 +472,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   color: black;
   border: 1px solid gray;
   border-radius: 5px;
-  padding: 20px;
+  padding: 1.25em;
   font-size: 150%;
   font-family: 'Libre Franklin', sans-serif;
   text-align: center;
@@ -470,6 +488,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .rating {
   text-align: left;
   font-family: 'Libre Franklin', sans-serif;
+  padding-top: 0.5em;
 }
 
 .favorite {
@@ -492,68 +511,69 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 }
 
 /* ======================================
-  Whiskey Profile Page
+  Post Confirm Page
 ======================================== */
 
-.whiskey-profile-container {
-
-}
-
-.whiskey-profile-container h1 {
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.6em;
-  padding: 10px 0;
-}
-
-.whiskey-profile-description {
-  height: 140px;
-  width: 250px;
-  font-size: 1.1em;
-  color: gray;
-  padding: 5px;
-  margin: 0 auto;
-}
-
-.back-to-search {
-  height: 40px;
-  width: 60px;
-  font-size: 1.3em;
-  cursor: pointer;
-  /*align-self: end;*/
-  border: 2px solid #9d9aac;
-  border-radius: 12px;
-  background-color: #d7aa48;
-  color: #9b2b0d;
-  position: absolute;
-  top: 55%;
-  left: 8%;
-  z-index: 2;
-}
-
-.redirect-to-whiskey-post {
-  height: 80px;
-  width: 90px;
-  font-size: 1.3em;
-  cursor: pointer;
-  /*align-self: end;*/
-  border: 2px solid #9d9aac;
-  border-radius: 12px;
-  background-color: #d7aa48;
-  color: #9b2b0d;
-  position: absolute;
-  top: 55%;
-  right: 8%;
-  z-index: 2;
-}
-
-.whiskey-profile-image {
+.confirm-favorite input[type="submit"],
+.confirm-redirect input[type="submit"] {
   display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
+  width: 50%;
+  margin: 20px auto;
+  background: #FFB832;
+  color: white;
+  border: 0;
+  border-radius: 2em;
+  padding: 0.75em;
+  font-size: 1.5em;
+  cursor: pointer;
 }
 
+.confirm-redirect input[type="submit"] {
+  width: 70%;
+}
+
+.confirm-statement p,
+.confirm-question p {
+  text-align: center;
+  font-size: 1.8em;
+  padding: 1.5em 0 0.1em;
+}
+
+/* ======================================
+  Profile Page
+======================================== */
+
+.profile-avatar .wax-seal {
+  height: 150px;
+  width: 150px;
+  background-image: url('../images/wax-seal-logo.png');
+  background-size: cover;
+}
+
+.profile-total-post p,
+.profile-unique-post p,
+.profile-favorite p {
+  font-family: 'Amiri', serif;
+  font-size: 60px;
+  margin: 5px 5px;
+  text-align: center;
+}
+
+.profile-username p {
+  font-family: 'Amiri', serif;
+  font-size: 40px;
+  margin: 5px 5px;
+  text-align: center;
+}
+
+.profile-total-post h3,
+.profile-unique-post h3,
+.profile-favorite h3 {
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 18px;
+  margin: 2px;
+  color: #DB631C;
+}
 
 /* ======================================
   Single Post Page
@@ -561,7 +581,8 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 
 .single-name p {
   font-size: 1.8em;
-  padding: 0.5em 0 0.1em;
+  padding: 0.5em 0.2em 0.1em;
+  text-align: center;
 }
 
 .single-photo img {
@@ -629,142 +650,6 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 
 .single-delete-post input[type="submit"] {
   background-color: #A6000A;
-}
-
-/* ======================================
-  Delete Account Page
-======================================== */
-
-.delete-username p {
-  text-align: center;
-  font-size: 2.8em;
-  font-weight: bold;
-  padding: 0.5em 0 0;
-}
-
-.delete-question p,
-.delete-statement p {
-  text-align: center;
-  font-size: 1.8em;
-  padding: 1.5em 0 0.1em;
-}
-
-.delete-answer-no input[type="submit"],
-.delete-answer-yes input[type="submit"] {
-  display: block;
-  width: 50%;
-  margin: 20px auto;
-  color: white;
-  border: 0;
-  border-radius: 2em;
-  padding: 0.75em;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-.delete-answer-no input[type="submit"] {
-  background-color: #FFB832;
-}
-
-.delete-answer-yes input[type="submit"] {
-  background-color: #A6000A;
-}
-
-/* ======================================
-  Post Confirm Page
-======================================== */
-
-.confirm-favorite input[type="submit"],
-.confirm-redirect input[type="submit"] {
-  display: block;
-  width: 50%;
-  margin: 20px auto;
-  background: #FFB832;
-  color: white;
-  border: 0;
-  border-radius: 2em;
-  padding: 0.75em;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-.confirm-redirect input[type="submit"] {
-  width: 70%;
-}
-
-.confirm-statement p,
-.confirm-question p {
-  text-align: center;
-  font-size: 1.8em;
-  padding: 1.5em 0 0.1em;
-}
-
-/* ======================================
-  Whiskey Search Page
-======================================== */
-
-.search-statement p,
-.search-statement ~ p {
-  text-align: center;
-  font-size: 1.5em;
-  padding: 0.5em 0 0.1em;
-}
-
-.search-form form {
-  width: 80%;
-  margin: 1.5em auto;
-}
-
-.search-field {
-  height: 3em;
-  width: 70%;
-  padding: 0.5em 1em;
-  border: 1px solid lightgray;
-  border-radius: 10%;
-  outline-color: #DB631C;
-}
-
-.search-button {
-  height: 3em;
-  width: 25%;
-  position: relative;
-  text-align: center;
-  left: 1%;
-  border: 2px solid #A6000A;
-  border-radius: 10%;
-  background-color: #A6000A;
-  color: white;
-}
-
-.search-button:hover {
-  background-color: #fafafa;
-  color: #A6000A;
-  cursor: pointer;
-}
-
-.search-results h2 {
-  font-size: 1.8em;
-  padding: 0.5em 0.5em 0.1em;
-  text-align: center;
-}
-
-.search-image img {
-  max-width: 8.5em;
-}
-
-.search-description {
-  padding: 0 1em;
-}
-
-.search-description p {
-  width: 100%;
-  font-size: 1em;
-  color: gray;
-}
-
-.border-between {
-  border: 2px solid gray;
-  margin: 1em 0;
 }
 
 /* ======================================
@@ -851,13 +736,168 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   cursor: pointer;
 }
 
+/* ======================================
+  Whiskey Profile Page
+======================================== */
+
+.whiskey-profile-container h1 {
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.6em;
+  padding: 10px 0;
+}
+
+.whiskey-profile-description {
+  height: 140px;
+  width: 250px;
+  font-size: 1.1em;
+  color: gray;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.back-to-search {
+  height: 40px;
+  width: 60px;
+  font-size: 1.3em;
+  cursor: pointer;
+  /*align-self: end;*/
+  border: 2px solid #9d9aac;
+  border-radius: 12px;
+  background-color: #d7aa48;
+  color: #9b2b0d;
+  position: absolute;
+  top: 55%;
+  left: 8%;
+  z-index: 2;
+}
+
+.redirect-to-whiskey-post {
+  height: 80px;
+  width: 90px;
+  font-size: 1.3em;
+  cursor: pointer;
+  /*align-self: end;*/
+  border: 2px solid #9d9aac;
+  border-radius: 12px;
+  background-color: #d7aa48;
+  color: #9b2b0d;
+  position: absolute;
+  top: 55%;
+  right: 8%;
+  z-index: 2;
+}
+
+.whiskey-profile-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* ======================================
+  Whiskey Search Page
+======================================== */
+
+.search-statement p,
+.search-statement ~ p {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 0.5em 0 0.1em;
+}
+
+.search-form form {
+  width: 80%;
+  margin: 1.5em auto;
+}
+
+.search-field {
+  height: 3em;
+  width: 70%;
+  padding: 0.5em 1em;
+  border: 1px solid lightgray;
+  border-radius: 10%;
+  outline-color: #DB631C;
+}
+
+.search-button {
+  height: 3em;
+  width: 25%;
+  position: relative;
+  text-align: center;
+  left: 1%;
+  border: 2px solid #A6000A;
+  border-radius: 10%;
+  background-color: #A6000A;
+  color: white;
+}
+
+.search-button:hover {
+  background-color: #fafafa;
+  color: #A6000A;
+  cursor: pointer;
+}
+
+.search-results h2 {
+  font-size: 1.8em;
+  padding: 0.5em 0.5em 0.1em;
+  text-align: center;
+}
+
+.search-image img {
+  max-width: 8.5em;
+}
+
+.search-description {
+  padding: 0 1em;
+}
+
+.search-description p {
+  width: 100%;
+  font-size: 1em;
+  color: gray;
+}
+
+.border-between {
+  border: 2px solid gray;
+  margin: 1em 0;
+}
+
+/* ======================================
+  Media Queries
+======================================== */
+
+@media screen and (min-width: 500px) and (max-width: 949px) {
+  /* ======================================
+    Delete Account Page
+  ======================================== */
+  .delete-answer-no input[type="submit"],
+  .delete-answer-yes input[type="submit"] {
+    width: 35%;
+  }
+}
 
 
+@media screen and (min-width: 950px) {
+  /* ======================================
+    Delete Account Page
+  ======================================== */
+  .delete-answer-no input[type="submit"],
+  .delete-answer-yes input[type="submit"] {
+    width: 25%;
+  }
 
+  .delete-photo-wrapper {
+    /*background-color: #FFB832;*/
+    background-image: url('/images/barrels.jpg');
+    background-repeat: no-repeat;
+    height: calc(100vh - 85px);
+  }
 
+  .delete-wrapper {
+    margin: 0 12.5em;
+    padding-bottom: 1.25em;
+    background-color: white;
+  }
 
-
-
-
-
-
+}

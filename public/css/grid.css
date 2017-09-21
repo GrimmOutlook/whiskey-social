@@ -61,7 +61,6 @@
   grid-template-columns: 1fr; /*1fr 1fr;*/
   grid-template-rows: 1fr auto;
   grid-gap: 10px;
-  /*padding: 20px;*/
 }
 
   /* ------------ Larger Screens ---------*/
@@ -161,7 +160,6 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 1%;
-  /*grid-template-rows: auto;*/
   grid-template-areas:
     "name name"
     "country region"
