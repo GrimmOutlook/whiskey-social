@@ -5,19 +5,27 @@ block content
   div.search-statement
     p Search for a whiskey:
 
-  if whiskeys
-    each w in whiskeys
-      h2= w.whiskeyName
-      h2= w.country
-      div= w.description
-      img(src=w.smallImageURL)
-  else
-
   //- TODO - Look at Treehouse form  -  Probably not a POST - How do I make what's entered here into the query part of the URL???
+
   div.search-form
     form(action="POST" placeholder='Search for a whiskey')
-      textarea#search-input(name="search-input", placeholder='Search')
-      input(type='submit', value='Submit')
+      input.search-field(type="text" placeholder="Search..." name="search-input" required)
+      input.search-button(type="button" value="Search")
+
+  p Results:
+
+  if whiskeys
+    each w in whiskeys
+      a(href="/whiskey/profile/" + w._id)
+        div.search-results
+          h2= w.whiskeyName
+          div.search-description
+            p= w.description
+          div.search-image
+            img(src=w.smallImageURL)
+      div.border-between
+  else
+    p No results found
 
   //- each whiskey in whiskeys
   //-   li= whiskeyName + smallImageURL

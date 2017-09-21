@@ -3,17 +3,16 @@
 ======================================== */
   /*------------ Mobile Stack -----------*/
 .profile-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    /*grid-template-rows: 500px min-content 120px 40px 120px 40px; */
-    grid-template-rows: auto;
-    grid-template-areas:
-      "username"
-      "avatar"
-      "total-post"
-      "unique-post"
-      "favorite";
-  }
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "username"
+    "avatar"
+    "total-post"
+    "unique-post"
+    "favorite";
+}
 
 .profile-username {
   grid-area: username;
@@ -107,18 +106,17 @@
 
   /*------------ Mobile Stack -----------*/
 .single-post-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1%;
-    /*grid-template-rows: auto;*/
-    grid-template-areas:
-      "single-name"
-      "single-rating"
-      "single-photo"
-      "single-comment"
-      "single-add-comment"
-      "delete-post";
-  }
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1%;
+  grid-template-areas:
+    "single-name"
+    "single-rating"
+    "single-photo"
+    "single-comment"
+    "single-add-comment"
+    "delete-post";
+}
 
 .single-name,
 .single-rating,
@@ -160,16 +158,16 @@
 
   /*------------ Mobile Stack -----------*/
 .whiskey-post-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1%;
-    /*grid-template-rows: auto;*/
-    grid-template-areas:
-      "name name"
-      "country region"
-      "description description"
-      "form form";
-  }
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1%;
+  /*grid-template-rows: auto;*/
+  grid-template-areas:
+    "name name"
+    "country region"
+    "description description"
+    "form form";
+}
 
 .post-whiskey-name,
 .post-description,
@@ -197,3 +195,36 @@
 .post-form {
   grid-area: form;
 }
+
+/* ======================================
+  Whiskey Search Page Grid
+======================================== */
+
+  /*------------ Mobile Stack -----------*/
+.search-results {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1%;
+  grid-template-areas:
+    "name name"
+    "photo description";
+}
+
+.search-results h2 {
+  grid-area: name;
+}
+
+.search-image {
+  grid-area: photo;
+}
+
+.search-description {
+  grid-area: description;
+}
+
+.search-description {
+  justify-self: center;
+  align-self: center;
+}
+
+

@@ -145,7 +145,6 @@ form#sign-up input[type="submit"] {
 }
 
 .login-bottom p {
-  /*margin: 20px auto;*/
   text-align: center;
   font-size: 1.2em;
 }
@@ -582,12 +581,12 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .single-comment h2 {
   text-align: left;
   font-size: 1.5em;
-  padding: 0.25em 0 0.1em;
+  padding: 0.25em 0.25em 0.1em;
 }
 
 .single-comment p {
   font-size: 1.2em;
-  padding: 0.5em 0 0.5em;
+  padding: 0.5em;
   border-bottom: 1px solid gray;
 }
 
@@ -704,38 +703,68 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   Whiskey Search Page
 ======================================== */
 
-.search-statement p {
+.search-statement p,
+.search-statement ~ p {
   text-align: center;
   font-size: 1.5em;
   padding: 0.5em 0 0.1em;
 }
 
-.search-form {
-  /*display: block;*/
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
+.search-form form {
+  width: 80%;
+  margin: 1.5em auto;
 }
 
-.search-form input[type="submit"] {
-  display: block;
-  width: 50%;
-  margin: 10px auto;
-  background: #FFB832;
+.search-field {
+  height: 3em;
+  width: 70%;
+  padding: 0.5em 1em;
+  border: 1px solid lightgray;
+  border-radius: 10%;
+  outline-color: #DB631C;
+}
+
+.search-button {
+  height: 3em;
+  width: 25%;
+  position: relative;
+  text-align: center;
+  left: 1%;
+  border: 2px solid #A6000A;
+  border-radius: 10%;
+  background-color: #A6000A;
   color: white;
-  border: 0;
-  border-radius: 2em;
-  padding: 0.75em;
-  font-size: 1.2em;
+}
+
+.search-button:hover {
+  background-color: #fafafa;
+  color: #A6000A;
   cursor: pointer;
 }
 
-#search-input {
-  width: 50%;
-  height: 2em;
-  border: 3px solid #cccccc;
-  padding: 5px;
+.search-results h2 {
+  font-size: 1.8em;
+  padding: 0.5em 0.5em 0.1em;
   text-align: center;
+}
+
+.search-image img {
+  max-width: 8.5em;
+}
+
+.search-description {
+  padding: 0 1em;
+}
+
+.search-description p {
+  width: 100%;
+  font-size: 1em;
+  color: gray;
+}
+
+.border-between {
+  border: 2px solid gray;
+  margin: 1em 0;
 }
 
 /* ======================================
@@ -806,7 +835,6 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .post-comment p {
   font-size: 1.5em;
   padding: 0.25em 0;
-  /*margin: 0 auto;*/
   text-align: center;
 }
 
