@@ -21,7 +21,7 @@ const userSchema = Schema({
     favorite: Boolean,
     comment: [{
       text: [String],
-      commentDate: {type: Date, default: Date.now},
+      commentDate: {type: Date, default: Date.now}
     }]
   }]
 });

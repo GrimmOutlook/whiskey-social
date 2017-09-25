@@ -21,7 +21,7 @@ describe('GET endpoint', function() {
 
       let res;
       return chai.request(app)
-        .get('/')
+        .get('/whiskey/search')
         .then(function(_res) {
           res = _res;
           console.log(res.status);
@@ -32,18 +32,18 @@ describe('GET endpoint', function() {
         });
     });
 
-    it('should return a 200 status & HTML - user', function() {
+    // it('should return a 200 status & HTML - user', function() {
 
-      let res;
-      return chai.request(app)
-        .get('/user')
-        .then(function(_res) {
-          res = _res;
-          console.log(res.status);
-          res.should.have.status(200);
-          // res.should.be.html;
-          console.log(`Your status is ${res.status}.`);
-        });
-    });
+    //   let res;
+    //   return chai.request(app)
+    //     .get('/user')
+    //     .then(function(_res) {
+    //       res = _res;
+    //       console.log(res.status);
+    //       res.should.have.status(200);
+    //       // res.should.be.html;
+    //       console.log(`Your status is ${res.status}.`);
+    //     });
+    // });
 
 });
