@@ -8,12 +8,12 @@ block content
 
       each post in posts
         if post.favorite
-          - var photoURL = post.image_url
+          - var photoURL = post.smallImageURL
           li.whiskey-card
-            div.whiskeyname= post.title
+            div.whiskeyname= post.whiskeyName
             div.rating= 'Rating: ' + post.rating
             div.favorite
               p Favorite
               img.favorite-icon
             a(href='/user/' + id + '/single-post/' + post.postID)
-              img.bottle-history(src=photoURL, alt=post.title)
+              img.bottle-history(src=photoURL, alt=post.whiskeyName)

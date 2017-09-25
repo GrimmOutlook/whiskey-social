@@ -67,10 +67,12 @@ router.get('/search', (req, res) => {
          //GET the screen
 router.get('/:userId/post/:whiskeyId', (req, res) => {
   console.log('userId: ' + req.params.userId);
+  console.log('whiskeyId: ' + req.params.whiskeyId);
   Whiskey
     .findById(req.params.whiskeyId)
     .exec()
     .then(single_whiskey => {
+      console.log(single_whiskey);
       res.render('whiskey-post', single_whiskey)
       })
     .catch(

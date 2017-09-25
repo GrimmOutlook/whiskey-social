@@ -458,7 +458,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .history-list, .favorites-list, .unique-list {
   padding: 0.625em;
   list-style-type: none;
-  background-color: #FFB832;
+  /*background-color: #FFB832;*/
 }
 
 .history-container h1, .favorites-container h1, .unique-container h1 {

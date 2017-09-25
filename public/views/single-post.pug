@@ -4,17 +4,26 @@ block content
   div.single-post-container
 
     div.single-name
-      p= title
+      p= whiskeyName
 
     div.single-photo
-      img(src=image_url)
+      img(src=smallImageURL)
 
     div.single-rating
       p= 'Rating: ' + rating
 
     div.single-comment
       h2 Comments:
-      p= comment[0].text
+      //- p= comment[0].text
+      //- p= comment[0].commentDate
+      //- p= comment[1].text
+      //- p= comment[1].commentDate
+      //- p= comment
+      each whatever in comment
+        p= whatever
+        //- iterate over each index in the comment array & pull out the text in each index
+        //- Write for loop 1st to iterate over each index, then find out how pug does it!!
+        //- Figure out how to modify time/date display
 
     div.single-add-comment
       form(method='POST' enctype='application/json' action="/whiskey/598786f0873d1cf2aa55467c/post/59930c0314ba7b8933046102")
