@@ -17,7 +17,7 @@ describe('GET endpoint', function() {
     return closeServer();
   });
 
-    it('should return a 200 status & HTML - homepage', function() {
+    it('should return a 200 status & HTML - whiskey search page', function() {
 
       let res;
       return chai.request(app)
