@@ -4,32 +4,26 @@ const Schema = mongoose.Schema
 
 mongoose.Promise = global.Promise;
 
+// avatar: Buffer,  //TODO nice to have  -  twitter or FBook photo
 const userSchema = Schema({
-  // firstName: {type: String},// required: true, trim: true},
-  // lastName: {type: String, required: true, trim: true},
-  password: {type: String, required: true},
-  username: {type: String, required: true, trim: true},
-  // email: {type: String, required: true, trim: true},
-  // avatar: Buffer,  //TODO nice to have  -  twitter or FBook photo
-
-  postCount: Number,  //Or just use post.length in model or router?
-  uniquePostCount: Number,
-  favoriteCount: Number,
-
+  firstName: {type: String, trim: true},
+  lastName: {type: String, trim: true},
+  password: String,
+  username: {type: String, trim: true},
+  email: {type: String, trim: true},
   posts: [{
     postID: Number,
-    title: String,  // from whiskey schema
-    image_url: String,
+    whiskeyName: String,     // from whiskey schema
+    smallImageURL: String,   // from whiskey schema
+    largeImageURL: String,   // from whiskey schema
     postDate: {type: Date, default: Date.now},
     rating: Number,
     favorite: Boolean,
-    // unique: Boolean,  ????????????
     comment: [{
       text: [String],
       commentDate: {type: Date, default: Date.now},
     }]
   }]
-
 });
 
 userSchema.methods.validatePassword = function(password) {

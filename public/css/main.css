@@ -518,7 +518,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .confirm-redirect input[type="submit"] {
   display: block;
   width: 50%;
-  margin: 20px auto;
+  margin: 1.25em auto;
   background: #FFB832;
   color: white;
   border: 0;
@@ -530,6 +530,10 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 
 .confirm-redirect input[type="submit"] {
   width: 70%;
+}
+
+.confirm-favorite {
+  margin-bottom: 0.25em;
 }
 
 .confirm-statement p,
@@ -744,26 +748,26 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   font-weight: bold;
   text-align: center;
   font-size: 1.6em;
-  padding: 10px 0;
+  padding: 0.625em 0;
 }
 
 .whiskey-profile-description {
-  height: 140px;
-  width: 250px;
+  height: 8.75em;
+  width: 15.625em;
   font-size: 1.1em;
   color: gray;
-  padding: 5px;
+  padding: 0.25px;
   margin: 0 auto;
 }
 
 .back-to-search {
-  height: 40px;
-  width: 60px;
+  height: 2.5em;
+  width: 3.75em;
   font-size: 1.3em;
   cursor: pointer;
   /*align-self: end;*/
   border: 2px solid #9d9aac;
-  border-radius: 12px;
+  border-radius: 0.75em;
   background-color: #d7aa48;
   color: #9b2b0d;
   position: absolute;
@@ -773,13 +777,13 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 }
 
 .redirect-to-whiskey-post {
-  height: 80px;
-  width: 90px;
+  height: 5em;
+  width: 5em;
   font-size: 1.3em;
   cursor: pointer;
   /*align-self: end;*/
   border: 2px solid #9d9aac;
-  border-radius: 12px;
+  border-radius: 0.75em;
   background-color: #d7aa48;
   color: #9b2b0d;
   position: absolute;
@@ -798,7 +802,6 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 /* ======================================
   Whiskey Search Page
 ======================================== */
-
 .search-statement p,
 .search-statement ~ p {
   text-align: center;
@@ -816,7 +819,6 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   width: 70%;
   padding: 0.5em 1em;
   border: 1px solid lightgray;
-  border-radius: 10%;
   outline-color: #DB631C;
 }
 
@@ -827,7 +829,6 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   text-align: center;
   left: 1%;
   border: 2px solid #A6000A;
-  border-radius: 10%;
   background-color: #A6000A;
   color: white;
 }
@@ -875,10 +876,63 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   .delete-answer-yes input[type="submit"] {
     width: 35%;
   }
+
+  /* ======================================
+    Post Confirm Page
+  ======================================== */
+  .confirm-favorite input[type="submit"],
+  .confirm-redirect input[type="submit"] {
+    width: 35%;
+  }
+
+  /* ======================================
+    Whiskey Post Page
+  ======================================== */
+  .post-comment input[type="submit"] {
+    width: 35%;
+  }
+
+  /* ======================================
+    Whiskey Profile Page
+  ======================================== */
+  .image-container {
+    height: 50vh;
+    overflow: hidden;
+  }
+
+  .whiskey-profile-image {
+    display: block;
+    width: 20em;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
 }
 
 
 @media screen and (min-width: 950px) {
+  /* ======================================
+  Site-Wide Styles
+======================================== */
+  .background-image-wrapper {
+    background-image: url('/images/barrels.jpg');
+    background-repeat: no-repeat;
+    height: calc(100vh - 85px);
+  }
+
+  .page-wrapper {
+    margin: 0 12.5em;
+    padding-bottom: 1.25em;
+    background-color: white;
+  }
+
+  .background-image-wrapper-2 {
+    background-image: url('/images/whiskey-glasses.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: calc(100vh - 85px);
+  }
+
   /* ======================================
     Delete Account Page
   ======================================== */
@@ -887,17 +941,55 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
     width: 25%;
   }
 
-  .delete-photo-wrapper {
-    /*background-color: #FFB832;*/
-    background-image: url('/images/barrels.jpg');
-    background-repeat: no-repeat;
-    height: calc(100vh - 85px);
+  /* ======================================
+    Post Confirm Page
+  ======================================== */
+  .confirm-favorite input[type="submit"],
+  .confirm-redirect input[type="submit"] {
+    width: 25%;
   }
 
-  .delete-wrapper {
-    margin: 0 12.5em;
-    padding-bottom: 1.25em;
-    background-color: white;
+  .confirm-redirect input[type="submit"] {
+    font-size: 1.1em;
   }
+
+  /* ======================================
+    Whiskey Post Page
+  ======================================== */
+  .post-comment input[type="submit"] {
+    width: 25%;
+  }
+
+  /* ======================================
+    Whiskey Profile Page
+  ======================================== */
+  .image-container {
+    height: 100vh;
+    overflow: hidden;
+    float: right;
+  }
+
+  .whiskey-profile-image {
+    display: block;
+    width: 25em;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  /* ======================================
+    Whiskey Search Page
+  ======================================== */
+  .search-form form {
+    width: 50%;
+  }
+
+  /* ======================================
+    Single Post Page
+  ======================================== */
+  .single-add-comment input[type="submit"] {
+    width: 40%;
+  }
+
 
 }

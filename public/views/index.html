@@ -22,24 +22,32 @@
         <img src="../images/wax-seal-logo.png">
       </div>
       <div class="mobile-signup">
-        <a href="signup.html">
+        <!-- Take off type=submit & just use <a> tag redirect -->
+        <a href="signup.pug">
           <input type="submit" class="signup-button" value="Sign Up" />
         </a>
       </div>
       <div class="mobile-login">
-        <a href="signup.html">
+        <a href="login.pug">
           <input type="submit" class="login-button" value="Log In" />
         </a>
       </div>
     </div>
 
     <div class="photo-container">
-      <div class="logo"><img src="../images/wax-seal-logo.png"></div>
+      <div class="logo">
+        <img src="../images/wax-seal-logo.png">
+      </div>
       <p class="name">Whiskey Social</p>
       <p class="tagline">What's in Your Glass?</p>
-      <div class="image-container"><img src="../images/whiskeybanner.jpg"></div>
+      <div class="image-container">
+        <img src="../images/whiskeybanner.jpg">
+      </div>
+      <!-- Take off type=submit & just use <a> tag redirect -->
       <button type="submit" class="signup-button">Sign Up</button>
-      <button type="submit" class="login-button">Log In</button>
+      <a href="login">
+        <button type="submit" class="login-button">Log In</button>
+      </a>
     </div>
     <div class="profile-description">
       <p>Whiskey Social makes it easy to keep track of how many whiskeys you've tried.  You can keep tabs on your favorites!</p>
