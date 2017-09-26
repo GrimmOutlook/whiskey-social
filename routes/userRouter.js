@@ -196,14 +196,13 @@ router.post('/:id/delete-account', function(req, res){
   User.findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {
-      console.log('Why won\'t this shit delete?');
-      res.sendFile('/index.html');
+      res.redirect('/');
       console.log('User has been removed from the database.');
     })
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the Account Delete page.'});
+        res.status(500).json({message: 'Why won\'t this shit delete?'});
     });
 })
 

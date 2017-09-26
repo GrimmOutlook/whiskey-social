@@ -15,7 +15,7 @@ block content
     div.single-comment
       h2 Comments:
       //- p= comment[0].text
-      //- p= comment[0].commentDate
+      p= comment[0].commentDate.toLocaleDateString('en-US')
       //- p= comment[1].text
       //- p= comment[1].commentDate
       //- p= comment

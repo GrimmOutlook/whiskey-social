@@ -5,7 +5,7 @@ block content
     div.page-wrapper
 
       div.delete-username
-        p= name
+        p= 'Hello, ' + name
         p= username
 
       div.delete-question
@@ -14,20 +14,14 @@ block content
       div.delete-answer-no
         a(href="/user/" + id)
           input(type='submit', value='No')
-          //- button.redirect-to-profile(type='submit') No
 
       div.delete-statement
         p Yes, I'm sure.  Please delete my account:
 
       div.delete-answer-yes
         form(method='POST' enctype='application/json' action="/user/" + id + "/delete-account")
-          //- <a> tag to redirect to homepage
           input(type='submit', value='Yes')
 
-
-      //- form(action="/user/" + id + "/delete-account", method="POST")
-      //-   label(for="eliminate") Yes, delete my account
-      //-   input(type="submit")
 
 
 
