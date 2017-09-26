@@ -12,7 +12,7 @@ const Strategy = require('passport-http').BasicStrategy;
 const app = express();
 
 const whiskeyRouter = require('./routes/whiskeyRouter');
-const passportRouter = require('./routes/passportRouter');
+const authRouter = require('./routes/authRouter');
 const userRouter = require('./routes/userRouter');
 
 // app.use(express.static('public'));
@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/user', userRouter);
 app.use('/whiskey', whiskeyRouter);
-app.use('/signup', passportRouter);  //use / as route, then /signup & /login in router?
+app.use('/', authRouter);  //use / as route, then /signup & /login in router?
 //Use sessions for tracking logins:
 // app.use(session, {
 //   secret: 'whiskey in the jar', //

@@ -10,6 +10,13 @@ const router = express.Router();
 //router instance will use jsonParser middleware
 // router.use(jsonParser);
 
+
+//--------------------------  Home Page - index.html  -----------------------------------
+router.get('/', (req, res) => {
+  console.log("To the home page!");
+  res.render('index');
+});
+
 //----------------------  Create basicStrategy middleware  ------------------------------
 
 //basicStrategy middleware is created using BasicStrategy module(?) from passport.js
@@ -43,14 +50,14 @@ router.use(passport.initialize());  //router instance can use passport middlewar
 
 
 //-------------------  Definitely the Signup screen  -----------------------------------
-router.get('/', (req, res) => {
+router.get('/signup', (req, res) => {
   console.log("To the signup page!");
   res.render('signup');
 });
 
 
 //POST one user with unique username for signup screen
-router.post('/', (req, res) => {
+router.post('/signup', (req, res) => {
   //req.body = {username: "<user>", password: "<pw>"};
   //which is eqv to:  var username = "<user>";   var password = "<pw>";
 
