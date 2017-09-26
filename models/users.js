@@ -20,7 +20,7 @@ const userSchema = Schema({
     rating: Number,
     favorite: Boolean,
     comment: [{
-      text: [String],
+      text: String,
       commentDate: {type: Date, default: Date.now}
     }]
   }]
@@ -55,10 +55,10 @@ userSchema.methods.profileUser = function() {
   return {
     id: this._id,
     name: this.fullName,
-    username: this.username,
-    postCount: this.postCount,
-    uniquePostCount: this.uniquePostCount,
-    favoriteCount: this.favoriteCount,
+    username: this.username
+    // ,postCount: this.postCount,
+    // uniquePostCount: this.uniquePostCount,
+    // favoriteCount: this.favoriteCount,
     // avatar: this.avatar
   };
 }
