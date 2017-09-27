@@ -8,9 +8,9 @@ block content
   //- TODO - Look at Treehouse form  -  Probably not a POST - How do I make what's entered here into the query part of the URL???
 
   div.search-form
-    form(action="POST" placeholder='Search for a whiskey')
-      input.search-field(type="text" placeholder="Search..." name="search-input" required)
-      input.search-button(type="button" value="Search")
+    form(action="search" placeholder='Search for a whiskey')
+      input.search-field(type="text" placeholder="Search..." name="whiskey" required)
+      input.search-button(type="submit" value="Search")
 
   p Results:
 

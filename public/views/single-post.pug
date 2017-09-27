@@ -19,8 +19,8 @@ block content
         p= whatever.commentDate.toLocaleDateString('en-US')
 
     div.single-add-comment
-      form(method='POST' enctype='application/json' action="/whiskey/598786f0873d1cf2aa55467c/post/59930c0314ba7b8933046102")
-        textarea#add-comment(name="add-comment", placeholder='Comment on this whiskey')
+      form(method='POST' enctype='application/json' action="/user/59c86f3490ae9e8f182a7e8e/single-post/4")
+        textarea#add-comment(name="text", placeholder='Comment on this whiskey')
         input(type='submit', value='Submit')
 
     div.single-delete-post

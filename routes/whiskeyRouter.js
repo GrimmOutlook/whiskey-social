@@ -68,11 +68,12 @@ router.get('/search', (req, res) => {
 router.get('/:userId/post/:whiskeyId', (req, res) => {
   console.log('userId: ' + req.params.userId);
   console.log('whiskeyId: ' + req.params.whiskeyId);
+  console.log('This is the GET Screen, WTF is it a status 304?');
   Whiskey
     .findById(req.params.whiskeyId)
     .exec()
     .then(single_whiskey => {
-      console.log(single_whiskey);
+      // console.log(single_whiskey);
       res.render('whiskey-post', single_whiskey)
       })
     .catch(
@@ -89,7 +90,11 @@ router.post('/:userId/post/:whiskeyId', (req, res) => {
   //GET comment and rating from form:
   // var userInput = JSON.stringify(req.body);
   var userInput = req.body;
-  console.log(userInput);
+  console.log('req.body Object.keys: ' + Object.keys(userInput));
+  console.log('req.body: ' + userInput);
+  console.log('req.body.comment: ' + userInput.comment);
+  console.log('whiskeyId: ' + req.params.whiskeyId);
+  console.log('userId: ' + req.params.userId);
 
   var a = Whiskey.findById(req.params.whiskeyId)
             .then((doesntMatter) => {
@@ -104,9 +109,14 @@ router.post('/:userId/post/:whiskeyId', (req, res) => {
           //values is an array of the 3 vars return values
           //manipulate these values to add whiskey info & userInput info into user.posts
   Promise.all([a,b, userInput]).then(values => {
-    console.log('User\'s posts array: ' + values[1].posts);
+    // console.log('User\'s posts array: ' + values[1].posts);
     console.log('whiskeyName & both image URLs: ' + values[0]);
     console.log('userInput comment & rating: ' + values[2].comment + values[2].rating);
+    // 1. Using values[1] user information, create a new posts Object in existing user.posts array with:
+    //     - a posts.postID number, which is incremented by one from the post with the most recent posts.postDate.
+    //     - Using values[0], add the whiskeyName & both image urls.
+    //     - Using values[2], add the rating, and a comment in the form of an object in the comment array
+    // 2. Do I use .create method or .findByIdAndUpdate???????
     res.render('post-confirm', values);
   });
 })

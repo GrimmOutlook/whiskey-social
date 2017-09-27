@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 // const {LocalStrategy} = require('passport-local');
 // const passport = require('passport');
 
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
+// const bodyParser = require('body-parser');
+// const jsonParser = bodyParser.json();
 
 const {User} = require('../models/users');
 const {Whiskey} = require('../models/whiskeys');
 
-router.use(jsonParser);
+// router.use(jsonParser);
 
 // passport.use(LocalStrategy);
 // router.use(passport.initialize());
@@ -98,6 +98,7 @@ router.get('/:id/post-history', function(req, res){
 //---------------------------- Single Post Page -----------------------------------------
 router.get('/:id/single-post/:postID', function(req, res){
   console.log('This is the single-post page');
+  console.log("userId: " + req.params.id);
   User
     .findById(req.params.id)
     .exec()
@@ -112,18 +113,6 @@ router.get('/:id/single-post/:postID', function(req, res){
         }
       })
     })
-    //   for (var i = 0; i < user.posts.length; i++){
-    //     var item = user.posts[i];
-    //     console.log(item);
-    //     if (item.postID == req.params.postID){
-    //       console.log("Post Found!");
-    //       console.log("This is the title: "+ item.title);
-    //       res.render('single-post', item);
-    //       break;
-    //     }
-    //   }
-
-    // })
     .catch(
       err => {
         console.error(err);
@@ -132,9 +121,55 @@ router.get('/:id/single-post/:postID', function(req, res){
 })
 
              //--------- PUT method for modifying comment & rating ----------------
+router.post('/:userId/single-post/:postId', function(req, res){
+  const userInput = req.body;
+
+  console.log('req.body Object.keys: ' + Object.keys(req.body));
+  console.log('req.body: ' + req.body);
+  console.log('JSON.stringify(req.body): ' + JSON.stringify(req.body));
+  console.log('User Input: ' + userInput);
+  console.log("userId: " + req.params.userId);//
+  console.log("postId: " + req.params.postId);//
+  const toUpdate = {};
+  const updateableFields = ['text'];
+
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      console.log('field: ' + field);
+      console.log('userInput[field]: ' + userInput[field]);//
+      console.log('userInput.field: ' + userInput.field);
+      console.log('userInput: ' + userInput);
+        toUpdate[field] = req.body[field];
+        console.log('This is toUpdate[field] in the if statement: ' + toUpdate[field]);
+        // res.render('post-confirm', toUpdate);
+      }
+      else {
+        console.log('Error message: field isn\'t in req.body');
+      }
+  });
+
+  console.log('toUpdate.text after forEach loop: ' + toUpdate.text);//
+  console.log('toUpdate after forEach loop: ' + toUpdate);
+  // const currentDate = Date.now;
+
+  const postIdIndex = req.params.postId - 1;
+
+// { _id: "iL9hL2hLauoSimtkM", "comments._id": "id1"},
+//   { $push: { "comments.$.likes": "userID3" }}
+  console.log('postIdIndex: ' + postIdIndex);
+
+  User
+    .findByIdAndUpdate(req.params.userId, {$push: {"posts.3.comment": {text: toUpdate.text}}})
+    .then(user => res.render('single-post', user))
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something\'s wrong with updating DB.'});
+    });
+   // db.users.update({_id : ObjectId("59c86f3490ae9e8f182a7e8e")}, {$push: {"posts.4.comment": {text: "testing"}}})
 
 
-
+})
 
              //--------- DELETE method for deleting entire post -------------------
 
