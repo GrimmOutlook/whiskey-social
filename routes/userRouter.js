@@ -10,25 +10,21 @@ const mongoose = require('mongoose');
 
 const {User} = require('../models/users');
 const {Whiskey} = require('../models/whiskeys');
+const dummyId = "59c86f3490ae9e8f182a7e8e";
 
 // router.use(jsonParser);
 
 // passport.use(LocalStrategy);
 // router.use(passport.initialize());
 
-//GET a list of all users - only use this search for friends screen
-// router.get('/', (req, res) => {
-//           return User
-//             .find()
-//             .exec()
-//             .then(users => res.json(users.map(user => user.formattedUser())))
-//             .catch(err => console.log(err) && res.status(500).json({message: 'Internal server error'}));
-//         });
-
 //--------------------------- Profile Page ---------------------------------------------
 router.get('/:id', function(req, res){
   console.log('This is the Profile page');
-  console.log('req.user: ' + req.user);
+  console.log('req.params.id: ' + req.params.id);
+
+// User
+//     .findByIdAndUpdate(req.params.userId,)
+
   User
     .findById(req.params.id)
     .exec()
@@ -107,9 +103,10 @@ router.get('/:id/single-post/:postID', function(req, res){
       //console.log("Post Length:"+user.posts.length);
       //TODO Rewrite with find instead of filter:
       user.posts.find(function(item){
-        console.log('This is the postID: ' + item.postID);
+        console.log('This is the postID: ' + item);
         if (item.postID == req.params.postID){
-          res.render('single-post', item);
+          console.log('This is the object going to pug: ' + JSON.stringify({"user":dummyId, "item":item}));
+          res.render('single-post', {"user": dummyId, "item": item});
         }
       })
     })
@@ -123,6 +120,8 @@ router.get('/:id/single-post/:postID', function(req, res){
              //--------- PUT method for modifying comment & rating ----------------
 router.post('/:userId/single-post/:postId', function(req, res){
   const userInput = req.body;
+
+  // if (Object.keys(req.body) === "text"){}
 
   console.log('req.body Object.keys: ' + Object.keys(req.body));
   console.log('req.body: ' + req.body);
@@ -152,15 +151,20 @@ router.post('/:userId/single-post/:postId', function(req, res){
   console.log('toUpdate after forEach loop: ' + toUpdate);
   // const currentDate = Date.now;
 
-  const postIdIndex = req.params.postId - 1;
+  const postIdIndex = parseInt(req.params.postId) - 1;
 
 // { _id: "iL9hL2hLauoSimtkM", "comments._id": "id1"},
 //   { $push: { "comments.$.likes": "userID3" }}
   console.log('postIdIndex: ' + postIdIndex);
+  const inner = "posts.3.comment";
+
+// "_id" : ObjectId("59c86f3490ae9e8f182a7e8e")
+// $push: {'devices' : {'id': deviceID, 'name':deviceName}}
 
   User
-    .findByIdAndUpdate(req.params.userId, {$push: {"posts.3.comment": {text: toUpdate.text}}})
-    .then(user => res.render('single-post', user))
+    .findByIdAndUpdate(req.params.userId, {"posts.postId":  3}, {$push: {"posts.$.comment": {text: toUpdate.text}}})
+    .then(user =>
+      res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId))
     .catch(
       err => {
         console.error(err);
@@ -172,7 +176,9 @@ router.post('/:userId/single-post/:postId', function(req, res){
 })
 
              //--------- DELETE method for deleting entire post -------------------
-
+  // else{
+    // Find post and delete it.
+  // }
 
 
 //--------------------------- Favorites Page -------------------------------------------
@@ -182,8 +188,7 @@ router.get('/:id/my-favorites', function(req, res){
     .findById(req.params.id)
     .exec()
     .then(user => {
-      //TODO get users posts where favorite is true.  Here or in .pug file?
-      res.render('my-favorites', user);
+      res.render('my-favorites', user.profileUser());
     })
     .catch(
       err => {
@@ -200,8 +205,7 @@ router.get('/:id/whiskeys', function(req, res){
     .findById(req.params.id)
     .exec()
     .then(user => {
-      //TODO get users posts.  Then $group by unique name
-      res.render('my-posts-unique', user);
+      res.render('my-posts-unique', user.profileUser());
     })
     .catch(
       err => {

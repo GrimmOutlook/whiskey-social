@@ -6,14 +6,15 @@ block content
     h1 My Favorites:
     ul.favorites-list
 
-      each post in posts
-        if post.favorite
-          - var photoURL = post.smallImageURL
-          li.whiskey-card
-            div.whiskeyname= post.whiskeyName
-            div.rating= 'Rating: ' + post.rating
-            div.favorite
-              p Favorite
-              img.favorite-icon
-            a(href='/user/' + id + '/single-post/' + post.postID)
-              img.bottle-history(src=photoURL, alt=post.whiskeyName)
+      each post in favoritePosts
+        - var photoURL = post.smallImageURL
+        li.whiskey-card
+          div.whiskeyname= post.whiskeyName
+          div.rating= 'Rating: ' + post.rating
+          div.favorite
+            p Favorite
+            img.favorite-icon
+          a(href='/user/' + id + '/single-post/' + post.postID)
+            img.bottle-history(src=photoURL, alt=post.whiskeyName)
+      else
+        p No favorites yet!

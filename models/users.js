@@ -51,15 +51,42 @@ userSchema.methods.formattedUser = function() {
 }
 
 userSchema.methods.profileUser = function() {
-  // console.log('profileUser: ' + this);
+  let postCount = this.posts.length;
+  let favoriteCount = 0;
+  let favoriteNames = [];  // array used to filter out duplicate favorites
+  let favoritePosts = [];
+  let unique = []; // array used to determine uniquePostCount
+  let uniquePosts = [];
+
+  if (this.posts.length > 0){
+    for (let f = 0; f < this.posts.length; f++){
+      if ((this.posts[f].favorite === true) && (favoriteNames.includes(this.posts[f].whiskeyName) === false)){
+        favoriteCount++;
+        favoriteNames.push(this.posts[f].whiskeyName);
+        favoritePosts.push(this.posts[f]);
+      }
+    }
+  }
+
+  if (this.posts.length > 0){
+    for (let w = 0; w < this.posts.length; w++){
+      if (unique.includes(this.posts[w].whiskeyName) === false){
+        unique.push(this.posts[w].whiskeyName);
+        uniquePosts.push(this.posts[w]);
+      }
+    }
+  }
+  let uniquePostCount = unique.length;
+
   return {
     id: this._id,
     name: this.fullName,
-    username: this.username
-    // ,postCount: this.postCount,
-    // uniquePostCount: this.uniquePostCount,
-    // favoriteCount: this.favoriteCount,
-    // avatar: this.avatar
+    username: this.username,
+    postCount: postCount,
+    favoriteCount: favoriteCount,
+    favoritePosts: favoritePosts,
+    uniquePostCount: uniquePostCount,
+    uniquePosts: uniquePosts
   };
 }
 

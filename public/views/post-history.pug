@@ -2,8 +2,6 @@ extends page-outline.pug
 
 block content
 
-
-
   div.page-wrapper
 
     div.history-container
@@ -21,3 +19,5 @@ block content
                 img.favorite-icon
             a(href='/user/' + id + '/single-post/' + post.postID)
               img.bottle-history(src=photoURL, alt=post.whiskeyName)
+        else
+          p Drink your first whiskey!

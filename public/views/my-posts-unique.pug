@@ -5,7 +5,7 @@ block content
     h1 My Whiskeys:
     ul.unique-list
 
-      each post in posts
+      each post in uniquePosts
         - var photoURL = post.smallImageURL
         li.whiskey-card
           div.whiskeyname= post.whiskeyName
@@ -16,5 +16,6 @@ block content
               img.favorite-icon
           a(href='/user/' + id + '/single-post/' + post.postID)
             img.bottle-history(src=photoURL, alt=post.whiskeyName)
-
+      else
+        p Drink your first whiskey!
 
