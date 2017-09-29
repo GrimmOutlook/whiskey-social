@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 
 const {User} = require('../models/users');
 const {Whiskey} = require('../models/whiskeys');
-const dummyId = "59c86f3490ae9e8f182a7e8e";
+const dummyId = "59ceaae756bbb5507df5d765";
 
 // router.use(jsonParser);
 
@@ -94,7 +94,7 @@ router.get('/:id/post-history', function(req, res){
 //---------------------------- Single Post Page -----------------------------------------
 router.get('/:id/single-post/:postID', function(req, res){
   console.log('This is the single-post page');
-  // console.log("userId: " + req.params.id);
+
   User
     .findById(req.params.id)
     .exec()
@@ -114,12 +114,8 @@ router.get('/:id/single-post/:postID', function(req, res){
     });
 })
 
-             //--------- PUT method for modifying comment & rating ----------------
+             //--------- PUT method for adding an additional comment ----------------
 router.post('/:userId/single-post/:postId', function(req, res){
-  const userInput = req.body;
-
-  // if (Object.keys(req.body) === "text"){}
-
   const toUpdate = {};
   const updateableFields = ['text'];
 
@@ -133,10 +129,10 @@ router.post('/:userId/single-post/:postId', function(req, res){
   });
 
   const postIdIndex = parseInt(req.params.postId) - 1;
-  const tryAgain = "posts." + postIdIndex + ".comment";
+  const commentPush = "posts." + postIdIndex + ".comment";
 
   User
-    .findByIdAndUpdate(req.params.userId, {$push: {[tryAgain]: {text: toUpdate.text}}})
+    .findByIdAndUpdate(req.params.userId, {$push: {[commentPush]: {text: toUpdate.text}}})
     .then(user =>
       res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId))
     .catch(
@@ -149,8 +145,20 @@ router.post('/:userId/single-post/:postId', function(req, res){
 
              //--------- DELETE method for deleting entire post -------------------
 router.delete('/:userId/single-post/:postId', function(req, res){
-     console.log("Hey this is the DELETE method");
+  console.log("Hey this is the DELETE method");
+
+  User.findByIdAndUpdate(req.params.userId, {$pull: {"posts": {postID: req.params.postId}}})
+    .exec()
+    .then(() => {
+      res.redirect('/user/' + req.params.userId);
+      console.log('This post has been removed from the database.');
     })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Why won\'t this shit delete?'});
+    });
+  })
 
 
 //--------------------------- Favorites Page -------------------------------------------

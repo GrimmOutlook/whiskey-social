@@ -6,6 +6,7 @@ const path   = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const jsonParser = bodyParser.json();
+const methodOverride = require('method-override');
 const passport = require('passport');
 const Strategy = require('passport-http').BasicStrategy;
 
@@ -23,6 +24,7 @@ const {DATABASE_URL, PORT} = require('./config');
 app.use(morgan('common'));
 app.use(jsonParser);
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 //CORS
 app.use(function(req, res, next) {

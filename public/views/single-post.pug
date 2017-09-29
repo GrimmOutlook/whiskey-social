@@ -26,6 +26,6 @@ block content
 
     div.single-delete-post
       p Delete this post?
-      form(action="/user/" + user + "/single-post/4" + "?_method=DELETE" method="OPTIONS")
+      form(action="/user/" + user + "/single-post/4?_method=DELETE" method="POST")
         //- a(href="/user/" + user)
         input(type='submit', value='Delete')
