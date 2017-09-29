@@ -24,6 +24,17 @@ app.use(morgan('common'));
 app.use(jsonParser);
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//CORS
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
 app.use('/user', userRouter);
 app.use('/whiskey', whiskeyRouter);
 app.use('/', authRouter);  //use / as route, then /signup & /login in router?

@@ -133,51 +133,24 @@ router.post('/:userId/single-post/:postId', function(req, res){
   });
 
   const postIdIndex = parseInt(req.params.postId) - 1;
-  const inner = "posts.3.comment";
+  const tryAgain = "posts." + postIdIndex + ".comment";
 
-  User.findById(req.params.userId)
-    .then(user => {
-      user.posts.find(function(item){
-        if (item.postID == req.params.postId){
-          console.log('user: ' + user);
-          console.log('user.posts: ' + user.posts);
-          console.log('user.posts[postIdIndex]: ' + user.posts[postIdIndex]);
-          // item.comment.push(toUpdate);
-
-          user.posts[postIdIndex].update(req.params.userId, {$push: {"comment": {text: toUpdate.text}}});
-
-          res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId)
-        }
-      })
-    })
+  User
+    .findByIdAndUpdate(req.params.userId, {$push: {[tryAgain]: {text: toUpdate.text}}})
+    .then(user =>
+      res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId))
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the single-post page.'});
+        res.status(500).json({message: 'Something\'s wrong with updating DB.'});
     });
-
-
-
-
-
-  // User
-  //   .findByIdAndUpdate(req.params.userId, {"posts.postId":  3}, {$push: {"posts.$.comment": {text: toUpdate.text}}})
-  //   .then(user =>
-  //     res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId))
-  //   .catch(
-  //     err => {
-  //       console.error(err);
-  //       res.status(500).json({message: 'Something\'s wrong with updating DB.'});
-  //   });
-   // db.users.update({_id : ObjectId("59c86f3490ae9e8f182a7e8e")}, {$push: {"posts.4.comment": {text: "testing"}}})
-
 
 })
 
              //--------- DELETE method for deleting entire post -------------------
-  // else{
-    // Find post and delete it.
-  // }
+router.delete('/:userId/single-post/:postId', function(req, res){
+     console.log("Hey this is the DELETE method");
+    })
 
 
 //--------------------------- Favorites Page -------------------------------------------
