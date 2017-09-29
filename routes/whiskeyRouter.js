@@ -35,7 +35,7 @@ router.get('/search', (req, res) => {
   console.log(searchTerm);
   if (searchTerm){
     Whiskey
-    .find({"whiskeyName": { $regex: searchTerm }})  // find is always an array
+    .find({"whiskeyName": { $regex: searchTerm, $options: '$i' }}) // find is always an array
     .exec()
     .then(whiskeys => {
       console.log("This is what whiskey is returning: " + whiskeys);
@@ -116,7 +116,7 @@ router.post('/:userId/post/:whiskeyId', (req, res) => {
     //     - a posts.postID number, which is incremented by one from the post with the most recent posts.postDate.
     //     - Using values[0], add the whiskeyName & both image urls.
     //     - Using values[2], add the rating, and a comment in the form of an object in the comment array
-    // 2. Do I use .create method or .findByIdAndUpdate???????
+    // 2. Use .findByIdAndUpdate
     res.render('post-confirm', values);
   });
 })

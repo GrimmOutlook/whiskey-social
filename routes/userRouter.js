@@ -94,18 +94,15 @@ router.get('/:id/post-history', function(req, res){
 //---------------------------- Single Post Page -----------------------------------------
 router.get('/:id/single-post/:postID', function(req, res){
   console.log('This is the single-post page');
-  console.log("userId: " + req.params.id);
+  // console.log("userId: " + req.params.id);
   User
     .findById(req.params.id)
     .exec()
     .then(user => {
-      // console.log(req.params.postID);  //this works
-      //console.log("Post Length:"+user.posts.length);
-      //TODO Rewrite with find instead of filter:
       user.posts.find(function(item){
-        console.log('This is the postID: ' + item);
+        // console.log('This is the postID: ' + item);
         if (item.postID == req.params.postID){
-          console.log('This is the object going to pug: ' + JSON.stringify({"user":dummyId, "item":item}));
+          // console.log('This is the object going to pug: ' + JSON.stringify({"user":dummyId, "item":item}));
           res.render('single-post', {"user": dummyId, "item": item});
         }
       })
@@ -123,53 +120,55 @@ router.post('/:userId/single-post/:postId', function(req, res){
 
   // if (Object.keys(req.body) === "text"){}
 
-  console.log('req.body Object.keys: ' + Object.keys(req.body));
-  console.log('req.body: ' + req.body);
-  console.log('JSON.stringify(req.body): ' + JSON.stringify(req.body));
-  console.log('User Input: ' + userInput);
-  console.log("userId: " + req.params.userId);//
-  console.log("postId: " + req.params.postId);//
   const toUpdate = {};
   const updateableFields = ['text'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {
-      console.log('field: ' + field);
-      console.log('userInput[field]: ' + userInput[field]);//
-      console.log('userInput.field: ' + userInput.field);
-      console.log('userInput: ' + userInput);
         toUpdate[field] = req.body[field];
-        console.log('This is toUpdate[field] in the if statement: ' + toUpdate[field]);
-        // res.render('post-confirm', toUpdate);
       }
       else {
         console.log('Error message: field isn\'t in req.body');
       }
   });
 
-  console.log('toUpdate.text after forEach loop: ' + toUpdate.text);//
-  console.log('toUpdate after forEach loop: ' + toUpdate);
-  // const currentDate = Date.now;
-
   const postIdIndex = parseInt(req.params.postId) - 1;
-
-// { _id: "iL9hL2hLauoSimtkM", "comments._id": "id1"},
-//   { $push: { "comments.$.likes": "userID3" }}
-  console.log('postIdIndex: ' + postIdIndex);
   const inner = "posts.3.comment";
 
-// "_id" : ObjectId("59c86f3490ae9e8f182a7e8e")
-// $push: {'devices' : {'id': deviceID, 'name':deviceName}}
+  User.findById(req.params.userId)
+    .then(user => {
+      user.posts.find(function(item){
+        if (item.postID == req.params.postId){
+          console.log('user: ' + user);
+          console.log('user.posts: ' + user.posts);
+          console.log('user.posts[postIdIndex]: ' + user.posts[postIdIndex]);
+          // item.comment.push(toUpdate);
 
-  User
-    .findByIdAndUpdate(req.params.userId, {"posts.postId":  3}, {$push: {"posts.$.comment": {text: toUpdate.text}}})
-    .then(user =>
-      res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId))
+          user.posts[postIdIndex].update(req.params.userId, {$push: {"comment": {text: toUpdate.text}}});
+
+          res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId)
+        }
+      })
+    })
     .catch(
       err => {
         console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with updating DB.'});
+        res.status(500).json({message: 'Something\'s wrong with the single-post page.'});
     });
+
+
+
+
+
+  // User
+  //   .findByIdAndUpdate(req.params.userId, {"posts.postId":  3}, {$push: {"posts.$.comment": {text: toUpdate.text}}})
+  //   .then(user =>
+  //     res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId))
+  //   .catch(
+  //     err => {
+  //       console.error(err);
+  //       res.status(500).json({message: 'Something\'s wrong with updating DB.'});
+  //   });
    // db.users.update({_id : ObjectId("59c86f3490ae9e8f182a7e8e")}, {$push: {"posts.4.comment": {text: "testing"}}})
 
 
