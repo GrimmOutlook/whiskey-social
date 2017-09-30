@@ -68,12 +68,13 @@ router.get('/search', (req, res) => {
 router.get('/:userId/post/:whiskeyId', (req, res) => {
   console.log('userId: ' + req.params.userId);
   console.log('whiskeyId: ' + req.params.whiskeyId);
-  console.log('This is the GET Screen, WTF is it a status 304?');
+
   Whiskey
     .findById(req.params.whiskeyId)
     .exec()
     .then(single_whiskey => {
-      // console.log(single_whiskey);
+      // console.log('GET screen promise argument: ' + single_whiskey);
+      //Look at single-post page GET route for passing user & whiskey to pug
       res.render('whiskey-post', single_whiskey)
       })
     .catch(
@@ -83,45 +84,61 @@ router.get('/:userId/post/:whiskeyId', (req, res) => {
     });
 });
 
-
 //every route has hard-coded user in it!!!!!!!
           //POST info entered into screen into DB
 router.post('/:userId/post/:whiskeyId', (req, res) => {
   //GET comment and rating from form:
-  // var userInput = JSON.stringify(req.body);
-  var userInput = req.body;
-  console.log('req.body Object.keys: ' + Object.keys(userInput));
-  console.log('req.body: ' + userInput);
-  console.log('req.body.comment: ' + userInput.comment);
-  console.log('whiskeyId: ' + req.params.whiskeyId);
-  console.log('userId: ' + req.params.userId);
+  const userInput = req.body;
 
-  var a = Whiskey.findById(req.params.whiskeyId)
-            .then((doesntMatter) => {
-              return [doesntMatter.whiskeyName, doesntMatter.largeImageURL, doesntMatter.smallImageURL];
-            });
+// Do we need to User.findById after 2nd then? or just construct the object in 1st or 2nd then, return that object as the argument for the next then, which will be the User.findById section.
 
-  var b = User.findById(req.params.userId)
-            .then(doesntMatterEither => {
-              return doesntMatterEither;
-            });
+  Whiskey.findById(req.params.whiskeyId)
+    .then(doesntMatter => {
+      const [whiskeyName, smallImageURL, largeImageURL] = [doesntMatter.whiskeyName,doesntMatter.smallImageURL, doesntMatter.largeImageURL];
 
-          //values is an array of the 3 vars return values
-          //manipulate these values to add whiskey info & userInput info into user.posts
-  Promise.all([a,b, userInput]).then(values => {
-    // console.log('User\'s posts array: ' + values[1].posts);
-    console.log('whiskeyName & both image URLs: ' + values[0]);
-    console.log('userInput comment & rating: ' + values[2].comment + values[2].rating);
-    // 1. Using values[1] user information, create a new posts Object in existing user.posts array with:
-    //     - a posts.postID number, which is incremented by one from the post with the most recent posts.postDate.
-    //     - Using values[0], add the whiskeyName & both image urls.
-    //     - Using values[2], add the rating, and a comment in the form of an object in the comment array
-    // 2. Use .findByIdAndUpdate
-    res.render('post-confirm', values);
-  });
+      console.log('userInput.comment: ' + userInput.comment);
+
+      return {
+        // postID: ????????????????????????,
+        whiskeyName: whiskeyName,
+        smallImageURL: smallImageURL,
+        largeImageURL: largeImageURL,
+        rating: userInput.rating,
+        favorite: false,
+        comment: [{
+          text: userInput.comment,
+          // commentDate: Date.now
+        }]
+      };
+
+    })
+    .then(whiskeyInfo => {
+      User
+        .findByIdAndUpdate(req.params.userId, {$push: {"posts": {whiskeyName: whiskeyInfo.whiskeyName, smallImageURL: whiskeyInfo.smallImageURL, largeImageURL: whiskeyInfo.largeImageURL, rating: whiskeyInfo.rating, favorite: false, comment: whiskeyInfo.comment[0]}}})
+        .exec()
+        .then(user => {
+          // console.log('user: ' + user.posts);
+          console.log('whiskeyInfo.comment[0]: ' + whiskeyInfo.comment[0]);
+          // console.log('whiskeyInfo.comment[0].commentDate: ' + whiskeyInfo.comment[0].commentDate);
+          console.log('entire user with new post(?): ' + user);
+          console.log('userInput.comment: ' + userInput.comment);
+          // console.log('req.body stringify: ' + JSON.stringify(userInput));
+      })})
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Something went terribly wrong!'});
+    });
+
 })
 
+// .findByIdAndUpdate(req.params.userId, {$push: {"posts": {comment: userInput.comment}}})
+
+// .findByIdAndUpdate(req.params.userId, {$push: {"posts": {whiskeyName: whiskeyInfo.whiskeyName, smallImageURL: whiskeyInfo.smallImageURL, largeImageURL: whiskeyInfo.largeImageURL, rating: whiskeyInfo.rating, favorite: false}}})
+
 // ---------------------- Post Confirmation Screen --------------------------------------
+
+   //Increment the postId here?
 router.get('/post/:id/confirm', (req, res) => {
   console.log(req.params.id);
   Whiskey
