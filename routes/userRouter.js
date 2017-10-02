@@ -82,6 +82,7 @@ router.get('/:id/post-history', function(req, res){
     .exec()
     .then(user => {
       //just get the whole user and use pug to render what is needed for display
+      console.log('example of history page pass to pug: ' + user.posts[30]);
       res.render('post-history', user);
     })
     .catch(
@@ -101,8 +102,8 @@ router.get('/:id/single-post/:postID', function(req, res){
     .then(user => {
       user.posts.find(function(item){
         // console.log('This is the postID: ' + item);
-        if (item.postID == req.params.postID){
-          // console.log('This is the object going to pug: ' + JSON.stringify({"user":dummyId, "item":item}));
+        if (item._id == req.params.postID){
+          console.log('This is the object going to pug: ' + JSON.stringify({"user":dummyId, "item":item}));
           res.render('single-post', {"user": dummyId, "item": item});
         }
       })
@@ -127,15 +128,29 @@ router.post('/:userId/single-post/:postId', function(req, res){
         console.log('Error message: field isn\'t in req.body');
       }
   });
-
-     //Using the post id that Mongo inserts instead of postId will eliminate need for const postIdIndex.  Will have to find some other way to configure commentPush.
   const postIdIndex = parseInt(req.params.postId) - 1;
   const commentPush = "posts." + postIdIndex + ".comment";
 
+  // User
+  //   .findByIdAndUpdate({req.params.userId, "posts._id" = req.params.postId}, {$push: {"posts.$.comment": {text: toUpdate.text}}})
+
   User
-    .findByIdAndUpdate(req.params.userId, {$push: {[commentPush]: {text: toUpdate.text}}})
-    .then(user =>
-      res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId))
+    .findByIdAndUpdate(req.params.userId)
+    .exec()
+    .then(user => {
+      user.posts.find(item => {
+        if (item._id == req.params.postId){
+          console.log("item.comment: " + item.comment);
+          console.log("toUpdate.text: " + toUpdate.text);
+          item.comment.push({text: toUpdate.text});
+          console.log("item.comment after: " + item.comment);
+          user.save();
+        }
+      })
+    })
+    .then(user => {
+      res.redirect('/user/' + req.params.userId + '/single-post/' + req.params.postId);
+    })
     .catch(
       err => {
         console.error(err);
@@ -148,7 +163,7 @@ router.post('/:userId/single-post/:postId', function(req, res){
 router.delete('/:userId/single-post/:postId', function(req, res){
   console.log("Hey this is the DELETE method");
 
-  User.findByIdAndUpdate(req.params.userId, {$pull: {"posts": {postID: req.params.postId}}})
+  User.findByIdAndUpdate(req.params.userId, {$pull: {"posts": {_id: req.params.postId}}})
     .exec()
     .then(() => {
       res.redirect('/user/' + req.params.userId);

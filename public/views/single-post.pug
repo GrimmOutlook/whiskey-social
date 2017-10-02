@@ -11,7 +11,6 @@ block content
 
     div.single-rating
       p= 'Rating: ' + item.rating
-      p= item.id
 
     div.single-comment
       h2 Comments:
@@ -20,12 +19,12 @@ block content
         p= whatever.commentDate.toLocaleDateString('en-US')
 
     div.single-add-comment
-      form(method='POST' enctype='application/json' action="/user/" + user + "/single-post/4")
+      form(method='POST' enctype='application/json' action="/user/" + user + "/single-post/" + item._id)
         textarea#add-comment(name="text", placeholder='Comment on this whiskey')
         input(type='submit', value='Submit')
 
     div.single-delete-post
       p Delete this post?
-      form(action="/user/" + user + "/single-post/4?_method=DELETE" method="POST")
+      form(action="/user/" + user + "/single-post/" + item._id + "?_method=DELETE" method="POST")
         //- a(href="/user/" + user)
         input(type='submit', value='Delete')
