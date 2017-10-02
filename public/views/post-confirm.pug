@@ -5,13 +5,15 @@ block content
     div.page-wrapper
 
       div.confirm-statement
-        p Cheers!  Your post was successful!
+        p Cheers!  Your post for:
+        p= posts[posts.length-1].whiskeyName
+        p was successful!
 
       div.confirm-question
         p Would you like to add this whiskey to your Favorites?
 
       div.confirm-favorite
-        form(method='POST' enctype='application/json' action="/user/" + id + "/my-favorites")
+        form(method='POST' enctype='application/json' action="/whiskey/post/" + id + "/confirm")
           input(type='submit', value='Yes')
 
       div.confirm-redirect

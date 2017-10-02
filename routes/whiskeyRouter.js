@@ -54,15 +54,6 @@ router.get('/search', (req, res) => {
   }
 })
 
-                  // Render more than one whiskey to search page
-
-                  // .then(whiskeys => {
-                  //       res.render('whiskey-search', {
-                  //         whiskeys: whiskeys.map(
-                  //           (whiskey) => whiskey)
-                  //       });
-                  //     })
-
 // -------------------- Whiskey Post Screen ---------------------------------------------
          //GET the screen
 router.get('/:userId/post/:whiskeyId', (req, res) => {
@@ -73,7 +64,6 @@ router.get('/:userId/post/:whiskeyId', (req, res) => {
     .findById(req.params.whiskeyId)
     .exec()
     .then(single_whiskey => {
-      // console.log('GET screen promise argument: ' + single_whiskey);
       //Look at single-post page GET route for passing user & whiskey to pug
       res.render('whiskey-post', single_whiskey)
       })
@@ -84,30 +74,23 @@ router.get('/:userId/post/:whiskeyId', (req, res) => {
     });
 });
 
-//every route has hard-coded user in it!!!!!!!
           //POST info entered into screen into DB
 router.post('/:userId/post/:whiskeyId', (req, res) => {
-  //GET comment and rating from form:
+  //comment and rating from form:
   const userInput = req.body;
-
-// Do we need to User.findById after 2nd then? or just construct the object in 1st or 2nd then, return that object as the argument for the next then, which will be the User.findById section.
 
   Whiskey.findById(req.params.whiskeyId)
     .then(doesntMatter => {
       const [whiskeyName, smallImageURL, largeImageURL] = [doesntMatter.whiskeyName,doesntMatter.smallImageURL, doesntMatter.largeImageURL];
 
-      console.log('userInput.comment: ' + userInput.comment);
-
       return {
-        // postID: ????????????????????????,
         whiskeyName: whiskeyName,
         smallImageURL: smallImageURL,
         largeImageURL: largeImageURL,
         rating: userInput.rating,
         favorite: false,
         comment: [{
-          text: userInput.comment,
-          // commentDate: Date.now
+          text: userInput.comment
         }]
       };
 
@@ -117,12 +100,10 @@ router.post('/:userId/post/:whiskeyId', (req, res) => {
         .findByIdAndUpdate(req.params.userId, {$push: {"posts": {whiskeyName: whiskeyInfo.whiskeyName, smallImageURL: whiskeyInfo.smallImageURL, largeImageURL: whiskeyInfo.largeImageURL, rating: whiskeyInfo.rating, favorite: false, comment: whiskeyInfo.comment[0]}}})
         .exec()
         .then(user => {
-          // console.log('user: ' + user.posts);
           console.log('whiskeyInfo.comment[0]: ' + whiskeyInfo.comment[0]);
-          // console.log('whiskeyInfo.comment[0].commentDate: ' + whiskeyInfo.comment[0].commentDate);
           console.log('entire user with new post(?): ' + user);
           console.log('userInput.comment: ' + userInput.comment);
-          // console.log('req.body stringify: ' + JSON.stringify(userInput));
+          res.redirect('/whiskey/post/' + req.params.userId + '/confirm');
       })})
     .catch(
       err => {
@@ -132,20 +113,15 @@ router.post('/:userId/post/:whiskeyId', (req, res) => {
 
 })
 
-// .findByIdAndUpdate(req.params.userId, {$push: {"posts": {comment: userInput.comment}}})
-
-// .findByIdAndUpdate(req.params.userId, {$push: {"posts": {whiskeyName: whiskeyInfo.whiskeyName, smallImageURL: whiskeyInfo.smallImageURL, largeImageURL: whiskeyInfo.largeImageURL, rating: whiskeyInfo.rating, favorite: false}}})
-
 // ---------------------- Post Confirmation Screen --------------------------------------
-
-   //Increment the postId here?
-router.get('/post/:id/confirm', (req, res) => {
-  console.log(req.params.id);
-  Whiskey
-    .findById(req.params.id)
+router.get('/post/:userId/confirm', (req, res) => {
+  console.log(req.params.userId);
+  User
+    .findById(req.params.userId)
     .exec()
-    .then(single_whiskey => {
-      res.render('post-confirm', single_whiskey)
+    .then(user => {
+      console.log(`comment most recent: ${user.posts[user.posts.length-1].comment[0].text}`);
+      res.render('post-confirm', user)
       })
     .catch(
       err => {
@@ -156,17 +132,20 @@ router.get('/post/:id/confirm', (req, res) => {
 
 
               //------------------- POST/PUT add to favorites --------------------------
-//TODO - needs work!!!
-router.post(':userId/post/:id/confirm', (req, res) => {
-    let userInput = JSON.stringify(req.body);
-    console.log(userInput);
+router.post('/post/:userId/confirm', (req, res) => {
+  console.log(`req.params.userId ${req.params.userId}`);
   User
     .findById(req.params.userId)
     .exec()
     .then(user => {
-      user.posts[postID].favorite === true
-      res.render('post-history', user)
-      })
+      console.log('current post: ' + user.posts[user.posts.length-1]);
+
+      user.posts[user.posts.length-1].favorite = true;
+      return user.save();
+    })
+    .then(user => {
+      res.redirect('/user/' + req.params.userId);
+    })
     .catch(
       err => {
         console.error(err);
@@ -175,3 +154,16 @@ router.post(':userId/post/:id/confirm', (req, res) => {
 });
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+

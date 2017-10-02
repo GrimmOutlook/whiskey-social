@@ -78,6 +78,8 @@ userSchema.methods.profileUser = function() {
   }
   let uniquePostCount = unique.length;
 
+
+  //include postId = this.posts.?????????????._id ???
   return {
     id: this._id,
     name: this.fullName,

@@ -128,6 +128,7 @@ router.post('/:userId/single-post/:postId', function(req, res){
       }
   });
 
+     //Using the post id that Mongo inserts instead of postId will eliminate need for const postIdIndex.  Will have to find some other way to configure commentPush.
   const postIdIndex = parseInt(req.params.postId) - 1;
   const commentPush = "posts." + postIdIndex + ".comment";
 
