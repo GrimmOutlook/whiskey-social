@@ -5,21 +5,21 @@ const mongoose = require('mongoose');
 // const bodyParser = require('body-parser');
 // const jsonParser = bodyParser.json();
 
-const universalUserId = 5;
+const dummyId = "59ceaae756bbb5507df5d765";
 
 const {Whiskey} = require('../models/whiskeys');
 const {User} = require('../models/users');
 
 // --------------------------- Whiskey Profile screen --------------------------
-router.get('/profile/:id', (req, res) => {
-  console.log(req.params.id);
+router.get('/profile/:whiskeyId', (req, res) => {
+  console.log(req.params.whiskeyId);
   Whiskey
-    .findById(req.params.id)
+    .findById(req.params.whiskeyId)
     .exec()
     .then(single_whiskey => {
       console.log("whiskey-profile info: " + single_whiskey);
       console.log("whiskey-profile whiskeyName: " + single_whiskey.whiskeyName);
-      res.render('whiskey-profile', single_whiskey)
+      res.render('whiskey-profile', {"user": dummyId, "single": single_whiskey});
       })
     .catch(
       err => {
@@ -64,8 +64,11 @@ router.get('/:userId/post/:whiskeyId', (req, res) => {
     .findById(req.params.whiskeyId)
     .exec()
     .then(single_whiskey => {
+
+      // {"user": dummyId, "item": item}
       //Look at single-post page GET route for passing user & whiskey to pug
-      res.render('whiskey-post', single_whiskey)
+
+      res.render('whiskey-post', {"user": dummyId, "single": single_whiskey});
       })
     .catch(
       err => {

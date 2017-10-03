@@ -3,17 +3,17 @@ extends page-outline.pug
 block content
 
   div.whiskey-profile-container
-    h1= whiskeyName
-    p.whiskey-profile-description= description
+    h1= single.whiskeyName
+    p.whiskey-profile-description= single.description
 
     a(href="/whiskey/search")
       button.back-to-search(type='submit') Back
 
-    a(href="/whiskey/post/" + id)
+    a(href="/whiskey/" + user + "/post/" + single.id)
       button.redirect-to-whiskey-post(type='submit') Rate this Whiskey
 
     div.image-container
-      img.whiskey-profile-image(src=smallImageURL)
+      img.whiskey-profile-image(src=single.smallImageURL)
       //- img.whiskey-profile-image(src=largeImageURL)
 
   div.push

@@ -4,19 +4,19 @@ block content
   div.whiskey-post-container
 
     div.post-whiskey-name
-      p= whiskeyName
+      p= single.whiskeyName
     div.post-country
       h3.label Country:
-      p= country
+      p= single.country
     div.post-region
       h3.label Region:
-      p= region
+      p= single.region
     div.post-description
-      p= description
+      p= single.description
 
     div.post-form
       div.post-comment
-        form(method='POST' enctype='application/json' action="/whiskey/59ceaae756bbb5507df5d765/post/" + id)
+        form(method='POST' enctype='application/json' action="/whiskey/" + user + "/post/" + single.id)
           textarea#comment-box(name="comment", placeholder='Add a comment')
 
           div.post-rating
