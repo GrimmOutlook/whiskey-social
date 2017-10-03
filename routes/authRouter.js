@@ -1,4 +1,3 @@
-//Import necessary packages and modules & set = to variables
 const {BasicStrategy} = require('passport-http');
 const mongoose = require('mongoose');
 const express = require('express');
@@ -18,35 +17,37 @@ router.get('/', (req, res) => {
 });
 
 //----------------------  Create basicStrategy middleware  ------------------------------
-
-//basicStrategy middleware is created using BasicStrategy module(?) from passport.js
-//Is this BasicStrategy for a signup?  Or login?  or both?
+        // WTF IS CALLBACK????????????????????????????????????????????????????????
 const basicStrategy = new BasicStrategy((username, password, callback) => {
-  let user;  //declare random variable named user
-  User  //instance of the module from user.js
-    .findOne({username: username})  //look for the username entered in by form
-    .exec()  //returns a Promise - how & why?
-    .then(_user => {   //fxn that takes 1 parameter _user, which is the username retrieved (or not) from the DB.
-      user = _user;  //_user retrieved from DB & assigned to empty variable user
-      if (!user) {  //if user is undefined, then proceed to next line
-        return callback(null, false);  //the arguments null & false are passed into the callback fxn. to process
+  let user;
+  User
+    .findOne({username: username})
+    .then(_user => {
+      user = _user;
+      if (!user) {
+        return Promise.reject({
+          reason: 'LoginError',
+          message: 'Incorrect username or password'
+        });
       }
-      return user.validatePassword(password);  //this is run if the DB returns a user, which only happens if username entered by form & username in DB are eqv.
-      //validatePassword is a method called on this instance of a user from user.js, using bcrypt to match passwords.
+      return user.validatePassword(password);
     })
-    .then(isValid => {  //the above Promise is resolved & passed in as an isValid parameter
-      if (!isValid) {  //if user is undefined, then proceed to next line
-        return callback(null, false);  //the arguments null & false are passed into the callback fxn. to process
+    .then(isValid => {
+      if (!isValid) {
+        return Promise.reject({
+          reason: 'LoginError',
+          message: 'Incorrect username or password',
+        });
       }
-      else {  //assume that the pw matches the username
-        return callback(null, user);  //the arguments null & user are passed into the callback fxn. to process
-      }
+        return callback(null, user)  //WTF is the callback fxn.?
     })
-    .catch(err => callback(err));  //some error is returned by the Promise above, pass it to the callback fxn to process
+    .catch(err => {
+      if (err.reason === 'LoginError') {
+        return callback(null, false, err);  //WTF is the callback fxn.?
+      }
+      return callback(err, false);  //WTF is the callback fxn.?
+    });
 });
-
-passport.use(basicStrategy);  //passport instance can use basicStrategy middleware
-router.use(passport.initialize());  //router instance can use passport middleware with the initialize method
 
 
 //-------------------  Definitely the Signup screen  -----------------------------------

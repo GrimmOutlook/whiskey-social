@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose');
@@ -8,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const jsonParser = bodyParser.json();
 const methodOverride = require('method-override');
 const passport = require('passport');
-const Strategy = require('passport-http').BasicStrategy;
+const Strategy = require('passport-http').BasicStrategy;  // ?????????????????????
 
 const app = express();
 
@@ -37,25 +38,13 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(passport.initialize());
+passport.use(basicStrategy);
+passport.use(jwtStrategy);
+
 app.use('/user', userRouter);
 app.use('/whiskey', whiskeyRouter);
-app.use('/', authRouter);  //use / as route, then /signup & /login in router?
-//Use sessions for tracking logins:
-// app.use(session, {
-//   secret: 'whiskey in the jar', //
-//   resave: true,                 //
-//   saveUninitialized: false      //
-// });
-
-
-app.use(cookieParser());
-app.use(session({ secret: 'keyboard cat',
-    resave: true,
-    saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
+app.use('/', authRouter);  //    /signup & /login in authRouter
 
 
 mongoose.Promise = global.Promise;
