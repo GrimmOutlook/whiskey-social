@@ -9,7 +9,8 @@ const cookieParser = require('cookie-parser');
 const jsonParser = bodyParser.json();
 const methodOverride = require('method-override');
 const passport = require('passport');
-const Strategy = require('passport-http').BasicStrategy;  // ?????????????????????
+
+const {basicStrategy, jwtStrategy} = require('./commons/strategies');
 
 const app = express();
 
@@ -44,7 +45,7 @@ passport.use(jwtStrategy);
 
 app.use('/user', userRouter);
 app.use('/whiskey', whiskeyRouter);
-app.use('/', authRouter);  //    /signup & /login in authRouter
+app.use('/', authRouter);  //    /signup & /login in authRouter + homepage root
 
 
 mongoose.Promise = global.Promise;

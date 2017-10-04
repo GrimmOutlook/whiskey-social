@@ -1,128 +1,186 @@
 const {BasicStrategy} = require('passport-http');
 const mongoose = require('mongoose');
 const express = require('express');
-// const jsonParser = require('body-parser').json();
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 const {User} = require('../models/users');
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
 //router is an instance of the express.Router()
 const router = express.Router();
-//router instance will use jsonParser middleware
-// router.use(jsonParser);
+
+//Create an authentication token using jsonwebtoken npm package:
+//Used in the login POST endpoint & provides token for future API requests.
+const createAuthToken = user => {
+  return jwt.sign({user}, config.JWT_SECRET, {
+    subject: user.username,
+    expiresIn: config.JWT_EXPIRY,
+    algorithm: 'HS256'
+  });
+};
 
 
 //--------------------------  Home Page - index.html  -----------------------------------
+  //--------- No Auth or JWT needed ----------------
 router.get('/', (req, res) => {
   console.log("To the home page!");
   res.render('index');
 });
 
-//----------------------  Create basicStrategy middleware  ------------------------------
-        // WTF IS CALLBACK????????????????????????????????????????????????????????
-const basicStrategy = new BasicStrategy((username, password, callback) => {
-  let user;
-  User
-    .findOne({username: username})
-    .then(_user => {
-      user = _user;
-      if (!user) {
-        return Promise.reject({
-          reason: 'LoginError',
-          message: 'Incorrect username or password'
-        });
-      }
-      return user.validatePassword(password);
-    })
-    .then(isValid => {
-      if (!isValid) {
-        return Promise.reject({
-          reason: 'LoginError',
-          message: 'Incorrect username or password',
-        });
-      }
-        return callback(null, user)  //WTF is the callback fxn.?
-    })
-    .catch(err => {
-      if (err.reason === 'LoginError') {
-        return callback(null, false, err);  //WTF is the callback fxn.?
-      }
-      return callback(err, false);  //WTF is the callback fxn.?
-    });
-});
 
-
-//-------------------  Definitely the Signup screen  -----------------------------------
+//-----------------------------  Signup screen  -----------------------------------
 router.get('/signup', (req, res) => {
   console.log("To the signup page!");
   res.render('signup');
 });
 
 
-//POST one user with unique username for signup screen
-router.post('/signup', (req, res) => {
-  //req.body = {username: "<user>", password: "<pw>"};
-  //which is eqv to:  var username = "<user>";   var password = "<pw>";
+// Post to register a new user
+router.post('/signup', jsonParser, (req, res) => {
+  // My site has front-end validation for username & password.  Still need this?
+  const requiredFields = ['username', 'password'];
+  const missingField = requiredFields.find(field => !(field in req.body));
 
-  let {username, password} = req.body;
-  if (!req.body) {
-    console.log("Even w/o a request body, this never executes. Why?");
-    return res.status(400).json({message: 'No request body'});
+  if (missingField) {
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: 'Missing field',
+      location: missingField
+    });
   }
-  // check for existing user
-  console.log("req.body: " + JSON.stringify(req.body));
+  // Checks to make sure form fields entered are strings.  Necessary? What else can they be?
+  const stringFields = ['username', 'password', 'firstName', 'lastName'];
+  const nonStringField = stringFields.find(field =>
+    (field in req.body) && typeof req.body[field] !== 'string'
+  );
+
+  if (nonStringField) {
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: 'Incorrect field type: expected string',
+      location: nonStringField
+    });
+  }
+  // If the username and password aren't trimmed we give an error.  Users might
+  // expect that these will work without trimming (i.e. they want the password
+  // "foobar ", including the space at the end).  We need to reject such values
+  // explicitly so the users know what's happening, rather than silently
+  // trimming them and expecting the user to understand.
+  // We'll silently trim the other fields, because they aren't credentials used
+  // to log in, so it's less of a problem.
+  const explicityTrimmedFields = ['username', 'password'];
+  const nonTrimmedField = explicityTrimmedFields.find(field =>
+    req.body[field].trim() !== req.body[field]
+  );
+
+  if (nonTrimmedField) {
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: 'Cannot start or end with a space',
+      location: nonTrimmedField
+    });
+  }
+  // Min. username & password are validated on front-end, just do the Max?
+  const sizedFields = {
+    username: {
+      min: 1,
+      max: 40
+    },
+    password: {
+      min: 10,
+      // bcrypt truncates after 72 characters, so let's not give the illusion
+      // of security by storing extra (unused) info
+      max: 72
+    }
+  };
+  const tooSmallField = Object.keys(sizedFields).find(field =>
+    'min' in sizedFields[field] &&
+    req.body[field].trim().length < sizedFields[field].min
+  );
+  const tooLargeField = Object.keys(sizedFields).find(field =>
+    'max' in sizedFields[field] &&
+    req.body[field].trim().length > sizedFields[field].max
+  );
+
+  if (tooSmallField || tooLargeField) {
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: tooSmallField ?
+        `Must be at least ${sizedFields[tooSmallField].min} characters long` :
+        `Must be at most ${sizedFields[tooLargeField].max} characters long`,
+      location: tooSmallField || tooLargeField
+    });
+  }
+  // Destructuring assignments - names must match up:
+  let {firstName='', lastName='', password, username, email} = req.body;
+  // Username and p/w come in pre-trimmed, otherwise we throw an error before this
+  firstName = firstName.trim();
+  lastName = lastName.trim();
+  email = email.trim();
+
   return User
-    .find({username})   //eqv. to .find({username: "<user>"})
+    .find({username})
     .count()
-    .exec()
-    .then(count => {  // if no existing user, then the count = 0. Proceed to call the hashpassword fxn. from users.js
+    .then(count => {
       if (count > 0) {
-        return res.status(422).json({message: 'username already taken'});
+        // There is an existing user with the same username
+        return Promise.reject({
+          code: 422,
+          reason: 'ValidationError',
+          message: 'Username already taken',
+          location: 'username'
+        });
       }
-      return User.hashPassword(password);
+      // If there is no existing user, hash the password
+      return User.hashPassword(password)
     })
     .then(hash => {
       return User
         .create({
+          firstName: firstName,
+          lastName: lastName,
+          password: hash,
           username: username,
-          password: hash  //,
-          // firstName: firstName,
-          // lastName: lastName
+          email: email
         })
     })
     .then(user => {
-      console.log('This is the user: ' + user);
-      res.render('settings', user.formattedUser());
-      // return res.status(201).json(user.formattedUser());
+      return res.status(201).json(user.formattedUser());
+      //Render the login page after signup to get the JWT???????????
+      // res.render('login', user.formattedUser());
     })
     .catch(err => {
-      if (err.name === 'AuthenticationError') {
-        return res.status(422).json({message: err.message});
+      // Forward validation errors on to the client, otherwise give a 500
+      // error because something unexpected has happened
+      if (err.reason === 'ValidationError') {
+        return res.status(err.code).json(err);
       }
-      res.status(500).json({message: 'Internal server error'})
+      res.status(500).json({code: 500, message: 'Internal server error'});
     });
 });
 
 
-//Is this the login??
-// router.get('/me',
-//   passport.authenticate('basic', {session: false}),  //why does 'basic' work?  what is session?
-//   (req, res) => res.json({user: req.user.formattedUser()})  //is this the callback fxn that goes into basicStrategy???
-// );
-
-//------------------------------ Definitely Login POST  -----------------------------
+//------------------------------ Login Screen  -------------------------------------
   //GET the Login Screen
 router.get('/login', (req, res) => {
   console.log("To the login page!");
   res.render('login');
 });
 
-  //POST the Login info, have passport authenticate it, redirect to settings page
-router.post('/me', passport.authenticate('basic', {
-    successRedirect : '/settings',
-    failureRedirect : '/',
-    // failureFlash : true,
-    session: true
-  }));
-
+//Login route: When user enters username & password (POST route): passport authenticates it using the basic strategy.  Then req/res fxn. creates a token using req.user & sends json response of the token:
+router.post('/login',
+  // The user provides a username and password to login
+  passport.authenticate('basic', {session: false}),
+  (req, res) => {
+    const authToken = createAuthToken(req.user.formattedUser());
+    res.json({authToken});
+  }
+);
 
 
 const isAuthenticated = function(req,res,next){
