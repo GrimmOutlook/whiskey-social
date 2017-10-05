@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-
-// const bodyParser = require('body-parser');
-// const jsonParser = bodyParser.json();
+const passport = require('passport');
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 const dummyId = "59ceaae756bbb5507df5d765";
 
@@ -11,7 +13,8 @@ const {Whiskey} = require('../models/whiskeys');
 const {User} = require('../models/users');
 
 // --------------------------- Whiskey Profile screen --------------------------
-router.get('/profile/:whiskeyId', (req, res) => {
+router.get('/profile/:whiskeyId',
+    passport.authenticate('jwt', {session: false}), (req, res) => {
   console.log(req.params.whiskeyId);
   Whiskey
     .findById(req.params.whiskeyId)
@@ -30,7 +33,8 @@ router.get('/profile/:whiskeyId', (req, res) => {
 
 // ----------------------------- Whiskey Search Screen ----------------------------------
 
-router.get('/search', (req, res) => {
+router.get('/search',
+    passport.authenticate('jwt', {session: false}), (req, res) => {
   var searchTerm = req.query.whiskey;
   console.log(searchTerm);
   if (searchTerm){
@@ -56,7 +60,8 @@ router.get('/search', (req, res) => {
 
 // -------------------- Whiskey Post Screen ---------------------------------------------
          //GET the screen
-router.get('/:userId/post/:whiskeyId', (req, res) => {
+router.get('/:userId/post/:whiskeyId',
+    passport.authenticate('jwt', {session: false}), (req, res) => {
   console.log('userId: ' + req.params.userId);
   console.log('whiskeyId: ' + req.params.whiskeyId);
 
@@ -78,7 +83,8 @@ router.get('/:userId/post/:whiskeyId', (req, res) => {
 });
 
           //POST info entered into screen into DB
-router.post('/:userId/post/:whiskeyId', (req, res) => {
+router.post('/:userId/post/:whiskeyId',
+    passport.authenticate('jwt', {session: false}), (req, res) => {
   //comment and rating from form:
   const userInput = req.body;
 
@@ -117,7 +123,8 @@ router.post('/:userId/post/:whiskeyId', (req, res) => {
 })
 
 // ---------------------- Post Confirmation Screen --------------------------------------
-router.get('/post/:userId/confirm', (req, res) => {
+router.get('/post/:userId/confirm',
+    passport.authenticate('jwt', {session: false}), (req, res) => {
   console.log(req.params.userId);
   User
     .findById(req.params.userId)
@@ -135,7 +142,8 @@ router.get('/post/:userId/confirm', (req, res) => {
 
 
               //------------------- POST/PUT add to favorites --------------------------
-router.post('/post/:userId/confirm', (req, res) => {
+router.post('/post/:userId/confirm',
+    passport.authenticate('jwt', {session: false}), (req, res) => {
   console.log(`req.params.userId ${req.params.userId}`);
   User
     .findById(req.params.userId)

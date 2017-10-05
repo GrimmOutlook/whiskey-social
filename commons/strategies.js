@@ -12,8 +12,8 @@ const {JWT_SECRET} = require('../config');
 
 //----------------------  Create basicStrategy middleware  ------------------------------
         // WTF IS CALLBACK????????????????????????????????????????????????????????
-    // Sole purpose of Basic Strategy is to protect the login endpoint
-const basicStrategy = new BasicStrategy((username, password, callback) => {
+    // Sole purpose of Basic Strategy is to create JWT ( & protect the login endpoint)
+const basicStrategy = new BasicStrategy((username, password, done) => {
   let user;
   User
     .findOne({username: username})
@@ -31,16 +31,16 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
       if (!isValid) {
         return Promise.reject({
           reason: 'LoginError',
-          message: 'Incorrect username or password',
+          message: 'Incorrect username or password'
         });
       }
-        return callback(null, user)  //WTF is the callback fxn.?
+        return done(null, user)  //WTF is the done fxn.?  next()???
     })
     .catch(err => {
       if (err.reason === 'LoginError') {
-        return callback(null, false, err);  //WTF is the callback fxn.?
+        return done(null, false, err);  //WTF is the done fxn.?
       }
-      return callback(err, false);  //WTF is the callback fxn.?
+      return done(err, false);  //WTF is the done fxn.?
     });
 });
 

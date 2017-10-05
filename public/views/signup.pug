@@ -22,13 +22,13 @@ html(lang="en")
       form#sign-up(method='POST' enctype='application/json' action='/signup')
         div
           input#first_name(type='text', name='first_name', required='', placeholder=' ')
-          label(for='first_name') First Name
+          label(for='firstName') First Name
         div
           input#last_name(type='text', name='last_name', required='', placeholder=' ')
-          label(for='last_name') Last Name
+          label(for='lastName') Last Name
         div
-          input#last_name(type='text', name='last_name', required='', placeholder=' ')
-          label(for='last_name') Username
+          input#username(type='text', name='username', required='', placeholder=' ')
+          label(for='username') Username
         div
           input#email(type='email', name='email', required='', placeholder=' ')
           label(for='email') Email Address

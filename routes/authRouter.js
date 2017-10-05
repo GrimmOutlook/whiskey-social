@@ -179,28 +179,10 @@ router.post('/login',
   (req, res) => {
     const authToken = createAuthToken(req.user.formattedUser());
     res.json({authToken});
+    console.log(`req.user within the /login post route: ${req.user}`);
+    // res.redirect('/user/' + req.user.id);
   }
 );
-
-
-const isAuthenticated = function(req,res,next){
-  // console.log('fxn isAuthenticated: ' + req.user);
-   if(req.user)
-      return next();
-   else
-      return res.status(401).json({
-        error: 'User not authenticated'
-      })
-
-}
-router.get('/checkauth', isAuthenticated, function(req, res){
-  console.log('req.user: ' + req.user);
-
-    res.status(200).json({
-        status: 'Login successful!'
-    });
-});
-
 
 module.exports = router;
 
