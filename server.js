@@ -14,10 +14,6 @@ const {basicStrategy, jwtStrategy} = require('./commons/strategies');
 
 const app = express();
 
-app.use(passport.initialize());
-passport.use(basicStrategy);
-passport.use(jwtStrategy);
-
 const whiskeyRouter = require('./routes/whiskeyRouter');
 const authRouter = require('./routes/authRouter');
 const userRouter = require('./routes/userRouter');
@@ -43,10 +39,13 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(passport.initialize());
+passport.use(basicStrategy);
+passport.use(jwtStrategy);
+
 app.use('/user', userRouter);
 app.use('/whiskey', whiskeyRouter);
 app.use('/', authRouter);  //    /signup & /login in authRouter + homepage root
-
 
 mongoose.Promise = global.Promise;
 

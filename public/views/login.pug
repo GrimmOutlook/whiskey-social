@@ -28,39 +28,41 @@ html(lang="en")
           input#password(type='password', name='password', required='', placeholder=' ', pattern='(?=.*[a-z]).{10,}')
           label(for='password') Password
 
-        input.login-button(type='submit', value='Log In' onclick="pleaseWork()")
+        input.login-button(type='submit', value='Log In')
 
       div.login-bottom
         p
           | New around here?
           a(href='/signup')   Sign up!
 
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous')
     script(type='text/javascript', src='/js/app.js')
 
-      //- script
-      //-   function createAjaxRequest() {
-      //-     var request;
-      //-     if (window.XMLHttpRequest) {
-      //-     // Mozilla, Safari, ...
-      //-     request = new XMLHttpRequest();
-      //-     } else if (window.ActiveXObject) {
-      //-     // IE
-      //-     try { request = new ActiveXObject('Msxml2.XMLHTTP'); }
-      //-     catch (err) { try {
-      //-     request = new ActiveXObject('Microsoft.XMLHTTP'); } catch (err) {} } }
-      //-     return request; }
-      //-   var request = createAjaxRequest();
-      //-     request.open('GET', solrURL + '?' + urlParamsString);
-      //-     request.send(null); request.onreadystatechange = function() {
-      //-     if(request.readyState === 4) {
-      //-     // done
-      //-     if(request.status) { // complete
-      //-     console.log('AJAX COMPLETE'); try {
-      //-     var res = JSON.parse(request.responseText);
-      //-     if(res.error && res.error.code === 400) {
-      //-      cb(res.err);
-      //-      }
-      //-     else { cb(null, res); } } catch (e) { cb(e); } } } };
+
+      //- script.
+      //- function createAjaxRequest() {
+      //- var request;
+      //- if (window.XMLHttpRequest) {
+      //- // Mozilla, Safari, ...
+      //- request = new XMLHttpRequest();
+      //- } else if (window.ActiveXObject) {
+      //- // IE
+      //- try { request = new ActiveXObject('Msxml2.XMLHTTP'); }
+      //- catch (err) { try {
+      //- request = new ActiveXObject('Microsoft.XMLHTTP'); } catch (err) {} } }
+      //- return request; }
+      //- var request = createAjaxRequest();
+      //- request.open('GET', solrURL + '?' + urlParamsString);
+      //- request.send(null); request.onreadystatechange = function() {
+      //- if(request.readyState === 4) {
+      //- // done
+      //- if(request.status) { // complete
+      //- console.log('AJAX COMPLETE'); try {
+      //- var res = JSON.parse(request.responseText);
+      //- if(res.error && res.error.code === 400) {
+      //- cb(res.err);
+      //- }
+      //- else { cb(null, res); } } catch (e) { cb(e); } } } };
 
 
 

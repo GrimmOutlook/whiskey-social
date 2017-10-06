@@ -178,9 +178,9 @@ router.post('/login',
   passport.authenticate('basic', {session: false}),
   (req, res) => {
     const authToken = createAuthToken(req.user.formattedUser());
-    res.json({authToken});
+    // res.json({authToken});
     console.log(`req.user within the /login post route: ${req.user}`);
-    // res.redirect('/user/' + req.user.id);
+    res.redirect('/user/' + req.user.id);
   }
 );
 
