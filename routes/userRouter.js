@@ -17,7 +17,7 @@ const dummyId = "59ceaae756bbb5507df5d765";
 // router.use(passport.initialize());
 
 //--------------------------- Profile Page ---------------------------------------------
-router.get('/:id', passport.authenticate('jwt', {session: false}), function(req, res){
+router.get('/:id', function(req, res){
   console.log('This is the Profile page');
   console.log('req.params.id: ' + req.params.id);
   console.log('req.user within the GET /user/userid route: ' + req.user);

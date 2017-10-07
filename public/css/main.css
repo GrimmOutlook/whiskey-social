@@ -195,7 +195,7 @@ ul.menu-list {
   line-height: 80px;
 }
 
-ul li .logo {
+ul.menu-list li .logo {
   position: absolute;
   left: 10px;
   top: 50%;
@@ -203,19 +203,6 @@ ul li .logo {
   height: 80px;
   width: 80px;
   cursor: pointer;
-}
-
-ul li p.header-text {
-  color: white;
-  position: absolute;
-  top: 1px;
-  left: 25%;
-  text-align: center;
-  padding-left: 8%;
-  font-size: 40px;
-  height: 40px;
-  line-height: 40px;
-  padding-top: 20px;
 }
 
 .redirect {
@@ -292,18 +279,21 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   .hide {
     display: none;
   }
+
+  .menu-list .header-text {
+    color: white;
+    position: absolute;
+    top: 1px;
+    left: 25%;
+    text-align: center;
+    padding-left: 8%;
+    font-size: 2em;
+    height: 2em;
+    line-height: 40px;
+    padding-top: 20px;
+  }
 }
 
-  /*--- Mobile Device - Shrink header text to fit on one line ---*/
-@media only screen and (max-width: 400px) {
-  .hide {
-    display: none;
-  }
-
-  ul li p.header-text {
-    font-size: 30px;
-  }
-}
   /*--- Mid-Size Devices ---*/
 @media only screen and (min-width: 651px) and (max-width: 949px) {
   .mobile-menu {
@@ -315,45 +305,41 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
     border-bottom: 5px solid #FFB832;
   }
 
-  ul.menu-list {
-    text-align: right;
+  .menu-list {
+    display: flex;
   }
 
-  ul li p.header-text {
-    position: static;
+  .menu-list li {
+    flex: 1;
+    text-align: center;
+  }
+
+  .menu-list li:nth-child(2) {
+    color: white;
+    font-size: 150%;
+    flex: 2;
     text-align: left;
-    padding-left: 12%;
   }
 
-  ul li .redirect {
-    text-align: right;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2em;
+  .menu-list li .redirect {
+    font-size: 1.6em;
     text-decoration: none;
     cursor: pointer;
   }
 
-  ul li a.link-one {
-    right: 38%;
+  .menu-list li input {
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #FFB832;
+    text-align: center;
+    margin: 0 auto;
   }
 
-  ul li a.link-two {
-    right: 28%;
-  }
-
-  ul li a.link-three {
-    right: 18%;
-  }
-
-  ul li a.link-four {
-    right: 10%;
-  }
-
-  ul li a.link-five {
-    right: 1.5%;
-    font-size: 1em;
+  .menu-list li input[value="Log Out"] {
+    color: white;
+    font-size: 1.2em;
   }
 }
 
@@ -364,51 +350,44 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   }
 
   .menu {
-    margin: 0;
-    padding: 0;
-    background-color: #DB631C;
     border-bottom: 5px solid #FFB832;
-    width: 100%;
   }
 
-  ul.menu-list {
-    text-align: right;
+  .menu-list {
+    display: flex;
   }
 
-  ul li p.header-text {
-    position: static;
+  .menu-list li {
+    flex: 1;
+    text-align: center;
+  }
+
+  .menu-list li:nth-child(2) {
+    color: white;
+    font-size: 40px;
+    flex: 3;
     text-align: left;
-    padding-left: 12%;
   }
 
-  ul li .redirect {
-    text-align: right;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  .menu-list li .redirect {
     font-size: 1.8em;
     text-decoration: none;
     cursor: pointer;
   }
 
-  ul li a.link-one {
-    right: 48%;
+  .menu-list li input {
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: #FFB832;
+    text-align: center;
+    margin: 0 auto;
   }
 
-  ul li a.link-two {
-    right: 36%;
-  }
-
-  ul li a.link-three {
-    right: 24%;
-  }
-
-  ul li a.link-four {
-    right: 14%;
-  }
-
-  ul li a.link-five {
-    right: 1.5%;
+  .menu-list li input[value="Log Out"] {
+    color: white;
+    font-size: 1.2em;
   }
 }
 

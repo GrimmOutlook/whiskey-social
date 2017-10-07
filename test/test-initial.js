@@ -17,11 +17,11 @@ describe('GET endpoint', function() {
     return closeServer();
   });
 
-    it('should return a 200 status & HTML - whiskey search page', function() {
+    it('should return a 200 status & HTML - homepage', function() {
 
       let res;
       return chai.request(app)
-        .get('/whiskey/search')
+        .get('/')
         .then(function(_res) {
           res = _res;
           console.log(res.status);

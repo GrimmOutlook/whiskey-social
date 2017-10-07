@@ -177,9 +177,13 @@ router.post('/login',
   // The user provides a username and password to login
   passport.authenticate('basic', {session: false}),
   (req, res) => {
+    // const authToken = createAuthToken({username: req.body.username});
     const authToken = createAuthToken(req.user.formattedUser());
     // res.json({authToken});
+    res.setHeader('Authorization', 'Bearer ' + authToken);
+    // console.log(`req.session.valid: ${req.session.valid}`);
     console.log(`req.user within the /login post route: ${req.user}`);
+    console.log(`res.header within the /login post route: ${res.header}`);
     res.redirect('/user/' + req.user.id);
   }
 );

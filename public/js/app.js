@@ -28,8 +28,10 @@ $(document).ready(function(){
   });
 })
 
-
-
+//Where tf do I put this????????????:
+// GET /resource HTTP/1.1
+// Host: server.example.com
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIXVCJ9...TJVA95OrM7E20RMHrHDcEfxjoYZgeFONFh7HgQ
 
 // cookie-parser???????????
 
