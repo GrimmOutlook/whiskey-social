@@ -1,11 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-const session = require('express-session');
+// const session = require('express-session');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path   = require('path');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
 const jsonParser = bodyParser.json();
 const methodOverride = require('method-override');
 const passport = require('passport');

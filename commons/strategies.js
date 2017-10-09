@@ -52,9 +52,12 @@ const basicStrategy = new BasicStrategy((username, password, done) => {
 //      - done: is a passport error first callback accepting arguments done(error, user, info)
 const jwtStrategy = new JwtStrategy({
     secretOrKey: JWT_SECRET,
-    // Look for the JWT as a Bearer auth header
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
-    // Only allow HS256 tokens - the same as the ones we issue
+    // jwtFromRequest: ExtractJwt.fromBodyField(req.body),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
+    // jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+    // jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+    // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+
     algorithms: ['HS256']
   },
   (payload, done) => {

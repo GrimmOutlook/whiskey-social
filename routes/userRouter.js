@@ -21,7 +21,8 @@ router.get('/:id', function(req, res){
   console.log('This is the Profile page');
   console.log('req.params.id: ' + req.params.id);
   console.log('req.user within the GET /user/userid route: ' + req.user);
-  console.log('is authenticated: ' + req.isAuthenticated())
+  console.log('req.header: ' + req.header);
+  console.log('is authenticated: ' + req.isAuthenticated());
 
   User
     .findById(req.params.id)
@@ -36,25 +37,24 @@ router.get('/:id', function(req, res){
     });
 })
 
-//----------------------- User Settings Page -------------------------------------------
-router.get('/:id/settings',
-    passport.authenticate('jwt', {session: false}), function(req, res){
-  console.log('This is the Settings page - GET');
-  User
-    .findById(req.params.id)
-    .exec()
-    .then(user => {
-      res.render('settings', user.formattedUser());
-    })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something\'s wrong with the settings page.'});
-    });
-})
+//----------------- User Settings Page Not for this version ---------------------------
+// router.get('/:id/settings',
+//     passport.authenticate('jwt', {session: false}), function(req, res){
+//   console.log('This is the Settings page - GET');
+//   User
+//     .findById(req.params.id)
+//     .exec()
+//     .then(user => {
+//       res.render('settings', user.formattedUser());
+//     })
+//     .catch(
+//       err => {
+//         console.error(err);
+//         res.status(500).json({message: 'Something\'s wrong with the settings page.'});
+//     });
+// })
           //------ POST/PUT changes to user settings fields ---------------//
-router.post('/:id/settings',
-    passport.authenticate('jwt', {session: false}), function(req, res){
+router.post('/:id/settings', function(req, res){
   console.log('This is the Settings page - POST');
   User
     .findById(req.params.id)
@@ -75,8 +75,7 @@ router.post('/:id/settings',
 })
 
 //--------------------- Post-History Page -----------------------------------------
-router.get('/:id/post-history',
-    passport.authenticate('jwt', {session: false}), function(req, res){
+router.get('/:id/post-history', function(req, res){
   console.log('This is the post-history page');
   User
     .findById(req.params.id)
@@ -94,8 +93,7 @@ router.get('/:id/post-history',
 })
 
 //---------------------------- Single Post Page -----------------------------------------
-router.get('/:id/single-post/:postID',
-    passport.authenticate('jwt', {session: false}), function(req, res){
+router.get('/:id/single-post/:postID', function(req, res){
   console.log('This is the single-post page');
 
   User
@@ -118,8 +116,7 @@ router.get('/:id/single-post/:postID',
 })
 
              //--------- PUT method for adding an additional comment ----------------
-router.post('/:userId/single-post/:postId',
-    passport.authenticate('jwt', {session: false}), function(req, res){
+router.post('/:userId/single-post/:postId', function(req, res){
   const toUpdate = {};
   const updateableFields = ['text'];
 
@@ -163,8 +160,7 @@ router.post('/:userId/single-post/:postId',
 })
 
              //--------- DELETE method for deleting entire post -------------------
-router.delete('/:userId/single-post/:postId',
-    passport.authenticate('jwt', {session: false}), function(req, res){
+router.delete('/:userId/single-post/:postId', function(req, res){
   console.log("Hey this is the DELETE method");
 
   User.findByIdAndUpdate(req.params.userId, {$pull: {"posts": {_id: req.params.postId}}})
@@ -182,8 +178,7 @@ router.delete('/:userId/single-post/:postId',
 
 
 //--------------------------- Favorites Page -------------------------------------------
-router.get('/:id/my-favorites',
-    passport.authenticate('jwt', {session: false}), function(req, res){
+router.get('/:id/my-favorites', function(req, res){
   console.log('This is the favorites page');
   User
     .findById(req.params.id)
@@ -199,8 +194,7 @@ router.get('/:id/my-favorites',
 })
 
 //---------------------------- My-unique-posts Page ------------------------------------
-router.get('/:id/whiskeys',
-    passport.authenticate('jwt', {session: false}), function(req, res){
+router.get('/:id/whiskeys', function(req, res){
   console.log('This is the my-posts-unique page');
 
   User
@@ -217,8 +211,7 @@ router.get('/:id/whiskeys',
 })
 
 //------------------------------ Account Delete Page ------------------------------------
-router.get('/:id/delete-account',
-    passport.authenticate('jwt', {session: false}), function(req, res){
+router.get('/:id/delete-account', function(req, res){
   console.log('This is the Account Delete page');
   User
     .findById(req.params.id)
@@ -234,8 +227,7 @@ router.get('/:id/delete-account',
     });
 })
 
-router.post('/:id/delete-account',
-    passport.authenticate('jwt', {session: false}), function(req, res){
+router.post('/:id/delete-account', function(req, res){
   User.findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {

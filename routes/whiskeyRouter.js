@@ -13,8 +13,7 @@ const {Whiskey} = require('../models/whiskeys');
 const {User} = require('../models/users');
 
 // --------------------------- Whiskey Profile screen --------------------------
-router.get('/profile/:whiskeyId',
-    passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/profile/:whiskeyId', (req, res) => {
   console.log(req.params.whiskeyId);
   Whiskey
     .findById(req.params.whiskeyId)
@@ -33,8 +32,7 @@ router.get('/profile/:whiskeyId',
 
 // ----------------------------- Whiskey Search Screen ----------------------------------
 
-router.get('/search',
-    passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/search', (req, res) => {
   var searchTerm = req.query.whiskey;
   console.log(searchTerm);
   if (searchTerm){
@@ -60,8 +58,7 @@ router.get('/search',
 
 // -------------------- Whiskey Post Screen ---------------------------------------------
          //GET the screen
-router.get('/:userId/post/:whiskeyId',
-    passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/:userId/post/:whiskeyId', (req, res) => {
   console.log('userId: ' + req.params.userId);
   console.log('whiskeyId: ' + req.params.whiskeyId);
 
@@ -83,8 +80,7 @@ router.get('/:userId/post/:whiskeyId',
 });
 
           //POST info entered into screen into DB
-router.post('/:userId/post/:whiskeyId',
-    passport.authenticate('jwt', {session: false}), (req, res) => {
+router.post('/:userId/post/:whiskeyId', (req, res) => {
   //comment and rating from form:
   const userInput = req.body;
 
@@ -123,8 +119,7 @@ router.post('/:userId/post/:whiskeyId',
 })
 
 // ---------------------- Post Confirmation Screen --------------------------------------
-router.get('/post/:userId/confirm',
-    passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/post/:userId/confirm', (req, res) => {
   console.log(req.params.userId);
   User
     .findById(req.params.userId)
@@ -142,8 +137,7 @@ router.get('/post/:userId/confirm',
 
 
               //------------------- POST/PUT add to favorites --------------------------
-router.post('/post/:userId/confirm',
-    passport.authenticate('jwt', {session: false}), (req, res) => {
+router.post('/post/:userId/confirm', (req, res) => {
   console.log(`req.params.userId ${req.params.userId}`);
   User
     .findById(req.params.userId)

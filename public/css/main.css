@@ -51,6 +51,19 @@ a {
   margin: 0 auto;
 }
 
+.menu-list .header-text-sign-up {
+  color: white;
+  position: absolute;
+  top: 1px;
+  left: 25%;
+  text-align: center;
+  padding-left: 8%;
+  font-size: 2em;
+  height: 2em;
+  line-height: 40px;
+  padding-top: 20px;
+}
+
 /*form always centered*/
 form#sign-up {
   max-width: 450px;
@@ -556,6 +569,10 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   font-size: 18px;
   margin: 2px;
   color: #DB631C;
+}
+
+.profile-container {
+  padding: 0 12em 0;
 }
 
 /* ======================================

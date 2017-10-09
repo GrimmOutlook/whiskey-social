@@ -180,8 +180,12 @@ router.post('/login',
     // const authToken = createAuthToken({username: req.body.username});
     const authToken = createAuthToken(req.user.formattedUser());
     // res.json({authToken});
-    res.setHeader('Authorization', 'Bearer ' + authToken);
+    console.log('typeof: ' + typeof({authToken}));
+    res.setHeader('authorization', 'bearer ' + {authToken});
+    // res.writeHead(200, {'Authorization': 'Bearer ' + authToken});
     // console.log(`req.session.valid: ${req.session.valid}`);
+    console.dir('req.body.user: ' + JSON.stringify(req.body.user));
+    console.log({authToken});
     console.log(`req.user within the /login post route: ${req.user}`);
     console.log(`res.header within the /login post route: ${res.header}`);
     res.redirect('/user/' + req.user.id);

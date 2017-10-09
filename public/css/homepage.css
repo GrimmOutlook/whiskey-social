@@ -200,49 +200,165 @@ a {
 
 @media only screen and (min-width: 500px) and (max-width: 949px) {
 
-  .mobile-top > * {
+.mobile-top > * {
+    display: none;
+  }
+
+  .mobile-image img {
     display: none;
   }
 
   .top-content-wrapper {
-    width: 100%;
-    float: left;
-  }
-
-  .image-container {
-    background:
-      linear-gradient(#cacdd1, #e6e9ed, transparent);
-    opacity: 0.75;
+    position: relative;
+    top: 0;
+    left: 0;
   }
 
   .hero-image {
-    position: relative;
-    z-index: -1;
+    max-width: 100%;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    background:
+    linear-gradient(#cacdd1, #e6e9ed, transparent);
+    opacity: 0.75;
+    filter: blur(1px);
+  }
+
+  .logo img {
+    position: absolute;
+    top: 2vh;
+    left: 12vw;
+    width: 20vw;
   }
 
   .name {
-    font-family: 1em/1.5 "Times New Roman", serif;
-    font-size: 5.5em;
+    font-family: "Times New Roman", serif;
+    font-size: 3.5em; /* 6.5vw */
     font-weight: 500;
-    margin: 0 0 1.5em;
+    margin: 0 0 1.5em 1em;
     position: absolute;
-    top: 10%;
-    right: 15%;
+    top: 10%;  /* 4vh */
+    right: 8%;  /* 2vw */
     color: #ffb832;
     z-index: 2;
   }
 
   .tagline {
-    font-family: 1em/1.5 "Times New Roman", serif;
-    font-size: 3.0em;
+    font-family: "Times New Roman", serif;
+    font-size: 2.0em;
     font-weight: 300;
-    margin: 0 0 1.5em;
+    margin: 0.5em 0 1.5em;
     position: absolute;
     top: 27%;
-    right: 15%;
+    right: 8%;
     color: #DB631C;
     z-index: 2;
   }
+
+  .login-button {
+    height: 5vh;
+    width: 15vw;
+    font-size: 110%;
+    /*padding: 1em 1.5em;*/
+    cursor: pointer;
+    border: 2px solid #9d9aac;
+    border-radius: 12px;
+    background-color: #DB631C;
+    color: #9b2b0d;
+    position: absolute;
+    bottom: 20%;
+    right: 8%;
+    z-index: 2;
+  }
+
+  .signup-button {
+    height: 5vh;
+    width: 15vw;
+    font-size: 110%;
+    cursor: pointer;
+    border: 2px solid #9d9aac;
+    border-radius: 12px;
+    background-color: #d7aa48;
+    color: #9b2b0d;
+    position: absolute;
+    bottom: 20%;
+    right: 30%;
+    z-index: 2;
+  }
+
+  .profile-description p,
+  .whiskey-description p {
+    max-width: 100%;
+    margin-left: 1.25em;
+    font-size: 1.8em;
+  }
+
+  .profile-mockup img,
+  .history-mockup img,
+  .whiskey-mockup img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .history-description p {
+    max-width: 100%;
+    margin-right: 20px;
+    font-size: 1.8em;
+  }
+
+  /* =================================
+  Grid
+==================================== */
+
+  .wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "photo photo"
+      "profile-d profile-m"
+      "history-m history-d"
+      "whiskey-d whiskey-m";
+    background-color: #fff;
+    color: #444;
+  }
+
+  .top-content-wrapper {
+    grid-area: photo;
+  }
+
+  .profile-description {
+    grid-area: profile-d;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .profile-mockup {
+    grid-area: profile-m;
+  }
+
+  .history-description {
+    grid-area: history-d;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .history-mockup {
+    grid-area: history-m;
+  }
+
+  .whiskey-description {
+    grid-area: whiskey-d;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .whiskey-mockup {
+    grid-area: whiskey-m;
+  }
+
 }
 
 @media only screen and (min-width: 950px) {
@@ -252,6 +368,12 @@ a {
 
   .mobile-image img {
     display: none;
+  }
+
+  .top-content-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
   }
 
   .hero-image {
