@@ -572,7 +572,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 }
 
 .profile-container {
-  padding: 0 12em 0;
+  /*padding: 0 12em 0;*/
 }
 
 /* ======================================
@@ -893,7 +893,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   ======================================== */
   .image-container {
     height: 50vh;
-    overflow: hidden;
+    /*overflow: hidden;*/
   }
 
   .whiskey-profile-image {
@@ -961,8 +961,8 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   ======================================== */
   .image-container {
     height: 100vh;
-    overflow: hidden;
-    float: right;
+    /*overflow: hidden;*/
+    /*float: right;*/
   }
 
   .whiskey-profile-image {

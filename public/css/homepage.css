@@ -70,8 +70,8 @@ a {
 
   .signup-button {
     width: 100%;
-    background-color: #FFB832;
-    color: white;
+    background-color: #d7aa48;
+    color: #9b2b0d;
     border: 3px solid #9d9aac;
     border-radius: 2em;
     padding: 0.625em 3.125em;
@@ -82,8 +82,8 @@ a {
 
   .login-button {
     width: 100%;
-    background-color: #d7aa48;
-    color: white;
+    background-color: #DB631C;
+    color: #9b2b0d;
     border: 3px solid #9d9aac;
     border-radius: 2em;
     padding: 0.625em 3.125em;
@@ -185,14 +185,19 @@ a {
     font-size: 1.4em;
   }
 
+  .history-description p,
+  .whiskey-description p {
+    border-top: 1px solid gray;
+  }
+
   .profile-mockup img,
   .history-mockup img,
   .whiskey-mockup img {
     display: block;
-    width: 20em;
-    height: 20em;
+    width: 50%;
+    height: auto;
     margin: 0 auto;
-    border-bottom: 1px solid gray;
+    padding-bottom: 8px;
   }
 
 }
@@ -297,9 +302,10 @@ a {
   .history-mockup img,
   .whiskey-mockup img {
     display: block;
-    max-width: 100%;
+    width: 65%;
     height: auto;
     margin: 0 auto;
+    padding-bottom: 15px;
   }
 
   .history-description p {
