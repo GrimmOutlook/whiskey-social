@@ -67,16 +67,27 @@ module.exports = function(passport) {
     // LOCAL SIGNUP ============================================================
     // =========================================================================
     passport.use('local-signup', new LocalStrategy({
-        // by default, local strategy uses username and password, we will override with email
+        // by default, local strategy uses username and password
         // usernameField : 'email',
         passwordField : 'password',
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 
     },
     function(req, username, password, done) {
-        console.log(`username: ${username}`);
+          const requiredFields = ['username', 'password'];
+          const missingField = requiredFields.find(field => !(field in req.body));
+
+          if (missingField) {
+            return res.status(422).json({
+              code: 422,
+              reason: 'ValidationError',
+              message: 'Missing field',
+              location: missingField
+            });
+          }
+
         if (username)
-            username = username.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
+            username = username.toLowerCase(); // avoid case-sensitive matching
 
         // asynchronous
         process.nextTick(function() {
@@ -84,18 +95,14 @@ module.exports = function(passport) {
             if (!req.user) {
                 User.findOne({ 'username' :  username }, function(err, user) {
                     // if there are any errors, return the error
-
                     if (err)
                         return done(err);
-
                     // check to see if theres already a user with that username
                     if (user) {
                         return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
                     } else {
-
                         // create the user
                         var newUser            = new User();
-
                         // newUser.firstName    = firstName;
                         // newUser.lastName    = lastName;
                         newUser.username    = username;
