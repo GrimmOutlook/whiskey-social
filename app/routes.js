@@ -99,7 +99,7 @@ module.exports = function(app, passport) {
     })
 
 //---------------------------- Single Post Page -----------------------------------------
-app.get('/single-post/:postId', function(req, res){
+app.get('/single-post/:postId', isLoggedIn, function(req, res){
   console.log('This is the single-post page');
   console.log(`req.params.postId: ${req.params.postId}`);
   const postIdIncoming = req.params.postId;
@@ -127,7 +127,7 @@ app.get('/single-post/:postId', function(req, res){
 })
 
              //--------- PUT method for adding an additional comment ----------------
-app.post('/single-post/:postId', function(req, res){
+app.post('/single-post/:postId', isLoggedIn, function(req, res){
   const toUpdate = {};
   const updateableFields = ['text'];
 
@@ -171,7 +171,7 @@ app.post('/single-post/:postId', function(req, res){
 })
 
              //--------- DELETE method for deleting entire post -------------------
-app.delete('/single-post/:postId', function(req, res){
+app.delete('/single-post/:postId', isLoggedIn, function(req, res){
   console.log("Hey this is the DELETE method");
   console.log(`req.params.postId: ${req.params.postId}`);
   console.log(`req.user.username: ${req.user.username}`);

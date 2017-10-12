@@ -1,6 +1,5 @@
 const express  = require('express');
 const app      = express();
-const port     = process.env.PORT || 8080;
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash    = require('connect-flash');
@@ -11,16 +10,18 @@ const bodyParser   = require('body-parser');
 const session      = require('express-session');
 const methodOverride = require('method-override');
 
-const configDB = require('./config/database.js');
+mongoose.Promise = global.Promise;
+
+const {PORT, DATABASE_URL} = require('./config/database');
 // const whiskeyRouter = require('./app/whiskeyRouter');
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+// mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
-// set up our express application
-app.use(morgan('dev')); // log every request to the console
+
+app.use(morgan('dev'));
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,5 +57,45 @@ app.use(function(req, res, next) {
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
-app.listen(port);
-console.log('The magic happens on port ' + port);
+let server;
+
+function runServer(databaseUrl=DATABASE_URL, port=PORT) {
+
+  return new Promise((resolve, reject) => {
+    mongoose.connect(databaseUrl, err => {
+      if (err) {
+        return reject(err);
+      }
+      server = app.listen(port, () => {
+        console.log(`Your app is listening on port ${port}`);
+        resolve();
+      })
+      .on('error', err => {
+        mongoose.disconnect();
+        reject(err);
+      });
+    });
+  });
+}
+
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+     return new Promise((resolve, reject) => {
+       console.log('Closing server');
+       server.close(err => {
+           if (err) {
+               return reject(err);
+           }
+           resolve();
+       });
+     });
+  });
+}
+
+if (require.main === module) {
+  runServer().catch(err => console.error(err));
+};
+
+module.exports = {app, runServer, closeServer};
+// app.listen(port);
+// console.log('The magic happens on port ' + port);

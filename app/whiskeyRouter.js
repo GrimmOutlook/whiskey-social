@@ -55,112 +55,107 @@ module.exports = function(app, passport) {
 
 // -------------------- Whiskey Post Screen ---------------------------------------------
          //GET the screen
-app.get('/post/:whiskeyId', (req, res) => {
-  console.log('userId: ' + req.user._id);
-  console.log('whiskeyId: ' + req.params.whiskeyId);
+  app.get('/post/:whiskeyId', isLoggedIn, (req, res) => {
+    console.log('userId: ' + req.user._id);
+    console.log('whiskeyId: ' + req.params.whiskeyId);
 
-  Whiskey
-    .findById(req.params.whiskeyId)
-    .exec()
-    .then(single_whiskey => {
+    Whiskey
+      .findById(req.params.whiskeyId)
+      .exec()
+      .then(single_whiskey => {
 
-      // {"user": dummyId, "item": item}
-      //Look at single-post page GET route for passing user & whiskey to pug
+        // {"user": dummyId, "item": item}
+        //Look at single-post page GET route for passing user & whiskey to pug
 
-      res.render('whiskey-post', {"user": req.user._id, "single": single_whiskey});
+        res.render('whiskey-post', {"user": req.user._id, "single": single_whiskey});
+        })
+      .catch(
+        err => {
+          console.error(err);
+          res.status(500).json({message: 'Something went terribly wrong!'});
+      });
+  });
+
+            //POST info entered into screen into DB
+  app.post('/post/:whiskeyId', isLoggedIn, (req, res) => {
+     console.log('whiskey-post POST userId: ' + req.user._id);
+    console.log('whiskey-post POST whiskeyId: ' + req.params.whiskeyId);
+    console.log(`req.body: ${req.body}`);
+    //comment and rating from form:
+    const userInput = req.body;
+
+    Whiskey.findById(req.params.whiskeyId)
+      .then(doesntMatter => {
+        const [whiskeyName, smallImageURL, largeImageURL] = [doesntMatter.whiskeyName,doesntMatter.smallImageURL, doesntMatter.largeImageURL];
+
+        return {
+          whiskeyName: whiskeyName,
+          smallImageURL: smallImageURL,
+          largeImageURL: largeImageURL,
+          rating: userInput.rating,
+          favorite: false,
+          comment: [{
+            text: userInput.comment
+          }]
+        };
+
       })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something went terribly wrong!'});
-    });
-});
+      .then(whiskeyInfo => {
+        User
+          .findByIdAndUpdate(req.user._id, {$push: {"posts": {whiskeyName: whiskeyInfo.whiskeyName, smallImageURL: whiskeyInfo.smallImageURL, largeImageURL: whiskeyInfo.largeImageURL, rating: whiskeyInfo.rating, favorite: false, comment: whiskeyInfo.comment[0]}}})
+          .exec()
+          .then(user => {
+            console.log('whiskeyInfo.comment[0]: ' + whiskeyInfo.comment[0]);
+            console.log('entire user with new post(?): ' + user);
+            console.log('userInput.comment: ' + userInput.comment);
+            res.redirect('/post/' + req.user._id + '/confirm');
+        })})
+      .catch(
+        err => {
+          console.error(err);
+          res.status(500).json({message: 'Something went terribly wrong!'});
+      });
 
-          //POST info entered into screen into DB
-app.post('/post/:whiskeyId', (req, res) => {
-   console.log('whiskey-post POST userId: ' + req.user._id);
-  console.log('whiskey-post POST whiskeyId: ' + req.params.whiskeyId);
-  console.log(`req.body: ${req.body}`);
-  //comment and rating from form:
-  const userInput = req.body;
-
-  Whiskey.findById(req.params.whiskeyId)
-    .then(doesntMatter => {
-      const [whiskeyName, smallImageURL, largeImageURL] = [doesntMatter.whiskeyName,doesntMatter.smallImageURL, doesntMatter.largeImageURL];
-
-      return {
-        whiskeyName: whiskeyName,
-        smallImageURL: smallImageURL,
-        largeImageURL: largeImageURL,
-        rating: userInput.rating,
-        favorite: false,
-        comment: [{
-          text: userInput.comment
-        }]
-      };
-
-    })
-    .then(whiskeyInfo => {
-      User
-        .findByIdAndUpdate(req.user._id, {$push: {"posts": {whiskeyName: whiskeyInfo.whiskeyName, smallImageURL: whiskeyInfo.smallImageURL, largeImageURL: whiskeyInfo.largeImageURL, rating: whiskeyInfo.rating, favorite: false, comment: whiskeyInfo.comment[0]}}})
-        .exec()
-        .then(user => {
-          console.log('whiskeyInfo.comment[0]: ' + whiskeyInfo.comment[0]);
-          console.log('entire user with new post(?): ' + user);
-          console.log('userInput.comment: ' + userInput.comment);
-          res.redirect('/post/' + req.user._id + '/confirm');
-      })})
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something went terribly wrong!'});
-    });
-
-})
+  })
 
 // ---------------------- Post Confirmation Screen --------------------------------------
-app.get('/post/:userId/confirm', (req, res) => {
-  console.log(req.params.userId);
-  User
-    .findById(req.params.userId)
-    .exec()
-    .then(user => {
-      console.log(`comment most recent: ${user.posts[user.posts.length-1].comment[0].text}`);
-      res.render('post-confirm', user)
-      })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something went terribly wrong!'});
-    });
-});
+  app.get('/post/:userId/confirm', isLoggedIn, (req, res) => {
+    console.log(req.params.userId);
+    User
+      .findById(req.params.userId)
+      .exec()
+      .then(user => {
+        console.log(`comment most recent: ${user.posts[user.posts.length-1].comment[0].text}`);
+        res.render('post-confirm', user)
+        })
+      .catch(
+        err => {
+          console.error(err);
+          res.status(500).json({message: 'Something went terribly wrong!'});
+      });
+  });
 
 
               //------------------- POST/PUT add to favorites --------------------------
-app.post('/post/:userId/confirm', (req, res) => {
-  console.log(`req.params.userId ${req.params.userId}`);
-  User
-    .findById(req.params.userId)
-    .exec()
-    .then(user => {
-      console.log('current post: ' + user.posts[user.posts.length-1]);
+  app.post('/post/:userId/confirm', isLoggedIn, (req, res) => {
+    console.log(`req.params.userId ${req.params.userId}`);
+    User
+      .findById(req.params.userId)
+      .exec()
+      .then(user => {
+        console.log('current post: ' + user.posts[user.posts.length-1]);
 
-      user.posts[user.posts.length-1].favorite = true;
-      return user.save();
-    })
-    .then(user => {
-      res.redirect('/profile');
-    })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something went terribly wrong!'});
-    });
-});
-
-
-
-
-
+        user.posts[user.posts.length-1].favorite = true;
+        return user.save();
+      })
+      .then(user => {
+        res.redirect('/profile');
+      })
+      .catch(
+        err => {
+          console.error(err);
+          res.status(500).json({message: 'Something went terribly wrong!'});
+      });
+  });
 
 }
