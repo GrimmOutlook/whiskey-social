@@ -13,10 +13,10 @@ block content
         p Would you like to add this whiskey to your Favorites?
 
       div.confirm-favorite
-        form(method='POST' enctype='application/json' action="/whiskey/post/" + id + "/confirm")
+        form(method='POST' enctype='application/json' action="/post/" + _id + "/confirm")
           input(type='submit', value='Yes')
 
       div.confirm-redirect
-        a(href="/user/" + id + "/post-history")
+        a(href="/post-history")
           input(type='submit', value='Back to History')
 

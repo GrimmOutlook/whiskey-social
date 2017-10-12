@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
-const whiskeySchema = mongoose.Schema({
+const whiskeySchema = Schema({
   whiskeyName: String,
   country: String,
   region: String,
@@ -9,6 +10,4 @@ const whiskeySchema = mongoose.Schema({
   description: String
 });
 
-const Whiskey = mongoose.model('Whiskey', whiskeySchema);
-
-module.exports = {Whiskey};
+module.exports = mongoose.model('Whiskey', whiskeySchema);

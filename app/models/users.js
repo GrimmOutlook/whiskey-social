@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt-nodejs');
 const Schema = mongoose.Schema
 
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 
 // avatar: Buffer,  //TODO nice to have  -  twitter or FBook photo
 const userSchema = Schema({
@@ -26,19 +26,19 @@ const userSchema = Schema({
   }]
 });
 
-userSchema.methods.validatePassword = function(password) {
-  return bcrypt.compare(password, this.password);
-}
+// generating a hash
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
-userSchema.statics.hashPassword = function(password) {
-  return bcrypt.hash(password, 10);
-}
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 userSchema.virtual('fullName').get(function() {
   return `${this.firstName} ${this.lastName}`;
 });
-
-//use a virtual(s) to replace Counts??
 
 userSchema.methods.formattedUser = function() {
   // console.log('formattedUser: ' + this);
@@ -92,8 +92,11 @@ userSchema.methods.profileUser = function() {
   };
 }
 
-const User = mongoose.model('User', userSchema);
+// create the model for users and expose it to our app
+module.exports = mongoose.model('User', userSchema);
 
-module.exports = {User};
+
+// const User = mongoose.model('User', userSchema);
+// module.exports = {User};
 
 

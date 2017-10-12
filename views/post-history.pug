@@ -8,6 +8,7 @@ block content
       h1 Recent Activity:
       ul.history-list
 
+        //- if posts != undefined
         each post in posts
           - var photoURL = post.smallImageURL
           li.whiskey-card
@@ -17,7 +18,7 @@ block content
               div.favorite
                 p Favorite
                 img.favorite-icon
-            a(href='/user/' + id + '/single-post/' + post._id)
+            a(href='/single-post/' + post._id)
               img.bottle-history(src=photoURL, alt=post.whiskeyName)
         else
           p Drink your first whiskey!

@@ -4,27 +4,27 @@ block content
   div.single-post-container
 
     div.single-name
-      p= item.whiskeyName
+      p= whiskeyName
 
     div.single-photo
-      img(src=item.smallImageURL)
+      img(src=smallImageURL)
 
     div.single-rating
-      p= 'Rating: ' + item.rating
+      p= 'Rating: ' + rating
 
     div.single-comment
       h2 Comments:
-      each whatever in item.comment
+      each whatever in comment
         p= whatever.text
         p= whatever.commentDate.toLocaleDateString('en-US')
 
     div.single-add-comment
-      form(method='POST' enctype='application/json' action="/user/" + user + "/single-post/" + item._id)
+      form(method='POST' enctype='application/json' action="/single-post/" + _id)
         textarea#add-comment(name="text", placeholder='Comment on this whiskey')
         input(type='submit', value='Submit')
 
     div.single-delete-post
       p Delete this post?
-      form(action="/user/" + user + "/single-post/" + item._id + "?_method=DELETE" method="POST")
+      form(action="/single-post/" + _id + "?_method=DELETE" method="POST")
         //- a(href="/user/" + user)
         input(type='submit', value='Delete')

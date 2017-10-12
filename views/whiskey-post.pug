@@ -16,7 +16,7 @@ block content
 
     div.post-form
       div.post-comment
-        form(method='POST' enctype='application/json' action="/whiskey/" + user + "/post/" + single.id)
+        form(method='POST' enctype='application/json' action="/post/" + single._id)
           textarea#comment-box(name="comment", placeholder='Add a comment')
 
           div.post-rating

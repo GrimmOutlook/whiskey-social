@@ -491,7 +491,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .favorite-icon {
   height: 45px;
   width: 45px;
-  background-image: url('/images/ribbon.png');
+  background-image: url('../public/images/ribbon.png');
   background-size: cover;
   text-align: right;
   /*padding-right: 18px;*/
@@ -542,7 +542,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .profile-avatar .wax-seal {
   height: 150px;
   width: 150px;
-  background-image: url('../images/wax-seal-logo.png');
+  background-image: url('public/images/wax-seal-logo.png');
   background-size: cover;
 }
 
@@ -911,7 +911,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   Site-Wide Styles
 ======================================== */
   .background-image-wrapper {
-    background-image: url('/images/barrels.jpg');
+    background-image: url('public/images/barrels.jpg');
     background-repeat: no-repeat;
     height: calc(100vh - 85px);
   }
@@ -923,7 +923,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   }
 
   .background-image-wrapper-2 {
-    background-image: url('/images/whiskey-glasses.jpg');
+    background-image: url('public/images/whiskey-glasses.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: calc(100vh - 85px);

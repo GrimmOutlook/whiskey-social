@@ -1,65 +1,62 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
-const passport = require('passport');
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
-const jwt = require('jsonwebtoken');
-const config = require('../config');
+const User = require('../app/models/users');
+const Whiskey = require('../app/models/whiskeys');
 
-const dummyId = "59ceaae756bbb5507df5d765";
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/');
+}
 
-const {Whiskey} = require('../models/whiskeys');
-const {User} = require('../models/users');
-
-// --------------------------- Whiskey Profile screen --------------------------
-router.get('/profile/:whiskeyId', (req, res) => {
-  console.log(req.params.whiskeyId);
-  Whiskey
-    .findById(req.params.whiskeyId)
-    .exec()
-    .then(single_whiskey => {
-      console.log("whiskey-profile info: " + single_whiskey);
-      console.log("whiskey-profile whiskeyName: " + single_whiskey.whiskeyName);
-      res.render('whiskey-profile', {"user": dummyId, "single": single_whiskey});
-      })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something went terribly wrong!'});
-    });
-});
+module.exports = function(app, passport) {
 
 // ----------------------------- Whiskey Search Screen ----------------------------------
 
-router.get('/search', (req, res) => {
-  var searchTerm = req.query.whiskey;
-  console.log(searchTerm);
-  if (searchTerm){
-    Whiskey
-    .find({"whiskeyName": { $regex: searchTerm, $options: '$i' }}) // find is always an array
-    .exec()
-    .then(whiskeys => {
-      console.log("This is what whiskey is returning: " + whiskeys);
-      console.log("Print this whiskeyName to screen!!: " + whiskeys[0].whiskeyName);
-      console.log(typeof(whiskeys));    //object - array
-      res.render('whiskey-search', { whiskeys });  // This makes the array an object
+    app.get('/whiskey-search', isLoggedIn, (req, res) => {
+      var searchTerm = req.query.whiskey;
+      console.log(searchTerm);
+      if (searchTerm){
+        Whiskey
+            .find({"whiskeyName": { $regex: searchTerm, $options: '$i' }}) // find is always an array
+            // .exec()
+            .then(whiskeys => {
+              console.log("This is what whiskeys is returning: " + whiskeys);
+              console.log("Print this whiskeyName to screen!!: " + whiskeys[0].whiskeyName);
+              console.log(typeof(whiskeys));    //object - array
+              res.render('whiskey-search', { whiskeys });  // This makes the array an object
+            })
+            .catch(
+              err => {
+                console.error(err);
+                res.status(500).json({message: 'Something went terribly wrong!'});
+            });
+      }
+      else{
+        res.render('whiskey-search');
+      }
     })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Something went terribly wrong!'});
+
+// --------------------------- Whiskey Profile screen --------------------------
+    app.get('/whiskey-profile/:whiskeyId', isLoggedIn, (req, res) => {
+      console.log(req.params.whiskeyId);
+      Whiskey
+        .findById(req.params.whiskeyId)
+        .exec()
+        .then(single_whiskey => {
+          console.log("whiskey-profile info: " + single_whiskey);
+          console.log("whiskey-profile whiskeyName: " + single_whiskey.whiskeyName);
+          res.render('whiskey-profile', single_whiskey);
+          })
+        .catch(
+          err => {
+            console.error(err);
+            res.status(500).json({message: 'Something went terribly wrong!'});
+        });
     });
-  }
-  else{
-    res.render('whiskey-search');
-  }
-})
 
 // -------------------- Whiskey Post Screen ---------------------------------------------
          //GET the screen
-router.get('/:userId/post/:whiskeyId', (req, res) => {
-  console.log('userId: ' + req.params.userId);
+app.get('/post/:whiskeyId', (req, res) => {
+  console.log('userId: ' + req.user._id);
   console.log('whiskeyId: ' + req.params.whiskeyId);
 
   Whiskey
@@ -70,7 +67,7 @@ router.get('/:userId/post/:whiskeyId', (req, res) => {
       // {"user": dummyId, "item": item}
       //Look at single-post page GET route for passing user & whiskey to pug
 
-      res.render('whiskey-post', {"user": dummyId, "single": single_whiskey});
+      res.render('whiskey-post', {"user": req.user._id, "single": single_whiskey});
       })
     .catch(
       err => {
@@ -80,7 +77,10 @@ router.get('/:userId/post/:whiskeyId', (req, res) => {
 });
 
           //POST info entered into screen into DB
-router.post('/:userId/post/:whiskeyId', (req, res) => {
+app.post('/post/:whiskeyId', (req, res) => {
+   console.log('whiskey-post POST userId: ' + req.user._id);
+  console.log('whiskey-post POST whiskeyId: ' + req.params.whiskeyId);
+  console.log(`req.body: ${req.body}`);
   //comment and rating from form:
   const userInput = req.body;
 
@@ -102,13 +102,13 @@ router.post('/:userId/post/:whiskeyId', (req, res) => {
     })
     .then(whiskeyInfo => {
       User
-        .findByIdAndUpdate(req.params.userId, {$push: {"posts": {whiskeyName: whiskeyInfo.whiskeyName, smallImageURL: whiskeyInfo.smallImageURL, largeImageURL: whiskeyInfo.largeImageURL, rating: whiskeyInfo.rating, favorite: false, comment: whiskeyInfo.comment[0]}}})
+        .findByIdAndUpdate(req.user._id, {$push: {"posts": {whiskeyName: whiskeyInfo.whiskeyName, smallImageURL: whiskeyInfo.smallImageURL, largeImageURL: whiskeyInfo.largeImageURL, rating: whiskeyInfo.rating, favorite: false, comment: whiskeyInfo.comment[0]}}})
         .exec()
         .then(user => {
           console.log('whiskeyInfo.comment[0]: ' + whiskeyInfo.comment[0]);
           console.log('entire user with new post(?): ' + user);
           console.log('userInput.comment: ' + userInput.comment);
-          res.redirect('/whiskey/post/' + req.params.userId + '/confirm');
+          res.redirect('/post/' + req.user._id + '/confirm');
       })})
     .catch(
       err => {
@@ -119,7 +119,7 @@ router.post('/:userId/post/:whiskeyId', (req, res) => {
 })
 
 // ---------------------- Post Confirmation Screen --------------------------------------
-router.get('/post/:userId/confirm', (req, res) => {
+app.get('/post/:userId/confirm', (req, res) => {
   console.log(req.params.userId);
   User
     .findById(req.params.userId)
@@ -137,7 +137,7 @@ router.get('/post/:userId/confirm', (req, res) => {
 
 
               //------------------- POST/PUT add to favorites --------------------------
-router.post('/post/:userId/confirm', (req, res) => {
+app.post('/post/:userId/confirm', (req, res) => {
   console.log(`req.params.userId ${req.params.userId}`);
   User
     .findById(req.params.userId)
@@ -149,7 +149,7 @@ router.post('/post/:userId/confirm', (req, res) => {
       return user.save();
     })
     .then(user => {
-      res.redirect('/user/' + req.params.userId);
+      res.redirect('/profile');
     })
     .catch(
       err => {
@@ -158,17 +158,9 @@ router.post('/post/:userId/confirm', (req, res) => {
     });
 });
 
-module.exports = router;
 
 
 
 
 
-
-
-
-
-
-
-
-
+}

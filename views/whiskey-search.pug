@@ -5,10 +5,8 @@ block content
   div.search-statement
     p Search for a whiskey:
 
-  //- TODO - Look at Treehouse form  -  Probably not a POST - How do I make what's entered here into the query part of the URL???
-
   div.search-form
-    form(action="search" placeholder='Search for a whiskey')
+    form(action="whiskey-search" placeholder='Search for a whiskey')
       input.search-field(type="text" placeholder="Search..." name="whiskey" required)
       input.search-button(type="submit" value="Search")
 
@@ -16,7 +14,7 @@ block content
 
   if whiskeys
     each w in whiskeys
-      a(href="/whiskey/profile/" + w._id)
+      a(href="/whiskey-profile/" + w._id)
         div.search-results
           h2= w.whiskeyName
           div.search-description

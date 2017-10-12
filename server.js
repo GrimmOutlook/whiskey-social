@@ -1,32 +1,45 @@
-require('dotenv').config();
-const express = require('express');
-// const session = require('express-session');
+const express  = require('express');
+const app      = express();
+const port     = process.env.PORT || 8080;
 const mongoose = require('mongoose');
-const morgan = require('morgan');
-const path   = require('path');
-const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
-const jsonParser = bodyParser.json();
-const methodOverride = require('method-override');
 const passport = require('passport');
+const flash    = require('connect-flash');
+const path   = require('path');
+const morgan       = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser   = require('body-parser');
+const session      = require('express-session');
+const methodOverride = require('method-override');
 
-const {basicStrategy, jwtStrategy} = require('./commons/strategies');
+const configDB = require('./config/database.js');
+// const whiskeyRouter = require('./app/whiskeyRouter');
 
-const app = express();
+// configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
 
-const whiskeyRouter = require('./routes/whiskeyRouter');
-const authRouter = require('./routes/authRouter');
-const userRouter = require('./routes/userRouter');
+require('./config/passport')(passport); // pass passport for configuration
 
-// app.use(express.static('public'));
-app.use('/', express.static(path.join(__dirname, 'public/')));
-
-const {DATABASE_URL, PORT} = require('./config');
-
-app.use(morgan('common'));
-app.use(jsonParser);
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
+// app.use('/whiskey', whiskeyRouter);
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'pug'); // set up ejs for templating
+app.set('views', path.join(__dirname, '/views'));  //require path needed?
+
+// required for passport
+app.use(session({
+    secret: 'onebourbononescotchonebeer',   // session secret
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
 //CORS
 app.use(function(req, res, next) {
@@ -39,57 +52,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(passport.initialize());
-passport.use(basicStrategy);
-passport.use(jwtStrategy);
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-app.use('/user', userRouter);
-app.use('/whiskey', whiskeyRouter);
-app.use('/', authRouter);  //    /signup & /login in authRouter + homepage root
-
-mongoose.Promise = global.Promise;
-
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, './public/views'));
-
-
-let server;
-
-function runServer(databaseUrl=DATABASE_URL, port=PORT) {
-
-  return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
-      if (err) {
-        return reject(err);
-      }
-      server = app.listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
-        resolve();
-      })
-      .on('error', err => {
-        mongoose.disconnect();
-        reject(err);
-      });
-    });
-  });
-}
-
-function closeServer() {
-  return mongoose.disconnect().then(() => {
-     return new Promise((resolve, reject) => {
-       console.log('Closing server');
-       server.close(err => {
-           if (err) {
-               return reject(err);
-           }
-           resolve();
-       });
-     });
-  });
-}
-
-if (require.main === module) {
-  runServer().catch(err => console.error(err));
-};
-
-module.exports = {app, runServer, closeServer};
+// launch ======================================================================
+app.listen(port);
+console.log('The magic happens on port ' + port);

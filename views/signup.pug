@@ -4,28 +4,28 @@ html(lang="en")
     meta(charset='utf-8')
     title Whiskey Social Signup
     meta(name="viewport", content="width=device-width, initial-scale=1")
-    link(rel='stylesheet', href='/css/reset.css')
-    link(rel='stylesheet', href='/css/grid.css')
-    link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='../public/css/reset.css')
+    link(rel='stylesheet', href='../public/css/grid.css')
+    link(rel='stylesheet', href='../public/css/main.css')
   body
     header
       nav.menu
         ul.menu-list
           li
-            img.logo(src='/images/wax-seal-logo.png', alt='wax seal logo')
+            img.logo(src='../public/images/wax-seal-logo.png', alt='wax seal logo')
           li.header-text-sign-up Whiskey Social
 
     div.main-content-wrapper
       div.logo-large
-        img.logo(src='/images/wax-seal-logo.png', alt='wax seal logo')
+        img.logo(src='../public/images/wax-seal-logo.png', alt='wax seal logo')
 
       form#sign-up(method='POST' enctype='application/json' action='/signup')
-        div
-          input#first_name(type='text', name='first_name', required='', placeholder=' ')
-          label(for='firstName') First Name
-        div
-          input#last_name(type='text', name='last_name', required='', placeholder=' ')
-          label(for='lastName') Last Name
+        //- div
+        //-   input#firstName(type='text', name='firstName', required='', placeholder=' ')
+        //-   label(for='firstName') First Name
+        //- div
+        //-   input#lastName(type='text', name='lastName', required='', placeholder=' ')
+        //-   label(for='lastName') Last Name
         div
           input#username(type='text', name='username', required='', placeholder=' ')
           label(for='username') Username

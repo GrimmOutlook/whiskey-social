@@ -62,12 +62,3 @@ URL.forEach(function(URL){
 
 app.listen(port);
 console.log(`Stuff is working on Port ${port}!`);
-
-
-
-
-
-
-
-
-// 'whiskeys.json', '{"whiskeyName": "' + whiskeyName + '", "country": "' + country + '", "region": "' + region + '", "description": "' + description + '", "smallImageURL": "' + smallImageURL + '", "largeImageURL": "' + largeImageURL +'"}'

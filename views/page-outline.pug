@@ -5,11 +5,11 @@ html(lang="en")
     title Whiskey Social
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(href="https://fonts.googleapis.com/css?family=Amiri|Libre+Baskerville|Libre+Franklin" rel="stylesheet")
-    //- link(rel='stylesheet', href='/../css/main.css') - doesn't work. Why?
+    //- link(rel='stylesheet', href='public/css/reset.css')
     style
-      include ../css/reset.css
-      include ../css/grid.css
-      include ../css/main.css
+      include ../public/css/reset.css
+      include ../public/css/grid.css
+      include ../public/css/main.css
   body
 
     include includes/header.pug
@@ -17,3 +17,4 @@ html(lang="en")
     block content
 
     include includes/footer.pug
+

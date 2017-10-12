@@ -1,0 +1,19 @@
+extends page-outline.pug
+
+block content
+
+  div.whiskey-profile-container
+    h1= whiskeyName
+    p.whiskey-profile-description= description
+
+    a(href="/whiskey-search")
+      button.back-to-search(type='submit') Back
+
+    a(href="/post/" + _id)
+      button.redirect-to-whiskey-post(type='submit') Rate this Whiskey
+
+    div.image-container
+      //- img.whiskey-profile-image(src=smallImageURL)
+      img.whiskey-profile-image(src=largeImageURL)
+
+  div.push
