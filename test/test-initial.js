@@ -1,5 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const User = require('../app/models/users');   //needed??
+const Whiskey = require('../app/models/whiskeys');   //needed??
 
 const should = chai.should();
 
