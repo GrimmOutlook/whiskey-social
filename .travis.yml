@@ -1,6 +1,8 @@
 language: node_js
 node_js: node
-sudo: false
+# sudo: false
+env:
+   - CI=true
 services:
   - mongodb
 deploy:
