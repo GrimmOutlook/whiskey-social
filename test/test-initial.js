@@ -65,7 +65,7 @@ describe('GET endpoint', function() {
         .get('/profile')
         .then(function(_res) {
           res = _res;
-          console.log(res.status);
+          console.log(res.body);
           res.should.have.status(200);
           res.should.be.html;
           console.log(`Your status is ${res.status}.`);
@@ -79,8 +79,8 @@ describe('GET endpoint', function() {
 //   const username = "user1"
 //   const password = "password10"
 
-//   before(() => runServer(TEST_DATABASE_URL));
-//   after(() => closeServer());
+  // before(() => runServer(TEST_DATABASE_URL));
+  // after(() => closeServer());
 
 //   // beforeEach(() => {
 //   //   newUser = new User();
@@ -103,26 +103,27 @@ describe('GET endpoint', function() {
 //     // return User;
 //   });
 
-//   afterEach(() => User.remove({}));
+  // afterEach(() => User.remove({}));
 
-//     describe('/signup', function() {
-//       it('Should reject requests with no credentials', function() {
-//         return chai
-//           .request(app)
-//           .post('/signup')
-//           .then(() =>
-//             should.fail(null, null, 'Request should not succeed')
-//           )
-//           .catch(err => {
-//             if (err instanceof chai.AssertionError) {
-//                 throw err;
-//             }
-//             const res = err.response;
-//             res.should.have.status(401);
-//             // expect(res).to.have.status(401);
-//           });
-//       });
-//     });
+    // describe('/login', function() {
+
+    //   it('Should reject requests with no credentials', function() {
+    //     return chai
+    //       .request(app)
+    //       .post('/login')
+    //       .then(() =>
+    //         should.fail(null, null, 'Request should not succeed')
+    //       )
+    //       .catch(err => {
+    //         if (err instanceof chai.AssertionError) {
+    //             throw err;
+    //         }
+    //         const res = err.response;
+    //         res.should.have.status(401);
+    //         // expect(res).to.have.status(401);
+    //       });
+    //   });
+    // });
 
 
 

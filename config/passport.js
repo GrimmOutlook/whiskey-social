@@ -38,6 +38,18 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
     function(req, username, password, done) {
+        const requiredFields = ['username', 'password'];
+        const missingField = requiredFields.find(field => !(field in req.body));
+
+        if (missingField) {
+          return res.status(422).json({
+            code: 422,
+            reason: 'ValidationError',
+            message: 'Missing field',
+            location: missingField
+          });
+        }
+
         if (username)
             username = username.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
 
