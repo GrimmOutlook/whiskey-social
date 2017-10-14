@@ -60,7 +60,7 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 let server;
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
-
+// mongoose.connect(databaseUrl, {useMongoClient: true}, err => {
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
       if (err) {
