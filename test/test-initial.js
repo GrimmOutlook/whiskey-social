@@ -1,33 +1,33 @@
-// const chai = require('chai');
-// const chaiHttp = require('chai-http');
-// const User = require('../app/models/users');   //needed??
-// const Whiskey = require('../app/models/whiskeys');   //needed??
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const User = require('../app/models/users');   //needed??
+const Whiskey = require('../app/models/whiskeys');   //needed??
 
-// const should = chai.should();
+const should = chai.should();
 
-// const {app, runServer, closeServer} = require('../server');
-// const {TEST_DATABASE_URL} = require('../config/database');
+const {app, runServer, closeServer} = require('../server');
+const {TEST_DATABASE_URL} = require('../config/database');
 
-// chai.use(chaiHttp);
+chai.use(chaiHttp);
 
-// describe('GET endpoint', function() {
+describe('GET endpoint', function() {
 
-//   before(() => runServer(TEST_DATABASE_URL));
-//   after(() => closeServer());
+  before(() => runServer(TEST_DATABASE_URL));
+  after(() => closeServer());
 
-//     it('should return a 200 status & HTML - homepage', function() {
-//       let res;
-//       return chai
-//         .request(app)
-//         .get('/')
-//         .then(function(_res) {
-//           res = _res;
-//           console.log(res.status);
-//           res.should.have.status(200);
-//           res.should.be.html;
-//           console.log(`Your status is ${res.status}.`);
-//         });
-//     });
+    it('should return a 200 status & HTML - homepage', function() {
+      let res;
+      return chai
+        .request(app)
+        .get('/')
+        .then(function(_res) {
+          res = _res;
+          console.log(res.status);
+          res.should.have.status(200);
+          res.should.be.html;
+          console.log(`Your status is ${res.status}.`);
+        });
+    });
 
 //     it('should return a 200 status & HTML - signup', function() {
 //       let res;
@@ -72,7 +72,7 @@
 //         });
 //     });
 
-// });
+});
 
 // describe('User signup & login', function() {
 //   // let newUser = {};

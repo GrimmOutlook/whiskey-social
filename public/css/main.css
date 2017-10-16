@@ -911,7 +911,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   Site-Wide Styles
 ======================================== */
   .background-image-wrapper {
-    background-image: url('public/images/barrels.jpg');
+    background-image: url('../public/images/barrels.jpg');
     background-repeat: no-repeat;
     height: calc(100vh - 85px);
   }
@@ -923,7 +923,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   }
 
   .background-image-wrapper-2 {
-    background-image: url('public/images/whiskey-glasses.jpg');
+    background-image: url('../public/images/whiskey-glasses.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: calc(100vh - 85px);

@@ -28,6 +28,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 // app.use('/whiskey', whiskeyRouter);
+// app.use(express.static('../public'));
+// app.use('/', express.static('public'));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug'); // set up ejs for templating
 app.set('views', path.join(__dirname, '/views'));  //require path needed?
