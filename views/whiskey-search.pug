@@ -12,18 +12,18 @@ block content
 
   p Results:
 
-  if whiskeys
-    each w in whiskeys
-      a(href="/whiskey-profile/" + w._id)
-        div.search-results
-          h2= w.whiskeyName
-          div.search-description
-            p= w.description
-          div.search-image
-            img(src=w.smallImageURL)
-      div.border-between
-    else
-      p No results found
+    if whiskeys
+      each w in whiskeys
+        a(href="/whiskey-profile/" + w._id)
+          div.search-results
+            h2= w.whiskeyName
+            div.search-description
+              p= w.description
+            div.search-image
+              img(src=w.smallImageURL)
+        div.border-between
+      else
+        p No results found
 
   //- each whiskey in whiskeys
   //-   li= whiskeyName + smallImageURL

@@ -8,11 +8,12 @@ function isLoggedIn(req, res, next) {
 }
 
 module.exports = function(app, passport) {
+    let searchTerm = "";
 
 // ----------------------------- Whiskey Search Screen ----------------------------------
 
     app.get('/whiskey-search', isLoggedIn, (req, res) => {
-      var searchTerm = req.query.whiskey;
+      searchTerm = req.query.whiskey;
       console.log(searchTerm);
       if (searchTerm){
         Whiskey

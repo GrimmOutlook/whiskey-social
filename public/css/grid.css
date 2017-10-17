@@ -95,7 +95,7 @@
     }
 
     .history-list, .favorites-list, .unique-list {
-      margin: 20px 150px;
+      margin: 2% 5%;
     }
   }
 
@@ -193,6 +193,46 @@
 .post-form {
   grid-area: form;
 }
+
+/* ======================================
+  Whiskey Profile Page
+======================================== */
+
+.whiskey-profile-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1%;
+  grid-template-areas:
+    "name name"
+    "description description"
+    "back forward"
+    "photo photo";
+}
+
+.whiskey-profile-container h1 {
+  grid-area: name;
+}
+
+.whiskey-profile-description {
+  grid-area: description;
+}
+
+.back-to-search {
+  grid-area: back;
+  justify-self: center;
+  align-self: start;
+}
+
+.redirect-to-whiskey-post {
+  grid-area: forward;
+  justify-self: center;
+  align-self: start;
+}
+
+.image-container {
+  grid-area: photo;
+}
+
 
 /* ======================================
   Whiskey Search Page Grid

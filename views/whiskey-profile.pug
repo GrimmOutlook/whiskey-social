@@ -6,11 +6,11 @@ block content
     h1= whiskeyName
     p.whiskey-profile-description= description
 
-    a(href="/whiskey-search")
-      button.back-to-search(type='submit') Back
+    a.back-to-search(href="/whiskey-search")
+      |< Back
 
-    a(href="/post/" + _id)
-      button.redirect-to-whiskey-post(type='submit') Rate this Whiskey
+    a.redirect-to-whiskey-post(href="/post/" + _id)
+      |Rate this Whiskey >
 
     div.image-container
       //- img.whiskey-profile-image(src=smallImageURL)

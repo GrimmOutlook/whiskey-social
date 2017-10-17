@@ -464,7 +464,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   color: black;
   border: 1px solid gray;
   border-radius: 5px;
-  padding: 1.25em;
+  padding: 1.25em 1.25em 0;
   font-size: 150%;
   font-family: 'Libre Franklin', sans-serif;
   text-align: center;
@@ -757,34 +757,16 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 }
 
 .back-to-search {
-  height: 2.5em;
-  width: 3.75em;
   font-size: 1.3em;
   cursor: pointer;
-  /*align-self: end;*/
-  border: 2px solid #9d9aac;
-  border-radius: 0.75em;
-  background-color: #d7aa48;
   color: #9b2b0d;
-  position: absolute;
-  top: 55%;
-  left: 8%;
   z-index: 2;
 }
 
 .redirect-to-whiskey-post {
-  height: 5em;
-  width: 5em;
   font-size: 1.3em;
   cursor: pointer;
-  /*align-self: end;*/
-  border: 2px solid #9d9aac;
-  border-radius: 0.75em;
-  background-color: #d7aa48;
   color: #9b2b0d;
-  position: absolute;
-  top: 55%;
-  right: 8%;
   z-index: 2;
 }
 
@@ -911,7 +893,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   Site-Wide Styles
 ======================================== */
   .background-image-wrapper {
-    background-image: url('../public/images/barrels.jpg');
+    background-image: url('/public/images/barrels.jpg');
     background-repeat: no-repeat;
     height: calc(100vh - 85px);
   }
@@ -923,7 +905,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   }
 
   .background-image-wrapper-2 {
-    background-image: url('../public/images/whiskey-glasses.jpg');
+    background-image: url('../../public/images/whiskey-glasses.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: calc(100vh - 85px);

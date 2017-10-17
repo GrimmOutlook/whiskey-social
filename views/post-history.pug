@@ -2,23 +2,21 @@ extends page-outline.pug
 
 block content
 
-  div.page-wrapper
+  div.history-container
+    h1 Recent Activity:
+    ul.history-list
 
-    div.history-container
-      h1 Recent Activity:
-      ul.history-list
-
-        //- if posts != undefined
-        each post in posts
-          - var photoURL = post.smallImageURL
-          li.whiskey-card
-            div.whiskeyname= post.whiskeyName
-            div.rating= 'Rating: ' + post.rating
-            if post.favorite
-              div.favorite
-                p Favorite
-                img.favorite-icon
-            a(href='/single-post/' + post._id)
-              img.bottle-history(src=photoURL, alt=post.whiskeyName)
-        else
-          p Drink your first whiskey!
+      //- if posts != undefined
+      each post in posts
+        - var photoURL = post.smallImageURL
+        li.whiskey-card
+          div.whiskeyname= post.whiskeyName
+          div.rating= 'Rating: ' + post.rating
+          if post.favorite
+            div.favorite
+              p Favorite
+              img.favorite-icon
+          a(href='/single-post/' + post._id)
+            img.bottle-history(src=photoURL, alt=post.whiskeyName)
+      else
+        p Drink your first whiskey!
