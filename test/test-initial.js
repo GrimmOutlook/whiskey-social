@@ -59,6 +59,9 @@ function tearDownDb() {
 
 
 describe('User signup & login', function() {
+  let testUserName = faker.name.firstName().toLowerCase();
+  let unencryptedPassword = faker.internet.password();
+  console.log('unencryptedPassword: ' + unencryptedPassword)
 
   before(() => runServer(TEST_DATABASE_URL));
   // beforeEach(() => userAndPassData());
@@ -66,32 +69,64 @@ describe('User signup & login', function() {
   after(() => closeServer());
 
     it('should allow a user to signup & save username & p/w to DB', function() {
-      let testUserName = faker.name.firstName().toLowerCase();
-      let plainEnglishPassword = faker.internet.password();
+      // let testUserName = faker.name.firstName().toLowerCase();
+      // let unencryptedPassword = faker.internet.password();
       return chai
         .request(app)
         .post('/signup')
         .send({
           username: testUserName,
-          password: plainEnglishPassword
+          password: unencryptedPassword
         })
         .then(() => {
-        // let testUser;
-        return testUser =
-        User
-        .findOne({username: testUserName})
-        console.log('User.findOne: ', {username: testUserName});
-        console.log('username: ', username);
+          // let testUser;
+          return testUser =
+          User
+          .findOne({username: testUserName})
         })
         .then(user => {
           console.log('user: ' + user);
           expect(user).to.not.be.null;
           expect(user.username).to.equal(testUserName);
-          expect(user.password).to.not.equal(plainEnglishPassword);
+          expect(user.password).to.not.equal(unencryptedPassword);
         })
-      });
-
     });
+
+    //Login with same testUserName & unencryptedPassword - encrypt p/w, then compare?
+    it('should allow a user to login with username/password matching in the DB', function() {
+      return chai
+        .request(app)
+        .post('/login')
+        .send({
+          username: testUserName,
+          password: unencryptedPassword
+        })
+        .then(() => {
+          // let testUser;
+          return testUser =
+          User
+          .findOne({username: testUserName})
+        })
+        .then(user => {
+          // var plainPassword = user.validPassword(user.password);
+          // console.log('plainPassword: ' + plainPassword);
+          console.log('db password: ' + user.password);
+          console.log('login user: ' + user);
+          expect(user).to.not.be.null;
+          expect(user.username).to.equal(testUserName);
+          return user.validPassword(unencryptedPassword);
+          // expect(user.validPassword(unencryptedPassword)).to.be.true;
+        })
+        .then(correctPassword => {
+          console.log(`correctPassword: ${correctPassword}`)
+          expect(correctPassword).to.be.true;
+        })
+    });
+
+});
+
+
+
 
     // it('Should reject requests with no credentials', function() {
     //   return chai

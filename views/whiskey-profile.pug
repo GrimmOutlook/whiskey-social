@@ -12,8 +12,12 @@ block content
     a.redirect-to-whiskey-post(href="/post/" + _id)
       |Rate this Whiskey >
 
+    - var smallPhoto = smallImageURL
+    - var largePhoto = largeImageURL
     div.image-container
-      //- img.whiskey-profile-image(src=smallImageURL)
-      img.whiskey-profile-image(src=largeImageURL)
+      if largePhoto == undefined
+        img.whiskey-profile-image(src=largeImageURL)
+      else
+        img.whiskey-profile-image(src=smallImageURL)
 
   div.push
