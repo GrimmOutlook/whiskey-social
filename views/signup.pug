@@ -41,5 +41,9 @@ html(lang="en")
             | Your password must be at least 10 characters with at least one letter - case insensitive.
         input(type='submit', value='Sign Up')
 
+    - if (messages.info)
+      .message.info
+        span= messages.info
+
     //- footer.main-footer
     //-   | Whiskey Social 2017 Copyright

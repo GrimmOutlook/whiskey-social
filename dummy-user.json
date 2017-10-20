@@ -80,3 +80,25 @@
     }
   ]
 }
+
+
+
+
+
+
+
+
+
+
+
+
+#
+# Fatal error in ../deps/v8/src/runtime/runtime-debug.cc, line 335
+# Check failed: args[0]->IsJSObject().
+#
+==== C stack trace ===============================
+    0   node                                0x0000000100bfbf63 v8::base::debug::StackTrace::StackTrace() + 19
+    1   node                                0x0000000100bf90e9 V8_Fatal + 233
+    2   node                                0x00000001007dfad6 v8::internal::Runtime_DebugGetPropertyDetails(int, v8::internal::Object**, v8::internal::Isolate*) + 3190
+    3   ???                                 0x0000017e8f0043a7 0x0 + 1643076666279
+

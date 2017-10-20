@@ -28,20 +28,6 @@ module.exports = function(passport) {
     },
 
     function(req, username, password, done) {
-        const requiredFields = ['username', 'password'];
-        const missingField = requiredFields.find(field => !(field in req.body));
-        if (missingField) {
-          return res.status(422).json({
-            code: 422,
-            reason: 'ValidationError',
-            message: 'Missing field',
-            location: missingField
-          });
-        }
-
-        if (username)
-            username = username.toLowerCase(); // avoid case-sensitive matching
-
         // asynchronous
         process.nextTick(function() {
             User.findOne({ 'username' :  username }, function(err, user) {
@@ -71,21 +57,6 @@ module.exports = function(passport) {
     },
 
     function(req, username, password, done) {
-      const requiredFields = ['username', 'password'];
-      const missingField = requiredFields.find(field => !(field in req.body));
-
-      if (missingField) {
-        return res.status(422).json({
-          code: 422,
-          reason: 'ValidationError',
-          message: 'Missing field',
-          location: missingField
-        });
-      }
-
-        if (username)
-            username = username.toLowerCase(); // avoid case-sensitive matching
-
         // asynchronous
         process.nextTick(function() {
           // if the user is not already logged in:
@@ -96,6 +67,7 @@ module.exports = function(passport) {
                   return done(err);
               // check to see if theres already a user with that username
               if (user) {
+                  console.log('req.flash: ', req.flash);
                   return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
               } else {
                   // create the user

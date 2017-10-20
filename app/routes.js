@@ -1,4 +1,8 @@
 const User = require('../app/models/users');
+const express = require('express');
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+
 const Whiskey = require('../app/models/whiskeys');
 const whiskeyRouter = require('./whiskeyRouter');
 
@@ -196,12 +200,10 @@ app.delete('/single-post/:postId', isLoggedIn, function(req, res){
 
     // locally --------------------------------
         // LOGIN ===============================
-        // show the login form
         app.get('/login', function(req, res) {
             res.render('login', { message: req.flash('loginMessage') });
         });
 
-        // process the login form
         app.post('/login', passport.authenticate('local-login', {
             successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
@@ -209,17 +211,57 @@ app.delete('/single-post/:postId', isLoggedIn, function(req, res){
         }));
 
         // SIGNUP =================================
-        // show the signup form
         app.get('/signup', function(req, res) {
+            req.flash('info', 'Flash is back!');
             res.render('signup', { message: req.flash('signupMessage') });
         });
 
-        // process the signup form
-        app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
-            failureRedirect : '/signup', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
-        }));
+        // BACKEND INPUT VALIDATION =================================
+                // All required fields entered.
+        function missedField (jsonParser, req, res){
+          const requiredFields = ['username', 'password'];
+          const missingField = requiredFields.find(field => !(field in req.body));
+          console.log(`missingField: ${missingField}`);
+            if (missingField) {
+              console.log(`res.status: missing field: ${res.status}`);
+              return res.status(422).json({      // .send instead of .json??
+                code: 422,
+                reason: 'ValidationError',
+                justforthehellofit: 'Look! Im in the res.body!',
+                message: 'Missing field',
+                location: missingField
+              });
+            }
+        }
+                // All required fields are strings.
+        function areStrings (jsonParser, req, res){
+          const stringFields = ['username', 'password'];
+          const nonStringField = stringFields.find(field =>
+            (field in req.body) && typeof req.body[field] !== 'string'
+          );
+          console.log('areStrings fxn here!');
+
+          if (nonStringField) {
+            return res.status(422).json({
+              code: 422,
+              reason: 'ValidationError',
+              flash: 'Must start with a letter!',
+              message: 'Incorrect field type: expected string',
+              location: nonStringField
+            });
+          }
+        }
+
+        app.post('/signup', jsonParser, (req, res) => {
+          missedField(jsonParser, req, res);
+          areStrings(jsonParser, req, res);
+
+            passport.authenticate('local-signup', {
+              successRedirect : '/profile', // redirect to the secure profile section
+              failureRedirect : '/signup', // redirect back to the signup page if there is an error
+              failureFlash : true // allow flash messages
+            })
+        });
 
 };
 

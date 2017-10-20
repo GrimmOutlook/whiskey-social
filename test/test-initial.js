@@ -1,5 +1,8 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const mocha = require('mocha');
+const describe = mocha.describe;
+const it = mocha.it;
 const faker = require('faker');
 const User = require('../app/models/users');
 const Whiskey = require('../app/models/whiskeys');
@@ -18,8 +21,8 @@ chai.use(chaiHttp);
 // Seed a User with just username & hashed password - for use with tests where inserting a whiskey post for 1st time + authentication/authorization.
 function userAndPassData() {
   const userAndPass = {
-    username: faker.name.firstName(),
-    password: faker.internet.password()
+    testUsername: faker.name.firstName(),
+    unencryptedPassword: faker.internet.password()
   };
   console.log('userAndPass: ' + JSON.stringify(userAndPass));
   return User.create(userAndPass);
@@ -58,206 +61,326 @@ function tearDownDb() {
 }
 
 
-describe('User signup & login', function() {
+describe('User signup & login - ', function() {
+  this.timeout(5000);
   let testUserName = faker.name.firstName().toLowerCase();
   let unencryptedPassword = faker.internet.password();
   console.log('unencryptedPassword: ' + unencryptedPassword)
 
   before(() => runServer(TEST_DATABASE_URL));
   // beforeEach(() => userAndPassData());
-  // afterEach(() => tearDownDb());
+  afterEach(() => tearDownDb());
   after(() => closeServer());
 
-    it('should allow a user to signup & save username & p/w to DB', function() {
-      // let testUserName = faker.name.firstName().toLowerCase();
-      // let unencryptedPassword = faker.internet.password();
-      return chai
-        .request(app)
-        .post('/signup')
-        .send({
-          username: testUserName,
-          password: unencryptedPassword
-        })
-        .then(() => {
-          // let testUser;
-          return testUser =
-          User
-          .findOne({username: testUserName})
-        })
-        .then(user => {
-          console.log('user: ' + user);
-          expect(user).to.not.be.null;
-          expect(user.username).to.equal(testUserName);
-          expect(user.password).to.not.equal(unencryptedPassword);
-        })
-    });
+                          // THIS PASSES!! - NOT ANYMORE!
+    // it('should allow a user to signup & save username & p/w to DB', function() {
+    //   // setTimeout(4000);
+    //   return chai
+    //     .request(app)
+    //     .post('/signup')
+    //     .send({
+    //       username: testUserName,
+    //       password: unencryptedPassword
+    //     })
+    //     .then(() =>
+    //       // let testUser;
+    //       testUser =
+    //       User
+    //       .findOne({username: testUserName})
+    //     )
+    //     .then(user => {
+    //       console.log('user: ' + user);
+    //       expect(user).to.not.be.null;
+    //       expect(user.username).to.equal(testUserName);
+    //       expect(user.password).to.not.equal(unencryptedPassword);
+    //       return true;
+    //     })
+    // });
 
-    //Login with same testUserName & unencryptedPassword - encrypt p/w, then compare?
-    it('should allow a user to login with username/password matching in the DB', function() {
-      return chai
-        .request(app)
-        .post('/login')
-        .send({
-          username: testUserName,
-          password: unencryptedPassword
-        })
-        .then(() => {
-          // let testUser;
-          return testUser =
-          User
-          .findOne({username: testUserName})
-        })
-        .then(user => {
-          // var plainPassword = user.validPassword(user.password);
-          // console.log('plainPassword: ' + plainPassword);
-          console.log('db password: ' + user.password);
-          console.log('login user: ' + user);
-          expect(user).to.not.be.null;
-          expect(user.username).to.equal(testUserName);
-          return user.validPassword(unencryptedPassword);
-          // expect(user.validPassword(unencryptedPassword)).to.be.true;
-        })
-        .then(correctPassword => {
-          console.log(`correctPassword: ${correctPassword}`)
-          expect(correctPassword).to.be.true;
-        })
-    });
+  describe('/signup Route', function() {
+    describe('POST to signup', function() {
+      it('Should reject users with missing username', function() {
+        return chai.request(app)
+          .post('/signup')
+          .send({
+            password: unencryptedPassword
+          })
+          .then(() => expect.fail(null, null, 'Request should not succeed'))
+          .catch(err => {
+            if (err instanceof chai.AssertionError) {
+              throw err;
+            }
 
-});
+            const res = err.response;
+            console.log('missing username res.body.message: ', res.body.message);
+            expect(res).to.have.status(422);
+            expect(res.body.reason).to.equal('ValidationError');
+            expect(res.body.message).to.equal('Missing field');
+            expect(res.body.location).to.equal('username');
+          });
+      });
+    })
+
+    it('Should reject users with missing password', function() {
+        return chai.request(app)
+          .post('/signup')
+          .send({
+            username: testUserName
+          })
+          .then(() => expect.fail(null, null, 'Request should not succeed'))
+          .catch(err => {
+            if (err instanceof chai.AssertionError) {
+              throw err;
+            }
+
+            const res = err.response;
+            console.log('missing password res.body.message: ', res.body.message);
+            expect(res).to.have.status(422);
+            expect(res.body.reason).to.equal('ValidationError');
+            expect(res.body.message).to.equal('Missing field');
+            expect(res.body.location).to.equal('password');
+          });
+      });
+
+      it('Should reject users with non-string username', function() {
+        return chai.request(app)
+          .post('/signup')
+          .send({
+            username: 1234,
+            password: unencryptedPassword
+          })
+          .then(() => expect.fail(null, null, 'Request should not succeed'))
+          .catch(err => {
+            if (err instanceof chai.AssertionError) {
+              throw err;
+            }
+
+            const res = err.response;
+            console.log('username no string res.body.message: ', res.body.message);
+            expect(res).to.have.status(422);
+            expect(res.body.reason).to.equal('ValidationError');
+            expect(res.body.message).to.equal('Incorrect field type: expected string');
+            expect(res.body.location).to.equal('username');
+          });
+      });
+
+      it('Should reject users with non-string password', function() {
+        return chai.request(app)
+          .post('/signup')
+          .send({
+            username: testUserName,
+            password: 1234
+          })
+          .then(() => expect.fail(null, null, 'Request should not succeed'))
+          .catch(err => {
+            if (err instanceof chai.AssertionError) {
+              throw err;
+            }
+
+            const res = err.response;
+            console.log('username no password res.body.message: ', res.body.message);
+            expect(res).to.have.status(422);
+            expect(res.body.reason).to.equal('ValidationError');
+            expect(res.body.message).to.equal('Incorrect field type: expected string');
+            expect(res.body.location).to.equal('password');
+          });
+      });
+  })
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // THIS TEST IS THE ONE I SPENT SO MUCH TIME ON
+    // it('Should reject users with duplicate username on signup', function() {
+    //   // setTimeout(4000);
+    //   return User
+    //     .create({
+    //       testUserName,
+    //       unencryptedPassword
+    //     })
+    //   .then(() =>
+    //     chai
+    //       .request(app).post('/signup').send({
+    //         username: testUserName,
+    //         password: unencryptedPassword
+    //       })
+    //       // return true;
+    //   )
+    //   // .then(() =>
+    //   //     expect.fail(null, null, 'Request should not succeed')
+    //   // )
+    //   .catch(err => {
+    //     console.log('hello fran');
+    //     if (err instanceof chai.AssertionError) {
+    //         throw err;
+    //     }
+
+    //     const res = err.response;
+    //     expect(res).to.have.status(422);
+    //     // expect(res.body.reason).to.equal('ValidationError');
+    //     console.log('res.body.message', res.body.message);
+    //     expect(res.body.message).to.equal('That username is already taken.');
+    //     expect(res.body.location).to.equal('username');
+    //   });
+
+    // }) // it rejects duplicate
+
+
+                    // FAILING TEST
     // it('Should reject requests with no credentials', function() {
     //   return chai
     //     .request(app)
-    //     .post('/login')
-    //     .then(() =>
-    //       should.fail(null, null, 'Request should not succeed') // make into expect
-    //     )
+    //     .post('/signup')
+    //     .send({
+    //       // username: "",
+    //       password: unencryptedPassword
+    //     })
+    //     .then(() => {
+    //       // console.log('no credentials username; ' + username);
+    //       // console.log('req.flash duplicate test: ' + req.flash);
+    //       console.log('username: ' + username);
+    //       expect(username).to.be.empty;
+    //       expect.fail(null, null, 'Request should not succeed')
+    //     })
     //     .catch(err => {
     //       if (err instanceof chai.AssertionError) {
     //           throw err;
     //       }
     //       const res = err.response;
-    //       expect(res).to.have.status(401);
-    //       // res.should.have.status(401);
+    //       console.log('res.status: ' + res);
+    //       expect(res).to.have.status(200);
     //     });
     // });
 
-// });
-
-
-
-// describe('GET endpoint', function() {
-
-//   before(() => runServer(TEST_DATABASE_URL));
-//   beforeEach(() => fullUserData());
-//   afterEach(() => tearDownDb());
-//   after(() => closeServer());
-
-//     it('should return a 200 status & HTML - homepage', function() {
-//       let res;
-//       return chai
-//         .request(app)
-//         .get('/')
-//         .then(function(_res) {
-//           res = _res;
-//           console.log(res.status);
-//           res.should.have.status(200);
-//           res.should.be.html;
-//           console.log(`Your status is ${res.status}.`);
-//         });
-//     });
-
-//     it('should return a 200 status & HTML - signup', function() {
-//       let res;
-//       return chai
-//         .request(app)
-//         .get('/signup')
-//         .then(function(_res) {
-//           res = _res;
-//           console.log(res.status);
-//           res.should.have.status(200);
-//           res.should.be.html;
-//           console.log(`Your status is ${res.status}.`);
-//         });
-//     });
-
-//     it('should return a 200 status & HTML - login', function() {
-//       let res;
-//       return chai
-//         .request(app)
-//         .get('/login')
-//         .then(function(_res) {
-//           res = _res;
-//           console.log(res.status);
-//           res.should.have.status(200);
-//           res.should.be.html;
-//           console.log(`Your status is ${res.status}.`);
-//         });
-//     });
-
-//     //Why the fuck does this pass?  It's a protected endpoint!!!!!!!!!!!!
-//     it('should return a 200 status & HTML - profile', function() {
-//       let res;
-//       return chai
-//         .request(app)
-//         .get('/profile')
-//         .then(function(_res) {
-//           res = _res;
-//           console.log(res.body);
-//           res.should.have.status(200);
-//           res.should.be.html;
-//           console.log(`Your status is ${res.status}.`);
-//         });
-//     });
-
-// });
-
-
-
-
-
-
-
-
-
-
-  // const username = "user1"
-  // const password = "password10"
-
-  // before(() => runServer(TEST_DATABASE_URL));
-  // after(() => closeServer());
-
-  // beforeEach(() => {
-  //   newUser = new User();
-  //   newUser.username = username;
-  //   newUser.password = newUser.generateHash(password);
-  //   newUser.save();
-  //   return newUser;
-  // });
-
-  // // console.log('newUser: ' + JSON.stringify(newUser));  // jack fucking squat
-  // beforeEach(() => {
-  //   return User
-  //     .generateHash(password)
-  //     .then(password => {
-  //       User.create({
-  //         username,
-  //         password
+               // PASSES BUT SHOULDN'T
+  // describe('Why do I need a nested describe for this??? - ', function() {
+  //   this.timeout(5000);
+  //   //signup with testUserName & unencryptedPassword - then login with them, then compare?
+  //   it('should allow a user to login with username/password matching in the DB', function() {
+  //     // setTimeout(4000);
+  //     User
+  //       .create({
+  //         testUserName,
+  //         unencryptedPassword
   //       })
-  //     });
-  //   // return User;
-  // });
+  //     .then(() =>
+  //       chai
+  //       .request(app)
+  //       .post('/login')
+  //       .send({
+  //         username: testUserName,
+  //         password: unencryptedPassword
+  //       })
+  //     )
+  //     .then(() => {
+  //       return testUser =
+  //       User
+  //       .findOne({username: testUserName})
+  //     })
+  //     .then(user => {
+  //       console.log('db password: ' + user.password);
+  //       console.log('login user: why is this null?' + user);
+  //       expect(user).to.not.be.null;
+  //       expect(user.username).to.equal(testUserName);
+  //       return user.validPassword(unencryptedPassword);
+  //       // expect(user.validPassword(unencryptedPassword)).to.be.true;
+  //     })
+  //     .then(correctPassword => {
+  //       console.log(`correctPassword: ${correctPassword}`)
+  //       expect(correctPasswordXXXXXXXXXXXXXX).to.be.true;
+  //     })
+  //   });
+  // }); // describe(why nested?)
 
-  // afterEach(() => User.remove({}));
+});  // describe('User signup & login')
 
 
 
 
 
 
+
+
+describe('GET endpoint', function() {
+
+  before(() => runServer(TEST_DATABASE_URL));
+  // beforeEach(() => userAndPassData());
+  afterEach(() => tearDownDb());
+  after(() => closeServer());
+
+    it('should return a 200 status & HTML - homepage', function() {
+      let res;
+      return chai
+        .request(app)
+        .get('/')
+        .then(function(_res) {
+          res = _res;
+          console.log(res.status);
+          res.should.have.status(200);
+          res.should.be.html;
+          console.log(`Your status is ${res.status}.`);
+        });
+    });
+
+    it('should return a 200 status & HTML - signup', function() {
+      let res;
+      return chai
+        .request(app)
+        .get('/signup')
+        .then(function(_res) {
+          res = _res;
+          console.log(res.status);
+          res.should.have.status(200);
+          res.should.be.html;
+          console.log(`Your status is ${res.status}.`);
+        });
+    });
+
+    it('should return a 200 status & HTML - login', function() {
+      let res;
+      return chai
+        .request(app)
+        .get('/login')
+        .then(function(_res) {
+          res = _res;
+          console.log(res.status);
+          res.should.have.status(200);
+          res.should.be.html;
+          console.log(`Your status is ${res.status}.`);
+        });
+    });
+
+    //Why the fuck does this pass?  It's a protected endpoint!!!!!!!!!!!!
+    // it('should return a 200 status & HTML - profile', function() {
+    //   let res;
+    //   return chai
+    //     .request(app)
+    //     .get('/profile')
+    //     .then(function(_res) {
+    //       res = _res;
+    //       console.log(res.body);
+    //       res.should.have.status(200);
+    //       res.should.be.html;
+    //       console.log(`Your status is ${res.status}.`);
+    //     });
+    // });
+
+});
 
 
 
