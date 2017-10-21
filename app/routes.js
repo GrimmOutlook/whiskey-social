@@ -218,7 +218,63 @@ app.delete('/single-post/:postId', isLoggedIn, function(req, res){
 
         // BACKEND INPUT VALIDATION =================================
                 // All required fields entered.
-        function missedField (jsonParser, req, res){
+        // function missedField (jsonParser, req, res){
+        //   const requiredFields = ['username', 'password'];
+        //   const missingField = requiredFields.find(field => !(field in req.body));
+        //   console.log(`missingField: ${missingField}`);
+        //     if (missingField) {
+        //       console.log(`res.status: missing field: ${res.status}`);
+        //       return res.status(422).json({      // .send instead of .json??
+        //         code: 422,
+        //         reason: 'ValidationError',
+        //         justforthehellofit: 'Look! Im in the res.body!',
+        //         message: 'Missing field',
+        //         location: missingField
+        //       });
+        //     }
+        // }
+        //         // All required fields are strings.
+        // function areStrings (jsonParser, req, res){
+        //   const stringFields = ['username', 'password'];
+        //   const nonStringField = stringFields.find(field =>
+        //     (field in req.body) && typeof req.body[field] !== 'string'
+        //   );
+        //   console.log('nonStringField: ' + nonStringField);
+
+        //   if (nonStringField) {
+        //     return res.status(422).json({
+        //       code: 422,
+        //       reason: 'ValidationError',
+        //       flash: 'Must start with a letter!',
+        //       message: 'Incorrect field type: expected string',
+        //       location: nonStringField
+        //     });
+        //   }
+        //   end();
+        // }
+
+        //         // Trim username & p/w
+        // function trimUserPw (jsonParser, req, res){
+        //   const explicityTrimmedFields = ['username', 'password'];
+        //   const nonTrimmedField = explicityTrimmedFields.find(field => {
+        //     console.log('field: ' + field);
+        //     console.log('req.body[field]: ' + req.body[field]);
+        //     req.body[field].trim() !== req.body[field]
+        //   });
+
+        //   if (nonTrimmedField) {
+        //     return res.status(422).json({
+        //       code: 422,
+        //       reason: 'ValidationError',
+        //       message: 'Cannot start or end with whitespace',
+        //       location: nonTrimmedField
+        //     });
+        //   }
+        // }
+
+        app.post('/signup', jsonParser, (req, res) => {
+          // BACKEND INPUT VALIDATION =================================
+                // All required fields entered.
           const requiredFields = ['username', 'password'];
           const missingField = requiredFields.find(field => !(field in req.body));
           console.log(`missingField: ${missingField}`);
@@ -232,14 +288,13 @@ app.delete('/single-post/:postId', isLoggedIn, function(req, res){
                 location: missingField
               });
             }
-        }
+
                 // All required fields are strings.
-        function areStrings (jsonParser, req, res){
           const stringFields = ['username', 'password'];
           const nonStringField = stringFields.find(field =>
             (field in req.body) && typeof req.body[field] !== 'string'
           );
-          console.log('areStrings fxn here!');
+          console.log('nonStringField: ' + nonStringField);
 
           if (nonStringField) {
             return res.status(422).json({
@@ -250,17 +305,55 @@ app.delete('/single-post/:postId', isLoggedIn, function(req, res){
               location: nonStringField
             });
           }
-        }
 
-        app.post('/signup', jsonParser, (req, res) => {
-          missedField(jsonParser, req, res);
-          areStrings(jsonParser, req, res);
+                // Trim username & p/w
+          const explicityTrimmedFields = ['username', 'password'];
+          const nonTrimmedField = explicityTrimmedFields.find(field =>
+            req.body[field].trim() !== req.body[field]
+          );
 
-            passport.authenticate('local-signup', {
-              successRedirect : '/profile', // redirect to the secure profile section
-              failureRedirect : '/signup', // redirect back to the signup page if there is an error
-              failureFlash : true // allow flash messages
-            })
+          console.log('nonTrimmedField: ' + nonTrimmedField);  //undefined?? Why??
+
+          if (nonTrimmedField) {
+            return res.status(422).json({
+              code: 422,
+              reason: 'ValidationError',
+              message: 'Cannot start or end with whitespace',
+              location: nonTrimmedField
+            });
+          }
+
+                  // Reject username & password that are too short/long
+          const sizedFields = {
+            username: {min: 1, max: 72},
+            password: {min: 10, max: 72}
+          };
+
+          const tooSmallField = Object.keys(sizedFields).find(field =>
+            'min' in sizedFields[field] &&
+            req.body[field].trim().length < sizedFields[field].min
+          );
+          const tooLargeField = Object.keys(sizedFields).find(field =>
+            'max' in sizedFields[field] &&
+            req.body[field].trim().length > sizedFields[field].max
+          );
+
+          if (tooSmallField || tooLargeField) {
+            return res.status(422).json({
+              code: 422,
+              reason: 'ValidationError',
+              message: tooSmallField ?
+                `Must be at least ${sizedFields[tooSmallField].min} character(s) long` :
+                `Must be at most ${sizedFields[tooLargeField].max} characters long`,
+              location: tooSmallField || tooLargeField
+            });
+          }
+
+          passport.authenticate('local-signup', {
+            successRedirect : '/profile', // redirect to the secure profile section
+            failureRedirect : '/signup', // redirect back to the signup page if there is an error
+            failureFlash : true // allow flash messages
+          })
         });
 
 };

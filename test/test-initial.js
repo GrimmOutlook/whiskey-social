@@ -62,8 +62,9 @@ function tearDownDb() {
 
 
 describe('User signup & login - ', function() {
-  this.timeout(5000);
+  this.timeout(25000);
   let testUserName = faker.name.firstName().toLowerCase();
+  let testUserName2 = ` ${testUserName} `;
   let unencryptedPassword = faker.internet.password();
   console.log('unencryptedPassword: ' + unencryptedPassword)
 
@@ -119,7 +120,6 @@ describe('User signup & login - ', function() {
             expect(res.body.location).to.equal('username');
           });
       });
-    })
 
     it('Should reject users with missing password', function() {
         return chai.request(app)
@@ -185,22 +185,114 @@ describe('User signup & login - ', function() {
             expect(res.body.location).to.equal('password');
           });
       });
-  })
+
+      it('Should reject users with non-trimmed username', function() {
+        return chai.request(app)
+          .post('/signup')
+          .send({
+            username: testUserName2,
+            password: unencryptedPassword
+          })
+          .then(() => expect.fail(null, null, 'Request should not succeed'))
+          .catch(err => {
+            if (err instanceof chai.AssertionError) {
+              throw err;
+            }
+
+            const res = err.response;
+            expect(res).to.have.status(422);
+            expect(res.body.reason).to.equal('ValidationError');
+            expect(res.body.message).to.equal('Cannot start or end with whitespace');
+            expect(res.body.location).to.equal('username');
+          });
+      });
+
+      it('Should reject users with non-trimmed password', function() {
+        return chai.request(app)
+          .post('/signup')
+          .send({
+            username: testUserName,
+            password: ` ${unencryptedPassword} `
+          })
+          .then(() => expect.fail(null, null, 'Request should not succeed'))
+          .catch(err => {
+            if (err instanceof chai.AssertionError) {
+              throw err;
+            }
+
+            const res = err.response;
+            expect(res).to.have.status(422);
+            expect(res.body.reason).to.equal('ValidationError');
+            expect(res.body.message).to.equal('Cannot start or end with whitespace');
+            expect(res.body.location).to.equal('password');
+          });
+      });
+
+      it('Should reject users with empty username', function() {
+        return chai.request(app)
+          .post('/signup')
+          .send({
+            username: '',
+            password: unencryptedPassword
+          })
+          .then(() => expect.fail(null, null, 'Request should not succeed'))
+          .catch(err => {
+            if (err instanceof chai.AssertionError) {
+              throw err;
+            }
+
+            const res = err.response;
+            expect(res).to.have.status(422);
+            expect(res.body.reason).to.equal('ValidationError');
+            expect(res.body.message).to.equal('Must be at least 1 character(s) long');
+            expect(res.body.location).to.equal('username');
+          });
+      });
+      it('Should reject users with password less than ten characters', function() {
+        return chai.request(app)
+          .post('/signup')
+          .send({
+            username: testUserName,
+            password: '123456789'
+          })
+          .then(() => expect.fail(null, null, 'Request should not succeed'))
+          .catch(err => {
+            if (err instanceof chai.AssertionError) {
+              throw err;
+            }
+
+            const res = err.response;
+            expect(res).to.have.status(422);
+            expect(res.body.reason).to.equal('ValidationError');
+            expect(res.body.message).to.equal('Must be at least 10 character(s) long');
+            expect(res.body.location).to.equal('password');
+          });
+      });
+
+      it('Should reject users with password greater than 72 characters', function() {
+        return chai.request(app)
+          .post('/signup')
+          .send({
+            username: testUserName,
+            password: new Array(73).fill('x').join('')
+          })
+          .then(() => expect.fail(null, null, 'Request should not succeed'))
+          .catch(err => {
+            if (err instanceof chai.AssertionError) {
+              throw err;
+            }
+
+            const res = err.response;
+            expect(res).to.have.status(422);
+            expect(res.body.reason).to.equal('ValidationError');
+            expect(res.body.message).to.equal('Must be at most 72 characters long');
+            expect(res.body.location).to.equal('password');
+          });
+      });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    });  // describe('POST to signup', function() {
+  });  // describe('/signup Route', function() {
 
 
 
@@ -240,32 +332,6 @@ describe('User signup & login - ', function() {
 
     // }) // it rejects duplicate
 
-
-                    // FAILING TEST
-    // it('Should reject requests with no credentials', function() {
-    //   return chai
-    //     .request(app)
-    //     .post('/signup')
-    //     .send({
-    //       // username: "",
-    //       password: unencryptedPassword
-    //     })
-    //     .then(() => {
-    //       // console.log('no credentials username; ' + username);
-    //       // console.log('req.flash duplicate test: ' + req.flash);
-    //       console.log('username: ' + username);
-    //       expect(username).to.be.empty;
-    //       expect.fail(null, null, 'Request should not succeed')
-    //     })
-    //     .catch(err => {
-    //       if (err instanceof chai.AssertionError) {
-    //           throw err;
-    //       }
-    //       const res = err.response;
-    //       console.log('res.status: ' + res);
-    //       expect(res).to.have.status(200);
-    //     });
-    // });
 
                // PASSES BUT SHOULDN'T
   // describe('Why do I need a nested describe for this??? - ', function() {
@@ -308,79 +374,4 @@ describe('User signup & login - ', function() {
   // }); // describe(why nested?)
 
 });  // describe('User signup & login')
-
-
-
-
-
-
-
-
-describe('GET endpoint', function() {
-
-  before(() => runServer(TEST_DATABASE_URL));
-  // beforeEach(() => userAndPassData());
-  afterEach(() => tearDownDb());
-  after(() => closeServer());
-
-    it('should return a 200 status & HTML - homepage', function() {
-      let res;
-      return chai
-        .request(app)
-        .get('/')
-        .then(function(_res) {
-          res = _res;
-          console.log(res.status);
-          res.should.have.status(200);
-          res.should.be.html;
-          console.log(`Your status is ${res.status}.`);
-        });
-    });
-
-    it('should return a 200 status & HTML - signup', function() {
-      let res;
-      return chai
-        .request(app)
-        .get('/signup')
-        .then(function(_res) {
-          res = _res;
-          console.log(res.status);
-          res.should.have.status(200);
-          res.should.be.html;
-          console.log(`Your status is ${res.status}.`);
-        });
-    });
-
-    it('should return a 200 status & HTML - login', function() {
-      let res;
-      return chai
-        .request(app)
-        .get('/login')
-        .then(function(_res) {
-          res = _res;
-          console.log(res.status);
-          res.should.have.status(200);
-          res.should.be.html;
-          console.log(`Your status is ${res.status}.`);
-        });
-    });
-
-    //Why the fuck does this pass?  It's a protected endpoint!!!!!!!!!!!!
-    // it('should return a 200 status & HTML - profile', function() {
-    //   let res;
-    //   return chai
-    //     .request(app)
-    //     .get('/profile')
-    //     .then(function(_res) {
-    //       res = _res;
-    //       console.log(res.body);
-    //       res.should.have.status(200);
-    //       res.should.be.html;
-    //       console.log(`Your status is ${res.status}.`);
-    //     });
-    // });
-
-});
-
-
 
