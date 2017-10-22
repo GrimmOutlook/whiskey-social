@@ -216,62 +216,15 @@ app.delete('/single-post/:postId', isLoggedIn, function(req, res){
             res.render('signup', { message: req.flash('signupMessage') });
         });
 
-        // BACKEND INPUT VALIDATION =================================
-                // All required fields entered.
-        // function missedField (jsonParser, req, res){
-        //   const requiredFields = ['username', 'password'];
-        //   const missingField = requiredFields.find(field => !(field in req.body));
-        //   console.log(`missingField: ${missingField}`);
-        //     if (missingField) {
-        //       console.log(`res.status: missing field: ${res.status}`);
-        //       return res.status(422).json({      // .send instead of .json??
-        //         code: 422,
-        //         reason: 'ValidationError',
-        //         justforthehellofit: 'Look! Im in the res.body!',
-        //         message: 'Missing field',
-        //         location: missingField
-        //       });
-        //     }
-        // }
-        //         // All required fields are strings.
-        // function areStrings (jsonParser, req, res){
-        //   const stringFields = ['username', 'password'];
-        //   const nonStringField = stringFields.find(field =>
-        //     (field in req.body) && typeof req.body[field] !== 'string'
-        //   );
-        //   console.log('nonStringField: ' + nonStringField);
+                  //SIGNUP + SIGNUP TESTS WORK WITH JUST THIS CODE:
+        // app.post('/signup',  passport.authenticate('local-signup', {
+        //     successRedirect : '/profile', // redirect to the secure profile section
+        //     failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        //     failureFlash : true // allow flash messages
+        //   })
+        // );
 
-        //   if (nonStringField) {
-        //     return res.status(422).json({
-        //       code: 422,
-        //       reason: 'ValidationError',
-        //       flash: 'Must start with a letter!',
-        //       message: 'Incorrect field type: expected string',
-        //       location: nonStringField
-        //     });
-        //   }
-        //   end();
-        // }
-
-        //         // Trim username & p/w
-        // function trimUserPw (jsonParser, req, res){
-        //   const explicityTrimmedFields = ['username', 'password'];
-        //   const nonTrimmedField = explicityTrimmedFields.find(field => {
-        //     console.log('field: ' + field);
-        //     console.log('req.body[field]: ' + req.body[field]);
-        //     req.body[field].trim() !== req.body[field]
-        //   });
-
-        //   if (nonTrimmedField) {
-        //     return res.status(422).json({
-        //       code: 422,
-        //       reason: 'ValidationError',
-        //       message: 'Cannot start or end with whitespace',
-        //       location: nonTrimmedField
-        //     });
-        //   }
-        // }
-
+              //ONLY BACKEND INPUT VALIDATION TESTS PASS WITH THIS CODE:
         app.post('/signup', jsonParser, (req, res) => {
           // BACKEND INPUT VALIDATION =================================
                 // All required fields entered.
@@ -323,7 +276,7 @@ app.delete('/single-post/:postId', isLoggedIn, function(req, res){
             });
           }
 
-                  // Reject username & password that are too short/long
+                 // Reject username & password that are too short/long
           const sizedFields = {
             username: {min: 1, max: 72},
             password: {min: 10, max: 72}
@@ -348,13 +301,13 @@ app.delete('/single-post/:postId', isLoggedIn, function(req, res){
               location: tooSmallField || tooLargeField
             });
           }
-
+        },
           passport.authenticate('local-signup', {
             successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
           })
-        });
+      );
 
-};
+};  // module.exports
 

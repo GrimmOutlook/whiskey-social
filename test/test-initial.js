@@ -62,7 +62,7 @@ function tearDownDb() {
 
 
 describe('User signup & login - ', function() {
-  this.timeout(25000);
+  this.timeout(8000);
   let testUserName = faker.name.firstName().toLowerCase();
   let testUserName2 = ` ${testUserName} `;
   let unencryptedPassword = faker.internet.password();
@@ -73,9 +73,8 @@ describe('User signup & login - ', function() {
   afterEach(() => tearDownDb());
   after(() => closeServer());
 
-                          // THIS PASSES!! - NOT ANYMORE!
+                          // THIS PASSES - without the validation code in POST route!
     // it('should allow a user to signup & save username & p/w to DB', function() {
-    //   // setTimeout(4000);
     //   return chai
     //     .request(app)
     //     .post('/signup')
@@ -91,6 +90,7 @@ describe('User signup & login - ', function() {
     //     )
     //     .then(user => {
     //       console.log('user: ' + user);
+    //       // console.log('res.body: ', + res.body)
     //       expect(user).to.not.be.null;
     //       expect(user.username).to.equal(testUserName);
     //       expect(user.password).to.not.equal(unencryptedPassword);
@@ -98,8 +98,35 @@ describe('User signup & login - ', function() {
     //     })
     // });
 
+             //This is from Thinkful JWT code - doesn't pass here either way.
+    // it('Should create a new user', function() {
+    //     return chai.request(app)
+    //       .post('/signup')
+    //       .send({
+    //         username: testUserName,
+    //         password: unencryptedPassword
+    //       })
+    //       .then(res => {
+    //         expect(res).to.have.status(200);
+    //         expect(res.body).to.be.an('object');
+    //         // expect(res.body).to.have.keys('username');
+    //         expect(res.body.username).to.equal(username);
+    //         return User.findOne({
+    //           username
+    //         });
+    //       })
+    //       .then(user => {
+    //         expect(user).to.not.be.null;
+    //         return user.validPassword(password);
+    //       })
+    //       .then(passwordIsCorrect => {
+    //         expect(passwordIsCorrect).to.be.true;
+    //       });
+    //   });
+
   describe('/signup Route', function() {
     describe('POST to signup', function() {
+              //BACK-END SIGNUP VALIDATION TESTS:
       it('Should reject users with missing username', function() {
         return chai.request(app)
           .post('/signup')
@@ -293,85 +320,6 @@ describe('User signup & login - ', function() {
 
     });  // describe('POST to signup', function() {
   });  // describe('/signup Route', function() {
-
-
-
-
-        // THIS TEST IS THE ONE I SPENT SO MUCH TIME ON
-    // it('Should reject users with duplicate username on signup', function() {
-    //   // setTimeout(4000);
-    //   return User
-    //     .create({
-    //       testUserName,
-    //       unencryptedPassword
-    //     })
-    //   .then(() =>
-    //     chai
-    //       .request(app).post('/signup').send({
-    //         username: testUserName,
-    //         password: unencryptedPassword
-    //       })
-    //       // return true;
-    //   )
-    //   // .then(() =>
-    //   //     expect.fail(null, null, 'Request should not succeed')
-    //   // )
-    //   .catch(err => {
-    //     console.log('hello fran');
-    //     if (err instanceof chai.AssertionError) {
-    //         throw err;
-    //     }
-
-    //     const res = err.response;
-    //     expect(res).to.have.status(422);
-    //     // expect(res.body.reason).to.equal('ValidationError');
-    //     console.log('res.body.message', res.body.message);
-    //     expect(res.body.message).to.equal('That username is already taken.');
-    //     expect(res.body.location).to.equal('username');
-    //   });
-
-    // }) // it rejects duplicate
-
-
-               // PASSES BUT SHOULDN'T
-  // describe('Why do I need a nested describe for this??? - ', function() {
-  //   this.timeout(5000);
-  //   //signup with testUserName & unencryptedPassword - then login with them, then compare?
-  //   it('should allow a user to login with username/password matching in the DB', function() {
-  //     // setTimeout(4000);
-  //     User
-  //       .create({
-  //         testUserName,
-  //         unencryptedPassword
-  //       })
-  //     .then(() =>
-  //       chai
-  //       .request(app)
-  //       .post('/login')
-  //       .send({
-  //         username: testUserName,
-  //         password: unencryptedPassword
-  //       })
-  //     )
-  //     .then(() => {
-  //       return testUser =
-  //       User
-  //       .findOne({username: testUserName})
-  //     })
-  //     .then(user => {
-  //       console.log('db password: ' + user.password);
-  //       console.log('login user: why is this null?' + user);
-  //       expect(user).to.not.be.null;
-  //       expect(user.username).to.equal(testUserName);
-  //       return user.validPassword(unencryptedPassword);
-  //       // expect(user.validPassword(unencryptedPassword)).to.be.true;
-  //     })
-  //     .then(correctPassword => {
-  //       console.log(`correctPassword: ${correctPassword}`)
-  //       expect(correctPasswordXXXXXXXXXXXXXX).to.be.true;
-  //     })
-  //   });
-  // }); // describe(why nested?)
 
 });  // describe('User signup & login')
 

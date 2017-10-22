@@ -57,6 +57,8 @@ module.exports = function(passport) {
     },
 
     function(req, username, password, done) {
+        if (username)
+            username = username.toLowerCase();
         // asynchronous
         process.nextTick(function() {
           // if the user is not already logged in:
@@ -73,7 +75,6 @@ module.exports = function(passport) {
                   // create the user
                   var newUser = new User();
                   newUser.username = username;
-
                   newUser.password = newUser.generateHash(password);
 
                   newUser.save(function(err) {
