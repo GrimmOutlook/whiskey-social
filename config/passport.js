@@ -57,8 +57,8 @@ module.exports = function(passport) {
     },
 
     function(req, username, password, done) {
-        if (username)
-            username = username.toLowerCase();
+        // if (username)
+        //     username = username.toLowerCase();
         // asynchronous
         process.nextTick(function() {
           // if the user is not already logged in:
@@ -67,6 +67,15 @@ module.exports = function(passport) {
               // if there are any errors, return the error
               if (err)
                   return done(err);
+                 // Check to see if all required fields entered.
+              const requiredFields = ['username', 'password'];
+              const missingField = requiredFields.find(field => !(field in req.body));
+              console.log(`missingField: ${missingField}`);
+
+                if (missingField) {
+                  return done(null, false, {message: 'User is inactive'});
+                }
+
               // check to see if theres already a user with that username
               if (user) {
                   console.log('req.flash: ', req.flash);
@@ -86,7 +95,29 @@ module.exports = function(passport) {
                 }
             });
           }
+          else{
+              console.log(req.user);
+          }
         });
     }));
 
-};
+    // function(username, password, done) {
+    //   User.findOne({'username' : username}, function(err, user) {
+    //     if (err)
+    //       return done(err);
+
+    //     if (user) {
+    //       console.log('req.flash: ', req.flash);
+    //       return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+    //     }
+
+    //     var validPassword = user.comparePassword(password);
+    //     if(!validPassword){
+    //       return done(null, false, {message: 'Incorrect password' });
+    //     }
+
+    //     return done(null, user);
+    //   });
+
+
+};  // module.exports
