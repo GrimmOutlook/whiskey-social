@@ -1,4 +1,14 @@
-const LocalStrategy = require('passport-local').Strategy;
+// const LocalStrategy = require('passport-local').Strategy;
+
+const express  = require('express');
+const app      = express();
+// const {PORT, DATABASE_URL} = require('./database');
+// const {app, runServer, closeServer} = require('../server');
+const {TEST_DATABASE_URL} = require('./database');
+let LocalStrategy;
+
+
+LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../app/models/users');
 
@@ -139,7 +149,9 @@ module.exports = function(passport) {
           }
         });
     }));
-
+    if (process.env.NODE_ENV == 'test') {
+      passport.authenticate = () => true;
+    }
     // function(username, password, done) {
     //   User.findOne({'username' : username}, function(err, user) {
     //     if (err)
