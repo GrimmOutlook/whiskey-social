@@ -4,7 +4,7 @@
   "description": "Keep track of your whiskeys",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test"
+    "test": "NODE_ENV=test mocha ./test"
   },
   "author": "GrimmOutlook",
   "license": "ISC",
@@ -31,6 +31,7 @@
     "chai-http": "^3.0.0",
     "faker": "^4.1.0",
     "mocha": "^3.4.2",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "passport-strategy-mock": "^0.1.1"
   }
 }

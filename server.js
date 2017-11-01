@@ -9,16 +9,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const session      = require('express-session');
 const methodOverride = require('method-override');
+const strategyMock = require('passport-strategy-mock');
 
 mongoose.Promise = global.Promise;
 
 const {PORT, DATABASE_URL} = require('./config/database');
-// const whiskeyRouter = require('./app/whiskeyRouter');
 
-// configuration ===============================================================
-// mongoose.connect(configDB.url); // connect to our database
-
-require('./config/passport')(passport); // pass passport for configuration
+//requires ./config/passport, then passes in the passport npm package to ./config/passport.js, then executes the code in passport.js
+require('./config/passport')(passport); // pass the module that was exported in passport.js
 
 
 app.use(morgan('dev'));
@@ -27,11 +25,8 @@ app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-// app.use('/whiskey', whiskeyRouter);
-// app.use(express.static('../public'));
-// app.use('/', express.static('public'));
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.set('view engine', 'pug'); // set up ejs for templating
+app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '/views'));  //require path needed?
 
 // required for passport

@@ -73,7 +73,7 @@
 //         });
 //     });
 
-//     // Why the fuck does this pass?  It's a protected endpoint!!!!!!!!!!!!
+//     // Why does this pass?  It's a protected endpoint!!!!!!!!!!!!
 //     it('should return a 200 status & HTML - profile', function() {
 //       let res;
 //       return chai

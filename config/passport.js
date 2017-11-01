@@ -149,26 +149,8 @@ module.exports = function(passport) {
           }
         });
     }));
-    if (process.env.NODE_ENV == 'test') {
-      passport.authenticate = () => true;
-    }
-    // function(username, password, done) {
-    //   User.findOne({'username' : username}, function(err, user) {
-    //     if (err)
-    //       return done(err);
-
-    //     if (user) {
-    //       console.log('req.flash: ', req.flash);
-    //       return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
-    //     }
-
-    //     var validPassword = user.comparePassword(password);
-    //     if(!validPassword){
-    //       return done(null, false, {message: 'Incorrect password' });
-    //     }
-
-    //     return done(null, user);
-    //   });
-
+    // if (process.env.NODE_ENV == 'test') {
+    //   passport.authenticate = () => true;
+    // }
 
 };  // module.exports
