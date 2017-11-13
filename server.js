@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const session      = require('express-session');
 const methodOverride = require('method-override');
-const strategyMock = require('passport-strategy-mock');
+// const strategyMock = require('passport-strategy-mock');
 
 mongoose.Promise = global.Promise;
 
