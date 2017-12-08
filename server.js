@@ -1,70 +1,79 @@
-const express  = require('express');
-const app      = express();
-const mongoose = require('mongoose');
-const passport = require('passport');
-const flash    = require('express-flash');
+'use strict';
+require('dotenv').config();
 const path   = require('path');
-const morgan       = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser   = require('body-parser');
-const session      = require('express-session');
+const bodyParser = require('body-parser');
+const express = require('express');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const passport = require('passport');
 const methodOverride = require('method-override');
-// const strategyMock = require('passport-strategy-mock');
 
 mongoose.Promise = global.Promise;
 
-const {PORT, DATABASE_URL} = require('./config/database');
+const {PORT, DATABASE_URL} = require('./config');
 
-//requires ./config/passport, then passes in the passport npm package to ./config/passport.js, then executes the code in passport.js
-require('./config/passport')(passport); // pass the module that was exported in passport.js
+const {router: usersRouter} = require('./users');
+const {router: whiskeyRouter} = require('./whiskeys');
+const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');  //why not require('.auth/index.js')?
 
+const app = express();
 
 app.use(morgan('dev'));
-app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+// Static files, views
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '/views'));  //require path needed?
 
-// required for passport
-app.use(session({
-    secret: 'onebourbononescotchonebeer',   // session secret
-    resave: true,
-    saveUninitialized: true
-}));
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
-
-//CORS
+// CORS
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
   if (req.method === 'OPTIONS') {
-    return res.sendStatus(204);
+    return res.send(204);     // old - return res.sendStatus(204);
   }
   next();
 });
 
-// routes ======================================================================
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/', usersRouter);  // signup   '/api/users/'
+app.use('/', authRouter);    // login    '/api/auth/'
+app.use('/', whiskeyRouter);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
+// A protected endpoint which needs a valid JWT to access it
+app.get('/api/protected', jwtAuth, (req, res) => {
+      console.log('req.user is: ' + req.user);
+      console.log('Does this work?');
+        return res.json({
+            data: 'rosebud'
+        });
+    }
+);
+
+app.use('*', (req, res) => {
+  return res.status(404).json({message: 'Not Found'});
+});
 
 // launch ======================================================================
 let server;
 
-function runServer(databaseUrl=DATABASE_URL, port=PORT) {
-// mongoose.connect(databaseUrl, {useMongoClient: true}, err => {
+// old - function runServer(databaseUrl=DATABASE_URL, port=PORT) {
+function runServer() {
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
+    mongoose.connect(DATABASE_URL, {useMongoClient: true}, err => {
       if (err) {
         return reject(err);
       }
-      server = app.listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
+      server = app.listen(PORT, () => {
+        console.log(`Your app is listening on port ${PORT}`);
         resolve();
       })
       .on('error', err => {
@@ -94,5 +103,4 @@ if (require.main === module) {
 };
 
 module.exports = {app, runServer, closeServer};
-// app.listen(port);
-// console.log('The magic happens on port ' + port);
+

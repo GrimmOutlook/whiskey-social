@@ -1,8 +1,9 @@
+'use strict';
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt-nodejs');
 const Schema = mongoose.Schema
 
-// mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
 // avatar: Buffer,  //TODO nice to have  -  twitter or FBook photo
 const userSchema = Schema({
@@ -26,14 +27,24 @@ const userSchema = Schema({
   }]
 });
 
-// generating a hash
-userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
+// // generating a hash
+// userSchema.methods.generateHash = function(password) {
+//     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+// };
+
+// // checking if password is valid
+// userSchema.methods.validPassword = function(password) {
+//     return bcrypt.compareSync(password, this.password);
+// };
 
 // checking if password is valid
-userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.password);
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compare(password, this.password);
+};
+
+// generating a hash
+userSchema.statics.hashPassword = function(password) {
+  return bcrypt.hash(password, 10);
 };
 
 userSchema.virtual('fullName').get(function() {
@@ -43,10 +54,10 @@ userSchema.virtual('fullName').get(function() {
 userSchema.methods.formattedUser = function() {
   // console.log('formattedUser: ' + this);
   return {
-    id: this._id,
+    // id: this._id,
     name: this.fullName,
     username: this.username,
-    email: this.email
+    // email: this.email
   };
 }
 
@@ -92,11 +103,11 @@ userSchema.methods.profileUser = function() {
   };
 }
 
+
+// module.exports = mongoose.model('User', userSchema);
+
 // create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);
-
-
-// const User = mongoose.model('User', userSchema);
-// module.exports = {User};
+const User = mongoose.model('User', userSchema);
+module.exports = {User};
 
 

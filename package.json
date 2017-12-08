@@ -9,18 +9,17 @@
   "author": "GrimmOutlook",
   "license": "ISC",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.15.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
     "cheerio": "^1.0.0-rc.2",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.14.1",
-    "express-flash": "0.0.2",
-    "express-session": "^1.15.6",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
     "method-override": "^2.3.10",
-    "mongoose": "^4.6.8",
-    "morgan": "^1.7.0",
+    "mongoose": "^4.13.6",
+    "morgan": "^1.9.0",
     "passport": "^0.3.2",
+    "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "pug": "^2.0.0-rc.4",
@@ -30,8 +29,7 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "faker": "^4.1.0",
-    "mocha": "^3.4.2",
-    "nodemon": "^1.12.1",
-    "passport-strategy-mock": "^0.1.1"
+    "mocha": "^3.5.3",
+    "nodemon": "^1.12.5"
   }
 }

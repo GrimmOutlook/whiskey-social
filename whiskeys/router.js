@@ -1,18 +1,26 @@
-const User = require('../app/models/users');
-const Whiskey = require('../app/models/whiskeys');
+'use strict';
+const {User} = require('../users/models');
+const {Whiskey} = require('./models');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-    res.redirect('/');
-}
+const router = express.Router();
 
-module.exports = function(app, passport) {
+const jsonParser = bodyParser.urlencoded();   // works in browser, not Postman
+// const jsonParser = bodyParser.json();      // works in Postman, not browser
+
+// function isLoggedIn(req, res, next) {
+//     if (req.isAuthenticated())
+//         return next();
+//     res.redirect('/');
+// }
+
+// module.exports = function(app, passport) {
     let searchTerm = "";
 
 // ----------------------------- Whiskey Search Screen ----------------------------------
 
-    app.get('/whiskey-search', isLoggedIn, (req, res) => {
+    router.get('/whiskey-search', (req, res) => {
       searchTerm = req.query.whiskey;
       console.log(searchTerm);
       if (searchTerm){
@@ -37,7 +45,7 @@ module.exports = function(app, passport) {
     })
 
 // --------------------------- Whiskey Profile screen --------------------------
-    app.get('/whiskey-profile/:whiskeyId', isLoggedIn, (req, res) => {
+    router.get('/whiskey-profile/:whiskeyId', (req, res) => {
       console.log(req.params.whiskeyId);
       Whiskey
         .findById(req.params.whiskeyId)
@@ -56,7 +64,7 @@ module.exports = function(app, passport) {
 
 // -------------------- Whiskey Post Screen ---------------------------------------------
          //GET the screen
-  app.get('/post/:whiskeyId', isLoggedIn, (req, res) => {
+  router.get('/post/:whiskeyId', (req, res) => {
     console.log('userId: ' + req.user._id);
     console.log('whiskeyId: ' + req.params.whiskeyId);
 
@@ -78,7 +86,7 @@ module.exports = function(app, passport) {
   });
 
             //POST info entered into screen into DB
-  app.post('/post/:whiskeyId', isLoggedIn, (req, res) => {
+  router.post('/post/:whiskeyId', (req, res) => {
      console.log('whiskey-post POST userId: ' + req.user._id);
     console.log('whiskey-post POST whiskeyId: ' + req.params.whiskeyId);
     console.log(`req.body: ${req.body}`);
@@ -120,7 +128,7 @@ module.exports = function(app, passport) {
   })
 
 // ---------------------- Post Confirmation Screen --------------------------------------
-  app.get('/post/:userId/confirm', isLoggedIn, (req, res) => {
+  router.get('/post/:userId/confirm', (req, res) => {
     console.log(req.params.userId);
     User
       .findById(req.params.userId)
@@ -138,7 +146,7 @@ module.exports = function(app, passport) {
 
 
               //------------------- POST/PUT add to favorites --------------------------
-  app.post('/post/:userId/confirm', isLoggedIn, (req, res) => {
+  router.post('/post/:userId/confirm', (req, res) => {
     console.log(`req.params.userId ${req.params.userId}`);
     User
       .findById(req.params.userId)
@@ -159,4 +167,5 @@ module.exports = function(app, passport) {
       });
   });
 
-}
+
+module.exports = {router};
