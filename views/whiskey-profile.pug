@@ -3,21 +3,21 @@ extends page-outline.pug
 block content
 
   div.whiskey-profile-container
-    h1= whiskeyName
-    p.whiskey-profile-description= description
+    h1= single_whiskey.whiskeyName
+    p.whiskey-profile-description= single_whiskey.description
 
-    a.back-to-search(href="/whiskey-search")
+    a.back-to-search(href="/whiskey-search?whiskey=" + searchTerm)
       |< Back
 
-    a.redirect-to-whiskey-post(href="/post/" + _id)
+    a.redirect-to-whiskey-post(href="/post/" + single_whiskey._id)
       |Rate this Whiskey >
 
-    - var smallPhoto = smallImageURL
-    - var largePhoto = largeImageURL
+    - var smallPhoto = single_whiskey.smallImageURL
+    - var largePhoto = single_whiskey.largeImageURL
     div.image-container
       if largePhoto == undefined
-        img.whiskey-profile-image(src=largeImageURL)
+        img.whiskey-profile-image(src=single_whiskey.largeImageURL)
       else
-        img.whiskey-profile-image(src=smallImageURL)
+        img.whiskey-profile-image(src=single_whiskey.smallImageURL)
 
   div.push

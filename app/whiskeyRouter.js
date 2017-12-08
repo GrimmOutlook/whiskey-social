@@ -15,13 +15,14 @@ module.exports = function(app, passport) {
     app.get('/whiskey-search', isLoggedIn, (req, res) => {
       searchTerm = req.query.whiskey;
       console.log(searchTerm);
+      req.session.searchTerm = searchTerm;
       if (searchTerm){
         Whiskey
             .find({"whiskeyName": { $regex: searchTerm, $options: '$i' }}) // find is always an array
             // .exec()
             .then(whiskeys => {
               console.log("This is what whiskeys is returning: " + whiskeys);
-              console.log("Print this whiskeyName to screen!!: " + whiskeys[0].whiskeyName);
+              // console.log("Print this whiskeyName to screen!!: " + whiskeys[0].whiskeyName);
               console.log(typeof(whiskeys));    //object - array
               res.render('whiskey-search', { whiskeys });  // This makes the array an object
             })
@@ -39,13 +40,14 @@ module.exports = function(app, passport) {
 // --------------------------- Whiskey Profile screen --------------------------
     app.get('/whiskey-profile/:whiskeyId', isLoggedIn, (req, res) => {
       console.log(req.params.whiskeyId);
+      console.log('req.session.searchTerm: ' + req.session.searchTerm);
       Whiskey
         .findById(req.params.whiskeyId)
         .exec()
         .then(single_whiskey => {
           console.log("whiskey-profile info: " + single_whiskey);
           console.log("whiskey-profile whiskeyName: " + single_whiskey.whiskeyName);
-          res.render('whiskey-profile', single_whiskey);
+          res.render('whiskey-profile', {"single_whiskey": single_whiskey, "searchTerm": req.session.searchTerm});
           })
         .catch(
           err => {

@@ -12,7 +12,7 @@ block content
 
   p Results:
 
-    if whiskeys
+    if whiskeys && whiskeys.length
       each w in whiskeys
         a(href="/whiskey-profile/" + w._id)
           div.search-results
@@ -22,8 +22,8 @@ block content
             div.search-image
               img(src=w.smallImageURL)
         div.border-between
-      else
-        p No results found
+    else
+      p No results found
 
   //- each whiskey in whiskeys
   //-   li= whiskeyName + smallImageURL
