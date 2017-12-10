@@ -64,6 +64,7 @@ userSchema.methods.profileUser = function() {
         favoriteCount++;
         favoriteNames.push(this.posts[f].whiskeyName);
         favoritePosts.push(this.posts[f]);
+        favoritePosts.reverse();
       }
     }
   }

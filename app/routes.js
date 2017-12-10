@@ -56,7 +56,7 @@ module.exports = function(app, passport) {
         .findOne({username: req.user.username})
         .exec()
         .then(user => {
-          console.log('example of history page pass to pug: ' + user);
+          user.posts.reverse();
           res.render('post-history', user);
         })
         .catch(
@@ -73,6 +73,7 @@ module.exports = function(app, passport) {
         .findOne({username: req.user.username})
         .exec()
         .then(user => {
+          // user.profileUser().favoritePosts.reverse();
           res.render('my-favorites', user.profileUser());
         })
         .catch(
@@ -93,6 +94,7 @@ module.exports = function(app, passport) {
         .findOne({username: req.user.username})
         .exec()
         .then(user => {
+          user.posts.reverse();
           res.render('my-posts-unique', user.profileUser());
         })
         .catch(

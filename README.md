@@ -1,18 +1,23 @@
-# Header Text for Explanation with one pound sign
+# Summary
 
 Hello, and welcome to Whiskey Social!
 
-#### Header Text for Explanation with four pound signs
+# Features
 This is some text about my app.
+## Feature #1
 
-## Instructions (with two pound signs)
+## Feature #2
 
-If you would like to use this app:
+## Feature #3
 
-1. List of indented instructions
-2. List of indented instructions
-3. List of indented instructions
-4. List of indented instructions
-5. List of indented instructions
-6. List of indented instructions
+# Wireframes
+
+# Tech Stack
+
+# Coming Soon
+
+1. Ability to add friends & see eachother's posts.
+2. Earn badges for drinking certain numbers or types of whiskeys
+3. Something Else
+4. Something Else
 

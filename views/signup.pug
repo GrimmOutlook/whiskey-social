@@ -11,7 +11,7 @@ html(lang="en")
     header
       nav.menu
         ul.menu-list
-          li
+          li.logo
             img.logo(src='../public/images/wax-seal-logo.png', alt='wax seal logo')
           li.header-text-sign-up Whiskey Social
 
@@ -41,9 +41,9 @@ html(lang="en")
             | Your password must be at least 10 characters with at least one letter - case Sensitive.
         input(type='submit', value='Sign Up')
 
-    - if (messages.info)
-      .message.info
-        span= messages.info
+    //- - if (messages.info)
+    //-   .message.info
+    //-     span= messages.info
 
     //- footer.main-footer
     //-   | Whiskey Social 2017 Copyright
