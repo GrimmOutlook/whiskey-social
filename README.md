@@ -1,7 +1,6 @@
 # Whiskey Social
 [![Build Status](https://travis-ci.org/GrimmOutlook/whiskey-social.svg?branch=master)](https://travis-ci.org/GrimmOutlook/whiskey-social)
 [![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)]()
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)]()
 # Summary
 Whiskey Social allows you to keep track of all the different whiskeys you've tried.  You can also rate them, keep track of your favorites, and make notes on each whiskey in your collection.
 
@@ -9,10 +8,11 @@ Whiskey Social allows you to keep track of all the different whiskeys you've tri
 
 ### Profile Page:
 Your Profile Page shows a number for:
-**My Posts** - The total number of whiskeys that you have tasted.
-**My Unique Posts** - The number of different whiskeys that you have tasted.
-**My Favorites** - The number of whiskeys you have designated as a favorite.
-- Just click on the number and you'll be redirected to a list of whiskeys in the corresponding category.  The list will show the name, photo, and rating of your whiskey, along with a blue-ribbon favorite designation for those you have favorited.
+  - **My Posts** - The total number of whiskeys that you have tasted.
+  - **My Unique Posts** - The number of different whiskeys that you have tasted.
+  - **My Favorites** - The number of whiskeys you have designated as a favorite.
+
+Just click on the number and you'll be redirected to a list of whiskeys in the corresponding category.  The list will show the name, photo, and rating of your whiskey, along with a blue-ribbon favorite designation for those you have favorited.
 
 ### Whiskey Search:
 - Search the database of over 1,700 whiskeys, bourbons, and scotches from around the world.
