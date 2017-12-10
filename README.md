@@ -23,12 +23,12 @@ Just click on the number and you'll be redirected to a list of whiskeys in the c
 - Click on any whiskey on any of the 3 'posts' pages and you'll be able to see any comments you've made associated with that whiskey, along with the ability to add other comments.
 
 # Screenshots
-![Profile Page](../public/images/readme-profile.png)
-![Posts Page](../public/images/readme-posts.png)
-![My Favorites Page](../public/images/readme-favorites.png)
-![Single Post Page](../public/images/readme-single-post.png)
-![Whiskey Search Page](./public/images/readme-search.png)
-![Whiskey Profile Page](/public/images/readme-whiskey-profile.png)
+<img src="public/images/readme-profile.png" alt="Profile Page preview" width="250">
+![Posts Page](public/images/readme-posts.png)
+![My Favorites Page](public/images/readme-favorites.png)
+![Single Post Page](public/images/readme-single-post.png)
+![Whiskey Search Page](public/images/readme-search.png)
+![Whiskey Profile Page](public/images/readme-whiskey-profile.png)
 ![Whiskey Post Page](public/images/readme-whiskey-post.png)
 
 
