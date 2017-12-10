@@ -1,5 +1,6 @@
 # Whiskey Social
 http://whiskey-social.herokuapp.com/
+
 [![Build Status](https://travis-ci.org/GrimmOutlook/whiskey-social.svg?branch=master)](https://travis-ci.org/GrimmOutlook/whiskey-social)
 [![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)]()
 # Summary
@@ -23,14 +24,13 @@ Just click on the number and you'll be redirected to a list of whiskeys in the c
 - Click on any whiskey on any of the 3 'posts' pages and you'll be able to see any comments you've made associated with that whiskey, along with the ability to add other comments.
 
 # Screenshots
-<img src="public/images/readme-profile.png" alt="Profile Page preview" width="250">
-![Posts Page](public/images/readme-posts.png)
-![My Favorites Page](public/images/readme-favorites.png)
-![Single Post Page](public/images/readme-single-post.png)
-![Whiskey Search Page](public/images/readme-search.png)
-![Whiskey Profile Page](public/images/readme-whiskey-profile.png)
-![Whiskey Post Page](public/images/readme-whiskey-post.png)
+<img src="public/images/readme-profile.png" alt="Profile Page preview" width="400">            <img src="public/images/readme-posts.png" alt="Posts Page preview" width="400">
 
+<img src="public/images/readme-favorites.png" alt="My Favorites Page preview" width="400">            <img src="public/images/readme-single-post.png" alt="Single Post Page preview" width="400">
+
+<img src="public/images/readme-search.png" alt="Whiskey Search preview" width="400">            <img src="public/images/readme-whiskey-profile.png" alt="Whiskey Profile preview" width="400">
+
+<img src="public/images/readme-whiskey-post.png" alt="Whiskey Post preview" width="400">
 
 # Tech Stack
 
