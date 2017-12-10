@@ -50,6 +50,52 @@
   margin-left: 12px;
 }
 
+@media screen and (min-width: 500px) {
+
+  .profile-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /*grid-template-rows: auto;*/
+    grid-template-areas:
+      "username username username avatar avatar"
+      "total-post . unique-post . favorite"
+  }
+
+  .profile-username {
+    grid-area: username;
+  }
+
+  .profile-avatar {
+    grid-area: avatar;
+  }
+
+  .profile-total-post {
+    grid-area: total-post;
+  }
+
+  .profile-unique-post {
+    grid-area: unique-post;
+  }
+
+  .profile-favorite {
+    grid-area: favorite;
+  }
+
+  .profile-username, .profile-avatar,
+  .profile-total-post, .profile-unique-post,
+  .profile-favorite {
+    justify-self: center;
+    align-self: center;
+  }
+
+  .profile-total-post, .profile-unique-post,
+  .profile-favorite {
+    margin-top: 5em;
+    margin-bottom: 6em;
+  }
+
+}
+
 
 /* =====================================================
   Post History, My Favorites, Unique Posts Pages Grid

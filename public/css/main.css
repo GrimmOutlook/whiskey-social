@@ -404,44 +404,6 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   }
 }
 
-/* ======================================
-  Delete Account Page
-======================================== */
-
-.delete-username p {
-  text-align: center;
-  font-size: 2.8em;
-  font-weight: bold;
-  padding: 0.5em 0 0;
-}
-
-.delete-question p,
-.delete-statement p {
-  text-align: center;
-  font-size: 1.5em;
-  padding: 1.5em 0.2em 0.1em;
-}
-
-.delete-answer-no input[type="submit"],
-.delete-answer-yes input[type="submit"] {
-  display: block;
-  width: 50%;
-  margin: 1.25em auto;
-  color: white;
-  border: 0;
-  border-radius: 2em;
-  padding: 0.75em;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-.delete-answer-no input[type="submit"] {
-  background-color: #FFB832;
-}
-
-.delete-answer-yes input[type="submit"] {
-  background-color: #A6000A;
-}
 
 /* ==================================================
   My Favorites, My Unique Posts, Post History Pages
@@ -558,7 +520,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .profile-username p {
   font-family: 'Amiri', serif;
   font-size: 40px;
-  margin: 5px 5px;
+  margin: 20px 5px 0;
   text-align: center;
 }
 
@@ -848,19 +810,31 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 
 @media screen and (min-width: 500px) and (max-width: 949px) {
   /* ======================================
-    Delete Account Page
-  ======================================== */
-  .delete-answer-no input[type="submit"],
-  .delete-answer-yes input[type="submit"] {
-    width: 35%;
-  }
-
-  /* ======================================
     Post Confirm Page
   ======================================== */
   .confirm-favorite input[type="submit"],
   .confirm-redirect input[type="submit"] {
     width: 35%;
+  }
+
+  /* ======================================
+    Profile Page
+  ======================================== */
+
+  .profile-avatar .wax-seal {
+    height: 180px;
+    width: 180px;
+    margin-top: 2em;
+  }
+
+  .profile-total-post p,
+  .profile-unique-post p,
+  .profile-favorite p {
+    font-size: 75px;
+  }
+
+  .profile-username p {
+    font-size: 60px;
   }
 
   /* ======================================
@@ -912,14 +886,6 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   }
 
   /* ======================================
-    Delete Account Page
-  ======================================== */
-  .delete-answer-no input[type="submit"],
-  .delete-answer-yes input[type="submit"] {
-    width: 25%;
-  }
-
-  /* ======================================
     Post Confirm Page
   ======================================== */
   .confirm-favorite input[type="submit"],
@@ -929,6 +895,26 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 
   .confirm-redirect input[type="submit"] {
     font-size: 1.1em;
+  }
+
+  /* ======================================
+    Profile Page
+  ======================================== */
+
+  .profile-avatar .wax-seal {
+    height: 200px;
+    width: 200px;
+    margin-top: 2em;
+  }
+
+  .profile-total-post p,
+  .profile-unique-post p,
+  .profile-favorite p {
+    font-size: 75px;
+  }
+
+  .profile-username p {
+    font-size: 60px;
   }
 
   /* ======================================
