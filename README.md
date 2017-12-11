@@ -24,13 +24,26 @@ Just click on the number and you'll be redirected to a list of whiskeys in the c
 - Click on any whiskey on any of the 3 'posts' pages and you'll be able to see any comments you've made associated with that whiskey, along with the ability to add other comments.
 
 # Screenshots
-<img src="public/images/readme-profile.png" alt="Profile Page preview" width="400">            <img src="public/images/readme-posts.png" alt="Posts Page preview" width="400">
+#### Profile Page:
+<img src="public/images/readme-profile.png" alt="Profile Page preview" width="600">
 
-<img src="public/images/readme-favorites.png" alt="My Favorites Page preview" width="400">            <img src="public/images/readme-single-post.png" alt="Single Post Page preview" width="400">
+#### Posts Page:
+<img src="public/images/readme-posts.png" alt="Posts Page preview" width="600">
 
-<img src="public/images/readme-search.png" alt="Whiskey Search preview" width="400">            <img src="public/images/readme-whiskey-profile.png" alt="Whiskey Profile preview" width="400">
+#### My Favorites Page:
+<img src="public/images/readme-favorites.png" alt="My Favorites Page preview" width="600">
 
-<img src="public/images/readme-whiskey-post.png" alt="Whiskey Post preview" width="400">
+#### Single Post Page:
+<img src="public/images/readme-single-post.png" alt="Single Post Page preview" width="600">
+
+#### Whiskey Search Page:
+<img src="public/images/readme-search.png" alt="Whiskey Search preview" width="600">
+
+#### Whiskey Profile Page:
+<img src="public/images/readme-whiskey-profile.png" alt="Whiskey Profile preview" width="600">
+
+#### Whiskey Post Page:
+<img src="public/images/readme-whiskey-post.png" alt="Whiskey Post preview" width="600">
 
 # Tech Stack
 
