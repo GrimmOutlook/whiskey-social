@@ -40,6 +40,59 @@ a {
   Sign-Up & Log-in Forms
 ======================================== */
 
+.header-signup {
+  margin: 0;
+  padding: 0;
+  background-color: #DB631C;
+  border-bottom: 3px solid #FFB832;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-signup-menu-list {
+  position: relative;
+  height: 80px;
+  line-height: 80px;
+}
+
+.header-signup-logo-box {
+  flex: 1;
+  text-align: center;
+}
+
+.header-signup-logo {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 80px;
+  width: 80px;
+  cursor: pointer;
+}
+
+.header-signup-text {
+  color: white;
+  font-size: 30px;
+  flex: 3;
+  margin-left: 30%;
+  text-align: left;
+}
+
+@media only screen and (min-width: 451px) {
+  .header-signup {
+    border-bottom: 5px solid #FFB832;
+  }
+
+  .header-signup-text {
+    transform: none;
+    font-size: 40px;
+    margin-left: 0;
+    text-align: center;
+  }
+
+}
+
 .logo-large {
   height: 220px;
 }
@@ -51,7 +104,7 @@ a {
   margin: 0 auto;
 }
 
-.menu-list .header-text-sign-up {
+/*.menu-list .header-text-sign-up {
   color: white;
   position: absolute;
   top: 1px;
@@ -62,7 +115,7 @@ a {
   height: 2em;
   line-height: 40px;
   padding-top: 20px;
-}
+}*/
 
 /*form always centered*/
 form#sign-up {
