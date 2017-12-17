@@ -156,7 +156,7 @@ form#sign-up > div > input[type="text"]:focus,
 form#sign-up > div > input[type="email"]:focus,
 form#sign-up > div > input[type="password"]:focus {
   outline: 0;
-  background: white;
+  background: #eee;
 }
 
 /*labels containing placeholder text disappear when field is clicked on*/
@@ -345,6 +345,26 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   .hide {
     display: none;
   }
+
+  div.burger {
+    position: absolute;
+    top: 9px;
+    padding-left: 8%;
+    padding-top: 20px;
+  }
+
+  span.burger-line {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+
+    background: white;
+    border-radius: 3px;
+
+    z-index: 1;
+    }
 
   .menu-list .header-text {
     color: white;

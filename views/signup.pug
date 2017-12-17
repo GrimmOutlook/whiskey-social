@@ -42,6 +42,11 @@ html(lang="en")
             | Your password must be at least 10 characters with at least one letter - case Sensitive.
         input(type='submit', value='Sign Up')
 
+      div.login-bottom
+        p
+          | Already Have an Account?
+          a(href='/login')   Log in here!
+
     //- - if (messages.info)
     //-   .message.info
     //-     span= messages.info
