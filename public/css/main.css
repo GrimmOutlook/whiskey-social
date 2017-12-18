@@ -143,7 +143,6 @@ form#sign-up > div > label {
 
 /*normal layout & styling of input fields*/
 form#sign-up > div > input[type="text"],
-form#sign-up > div > input[type="email"],
 form#sign-up > div > input[type="password"] {
   width: 100%;
   border: 0;
@@ -153,7 +152,6 @@ form#sign-up > div > input[type="password"] {
 
 /* layout & styling of input fields when field is clicked on*/
 form#sign-up > div > input[type="text"]:focus,
-form#sign-up > div > input[type="email"]:focus,
 form#sign-up > div > input[type="password"]:focus {
   outline: 0;
   background: #eee;
@@ -161,15 +159,13 @@ form#sign-up > div > input[type="password"]:focus {
 
 /*labels containing placeholder text disappear when field is clicked on*/
 form#sign-up > div > input[type="text"]:focus + label,
-form#sign-up > div > input[type="email"]:focus + label,
 form#sign-up > div > input[type="password"]:focus + label {
   opacity: 0;
 }
 
 /*valid entries will show checkbox.  checkbox styling.*/
-form#sign-up > div > input[type="text"]:valid,
-form#sign-up > div > input[type="email"]:valid,
-form#sign-up > div > input[type="password"]:valid {
+form#sign-up.green-check > div > input[type="text"]:valid,
+form#sign-up.green-check > div > input[type="password"]:valid {
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/check.svg);
   background-size: 20px;
   background-repeat: no-repeat;
@@ -178,28 +174,24 @@ form#sign-up > div > input[type="password"]:valid {
 
 /*valid entries will have label placeholder text removed*/
 form#sign-up > div > input[type="text"]:valid + label,
-form#sign-up > div > input[type="email"]:valid + label,
 form#sign-up > div > input[type="password"]:valid + label {
   opacity: 0;
 }
 
 /*when input is not valid, not in focus, not empty, do this to the input field*/
 form#sign-up > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown),
-form#sign-up > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown),
 form#sign-up > div > input[type="password"]:invalid:not(:focus):not(:placeholder-shown) {
   background: #FFB832;
 }
 
 /*when input is not valid, not in focus, not empty, do this to the label text*/
 form#sign-up > div > input[type="text"]:invalid:not(:focus):not(:placeholder-shown) + label,
-form#sign-up > div > input[type="email"]:invalid:not(:focus):not(:placeholder-shown) + label,
 form#sign-up > div > input[type="password"]:invalid:not(:focus):not(:placeholder-shown) + label {
   opacity: 0;
 }
 
 /*when input is not valid, not empty, but in focus - show the requirements div*/
 form#sign-up > div > input[type="text"]:invalid:focus:not(:placeholder-shown) ~ .requirements,
-form#sign-up > div > input[type="email"]:invalid:focus:not(:placeholder-shown) ~ .requirements,
 form#sign-up > div > input[type="password"]:invalid:focus:not(:placeholder-shown) ~ .requirements {
   max-height: 200px;
   padding: 10px 30px 20px 50px;
@@ -343,6 +335,10 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   /*--- Mobile Device - Hide Top Menu ---*/
 @media only screen and (max-width: 650px) {
   .hide {
+    display: none;
+  }
+
+  img.logo {
     display: none;
   }
 

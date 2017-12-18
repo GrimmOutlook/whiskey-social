@@ -13,28 +13,18 @@ html(lang="en")
     header.header-signup
       ul.header-signup-menu-list
         li.header-signup-logo-box
-          img.header-signup-logo(src='/public/images/wax-seal-logo.png', alt='wax seal logo')
+          a(href='/')
+            img.header-signup-logo(src='/public/images/wax-seal-logo.png', alt='wax seal logo')
       div.header-signup-text Whiskey Social
 
     div.main-content-wrapper
       div.logo-large
-        img.logo(src='../public/images/wax-seal-logo.png', alt='wax seal logo')
+        img.logo-large(src='../public/images/wax-seal-logo.png', alt='wax seal logo')
 
-      form#sign-up(method='POST' enctype='application/json' action='/signup')
-        //- div
-        //-   input#firstName(type='text', name='firstName', required='', placeholder=' ')
-        //-   label(for='firstName') First Name
-        //- div
-        //-   input#lastName(type='text', name='lastName', required='', placeholder=' ')
-        //-   label(for='lastName') Last Name
+      form#sign-up.green-check(method='POST' enctype='application/json' action='/signup')
         div
           input#username(type='text', name='username', required='', placeholder=' ')
           label(for='username') Username
-        //- div
-        //-   input#email(type='email', name='email', required='', placeholder=' ')
-        //-   label(for='email') Email Address
-        //-   .requirements
-        //-     | Must be a valid email address.
         div
           input#password(type='password', name='password', required='', placeholder=' ', pattern='(?=.*[a-z]).{10,}')
           label(for='password') Password

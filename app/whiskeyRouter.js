@@ -33,7 +33,7 @@ module.exports = function(app, passport) {
             });
       }
       else{
-        res.render('whiskey-search');
+        res.render('whiskey-search', {message: 'Enter a Search term above.'});
       }
     })
 

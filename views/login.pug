@@ -13,12 +13,13 @@ html(lang="en")
     header.header-signup
       ul.header-signup-menu-list
         li.header-signup-logo-box
-          img.header-signup-logo(src='/public/images/wax-seal-logo.png', alt='wax seal logo')
+          a(href='/')
+            img.header-signup-logo(src='/public/images/wax-seal-logo.png', alt='wax seal logo')
       div.header-signup-text Whiskey Social
 
     div.main-content-wrapper
       div.logo-large
-        img.logo(src='/public/images/wax-seal-logo.png', alt='wax seal logo')
+        img.logo-large(src='/public/images/wax-seal-logo.png', alt='wax seal logo')
 
       form#sign-up(method='POST' enctype='application/json' action="/login")
         div
