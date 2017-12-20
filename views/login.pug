@@ -17,9 +17,14 @@ html(lang="en")
             img.header-signup-logo(src='/public/images/wax-seal-logo.png', alt='wax seal logo')
       div.header-signup-text Whiskey Social
 
+
+
     div.main-content-wrapper
       div.logo-large
         img.logo-large(src='/public/images/wax-seal-logo.png', alt='wax seal logo')
+
+    if message
+      p.message-error= message
 
       form#sign-up(method='POST' enctype='application/json' action="/login")
         div

@@ -83,7 +83,7 @@ module.exports = function(passport) {
               const missingField = requiredFields.find(field => !(field in req.body));
               console.log(`missingField: ${missingField}`);
                 if (missingField) {
-                  return done(null, false, {message: 'Please fill in both username & password.'});
+                  return done(null, false, req.flash('signupMessage', 'Please fill in both username & password.'));
                 }
 
         // All required fields are strings.
@@ -93,7 +93,7 @@ module.exports = function(passport) {
               );
               console.log('nonStringField in passport.js: ' + nonStringField);
                 if (nonStringField) {
-                 return done(null, false, {message: 'Please use at least one letter for both username & password.'});
+                 return done(null, false, req.flash('signupMessage', 'Please use at least one letter for both username & password.'));
                 }
 
         // Trim username & p/w
@@ -101,10 +101,11 @@ module.exports = function(passport) {
               const nonTrimmedField = explicityTrimmedFields.find(field =>
                 req.body[field].trim() !== req.body[field]
               );
-              console.log('nonTrimmedField: ' + nonTrimmedField);  //undefined?? Why??
+              console.log('nonTrimmedField: ' + nonTrimmedField);
                 if (nonTrimmedField) {
-                  return done(null, false, {message: 'Please do not use a space at the start or end of your username or password.'});
+                  return done(null, false, req.flash('signupMessage', 'Please do not use a space at the start or end of your username or password.'));
                 }
+
 
         // Reject username & password that are too short/long
               const sizedFields = {
@@ -122,7 +123,7 @@ module.exports = function(passport) {
               );
 
               if (tooSmallField || tooLargeField) {
-                  return done(null, false, {message: 'This should be a better error message.'});
+                  return done(null, false, req.flash('signupMessage', 'Username should be between 1 & 72 characters in length.  Password should be between 10 & 72 characters in length.'));
               }
 
         // Check to see if theres already a user with that username

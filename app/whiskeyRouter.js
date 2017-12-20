@@ -21,7 +21,7 @@ module.exports = function(app, passport) {
             .find({"whiskeyName": { $regex: searchTerm, $options: '$i' }}) // find is always an array
             // .exec()
             .then(whiskeys => {
-              console.log("This is what whiskeys is returning: " + whiskeys);
+              console.log("This is what whiskeys is returning: ", whiskeys);
               // console.log("Print this whiskeyName to screen!!: " + whiskeys[0].whiskeyName);
               console.log(typeof(whiskeys));    //object - array
               res.render('whiskey-search', { whiskeys });  // This makes the array an object
@@ -83,7 +83,7 @@ module.exports = function(app, passport) {
   app.post('/post/:whiskeyId', isLoggedIn, (req, res) => {
      console.log('whiskey-post POST userId: ' + req.user._id);
     console.log('whiskey-post POST whiskeyId: ' + req.params.whiskeyId);
-    console.log(`req.body: ${req.body}`);
+    console.log('req.body: ', req.body);
     //comment and rating from form:
     const userInput = req.body;
 
@@ -108,7 +108,7 @@ module.exports = function(app, passport) {
           .findByIdAndUpdate(req.user._id, {$push: {"posts": {whiskeyName: whiskeyInfo.whiskeyName, smallImageURL: whiskeyInfo.smallImageURL, largeImageURL: whiskeyInfo.largeImageURL, rating: whiskeyInfo.rating, favorite: false, comment: whiskeyInfo.comment[0]}}})
           .exec()
           .then(user => {
-            console.log('whiskeyInfo.comment[0]: ' + whiskeyInfo.comment[0]);
+            console.log('whiskeyInfo.comment[0]: ', whiskeyInfo.comment[0]);
             console.log('entire user with new post(?): ' + user);
             console.log('userInput.comment: ' + userInput.comment);
             res.redirect('/post/' + req.user._id + '/confirm');

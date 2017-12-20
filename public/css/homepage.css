@@ -80,6 +80,19 @@ a {
     z-index: 2;
   }
 
+  .signup-button-sections {
+    width: 50%;
+    background-color: #d7aa48;
+    color: #9b2b0d;
+    border: 3px solid #9d9aac;
+    border-radius: 2em;
+    padding: 0.4em 2.125em;
+    font-size: 1.4em;
+    cursor: pointer;
+    display: block;
+    margin: 1em auto;
+  }
+
   .login-button {
     width: 100%;
     background-color: #DB631C;
@@ -291,6 +304,19 @@ a {
     z-index: 2;
   }
 
+  .signup-button-sections {
+    height: 6vh;
+    width: 18vw;
+    font-size: 100%;
+    cursor: pointer;
+    border: 2px solid #9d9aac;
+    border-radius: 12px;
+    background-color: #d7aa48;
+    color: #9b2b0d;
+    display: block;
+    margin: 1em auto;
+  }
+
   .profile-description p,
   .whiskey-description p {
     max-width: 100%;
@@ -452,6 +478,19 @@ a {
     bottom: 40%;
     right: 40%;
     z-index: 2;
+  }
+
+  .signup-button-sections {
+    height: 7vh;
+    width: 15vw;
+    font-size: 3vh;
+    cursor: pointer;
+    border: 2px solid #9d9aac;
+    border-radius: 12px;
+    background-color: #d7aa48;
+    color: #9b2b0d;
+    display: block;
+    margin: 1em auto;
   }
 
   .profile-description p,

@@ -21,6 +21,9 @@ html(lang="en")
       div.logo-large
         img.logo-large(src='../public/images/wax-seal-logo.png', alt='wax seal logo')
 
+    if message
+      p.message-error= message
+
       form#sign-up.green-check(method='POST' enctype='application/json' action='/signup')
         div
           input#username(type='text', name='username', required='', placeholder=' ')

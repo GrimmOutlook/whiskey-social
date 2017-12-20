@@ -61,8 +61,13 @@
       "total-post . unique-post . favorite"
   }
 
+  .profile-container .profile-username {
+    max-width: 30%;
+  }
+
   .profile-username {
     grid-area: username;
+    /*max-width: 60%;*/
   }
 
   .profile-avatar {
@@ -102,7 +107,7 @@
 ======================================================== */
 
   /*------------ Mobile Stack -----------*/
-.history-list, .favorites-list, .unique-list {
+.history-list, .favorites-list, .unique-list, .new-user-text {
   display: grid;
   grid-template-columns: 1fr; /*1fr 1fr;*/
   grid-template-rows: 1fr auto;
@@ -134,6 +139,10 @@
       grid-row-gap: 10px;
       /*justify-items: stretch;*/
       /*align-items: stretch;*/
+    }
+
+    .new-user-text {
+     grid-template-columns: 1fr;
     }
 
     .whiskey-card {

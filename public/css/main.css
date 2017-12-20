@@ -221,6 +221,61 @@ form#sign-up input[type="submit"] {
   font-size: 1.2em;
 }
 
+@keyframes moveInFromLeft {
+  0% {
+    opacity: 1;
+    /*transform: translateX(-8rem);*/
+  }
+
+ /* 10% {
+    opacity: 1;
+    transform: translate(0);
+  }
+
+  80% {
+    opacity: 0.75;
+    transform: translate(0);
+  }*/
+
+  98% {
+    opacity: 1;
+    /*transform: translate(0);*/
+  }
+
+  100% {
+    opacity: 0;
+    /*transform: scale(0);*/
+    /*width: 0;*/
+    /*height: 0;*/
+    /*visibility: hidden;*/
+    /*overflow: hidden;*/
+    /*display: none;*/
+  }
+}
+
+@keyframes collapseElement {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+p.message-error {
+  font-size: 1.25em;
+  width: 40%;
+  color: #9B2B0D;
+  text-align: center;
+  margin: 1em auto;
+  background-color: yellow;
+  animation: moveInFromLeft 5s forwards,
+             collapseElement 0.5s 5.5s ease;
+}
+
 .login-bottom p {
   text-align: center;
   font-size: 1.2em;
@@ -533,6 +588,13 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   text-align: right;
 }
 
+.new-user-text {
+  padding: 0.75em 0.5em;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 150%;
+  width: 80%;
+}
+
 /* ======================================
   Post Confirm Page
 ======================================== */
@@ -570,11 +632,76 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   Profile Page
 ======================================== */
 
+/*.profile-avatar {
+background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRjM4RjE5IiB4bWxuczp4PSJodHRwOi8vb…AxMC45LTg2NC43LDEwMTkuOS04NzAuOCwxMDI2Ljd6Ii8+PC9nPjwvc3dpdGNoPjwvc3ZnPg==);
+}*/
+
+.profile-button:link, .profile-button:visited {
+  /*text-transform: uppercase;*/
+  text-decoration: none;
+  padding: 1rem 2.5rem;
+  display: inline-block;
+  border: 1px solid black;
+  background-color: #eee;
+  transition: all .2s;
+  /*position: absolute;
+  left: 40%;
+  top: 85%;*/
+  font-size: 1.6rem;
+}
+
+.profile-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0,0,0, 0.3);
+}
+
+.profile-button:hover::after {
+  transform: scaleX(1.2) scaleY(1.6);
+  opacity: 0;
+}
+
+.profile-button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0, 0.3);
+}
+
+.profile-button--blue {
+  background-color: #007dff;
+  color: white;
+  position: absolute;
+  left: 20%;
+  top: 85%;
+}
+
+.profile-button--blue::after {
+  background-color: #007dff;
+}
+
+.profile-button::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 1s;
+}
+
 .profile-avatar .wax-seal {
   height: 150px;
   width: 150px;
   background-image: url('public/images/wax-seal-logo.png');
   background-size: cover;
+}
+
+.profile-total-post,
+.profile-unique-post,
+.profile-favorite {
+  width: 150px;
+  /*border: 2px solid black;*/
 }
 
 .profile-total-post p,
@@ -821,6 +948,10 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .search-form form {
   width: 80%;
   margin: 1.5em auto;
+}
+
+.search-form p {
+  font-size: 1.5em;
 }
 
 .search-field {

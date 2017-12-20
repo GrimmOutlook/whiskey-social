@@ -6,21 +6,27 @@ block content
       div.profile-container
         div.profile-username
           p= username
-        //- div= name
+
+        div.search-form
+          p To Get Started, Enter A Search Term Here:
+          form(action="whiskey-search")
+            input.search-field(type="text" placeholder="Example: Redbreast" name="whiskey" required)
+            input.search-button(type="submit" value="Search")
+
         div.profile-avatar
           div.wax-seal
 
         div.profile-total-post
-          a(href="/post-history")
+          a.profile-button(href="/post-history")
             p= postCount
             h3 My Posts
 
         div.profile-unique-post
-          a(href="/whiskeys")
+          a.profile-button(href="/whiskeys")
             p= uniquePostCount
             h3 My Unique Posts
 
         div.profile-favorite
-          a(href="/my-favorites")
+          a.profile-button(href="/my-favorites")
             p= favoriteCount
             h3 My Favorites
