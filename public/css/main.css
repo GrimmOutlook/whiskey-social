@@ -224,38 +224,14 @@ form#sign-up input[type="submit"] {
 @keyframes moveInFromLeft {
   0% {
     opacity: 1;
-    /*transform: translateX(-8rem);*/
+    width: 75%;
+    height: auto;
   }
-
- /* 10% {
-    opacity: 1;
-    transform: translate(0);
-  }
-
-  80% {
-    opacity: 0.75;
-    transform: translate(0);
-  }*/
 
   98% {
     opacity: 1;
-    /*transform: translate(0);*/
-  }
-
-  100% {
-    opacity: 0;
-    /*transform: scale(0);*/
-    /*width: 0;*/
-    /*height: 0;*/
-    /*visibility: hidden;*/
-    /*overflow: hidden;*/
-    /*display: none;*/
-  }
-}
-
-@keyframes collapseElement {
-  0% {
-    opacity: 0;
+    width: 75%;
+    height: auto;
   }
 
   100% {
@@ -265,6 +241,10 @@ form#sign-up input[type="submit"] {
   }
 }
 
+p.message-error:empty {
+  display: none;
+}
+
 p.message-error {
   font-size: 1.25em;
   width: 40%;
@@ -272,8 +252,7 @@ p.message-error {
   text-align: center;
   margin: 1em auto;
   background-color: yellow;
-  animation: moveInFromLeft 5s forwards,
-             collapseElement 0.5s 5.5s ease;
+  animation: moveInFromLeft 5s forwards;
 }
 
 .login-bottom p {
@@ -632,10 +611,6 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   Profile Page
 ======================================== */
 
-/*.profile-avatar {
-background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRjM4RjE5IiB4bWxuczp4PSJodHRwOi8vb…AxMC45LTg2NC43LDEwMTkuOS04NzAuOCwxMDI2Ljd6Ii8+PC9nPjwvc3dpdGNoPjwvc3ZnPg==);
-}*/
-
 .profile-button:link, .profile-button:visited {
   /*text-transform: uppercase;*/
   text-decoration: none;
@@ -695,6 +670,28 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRjM4RjE5IiB4bWxu
   width: 150px;
   background-image: url('public/images/wax-seal-logo.png');
   background-size: cover;
+}
+
+.profile-icon {
+  width: 72%;
+  height: 72%;
+  border-radius: 50%;
+  background-color:#FFFFFF;
+  color: #860000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.icon {
+  font-size: 3em;
+}
+
+.wax-seal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-total-post,
@@ -870,15 +867,69 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRjM4RjE5IiB4bWxu
   cursor: pointer;
 }
 
+.post-rating {
+  float: left;
+}
+
 .post-rating label {
   font-size: 1.25em;
   padding: 0 1em;
+}
+
+.post-rating:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0,0,0,0);
+}
+
+.post-rating:not(:checked) > label {
+  float: right;
+  width: 1.2em;
+  padding: 0 .1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 200%;
+  line-height: 1.2;
+  color: #ddd;
+  text-shadow: 1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.post-rating:not(:checked) > label:before {
+  content: '★ ';
+}
+
+.post-rating > input:checked ~ label {
+  color: #DB631C;
+  text-shadow: 1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.post-rating:not(:checked) > label:hover,
+.post-rating:not(:checked) > label:hover ~ label {
+  color: #e3eb00;
+  text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.post-rating > input:checked + label:hover,
+.post-rating > input:checked + label:hover ~ label,
+.post-rating > input:checked ~ label:hover,
+.post-rating > input:checked ~ label:hover ~ label,
+.post-rating > label:hover ~ input:checked ~ label {
+  color: #FFB832;
+  text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.post-rating > label:active {
+  position: relative;
+  top: 2px;
+  left: 2px;
 }
 
 .post-comment p {
   font-size: 1.5em;
   padding: 0.25em 0;
   text-align: center;
+  clear: both;
 }
 
 .post-comment input[type="submit"] {
@@ -892,6 +943,7 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRjM4RjE5IiB4bWxu
   padding: 0.75em;
   font-size: 1.5em;
   cursor: pointer;
+  clear: both;
 }
 
 /* ======================================

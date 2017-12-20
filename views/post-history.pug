@@ -4,6 +4,9 @@ block content
 
   div.history-container
     h1 Recent Activity:
+    if !posts.length
+      div.new-user-text
+        p New around here? Click on the Search menu option and start searching for your first whiskey!
     ul.history-list
 
       //- if posts != undefined
@@ -18,6 +21,6 @@ block content
               img.favorite-icon
           a(href='/single-post/' + post._id)
             img.bottle-history(src=photoURL, alt=post.whiskeyName)
-      else
-        div.new-user-text
-          p New around here? Click on the Search menu option and start searching for your first whiskey!
+      //- else
+      //-   div.new-user-text
+      //-     p New around here? Click on the Search menu option and start searching for your first whiskey!

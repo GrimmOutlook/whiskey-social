@@ -4,6 +4,9 @@ block content
 
   div.unique-container
     h1 My Whiskeys:
+    if !posts.length
+      div.new-user-text
+        p New around here? Click on the Search menu option and start searching for your first whiskey!
     ul.unique-list
 
       each post in uniquePosts
@@ -17,6 +20,3 @@ block content
               img.favorite-icon
           a(href='/single-post/' + post._id)
             img.bottle-history(src=photoURL, alt=post.whiskeyName)
-      else
-        p.new-user-text New around here? Click on the Search menu option and start searching for your first whiskey!
-

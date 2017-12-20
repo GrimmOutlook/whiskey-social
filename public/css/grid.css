@@ -141,10 +141,6 @@
       /*align-items: stretch;*/
     }
 
-    .new-user-text {
-     grid-template-columns: 1fr;
-    }
-
     .whiskey-card {
       font-size: 110%;
     }

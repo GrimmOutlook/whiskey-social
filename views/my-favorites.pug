@@ -4,6 +4,9 @@ block content
 
   div.favorites-container
     h1 My Favorites:
+    if !posts.length
+      div.new-user-text
+        p No favorites yet!  New around here? Click on the Search menu option and start searching for your first whiskey!
     ul.favorites-list
 
       each post in favoritePosts
@@ -16,5 +19,3 @@ block content
             img.favorite-icon
           a(href='/single-post/' + post._id)
             img.bottle-history(src=photoURL, alt=post.whiskeyName)
-      else
-        p.new-user-text No favorites yet!  New around here? Click on the Search menu option and start searching for your first whiskey!
