@@ -2,7 +2,7 @@
   "name": "whiskey-social",
   "version": "1.0.0",
   "description": "Keep track of your whiskeys",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "NODE_ENV=test mocha ./test"
   },
