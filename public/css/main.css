@@ -612,21 +612,19 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 ======================================== */
 
 .profile-button:link, .profile-button:visited {
-  /*text-transform: uppercase;*/
   text-decoration: none;
   padding: 1rem 2.5rem;
   display: inline-block;
   border: 1px solid black;
-  background-color: #eee;
+  background-color: #f9b808d1;
   transition: all .2s;
-  /*position: absolute;
-  left: 40%;
-  top: 85%;*/
   font-size: 1.6rem;
 }
 
 .profile-button:hover {
   transform: translateY(-3px);
+  background-color: #FFB832;
+  border: 3px solid #DB631C;
   box-shadow: 0 1rem 2rem rgba(0,0,0, 0.3);
 }
 
@@ -640,34 +638,9 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   box-shadow: 0 0.5rem 1rem rgba(0,0,0, 0.3);
 }
 
-.profile-button--blue {
-  background-color: #007dff;
-  color: white;
-  position: absolute;
-  left: 20%;
-  top: 85%;
-}
-
-.profile-button--blue::after {
-  background-color: #007dff;
-}
-
-.profile-button::after {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  border-radius: 10rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 1s;
-}
-
 .profile-avatar .wax-seal {
-  height: 150px;
-  width: 150px;
+  height: 9em; /* 150px; */
+  width: 9em; /* 150px; */
   background-image: url('public/images/wax-seal-logo.png');
   background-size: cover;
 }
@@ -677,7 +650,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   height: 72%;
   border-radius: 50%;
   background-color:#FFFFFF;
-  color: #860000;
+  color: #FFB832;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -685,7 +658,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 }
 
 .icon {
-  font-size: 3em;
+  font-size: 9em; /* 6.5em media query for smaller screens */
 }
 
 .wax-seal {
@@ -698,7 +671,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .profile-unique-post,
 .profile-favorite {
   width: 150px;
-  /*border: 2px solid black;*/
+  /* border: 2px solid black; */
 }
 
 .profile-total-post p,
@@ -723,7 +696,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 18px;
   margin: 2px;
-  color: #DB631C;
+  color: black; /* #DB631C; */
 }
 
 .profile-container {

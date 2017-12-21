@@ -20,14 +20,12 @@ block content
             div.search-description
               p= w.description
             div.search-image
-              img(src=w.smallImageURL)
+              img(src=w.smallImageURL alt=w.whiskeyName)
         div.border-between
     else if message
       p= message
     else
       p No results found
 
-  //- each whiskey in whiskeys
-  //-   li= whiskeyName + smallImageURL
 
 
