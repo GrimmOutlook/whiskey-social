@@ -2,72 +2,84 @@
   Profile Page Grid
 ======================================== */
   /*------------ Mobile Stack -----------*/
-.profile-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-    "username"
-    "avatar"
-    "total-post"
-    "unique-post"
-    "favorite";
-}
+@media screen and (max-width: 499px) {
 
-.profile-username {
-  grid-area: username;
-  justify-self: left;
-  align-self: end;
-  margin-left: 12px;
-}
+  .profile-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "search"
+      "username"
+      "avatar"
+      "total-post"
+      "unique-post"
+      "favorite";
+  }
 
-.profile-avatar {
-  grid-area: avatar;
-  justify-self: right;
-  align-self: start;
-  margin-right: 12px;
-}
+  .search-form {
+    grid-area: search;
+    justify-self: left;
+    align-self: end;
+    margin-left: 12px;
+  }
 
-.profile-total-post {
-  grid-area: total-post;
-  justify-self: left;
-  align-self: center;
-  margin-left: 12px;
-  margin-top: 0;
-}
+  .profile-username {
+    grid-area: username;
+    justify-self: left;
+    align-self: end;
+    margin-left: 12px;
+  }
 
-.profile-unique-post {
-  grid-area: unique-post;
-  justify-self: right;
-  align-self: center;
-  margin-right: 12px;
-}
+  .profile-avatar {
+    grid-area: avatar;
+    justify-self: right;
+    align-self: start;
+    margin-right: 12px;
+  }
 
-.profile-favorite {
-  grid-area: favorite;
-  justify-self: left;
-  align-self: center;
-  margin-left: 12px;
+  .profile-total-post {
+    grid-area: total-post;
+    justify-self: left;
+    align-self: center;
+    margin-left: 12px;
+    margin-top: 0;
+  }
+
+  .profile-unique-post {
+    grid-area: unique-post;
+    justify-self: right;
+    align-self: center;
+    margin-right: 12px;
+  }
+
+  .profile-favorite {
+    grid-area: favorite;
+    justify-self: left;
+    align-self: center;
+    margin-left: 12px;
+  }
+
 }
 
 @media screen and (min-width: 500px) {
 
   .profile-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     /*grid-template-rows: auto;*/
     grid-template-areas:
-      "username username username avatar avatar"
-      "total-post . unique-post . favorite"
+      "search search avatar"
+      "username username avatar"
+      "total-post unique-post favorite"
   }
 
-  .profile-container .profile-username {
-    max-width: 30%;
+  .search-form {
+    grid-area: search;
   }
 
   .profile-username {
     grid-area: username;
-    /*max-width: 60%;*/
   }
 
   .profile-avatar {
@@ -86,17 +98,27 @@
     grid-area: favorite;
   }
 
-  .profile-username, .profile-avatar,
+  .search-form {
+    justify-self: left;
+    align-self: center;
+  }
+
+  .profile-avatar,
   .profile-total-post, .profile-unique-post,
   .profile-favorite {
     justify-self: center;
     align-self: center;
   }
 
+  .profile-username {
+    justify-self: center;
+    align-self: center;
+  }
+
   .profile-total-post, .profile-unique-post,
   .profile-favorite {
-    margin-top: 5em;
-    margin-bottom: 6em;
+    margin-top: 3em;
+    margin-bottom: 1em;
   }
 
 }

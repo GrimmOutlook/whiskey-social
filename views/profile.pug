@@ -8,7 +8,10 @@ block content
           p= username
 
         div.search-form
-          p To Get Started, Enter A Search Term Here:
+          if !postCount.length
+            p To Get Started, Search for a Whiskey Here:
+          else
+            p Search for a Whiskey:
           form(action="whiskey-search")
             input.search-field(type="text" placeholder="Example: Redbreast" name="whiskey" required)
             input.search-button(type="submit" value="Search")
