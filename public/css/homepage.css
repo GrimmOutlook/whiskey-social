@@ -82,6 +82,7 @@ a {
   }
 
   .signup-button-sections {
+    font-family: "Amiri", sans-serif;
     width: 50%;
     background-color: #d7aa48;
     color: #9b2b0d;
@@ -309,6 +310,7 @@ a {
   }
 
   .signup-button-sections {
+    font-family: "Amiri", sans-serif;
     height: 6vh;
     width: 18vw;
     font-size: 100%;
@@ -430,7 +432,7 @@ a {
   }
 
   .name {
-    font-family: "Times New Roman", serif;
+    font-family: "Libre+Baskerville", serif;
     font-size: 5.5em; /* 6.5vw */
     font-weight: 500;
     margin: 0 0 1.5em 1em;
@@ -442,7 +444,7 @@ a {
   }
 
   .tagline {
-    font-family: "Times New Roman", serif;
+    font-family: "Libre+Baskerville", serif;
     font-size: 3.0em;
     font-weight: 300;
     margin: 0.5em 0 1.5em;
@@ -487,6 +489,7 @@ a {
   }
 
   .signup-button-sections {
+    font-family: "Amiri", sans-serif;
     height: 7vh;
     width: 15vw;
     font-size: 3vh;
@@ -501,6 +504,7 @@ a {
 
   .profile-description p,
   .whiskey-description p {
+    font-family: "Libre+Baskerville", serif;
     max-width: 100%;
     margin-left: 1.25em;
     font-size: 1.8em;
@@ -516,6 +520,7 @@ a {
   }
 
   .history-description p {
+    font-family: "Libre+Baskerville", serif;
     max-width: 100%;
     margin-right: 20px;
     font-size: 1.8em;

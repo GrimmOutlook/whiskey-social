@@ -23,6 +23,7 @@
 
 * {
   box-sizing: border-box;
+  font-family: "Libre+Baskerville", serif;
 }
 
 html, body {
@@ -122,6 +123,7 @@ form#sign-up {
   max-width: 450px;
   margin: 0 auto 0;
   padding: 0 10px;
+  font-family: "Amiri", sans-serif;
 }
 
 /*position is relative so that child elements can be positioned absolutely*/
@@ -210,6 +212,7 @@ form#sign-up > div .requirements {
 
 /*submit button*/
 form#sign-up input[type="submit"] {
+  font-family: "Amiri", sans-serif;
   display: block;
   width: 80%;
   margin: 20px auto;
@@ -520,7 +523,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 
 .history-container h1, .favorites-container h1, .unique-container h1 {
   padding: 0.75em 0.5em;
-  font-family: 'Libre Franklin', sans-serif;
+  font-family: "Libre+Baskerville", serif;
   font-size: 175%;
 }
 
@@ -531,7 +534,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
   border-radius: 5px;
   padding: 1.25em 1.25em 0;
   font-size: 150%;
-  font-family: 'Libre Franklin', sans-serif;
+  font-family: "Libre+Baskerville", serif;
   text-align: center;
 }
 
@@ -544,13 +547,13 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 
 .rating {
   text-align: left;
-  font-family: 'Libre Franklin', sans-serif;
+  font-family: "Libre+Baskerville", serif;
   padding-top: 0.5em;
 }
 
 .favorite {
   text-align: right;
-  font-family: 'Libre Franklin', sans-serif;
+  font-family: "Libre+Baskerville", serif;
 }
 
 .favorite-icon {
@@ -569,7 +572,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 
 .new-user-text {
   padding: 0.75em 0.5em;
-  font-family: 'Libre Franklin', sans-serif;
+  font-family: "Libre+Baskerville", serif;
   font-size: 150%;
   width: 80%;
 }
@@ -697,7 +700,7 @@ input[type=checkbox]:checked ~ .mobile-menu ul {
 .profile-total-post h3,
 .profile-unique-post h3,
 .profile-favorite h3 {
-  font-family: 'Libre Franklin', sans-serif;
+  font-family: "Libre+Baskerville", serif;
   font-size: 1em;
   margin: 2px;
   color: black; /* #DB631C; */
