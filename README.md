@@ -45,6 +45,24 @@ Just click on the number and you'll be redirected to a list of whiskeys in the c
 #### Whiskey Post Page:
 <img src="public/images/readme-whiskey-post.png" alt="Whiskey Post preview" width="600">
 
+# Endpoints
+
+- **/whiskey-search** - Search database for a whiskey using a user's search term.  Display any matches - GET
+- **/whiskey-profile/:whiskeyId** - Display information about a particular whiskey - GET
+- **/post/:whiskeyId** - Render screen that allows the user to post a whiskey. - GET
+- **/post/:whiskeyId** - Add a whiskey to a user's list of whiskeys. - POST
+- **/post/:userId/confirm** - Render screen that allows the user to add a whiskey to their list of favorites. - GET
+- **/post/:userId/confirm** - Add a whiskey to a user's list of favorites. - POST / PUT
+
+- **/profile** - Render screen that shows the user's profile. - GET
+- **/post-history** - Render screen that shows all of the user's whiskey posts. - GET
+- **/my-favorites** - Render screen that shows all of the user's whiskey posts marked as a favorite. - GET
+- **/whiskeys** - Render screen that shows all of the user's unique whiskey posts (no duplicates). - GET
+- **/single-post/:postId** - Render screen that shows an individual whiskey post, complete with rating, comments, and favorite designation. - GET
+
+- **/single-post/:postId** - Allows user to add an additional comment. - POST / PUT
+- **/single-post/:postId** - Allows user to delete an entire post from their list of whiskeys. - DELETE
+
 # Tech Stack
 
 - HTML5
